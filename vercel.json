@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ninja/:path*",
+      "destination": "https://poe.ninja/:path*"
+    }
+  ]
+}
