@@ -1,0 +1,575 @@
+{
+  "tabletTypes": [
+    {
+      "id": 1,
+      "code": "pioneer",
+      "name_ko": "선도자",
+      "pattern_ko": "사능"
+    },
+    {
+      "id": 2,
+      "code": "rift",
+      "name_ko": "균열",
+      "pattern_ko": "균열"
+    },
+    {
+      "id": 3,
+      "code": "expedition",
+      "name_ko": "탐험",
+      "pattern_ko": "탐험"
+    },
+    {
+      "id": 4,
+      "code": "delirium",
+      "name_ko": "환영",
+      "pattern_ko": "환영"
+    },
+    {
+      "id": 5,
+      "code": "ritual",
+      "name_ko": "의식",
+      "pattern_ko": "의식"
+    },
+    {
+      "id": 6,
+      "code": "guardian",
+      "name_ko": "감독관",
+      "pattern_ko": "감독"
+    },
+    {
+      "id": 13,
+      "code": "abbysal",
+      "name_ko": "심연",
+      "pattern_ko": "심연"
+    }
+  ],
+  "prefixOptions": [
+    {
+      "id": 1,
+      "tablet_type_id": null,
+      "text_ko": "지도에서 발견하는 아이템 희귀도 (10–30)% 증가",
+      "pattern_ko": "견.*희",
+      "type": "prefix"
+    },
+    {
+      "id": 2,
+      "tablet_type_id": null,
+      "text_ko": "지도 내 무리 규모 (4–10)% 증가",
+      "pattern_ko": "내.무",
+      "type": "prefix"
+    },
+    {
+      "id": 3,
+      "tablet_type_id": null,
+      "text_ko": "마법 몬스터 (25–70)% 증폭",
+      "pattern_ko": "법.몬",
+      "type": "prefix"
+    },
+    {
+      "id": 4,
+      "tablet_type_id": null,
+      "text_ko": "희귀 몬스터 수 (15-40)% 증가",
+      "pattern_ko": "귀.몬.*가$",
+      "type": "prefix"
+    },
+    {
+      "id": 5,
+      "tablet_type_id": null,
+      "text_ko": "지도에서 발견하는 골드 (15–40)% 증가",
+      "pattern_ko": "골드",
+      "type": "prefix"
+    },
+    {
+      "id": 6,
+      "tablet_type_id": null,
+      "text_ko": "지도 내 경험치 획득 (5–20)% 증가",
+      "pattern_ko": "치.획",
+      "type": "prefix"
+    },
+    {
+      "id": 7,
+      "tablet_type_id": null,
+      "text_ko": "지도에서 발견하는 아이템 수량 (4–10)% 증가",
+      "pattern_ko": "템.수",
+      "type": "prefix"
+    },
+    {
+      "id": 64,
+      "tablet_type_id": null,
+      "text_ko": "지도에 소환의 원 1개 추가 등장",
+      "pattern_ko": "원.*추",
+      "type": "prefix"
+    },
+    {
+      "id": 65,
+      "tablet_type_id": null,
+      "text_ko": "지도에 탈주 유배자 1명 추가 등장",
+      "pattern_ko": "탈.*추",
+      "type": "prefix"
+    },
+    {
+      "id": 67,
+      "tablet_type_id": null,
+      "text_ko": "지역에 아즈메리 혼백 1개 추가 등장",
+      "pattern_ko": "혼.*추",
+      "type": "prefix"
+    },
+    {
+      "id": 68,
+      "tablet_type_id": null,
+      "text_ko": "지도에 에센스 1개 추가 등장",
+      "pattern_ko": "센.*추",
+      "type": "prefix"
+    },
+    {
+      "id": 69,
+      "tablet_type_id": null,
+      "text_ko": "지도에 희귀 상자 1개 추가 등장",
+      "pattern_ko": "상.*추",
+      "type": "prefix"
+    },
+    {
+      "id": 71,
+      "tablet_type_id": null,
+      "text_ko": "몬스터의 효율 (7—11)% 증가",
+      "pattern_ko": "효율",
+      "type": "prefix"
+    }
+  ],
+  "suffixOptions": [
+    {
+      "id": 8,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 희생되는 몬스터가 주는 공물 점수 (10–30)% 증가",
+      "pattern_ko": "가.주",
+      "type": "suffix"
+    },
+    {
+      "id": 9,
+      "tablet_type_id": 1,
+      "text_ko": "지도 내 희귀 몬스터가 (30–80)% 확률로 속성 1개를 추가로 보유",
+      "pattern_ko": "보유",
+      "type": "suffix"
+    },
+    {
+      "id": 10,
+      "tablet_type_id": 1,
+      "text_ko": "지도에 성소가 등장할 확률 (50–100)% 증가",
+      "pattern_ko": "소가.등",
+      "type": "suffix"
+    },
+    {
+      "id": 11,
+      "tablet_type_id": 1,
+      "text_ko": "지도에 금고가 등장할 확률 (50–100)% 증가",
+      "pattern_ko": "고가",
+      "type": "suffix"
+    },
+    {
+      "id": 12,
+      "tablet_type_id": 1,
+      "text_ko": "지도에 에센스가 등장할 확률 (50–100)% 증가",
+      "pattern_ko": "스가.등",
+      "type": "suffix"
+    },
+    {
+      "id": 14,
+      "tablet_type_id": 1,
+      "text_ko": "지도 보스가 있는 지역에 금고 1개 추가 등장",
+      "pattern_ko": "고.1",
+      "type": "suffix"
+    },
+    {
+      "id": 15,
+      "tablet_type_id": 1,
+      "text_ko": "지도 보스가 있는 지역에 성소 1개 추가 등장",
+      "pattern_ko": "소.1",
+      "type": "suffix"
+    },
+    {
+      "id": 16,
+      "tablet_type_id": 1,
+      "text_ko": "지도 보스가 있는 지역에 에센스 1개 추가 등장",
+      "pattern_ko": "스.1",
+      "type": "suffix"
+    },
+    {
+      "id": 18,
+      "tablet_type_id": 1,
+      "text_ko": "지도 보스가 주는 경험치 (20–80)% 증폭",
+      "pattern_ko": "주는.경",
+      "type": "suffix"
+    },
+    {
+      "id": 19,
+      "tablet_type_id": 1,
+      "text_ko": "지도 보스가 떨어뜨리는 아이템 희귀도 (20–65)% 증가",
+      "pattern_ko": "스가.*희",
+      "type": "suffix"
+    },
+    {
+      "id": 21,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열에서 생성되는 마법 몬스터 (25–70)% 증가",
+      "pattern_ko": "균.*법",
+      "type": "suffix"
+    },
+    {
+      "id": 22,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열이 희귀 몬스터 1마리를 추가로 생성함",
+      "pattern_ko": "균.*귀",
+      "type": "suffix"
+    },
+    {
+      "id": 23,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열의 몬스터 밀집도 (4–10)% 증가",
+      "pattern_ko": "터.밀",
+      "type": "suffix"
+    },
+    {
+      "id": 24,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열의 몬스터 밀집도 (3–8)% 증가지도 내 균열이 (10–30)% 더 빠르게 열리고 닫힘",
+      "pattern_ko": "닫",
+      "type": "suffix"
+    },
+    {
+      "id": 26,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열에 움켜잡는 손 (1–3)개 추가 등장",
+      "pattern_ko": "손",
+      "type": "suffix"
+    },
+    {
+      "id": 27,
+      "tablet_type_id": 2,
+      "text_ko": "지도 내 균열 몬스터가 떨어뜨리는 균열 파편의 수량 (10–30)% 증가",
+      "pattern_ko": "열.파",
+      "type": "suffix"
+    },
+    {
+      "id": 28,
+      "tablet_type_id": 2,
+      "text_ko": "균열이 등장하는 지도에 (4–10)%의 확률로 균열 3개 추가 등장",
+      "pattern_ko": "열.3",
+      "type": "suffix"
+    },
+    {
+      "id": 29,
+      "tablet_type_id": 2,
+      "text_ko": "균열이 등장하는 지도에 (10–30)%의 확률로 균열 1개 추가 등장",
+      "pattern_ko": "열.1",
+      "type": "suffix"
+    },
+    {
+      "id": 30,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 몬스터가 떨어뜨리는 유물의 수량 (10–30)% 증가",
+      "pattern_ko": "는.유",
+      "type": "suffix"
+    },
+    {
+      "id": 31,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 탐험 폭발물 설치 범위 (10–30)% 증가",
+      "pattern_ko": "발물",
+      "type": "suffix"
+    },
+    {
+      "id": 32,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 탐험의 유적 +(1–2)개",
+      "pattern_ko": "의.유",
+      "type": "suffix"
+    },
+    {
+      "id": 33,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 탐험 폭발 반경 (10–30)% 증가",
+      "pattern_ko": "반경",
+      "type": "suffix"
+    },
+    {
+      "id": 34,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 룬 몬스터가 떨어뜨리는 탐험 일지의 수량 (10–30)% 증가",
+      "pattern_ko": "일지",
+      "type": "suffix"
+    },
+    {
+      "id": 35,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 희귀 탐험 몬스터 수 (15–40)% 증가",
+      "pattern_ko": "험.몬",
+      "type": "suffix"
+    },
+    {
+      "id": 36,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 유적의 효과 (6–18)% 증가",
+      "pattern_ko": "내.유",
+      "type": "suffix"
+    },
+    {
+      "id": 37,
+      "tablet_type_id": 3,
+      "text_ko": "지도 내 룬 몬스터 표시물 수량 (10–30)% 증가",
+      "pattern_ko": "시물",
+      "type": "suffix"
+    },
+    {
+      "id": 38,
+      "tablet_type_id": 4,
+      "text_ko": "지도에서 발견하는 복제된 영토 파편의 중첩 개수 (10–30)% 증가",
+      "pattern_ko": "중첩",
+      "type": "suffix"
+    },
+    {
+      "id": 39,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 몬스터 처치 시 차는 보상 진행도 (10–30)% 증가",
+      "pattern_ko": "시.차",
+      "type": "suffix"
+    },
+    {
+      "id": 40,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 안개가 (6–12)초 추가로 지속되고 사라짐",
+      "pattern_ko": "지속",
+      "type": "suffix"
+    },
+    {
+      "id": 41,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 안개가 (20–30)% 더 느리게 사라짐",
+      "pattern_ko": "느리",
+      "type": "suffix"
+    },
+    {
+      "id": 42,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영이 거울과의 거리에 비례해 (10–30)% 더 빠르게 증가",
+      "pattern_ko": "거리",
+      "type": "suffix"
+    },
+    {
+      "id": 43,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 몬스터의 무리 규모 (10–30)% 증가",
+      "pattern_ko": "무리",
+      "type": "suffix"
+    },
+    {
+      "id": 44,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 안개에서 생성되는 분열의 거울 (10–30)% 증가",
+      "pattern_ko": "분열",
+      "type": "suffix"
+    },
+    {
+      "id": 45,
+      "tablet_type_id": 4,
+      "text_ko": "지도의 희귀 몬스터 처치 시 환영 거울 타이머 (2–5)초 동안 일시 정지",
+      "pattern_ko": "이머",
+      "type": "suffix"
+    },
+    {
+      "id": 46,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 인카운터의 고유 보스 등장 확률 (10–30)% 증폭",
+      "pattern_ko": "환.*고",
+      "type": "suffix"
+    },
+    {
+      "id": 47,
+      "tablet_type_id": 4,
+      "text_ko": "지도 내 환영 인카운터가 (8–24)%의 확률로 보상 1개 추가 생성",
+      "pattern_ko": "환.*보.*추",
+      "type": "suffix"
+    },
+    {
+      "id": 49,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 헌정품을 무작위 변경하는 데 소모되는 공물 점수 (20–30)% 감소",
+      "pattern_ko": "변.*데",
+      "type": "suffix"
+    },
+    {
+      "id": 50,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 헌정품을 보류하는 데 소모되는 공물 점수 (20–30)% 감소",
+      "pattern_ko": "보.*데",
+      "type": "suffix"
+    },
+    {
+      "id": 51,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에 보류한 헌정품이 다시 등장하는 시간 (15–40)% 가속",
+      "pattern_ko": "시.등",
+      "type": "suffix"
+    },
+    {
+      "id": 52,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 헌정품을 무작위 변경할 기회 1회 추가",
+      "pattern_ko": "할.기",
+      "type": "suffix"
+    },
+    {
+      "id": 53,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 무작위 변경된 헌정품이 (3–6)%의 확률로 공물 점수를 소모하지 않음",
+      "pattern_ko": "를.소",
+      "type": "suffix"
+    },
+    {
+      "id": 54,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 되살아난 몬스터가 마법 등급일 확률 (25–70)% 증가",
+      "pattern_ko": "법.등",
+      "type": "suffix"
+    },
+    {
+      "id": 55,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 제단에서 되살아난 몬스터가 희귀 등급일 확률 (15–40)% 증가",
+      "pattern_ko": "귀.등",
+      "type": "suffix"
+    },
+    {
+      "id": 56,
+      "tablet_type_id": 5,
+      "text_ko": "지도 내 의식 헌정품이 징조일 확률 (25–70)% 증가",
+      "pattern_ko": ".*징",
+      "type": "suffix"
+    },
+    {
+      "id": 57,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 있는 지역에 금고 1개 추가 등장",
+      "pattern_ko": "고.1",
+      "type": "suffix"
+    },
+    {
+      "id": 58,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 있는 지역에 성소 1개 추가 등장",
+      "pattern_ko": "소.1",
+      "type": "suffix"
+    },
+    {
+      "id": 59,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 있는 지역에 에센스 1개 추가 등장",
+      "pattern_ko": "스.1",
+      "type": "suffix"
+    },
+    {
+      "id": 60,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 떨어뜨리는 경로석의 수량 (10–30)% 증가",
+      "pattern_ko": "가.떨.*경",
+      "type": "suffix"
+    },
+    {
+      "id": 61,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 주는 경험치 (20–80)% 증폭",
+      "pattern_ko": "주는.경",
+      "type": "suffix"
+    },
+    {
+      "id": 62,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 떨어뜨리는 아이템 희귀도 (20–60)% 증가",
+      "pattern_ko": "스가.*희",
+      "type": "suffix"
+    },
+    {
+      "id": 63,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 떨어뜨리는 아이템의 수량 (10–20)% 증가",
+      "pattern_ko": "스가.*수",
+      "type": "suffix"
+    },
+    {
+      "id": 66,
+      "tablet_type_id": 1,
+      "text_ko": "지도에서 발견하는 경로석 수량 (20–50)% 증가",
+      "pattern_ko": "석.수",
+      "type": "suffix"
+    },
+    {
+      "id": 70,
+      "tablet_type_id": 6,
+      "text_ko": "지도 보스가 있는 지역에 아즈메리 혼백 1개 추가 등장",
+      "pattern_ko": "스.*백.1",
+      "type": "suffix"
+    },
+    {
+      "id": 72,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연에서 생성되는 몬스터 (20—30)% 증가",
+      "pattern_ko": "심.*생.*증",
+      "type": "suffix"
+    },
+    {
+      "id": 73,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연에 추가 희귀 몬스터 (1—2)마리 생성",
+      "pattern_ko": "심.*추.*몬",
+      "type": "suffix"
+    },
+    {
+      "id": 74,
+      "tablet_type_id": 13,
+      "text_ko": "닫은 구덩이의 수에 따라 지도 내 심연 몬스터의 난이도와 보상 증가",
+      "pattern_ko": "덩.*수",
+      "type": "suffix"
+    },
+    {
+      "id": 75,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연이 심연 지하로 이어질 확률 (10—20)% 증가",
+      "pattern_ko": "지하",
+      "type": "suffix"
+    },
+    {
+      "id": 76,
+      "tablet_type_id": 13,
+      "text_ko": "지도에 심연 1개 추가 등장",
+      "pattern_ko": "심.*1개",
+      "type": "suffix"
+    },
+    {
+      "id": 77,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연 구덩이에서 보상을 제공할 확률 2배",
+      "pattern_ko": "2배",
+      "type": "suffix"
+    },
+    {
+      "id": 78,
+      "tablet_type_id": 13,
+      "text_ko": "지도에 (20—40)% 확률로 심연 4개 추가 등장",
+      "pattern_ko": "심.*개.추",
+      "type": "suffix"
+    },
+    {
+      "id": 79,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연 몬스터가 심연 속성을 보유할 확률 (20—30)% 증가",
+      "pattern_ko": "심.*속",
+      "type": "suffix"
+    },
+    {
+      "id": 80,
+      "tablet_type_id": 13,
+      "text_ko": "지도 내 심연에서 훼손된 화폐가 등장할 확률 (20—30)% 증가",
+      "pattern_ko": "훼손",
+      "type": "suffix"
+    }
+  ]
+}

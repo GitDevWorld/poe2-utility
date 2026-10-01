@@ -68,7 +68,7 @@ export default function App() {
   const [fetchedAt, setFetchedAt] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("");
+  const [filterId, setFilterId] = useState("");
   const [enabledCats, setEnabledCats] = useState<CategoryId[]>(readCategories);
   const [haveId, setHaveId] = useState(() => localStorage.getItem(STORAGE_HAVE) ?? "divine");
   const [wantId, setWantId] = useState(() => localStorage.getItem(STORAGE_WANT) ?? "exalted");
@@ -155,25 +155,17 @@ export default function App() {
       : null;
 
   const filtered = useMemo(() => {
-    const needle = query.trim().toLowerCase();
     const watched = new Set(watchIds);
     return rows
       .filter((row) => enabledCats.includes(row.categoryId))
       .filter((row) => !watchOnly || watched.has(`${row.categoryId}:${row.id}`))
-      .filter((row) => {
-        if (!needle) return true;
-        return (
-          row.name.toLowerCase().includes(needle) ||
-          row.koName.toLowerCase().includes(needle) ||
-          row.id.includes(needle)
-        );
-      })
+      .filter((row) => !filterId || row.id === filterId)
       .sort((a, b) => {
         const direction = sortDir === "asc" ? 1 : -1;
         if (sortKey === "name") return a.koName.localeCompare(b.koName, "ko") * direction;
         return (a[sortKey] - b[sortKey]) * direction;
       });
-  }, [rows, query, enabledCats, sortKey, sortDir, watchIds, watchOnly]);
+  }, [rows, filterId, enabledCats, sortKey, sortDir, watchIds, watchOnly]);
 
   const currencyOptions = useMemo(() => {
     const unique = new Map<string, MarketRow>();
@@ -212,6 +204,13 @@ export default function App() {
     if (sortKey !== key) return "";
     return sortDir === "desc" ? " ↓" : " ↑";
   };
+
+  const emptyMessage =
+    enabledCats.length === 0
+      ? "분류를 하나 이상 선택하세요."
+      : watchOnly
+        ? "선택한 화폐가 없습니다. 체크박스로 고른 뒤 다시 눌러 전체 목록으로 돌아가세요."
+        : "검색 결과가 없습니다.";
 
   return (
     <div className="page">
@@ -271,11 +270,13 @@ export default function App() {
           <CurrencyPicker label="받을 화폐" value={wantId} options={currencyOptions} onChange={setWantId} />
           <div className="calc-result">
             <span>예상 수령</span>
-            <strong>{converted == null ? "—" : formatRate(converted)}</strong>
-            <small>
-              <CurrencyIcon row={want} size={20} />
-              {want?.koName ?? ""}
-            </small>
+            <div className="calc-result-card">
+              <CurrencyIcon row={want} size={28} />
+              <div>
+                <strong>{converted == null ? "—" : formatRate(converted)}</strong>
+                <small>{want?.koName ?? "화폐 선택"}</small>
+              </div>
+            </div>
           </div>
         </div>
         {have && want && (
@@ -297,10 +298,14 @@ export default function App() {
             </p>
           </div>
           <div className="filters">
-            <input
-              placeholder="화폐 검색 (신성한 오브, exalted…)"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
+            <CurrencyPicker
+              label="화폐 검색"
+              value={filterId}
+              options={currencyOptions}
+              onChange={setFilterId}
+              placeholder="전체 화폐"
+              allowClear
+              clearLabel="전체 화폐"
             />
             <select
               value={`${sortKey}:${sortDir}`}
@@ -413,7 +418,7 @@ export default function App() {
                     </td>
                     <td>
                       <div className="name-cell">
-                        <CurrencyIcon row={row} size={24} />
+                        <CurrencyIcon row={row} size={28} />
                         <div>
                           <strong>{row.koName}</strong>
                           <span>{row.name}</span>
@@ -421,9 +426,9 @@ export default function App() {
                       </div>
                     </td>
                     <td>{CATEGORIES.find((item) => item.id === row.categoryId)?.label ?? row.category}</td>
-                    <td>{formatRate(quoteValue(row, exalted) ?? Number.NaN)}</td>
-                    <td>{formatRate(quoteValue(row, chaos) ?? Number.NaN)}</td>
-                    <td>{formatRate(quoteValue(row, divine) ?? Number.NaN)}</td>
+                    <td className="num-cell">{formatRate(quoteValue(row, exalted) ?? Number.NaN)}</td>
+                    <td className="num-cell">{formatRate(quoteValue(row, chaos) ?? Number.NaN)}</td>
+                    <td className="num-cell">{formatRate(quoteValue(row, divine) ?? Number.NaN)}</td>
                     <td>{formatVolume(row.volumeDivine)}</td>
                     <td>
                       <Spark data={row.sparkline.data} change={row.sparkline.totalChange} />
@@ -434,11 +439,7 @@ export default function App() {
               {!loading && filtered.length === 0 && (
                 <tr>
                   <td colSpan={8} className="empty">
-                    {enabledCats.length === 0
-                      ? "분류를 하나 이상 선택하세요."
-                      : watchOnly
-                        ? "선택한 화폐가 없습니다. 체크박스로 고른 뒤 다시 눌러 전체 목록으로 돌아가세요."
-                        : "검색 결과가 없습니다."}
+                    {emptyMessage}
                   </td>
                 </tr>
               )}

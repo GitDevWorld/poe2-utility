@@ -7,17 +7,23 @@ export function CurrencyPicker({
   value,
   options,
   onChange,
+  placeholder = "화폐 선택",
+  allowClear = false,
+  clearLabel = "전체",
 }: {
   label: string;
   value: string;
   options: MarketRow[];
   onChange: (id: string) => void;
+  placeholder?: string;
+  allowClear?: boolean;
+  clearLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLLabelElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const selected = options.find((row) => row.id === value);
+  const selected = value ? options.find((row) => row.id === value) : undefined;
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -48,7 +54,7 @@ export function CurrencyPicker({
       {label}
       <button type="button" className="picker-button" onClick={() => setOpen((current) => !current)}>
         <CurrencyIcon row={selected} size={24} />
-        <span>{selected?.koName ?? "화폐 선택"}</span>
+        <span>{selected?.koName ?? placeholder}</span>
       </button>
       {open && (
         <div className="picker-menu">
@@ -59,6 +65,17 @@ export function CurrencyPicker({
             onChange={(event) => setQuery(event.target.value)}
           />
           <ul>
+            {allowClear && !query.trim() && (
+              <li>
+                <button type="button" className={!value ? "active" : ""} onClick={() => {
+                  onChange("");
+                  setOpen(false);
+                  setQuery("");
+                }}>
+                  <span>{clearLabel}</span>
+                </button>
+              </li>
+            )}
             {filtered.map((row) => (
               <li key={row.id}>
                 <button
