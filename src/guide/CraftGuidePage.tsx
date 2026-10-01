@@ -117,17 +117,20 @@ const TIER_HINTS: Record<string, string> = {
 const MAIN_STEPS: Step[] = [
   {
     id: "start",
-    title: "시작 베이스 — 발견하는 아이템 희귀도 증가 접두(분열) + 접미 + 저항 1티어",
+    title: "시작 — 베스트 베이스",
     body: [
-      "제작 전에 이 상태의 반지를 준비한다. 접두에 분열된 발견하는 아이템 희귀도 증가, 접미에 발견하는 아이템 희귀도 증가 + 1티어 저항.",
-      "발견하는 아이템 희귀도 증가 접두 + 접미 + 아무 옵션이면 사도 되지만, 접미에 1티어 저항이 있으면 가장 베스트.",
-      "주의: 아이템 레벨 82 이상 베이스여야 저항 1티어가 뜬다.",
+      "접두에 분열된 발견하는 아이템 희귀도 증가, 접미에 발견하는 아이템 희귀도 증가 + 저항 1티어가 붙은 베스트 베이스로 시작한다.",
+      "베스트 베이스 매물이 없어서 대체 베이스(저항 없음)를 샀다면 위의 베이스 만드는 법을 먼저 진행한다 — 끝나면 1·2번을 건너뛰고 3번으로 합류한다.",
     ],
     items: [],
+    next: [
+      { label: "베스트 베이스면", to: "1", ok: true },
+      { label: "대체 베이스면", to: "M1", ok: true },
+    ],
     ring: {
       prefixes: [{ text: RARITY_P, kind: "fractured" }, null, null],
       suffixes: [{ text: RARITY_S }, { text: FIRE_RES }, null],
-      note: "제작 시작 상태",
+      note: "베스트 베이스",
     },
   },
   {
@@ -540,6 +543,9 @@ function BaseSearch() {
         조건: 황금 반지 · 아이템 레벨 82 이상 · 발견하는 아이템 희귀도 합계 33% 이상 · 빈 접두 2칸 이상 · 빈 접미 1칸 이상 · 분열 아이템 · 타락
         아님
       </p>
+      <p className="guide-search-note">
+        이 필터는 베스트 베이스와 대체 베이스를 모두 찾는다 — 접미에 저항 1티어가 붙은 매물이 있으면 그걸 우선 구매.
+      </p>
       <a className="guide-search-go" href={TRADE_FULL_URL} target="_blank" rel="noreferrer">
         필터 적용된 검색 바로 가기 →
       </a>
@@ -792,33 +798,60 @@ export function CraftGuidePage() {
         왼쪽 반지 상태의 옵션·수치는 이해를 돕기 위한 <strong>예시값</strong>입니다. 실제 옵션과 수치는 다를 수 있습니다.
       </p>
 
-      <section className="guide-base-shape">
-        <RingPanel
-          stateText="구해야 할 베이스"
-          ring={{
-            prefixes: [{ text: RARITY_P, kind: "fractured" }, null, null],
-            suffixes: [{ text: RARITY_S }, null, null],
-            note: "필요한 베이스 모양",
-          }}
-        />
-        <div className="guide-base-shape-text">
-          <h2>필요한 베이스</h2>
-          <p>황금 반지 · 아이템 레벨 82 이상</p>
-          <p>접두에 분열된 발견하는 아이템 희귀도 증가, 접미에 발견하는 아이템 희귀도 증가 — 나머지는 접두·접미 각각 빈 칸 2개.</p>
-          <p className="guide-search-note">저항이 이미 붙은 베이스를 구하면 아래 성공 경로 시작부터, 없으면 베이스 만드는 법부터 진행합니다.</p>
-        </div>
-      </section>
+      <h2 className="guide-section-title">필요한 베이스</h2>
+      <p className="guide-legend">
+        황금 반지 · 아이템 레벨 82 이상(그래야 저항 1티어가 뜬다). 접두에 분열된 발견하는 아이템 희귀도 증가, 접미에 발견하는 아이템
+        희귀도 증가가 공통이고, 접미 저항 1티어 유무로 시작 위치가 갈린다.
+      </p>
+      <div className="guide-base-shapes">
+        <section className="guide-base-shape">
+          <RingPanel
+            stateText="바로 구매"
+            ring={{
+              prefixes: [{ text: RARITY_P, kind: "fractured" }, null, null],
+              suffixes: [{ text: RARITY_S }, { text: FIRE_RES }, null],
+              note: "베스트 베이스 — 저항 1티어 포함",
+            }}
+          />
+          <p>접미에 저항 1티어까지 붙은 매물. 있으면 이걸 사서 성공 경로 처음부터 진행한다.</p>
+          <button type="button" className="guide-go dest-main" onClick={() => goStep("start")}>
+            <span className="guide-go-label">베스트 베이스면</span>
+            <span className="guide-go-dest">시작</span>
+            <span className="guide-go-icon">
+              <ArrowIcon />
+            </span>
+          </button>
+        </section>
+        <section className="guide-base-shape">
+          <RingPanel
+            stateText="매물이 없을 때"
+            ring={{
+              prefixes: [{ text: RARITY_P, kind: "fractured" }, null, null],
+              suffixes: [{ text: RARITY_S }, null, null],
+              note: "대체 베이스 — 저항 없음",
+            }}
+          />
+          <p>베스트 베이스 매물이 없을 때 사는 베이스. 베이스 만드는 법으로 접미를 채운 뒤 성공 경로 3번에 합류한다.</p>
+          <button type="button" className="guide-go dest-make" onClick={() => goStep("M1")}>
+            <span className="guide-go-label">대체 베이스면</span>
+            <span className="guide-go-dest">제작 1</span>
+            <span className="guide-go-icon">
+              <ArrowIcon />
+            </span>
+          </button>
+        </section>
+      </div>
 
       <BaseSearch />
 
-      <h2 className="guide-section-title make">베이스 만드는 법</h2>
+      <h2 className="guide-section-title make">베이스 만드는 법 — 대체 베이스용</h2>
       <p className="guide-legend">
-        완성 베이스를 못 구했을 때, 저항이 없는 분열 아이템 희귀도 황금 반지(접두 분열 + 접미 발견하는 아이템 희귀도 증가)로 직접
-        만드는 방법입니다.
+        베스트 베이스 매물이 없을 때, 대체 베이스(저항 없음)의 접미를 직접 채우는 방법입니다. 끝나면 접미가 성공 경로 2번을 마친 상태와
+        같아지므로 1·2번을 건너뛰고 3번으로 합류합니다.
       </p>
       <ol className="guide-steps">{MAKE_STEPS.map(renderStep)}</ol>
 
-      <h2 className="guide-section-title">성공 경로</h2>
+      <h2 className="guide-section-title">성공 경로 — 베스트 베이스부터</h2>
       <ol className="guide-steps">{MAIN_STEPS.map(renderStep)}</ol>
 
       <h2 className="guide-section-title variant">변형 루트</h2>
