@@ -14,7 +14,7 @@ function readPage(): Page {
 
 const TITLES: Record<Page, string> = {
   exchange: "POE2 화폐 교환비",
-  tablet: "POE2 돈되는 서판 찾기",
+  tablet: "POE2 서판",
   guide: "POE2 제작 가이드",
 };
 
@@ -43,7 +43,7 @@ export default function Root() {
           교환비
         </button>
         <button type="button" className={page === "tablet" ? "active" : ""} onClick={() => go("tablet")}>
-          돈되는 서판 찾기
+          서판
         </button>
         <button type="button" className={page === "guide" ? "active" : ""} onClick={() => go("guide")}>
           제작 가이드

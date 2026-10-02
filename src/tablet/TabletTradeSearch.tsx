@@ -68,7 +68,7 @@ export function TabletTradeSearch({
         <div>
           <h3>경매장 검색</h3>
           <p className="guide-search-note">
-            {typeName} · {searchable.length ? `선택한 옵션 ${searchable.length}개 중 하나 이상` : "옵션 조건 없음"} · 즉시 구매 · 낮은 가격순
+            {typeName} · {searchable.length ? `선택한 옵션 ${searchable.length}개 모두 포함` : "옵션 조건 없음"} · 즉시 구매 · 낮은 가격순
             {skipped > 0 ? ` · 경매장 미연동 옵션 ${skipped}개 제외` : ""}
           </p>
         </div>

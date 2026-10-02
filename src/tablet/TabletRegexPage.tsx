@@ -21,8 +21,8 @@ export function TabletRegexPage() {
     <div className="page">
       <header className="hero">
         <div>
-          <p className="eyebrow">Path of Exile 2 · 0.5.5 · 창고 검색</p>
-          <h1>돈되는 서판 찾기</h1>
+          <p className="eyebrow">Path of Exile 2 · 창고 검색 · 경매장</p>
+          <h1>서판</h1>
         </div>
       </header>
 

@@ -3,6 +3,10 @@ export type TabletType = {
   code: string;
   name_ko: string;
   pattern_ko: string;
+  /** 경매장 베이스 이름 (카카오 경매장은 한글만 받는다) */
+  trade_ko: string;
+  /** poe2db 아이콘 파일 이름 */
+  icon: string;
 };
 
 export type TabletMod = {

@@ -15,7 +15,6 @@ import type { TabletMod } from "./types";
 import type { TabletFilter } from "./recommended";
 import {
   formatLowestPrice,
-  refsAboveThreshold,
   type ModTradePrices,
 } from "./tradeMarket";
 import { hasTradeStatForRef } from "./tradeStatMap";
@@ -244,8 +243,6 @@ export function TabletRegexBuilder({ onCopy }: Props) {
   const [included, setIncluded] = useState<ModRef[]>([]);
   const [excluded, setExcluded] = useState<ModRef[]>([]);
   const [query, setQuery] = useState("");
-  const [magicMinEx, setMagicMinEx] = useState(3);
-  const [rareMinEx, setRareMinEx] = useState(5);
 
   const tabletType = typeof tabletFilter === "number" ? tabletTypes.find((item) => item.id === tabletFilter) : undefined;
   const league = market?.league || "Forbidden Rites";
@@ -325,31 +322,6 @@ export function TabletRegexBuilder({ onCopy }: Props) {
     setIncludeTypePattern(false);
   };
 
-  const applyAboveThreshold = () => {
-    if (!market) return;
-    const refs = refsAboveThreshold(market, tabletFilter, magicMinEx, rareMinEx);
-    if (!refs.length) return;
-    setAddMode(true);
-    setIncluded((prev) => {
-      const keys = new Set(prev.map(modRefKey));
-      const merged = [...prev];
-      for (const ref of refs) {
-        const key = modRefKey(ref);
-        if (!keys.has(key)) {
-          keys.add(key);
-          merged.push(ref);
-        }
-      }
-      return merged;
-    });
-    setExcluded((prev) => prev.filter((ref) => !refs.some((r) => modRefKey(r) === modRefKey(ref))));
-    if (tabletFilter !== "all") setIncludeTypePattern(true);
-  };
-
-  const canApplyThreshold = Boolean(
-    market && refsAboveThreshold(market, tabletFilter, magicMinEx, rareMinEx).length,
-  );
-
   return (
     <section className="table-wrap tablet-builder">
       <div className="calc-head">
@@ -421,29 +393,6 @@ export function TabletRegexBuilder({ onCopy }: Props) {
             placeholder="검색"
             className="tablet-search-input"
           />
-          <label className="tablet-threshold-field">
-            <span>마법 기준(ex)</span>
-            <input
-              type="number"
-              min={0}
-              step={1}
-              value={magicMinEx}
-              onChange={(e) => setMagicMinEx(Number(e.target.value) || 0)}
-            />
-          </label>
-          <label className="tablet-threshold-field">
-            <span>희귀 기준(ex)</span>
-            <input
-              type="number"
-              min={0}
-              step={1}
-              value={rareMinEx}
-              onChange={(e) => setRareMinEx(Number(e.target.value) || 0)}
-            />
-          </label>
-          <button type="button" className="ghost active" disabled={!canApplyThreshold} onClick={applyAboveThreshold}>
-            기준가 이상 추가
-          </button>
           <button
             type="button"
             className="ghost"

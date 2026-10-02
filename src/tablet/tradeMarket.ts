@@ -1,7 +1,5 @@
 import { getLeagues } from "../api";
-import { modRefKey, prefixOptions, suffixesForFilter, type ModRef } from "./data";
 import type { TabletFilter } from "./recommended";
-import tradeMap from "./tabletTradeMap.json";
 
 /**
  * 서판 시세는 GitHub Actions(scripts/collect-tablet-prices.mjs)가 1시간마다 경매장에서 모아
@@ -67,20 +65,6 @@ async function selectedLeague(): Promise<string | undefined> {
   }
 }
 
-export function tradeJobsForFilter(filter: TabletFilter): { ref: ModRef }[] {
-  const { tradeStatByRef } = tradeMap as { tradeStatByRef: Record<string, string> };
-  const jobs: { ref: ModRef }[] = [];
-  const seen = new Set<string>();
-  for (const mod of [...prefixOptions, ...suffixesForFilter(filter)]) {
-    const ref: ModRef = { slot: mod.type, id: mod.id };
-    const key = modRefKey(ref);
-    if (seen.has(key) || !tradeStatByRef[key]) continue;
-    seen.add(key);
-    jobs.push({ ref });
-  }
-  return jobs;
-}
-
 export async function fetchTabletTradePrices(_filter: TabletFilter, force = false): Promise<TabletTradeSnapshot> {
   const collected = await loadCollected(force);
   const league = await selectedLeague();
@@ -97,23 +81,6 @@ export async function fetchTabletTradePrices(_filter: TabletFilter, force = fals
     progress: collected.progress,
     emptyHint,
   };
-}
-
-export function refsAboveThreshold(
-  snapshot: TabletTradeSnapshot,
-  filter: TabletFilter,
-  magicMin: number,
-  rareMin: number,
-): ModRef[] {
-  const refs: ModRef[] = [];
-  for (const job of tradeJobsForFilter(filter)) {
-    const band = snapshot.prices[modRefKey(job.ref)];
-    if (!band) continue;
-    const magicOk = band.magic && band.magic.lowestEx >= magicMin;
-    const rareOk = band.rare && band.rare.lowestEx >= rareMin;
-    if (magicOk || rareOk) refs.push(job.ref);
-  }
-  return refs;
 }
 
 export function formatLowestPrice(stats?: PriceStats): string {

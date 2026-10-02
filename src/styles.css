@@ -734,24 +734,6 @@ tr:hover {
   opacity: 0.6;
 }
 
-.tablet-threshold-field {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.tablet-threshold-field input {
-  width: 72px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: #1a1510;
-  color: inherit;
-  font: inherit;
-}
-
 .tablet-price-legend {
   color: var(--muted);
 }
