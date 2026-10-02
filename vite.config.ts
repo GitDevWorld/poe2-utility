@@ -11,7 +11,7 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ninja/, ""),
         headers: {
-          "User-Agent": "poe2-exchange-local/0.1 (local-dev)",
+          "User-Agent": "poe2-utility-local/0.1 (local-dev)",
         },
       },
       "/api/trade": {
@@ -27,7 +27,7 @@ export default defineConfig({
           return `/api/trade2/${rel}${qs ? `?${qs}` : ""}`;
         },
         headers: {
-          "User-Agent": "OAuth poe2-exchange/0.1 (contact: none)",
+          "User-Agent": "OAuth poe2-utility/0.1 (+https://github.com/GitDevWorld/poe2-utility)",
         },
       },
     },

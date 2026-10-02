@@ -74,10 +74,10 @@ const ITEMS = {
   },
 } as const;
 
-type ModKind = "fractured" | "desecrated" | "new" | "gamble";
-type Mod = { text: string; kind?: ModKind; hint?: string } | null;
+export type ModKind = "fractured" | "desecrated" | "new" | "gamble";
+export type Mod = { text: string; kind?: ModKind; hint?: string } | null;
 
-type RingState = {
+export type RingState = {
   quality?: string;
   prefixes: Mod[];
   suffixes: Mod[];
@@ -581,7 +581,7 @@ function destKind(id: StepId): DestKind {
   return "main";
 }
 
-function ArrowIcon({ back = false }: { back?: boolean }) {
+export function ArrowIcon({ back = false }: { back?: boolean }) {
   return (
     <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
       <path
@@ -596,7 +596,7 @@ function ArrowIcon({ back = false }: { back?: boolean }) {
   );
 }
 
-function EndIcon({ ok }: { ok: boolean }) {
+export function EndIcon({ ok }: { ok: boolean }) {
   return (
     <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
       <path
@@ -645,15 +645,27 @@ function ModLine({ mod }: { mod: Mod }) {
   );
 }
 
-function RingPanel({ ring, id, stateText }: { ring: RingState; id?: StepId; stateText?: string }) {
+export function RingPanel({
+  ring,
+  id,
+  stateText,
+  itemName = "황금 반지",
+  itemIcon = GOLD_RING_ICON,
+}: {
+  ring: RingState;
+  id?: StepId;
+  stateText?: string;
+  itemName?: string;
+  itemIcon?: string;
+}) {
   const state = stateText ?? (id ? stateLabel(id) : "");
   return (
     <div className="ring-panel" aria-label={`${state} 반지 상태 예시`}>
       {ring.note && <p className="ring-title">{ring.note}</p>}
       <div className="ring-panel-head">
         <strong className="ring-name">
-          <img src={GOLD_RING_ICON} alt="" width={28} height={28} loading="lazy" />
-          황금 반지
+          <img src={itemIcon} alt="" width={28} height={28} loading="lazy" />
+          {itemName}
         </strong>
         <span>{state} · 예시값</span>
       </div>
@@ -674,7 +686,7 @@ function RingPanel({ ring, id, stateText }: { ring: RingState; id?: StepId; stat
   );
 }
 
-export function CraftGuidePage() {
+export function RingGuide() {
   const [flash, setFlash] = useState<StepId | null>(null);
 
   const goStep = (id: StepId) => {

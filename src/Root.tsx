@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import App from "./App";
 import { TabletRegexPage } from "./tablet/TabletRegexPage";
-import { CraftGuidePage } from "./guide/CraftGuidePage";
+import { GuidePage } from "./guide/GuidePage";
 
 type Page = "exchange" | "tablet" | "guide";
 
@@ -49,7 +49,7 @@ export default function Root() {
           제작 가이드
         </button>
       </nav>
-      {page === "tablet" ? <TabletRegexPage /> : page === "guide" ? <CraftGuidePage /> : <App />}
+      {page === "tablet" ? <TabletRegexPage /> : page === "guide" ? <GuidePage /> : <App />}
     </>
   );
 }

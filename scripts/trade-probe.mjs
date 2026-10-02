@@ -1,6 +1,6 @@
 // GitHub Actions 등 외부 서버에서 경매장 API 접근이 되는지 확인하는 시험 스크립트.
 const LEAGUE = process.env.LEAGUE ?? "Forbidden Rites";
-const USER_AGENT = "OAuth poe2-exchange/0.1 (+https://github.com/GitDevWorld/poe2-exchange)";
+const USER_AGENT = "OAuth poe2-utility/0.1 (+https://github.com/GitDevWorld/poe2-utility)";
 const HOSTS = ["https://www.pathofexile.com", "https://poe.kakaogames.com"];
 
 const body = {

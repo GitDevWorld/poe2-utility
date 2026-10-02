@@ -1997,6 +1997,77 @@ button.guide-back:active {
   }
 }
 
+.guide-tabs {
+  display: flex;
+  gap: 6px;
+  width: min(1440px, calc(100% - 32px));
+  margin: 16px auto 0;
+  padding: 4px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.guide-tabs button {
+  flex: 1;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.guide-tabs button.active {
+  color: #1a1510;
+  background: var(--gold);
+}
+
+.guide-tabs button:not(.active):hover {
+  color: var(--gold);
+  background: #2b2218;
+}
+
+.jewel-wanted {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.jewel-wanted ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.jewel-wanted-tag {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #c9a978;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+
+.jewel-wanted-tag.desecrated {
+  color: #c98ad6;
+}
+
+@media (max-width: 640px) {
+  .guide-tabs {
+    width: calc(100% - 24px);
+  }
+
+  .jewel-wanted {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- 모바일 ---------- */
 @media (max-width: 640px) {
   .page {

@@ -1,5 +1,5 @@
 const TRADE_ORIGIN = "https://www.pathofexile.com/api/trade2";
-const USER_AGENT = "OAuth poe2-exchange/0.1 (contact: none)";
+const USER_AGENT = "OAuth poe2-utility/0.1 (+https://github.com/GitDevWorld/poe2-utility)";
 
 export default async function handler(req, res) {
   const relativePath = req.query.path;

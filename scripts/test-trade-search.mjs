@@ -1,4 +1,4 @@
-const UA = "OAuth poe2-exchange/0.1 (contact: none)";
+const UA = "OAuth poe2-utility/0.1 (+https://github.com/GitDevWorld/poe2-utility)";
 const LEAGUE = "Forbidden Rites";
 
 const tests = [

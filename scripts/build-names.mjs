@@ -65,7 +65,7 @@ async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
       Accept: "text/html,application/json",
-      "User-Agent": "poe2-exchange-local/0.1 (local-dev)",
+      "User-Agent": "poe2-utility-local/0.1 (local-dev)",
     },
   });
   if (!response.ok) throw new Error(`${url} ${response.status}`);
