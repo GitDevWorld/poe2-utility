@@ -1,5 +1,6 @@
 // 서판 옵션별 경매장 시세 수집기 (GitHub Actions에서 주기 실행).
 // Vercel 등 일부 데이터센터 IP는 경매장이 막기 때문에, 수집은 여기서 하고 결과 JSON만 사이트가 읽는다.
+import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
@@ -11,6 +12,9 @@ const SAMPLE_LISTINGS = 10;
 const SEARCH_GAP_MS = 10_500;
 const FETCH_GAP_MS = 1_500;
 const MAX_RETRIES = 3;
+// 옵션 N개마다 중간 결과를 data 브랜치에 올린다 (PUBLISH=1 일 때, Actions에서만).
+const PUBLISH_EVERY = 6;
+const PUBLISHED_URL = "https://raw.githubusercontent.com/GitDevWorld/poe2-utility/data/tablet-prices.json";
 
 const data = JSON.parse(readFileSync("src/tablet/tabletData.json", "utf8"));
 const tradeMap = JSON.parse(readFileSync("src/tablet/tabletTradeMap.json", "utf8"));
@@ -155,15 +159,71 @@ function buildJobs() {
   return limit > 0 ? jobs.slice(0, limit) : jobs;
 }
 
+/** 지난 수집 결과 — 이번 수집에서 아직 못 다룬 옵션은 이전 값을 그대로 보여준다. */
+async function loadPrevious(league) {
+  try {
+    const { res, body } = await json(`${PUBLISHED_URL}?v=${Date.now()}`);
+    if (!res.ok || body?.league !== league) return {};
+    return body.prices ?? {};
+  } catch {
+    return {};
+  }
+}
+
+let publishedOnce = false;
+
+/** out 폴더를 data 브랜치 단일 커밋으로 강제 푸시 */
+function publish(message) {
+  if (process.env.PUBLISH !== "1") return;
+  const dir = dirname(OUT_FILE);
+  const git = (...args) => execFileSync("git", args, { cwd: dir, stdio: "pipe" });
+  const remote = `https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`;
+  try {
+    if (!publishedOnce) {
+      git("init", "-q");
+      git("checkout", "-q", "-b", "data");
+      git("config", "user.name", "tablet-collector");
+      git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com");
+    }
+    git("add", "tablet-prices.json");
+    git("commit", "-q", ...(publishedOnce ? ["--amend"] : []), "-m", message);
+    git("push", "-q", "-f", remote, "data");
+    publishedOnce = true;
+  } catch (err) {
+    log(`publish failed: ${err.message.split("\n")[0]}`);
+  }
+}
+
 async function main() {
   const league = await resolveLeague();
   const rates = await loadRates(league);
   const jobs = buildJobs();
-  log(`league=${league} rates=${JSON.stringify(rates)} jobs=${jobs.length}`);
+  const previous = await loadPrevious(league);
+  log(`league=${league} rates=${JSON.stringify(rates)} jobs=${jobs.length} previous=${Object.keys(previous).length}`);
 
-  const prices = {};
+  const prices = { ...previous };
   let errors = 0;
   let lastError = "";
+  let fresh = 0;
+
+  const write = (done) => {
+    const withPrice = Object.values(prices).filter((p) => p.magic || p.rare).length;
+    const out = {
+      schema: 1,
+      league,
+      updatedAt: Date.now(),
+      rates,
+      sample: SAMPLE_LISTINGS,
+      status: "securable",
+      progress: { done, total: jobs.length },
+      stats: { mods: jobs.length, withPrice, fresh, errors },
+      prices,
+    };
+    mkdirSync(dirname(OUT_FILE), { recursive: true });
+    writeFileSync(OUT_FILE, JSON.stringify(out));
+    return withPrice;
+  };
+
   for (const [index, job] of jobs.entries()) {
     const entry = {};
     for (const rarity of ["magic", "rare"]) {
@@ -177,30 +237,31 @@ async function main() {
         await sleep(SEARCH_GAP_MS);
       }
     }
-    prices[job.key] = entry;
+    // 이번에 값을 하나도 못 받았으면 이전 값을 남겨 둔다.
+    if (entry.magic || entry.rare) {
+      prices[job.key] = { ...entry, at: Date.now() };
+      fresh += 1;
+    } else if (!prices[job.key]) {
+      prices[job.key] = {};
+    }
     log(`${index + 1}/${jobs.length} ${job.key} ${JSON.stringify(entry)}`);
+
+    const done = index + 1;
+    if (done % PUBLISH_EVERY === 0 && done < jobs.length && fresh > 0) {
+      write(done);
+      publish(`tablet prices ${done}/${jobs.length}`);
+    }
   }
 
-  const withPrice = Object.values(prices).filter((p) => p.magic || p.rare).length;
-  if (withPrice === 0) {
+  if (fresh === 0) {
     // 전부 실패면 기존 데이터를 덮어쓰지 않도록 실패로 끝낸다.
     console.error(`no prices collected (${errors} errors, last: ${lastError})`);
     process.exit(1);
   }
 
-  const out = {
-    schema: 1,
-    league,
-    updatedAt: Date.now(),
-    rates,
-    sample: SAMPLE_LISTINGS,
-    status: "securable",
-    stats: { mods: jobs.length, withPrice, errors },
-    prices,
-  };
-  mkdirSync(dirname(OUT_FILE), { recursive: true });
-  writeFileSync(OUT_FILE, JSON.stringify(out));
-  log(`wrote ${OUT_FILE}: ${withPrice}/${jobs.length} mods priced, ${errors} errors`);
+  const withPrice = write(jobs.length);
+  publish(`tablet prices ${new Date().toISOString().slice(0, 16)}Z`);
+  log(`wrote ${OUT_FILE}: ${withPrice}/${jobs.length} mods priced, ${fresh} fresh, ${errors} errors`);
 }
 
 await main();

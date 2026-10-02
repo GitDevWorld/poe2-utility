@@ -31,6 +31,14 @@ export function useTabletMarket(tabletFilter: TabletFilter) {
     void load();
   }, [load]);
 
+  // 수집이 진행 중이면 중간 결과가 계속 올라오니 2분마다 새로 받는다.
+  const collecting = Boolean(market?.progress && market.progress.done < market.progress.total);
+  useEffect(() => {
+    if (!collecting) return;
+    const timer = window.setInterval(() => void load(true), 2 * 60 * 1000);
+    return () => window.clearInterval(timer);
+  }, [collecting, load]);
+
   return { market, loading, error, reload: () => load(true) };
 }
 

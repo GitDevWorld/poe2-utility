@@ -458,7 +458,10 @@ export function TabletRegexBuilder({ onCopy }: Props) {
           {marketError && marketError}
           {market && !marketError && (
             <>
-              공식 경매장 즉시 구매 · {market.league} · {formatMarketAgo(market.updatedAt)} 수집 · 1시간마다 갱신
+              공식 경매장 즉시 구매 · {market.league} · {formatMarketAgo(market.updatedAt)} 갱신
+              {market.progress && market.progress.done < market.progress.total
+                ? ` · 수집 중 ${market.progress.done}/${market.progress.total} (모인 것부터 표시)`
+                : " · 1시간마다 갱신"}
               {market.emptyHint && !marketLoading ? ` · ${market.emptyHint}` : ""}
               {" · "}
               <span className="tablet-price-legend">마법/희귀 = 즉시 구매 최저가(ex), 누르면 경매장 검색</span>

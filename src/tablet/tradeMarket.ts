@@ -40,6 +40,8 @@ type CollectedPrices = {
   league: string;
   updatedAt: number;
   prices: Record<string, ModTradePrices>;
+  /** 수집 중이면 done < total — 그동안 모은 옵션만 새 값이고 나머지는 이전 값 */
+  progress?: { done: number; total: number };
 };
 
 let cache: { at: number; data: CollectedPrices } | null = null;
@@ -79,21 +81,20 @@ export function tradeJobsForFilter(filter: TabletFilter): { ref: ModRef }[] {
   return jobs;
 }
 
-export async function fetchTabletTradePrices(filter: TabletFilter, force = false): Promise<TabletTradeSnapshot> {
+export async function fetchTabletTradePrices(_filter: TabletFilter, force = false): Promise<TabletTradeSnapshot> {
   const collected = await loadCollected(force);
-  const total = tradeJobsForFilter(filter).length;
   const league = await selectedLeague();
   const priced = Object.values(collected.prices).filter((p) => p.magic || p.rare).length;
 
   let emptyHint: string | undefined;
-  if (priced === 0) emptyHint = "수집된 시세가 없습니다.";
+  if (priced === 0) emptyHint = "아직 수집된 시세가 없습니다.";
   else if (league && league !== collected.league) emptyHint = `시세는 ${collected.league} 리그 기준입니다.`;
 
   return {
     league: collected.league,
     updatedAt: collected.updatedAt,
     prices: collected.prices,
-    progress: { done: total, total },
+    progress: collected.progress,
     emptyHint,
   };
 }
