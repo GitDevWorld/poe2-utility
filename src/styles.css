@@ -2165,6 +2165,50 @@ a.tablet-mod-price-col:hover {
   padding: 6px 12px;
 }
 
+/* 시세 버튼: 한 줄, 크게 */
+.tablet-mod-item > .tablet-mod-prices {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+a.tablet-mod-price-col {
+  min-width: 92px;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 10px;
+  color: var(--text);
+  background: #1a1510;
+  border-radius: 8px;
+}
+
+a.tablet-mod-price-col.hot {
+  color: var(--gold);
+  border-color: var(--gold-2);
+}
+
+.tablet-mod-price-col .tablet-mod-price-label {
+  min-width: 0;
+  margin-right: 0;
+  font-size: 12px;
+}
+
+.tablet-mod-price-col .tablet-mod-price-go {
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .tablet-mod-item {
+    flex-wrap: wrap;
+  }
+
+  .tablet-mod-item > .tablet-mod-prices {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
 /* ---------- 모바일 ---------- */
 @media (max-width: 640px) {
   .page {

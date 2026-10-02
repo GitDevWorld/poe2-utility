@@ -55,7 +55,7 @@ function PriceBand({
       rel="noreferrer"
       title={
         stats
-          ? `${label === "M" ? "마법" : "희귀"} 즉시 구매 최저가 ${stats.lowestEx}ex` +
+          ? `${label} 즉시 구매 최저가 ${stats.lowestEx}ex` +
             (stats.medianEx != null ? ` · 하위 10개 중간값 ${stats.medianEx}ex` : "") +
             (stats.listings != null ? ` · 매물 ${stats.listings >= 10000 ? "10000+" : stats.listings}개` : "")
           : "시세 없음"
@@ -138,12 +138,12 @@ function ModPicker({
                     {tradeMapped ? (
                       <>
                         <PriceBand
-                          label="M"
+                          label="마법"
                           stats={band?.magic}
                           searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "magic" }))}
                         />
                         <PriceBand
-                          label="R"
+                          label="희귀"
                           stats={band?.rare}
                           searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "rare" }))}
                         />
@@ -461,7 +461,7 @@ export function TabletRegexBuilder({ onCopy }: Props) {
               공식 경매장 즉시 구매 · {market.league} · {formatMarketAgo(market.updatedAt)} 수집 · 1시간마다 갱신
               {market.emptyHint && !marketLoading ? ` · ${market.emptyHint}` : ""}
               {" · "}
-              <span className="tablet-price-legend">M/R = 마법/희귀 최저가(ex)</span>
+              <span className="tablet-price-legend">마법/희귀 = 즉시 구매 최저가(ex), 누르면 경매장 검색</span>
               <button type="button" className="tablet-market-inline-btn" onClick={() => reloadMarket()}>
                 새로고침
               </button>
