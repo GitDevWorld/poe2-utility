@@ -39,7 +39,16 @@ function toggleRef(list: ModRef[], ref: ModRef): ModRef[] {
 function PriceBand({ label, stats }: { label: string; stats?: ModTradePrices["magic"] }) {
   const hot = stats && stats.lowestEx >= 5;
   return (
-    <span className={`tablet-mod-price-col ${hot ? "hot" : ""}`} title={`${label === "M" ? "마법" : "희귀"} 최저가 (ex)`}>
+    <span
+      className={`tablet-mod-price-col ${hot ? "hot" : ""}`}
+      title={
+        stats
+          ? `${label === "M" ? "마법" : "희귀"} 즉시 구매 최저가 ${stats.lowestEx}ex` +
+            (stats.medianEx != null ? ` · 하위 10개 중간값 ${stats.medianEx}ex` : "") +
+            (stats.listings != null ? ` · 매물 ${stats.listings >= 10000 ? "10000+" : stats.listings}개` : "")
+          : "시세 없음"
+      }
+    >
       <span className="tablet-mod-price-label">{label}</span>
       {formatLowestPrice(stats)}
     </span>
@@ -306,11 +315,6 @@ export function TabletRegexBuilder({ onCopy }: Props) {
     market && refsAboveThreshold(market, tabletFilter, magicMinEx, rareMinEx).length,
   );
 
-  const progressLabel =
-    market?.progress && market.progress.done < market.progress.total
-      ? ` · ${market.progress.done}/${market.progress.total}`
-      : "";
-
   return (
     <section className="table-wrap tablet-builder">
       <div className="calc-head">
@@ -412,16 +416,14 @@ export function TabletRegexBuilder({ onCopy }: Props) {
           </button>
         </div>
         <p className="tablet-market-inline">
-          {marketLoading && `경매장 시세 조회 중…${progressLabel}`}
+          {marketLoading && "경매장 시세 불러오는 중…"}
           {marketError && marketError}
           {market && !marketError && (
             <>
-              공식 경매장 · {market.league || "…"} · {formatMarketAgo(market.updatedAt)}
-              {market.fromShared ? " · 공유 캐시" : ""}
-              {progressLabel}
+              공식 경매장 즉시 구매 · {market.league} · {formatMarketAgo(market.updatedAt)} 수집 · 1시간마다 갱신
               {market.emptyHint && !marketLoading ? ` · ${market.emptyHint}` : ""}
               {" · "}
-              <span className="tablet-price-legend">M/R = exalt 표시 최저가</span>
+              <span className="tablet-price-legend">M/R = 마법/희귀 최저가(ex)</span>
               <button type="button" className="tablet-market-inline-btn" onClick={() => reloadMarket()}>
                 새로고침
               </button>

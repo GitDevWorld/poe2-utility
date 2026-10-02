@@ -1,0 +1,38 @@
+name: Collect tablet prices
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-tablet-prices
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect prices from trade API
+        run: node scripts/collect-tablet-prices.mjs
+        env:
+          OUT_FILE: out/tablet-prices.json
+      - name: Publish to data branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd out
+          git init -q
+          git checkout -q -b data
+          git add tablet-prices.json
+          git -c user.name="tablet-collector" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "tablet prices $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data

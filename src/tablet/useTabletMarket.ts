@@ -13,20 +13,9 @@ export function useTabletMarket(tabletFilter: TabletFilter) {
       const id = ++loadId.current;
       setLoading(true);
       setError("");
-      setMarket({ league: "", updatedAt: Date.now(), prices: {}, progress: { done: 0, total: 0 } });
       try {
-        await fetchTabletTradePrices(tabletFilter, force, {
-          onPartial: (partial) => {
-            if (id !== loadId.current) return;
-            setMarket(partial);
-            if (partial.progress && partial.progress.done > 0) {
-              setLoading(false);
-            }
-          },
-        }).then((final) => {
-          if (id !== loadId.current) return;
-          setMarket(final);
-        });
+        const snapshot = await fetchTabletTradePrices(tabletFilter, force);
+        if (id === loadId.current) setMarket(snapshot);
       } catch {
         if (id !== loadId.current) return;
         setError("경매장 시세를 불러오지 못했습니다.");
