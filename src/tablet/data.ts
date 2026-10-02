@@ -20,7 +20,8 @@ export function getModByRef(ref: ModRef): TabletMod | undefined {
 
 export function suffixesForTabletType(tabletTypeId: number | null): TabletMod[] {
   if (tabletTypeId == null) return [];
-  return suffixOptions.filter((item) => item.tablet_type_id === tabletTypeId);
+  // 공통 접미(tablet_type_id 없음)는 모든 서판 종류에 붙는다.
+  return suffixOptions.filter((item) => item.tablet_type_id === tabletTypeId || item.tablet_type_id == null);
 }
 
 export function suffixesForFilter(filter: number | "all"): TabletMod[] {

@@ -2068,6 +2068,103 @@ button.guide-back:active {
   }
 }
 
+.tablet-type-chips .ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tablet-type-chips .ghost img,
+.tablet-mod-type-tag img,
+.tablet-trade-search-head img {
+  object-fit: contain;
+}
+
+.tablet-mod-type-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tablet-mod-item {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.tablet-mod-item > .tablet-mod-row {
+  flex: 1;
+  min-width: 0;
+}
+
+.tablet-mod-item > .tablet-mod-prices {
+  justify-content: center;
+}
+
+a.tablet-mod-price-col {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+a.tablet-mod-price-col:hover {
+  color: var(--gold);
+  border-color: var(--gold-2);
+  background: #2b2218;
+}
+
+.tablet-mod-price-go {
+  margin-left: 3px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.tablet-trade-search {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: #1a1510;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.tablet-trade-search > p {
+  margin: 8px 0 4px;
+}
+
+.tablet-trade-search-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.tablet-trade-search-head > div:not(.tablet-trade-rarity) {
+  flex: 1;
+  min-width: 200px;
+}
+
+.tablet-trade-search-head h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.tablet-trade-search-head .guide-search-note {
+  margin: 2px 0 0;
+}
+
+.tablet-trade-rarity {
+  display: flex;
+  gap: 6px;
+}
+
+.tablet-trade-rarity .ghost {
+  padding: 6px 12px;
+}
+
 /* ---------- 모바일 ---------- */
 @media (max-width: 640px) {
   .page {

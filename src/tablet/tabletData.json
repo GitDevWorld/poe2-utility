@@ -138,6 +138,20 @@
   ],
   "suffixOptions": [
     {
+      "id": 81,
+      "tablet_type_id": null,
+      "text_ko": "지도에 무작위 속성 부여 (1–2)개 추가",
+      "pattern_ko": "작위.속",
+      "type": "suffix"
+    },
+    {
+      "id": 82,
+      "tablet_type_id": null,
+      "text_ko": "고유 몬스터가 속성 1개 추가 보유",
+      "pattern_ko": "고유.몬",
+      "type": "suffix"
+    },
+    {
       "id": 8,
       "tablet_type_id": 5,
       "text_ko": "지도 내 의식 제단에서 희생되는 몬스터가 주는 공물 점수 (10–30)% 증가",

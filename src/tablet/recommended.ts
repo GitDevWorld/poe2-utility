@@ -1,5 +1,4 @@
 import { joinPatterns } from "./buildRegex";
-import { isDiscouragedMod } from "./discouraged";
 import { getModByRef, modRefKey, tabletTypes, type ModRef } from "./data";
 
 /** 0.5.5 커뮤니티·SNOMET 기준 — 종류별로 ‘돈/효율’에 자주 거론되는 옵션 */
@@ -145,7 +144,6 @@ export function recommendedRefsForAllTypes(): ModRef[] {
 }
 
 function modSortTier(filter: TabletFilter, ref: ModRef, mod?: { tablet_type_id: number | null }): number {
-  if (isDiscouragedMod(ref)) return 2;
   if (isRecommendedMod(filter, ref, mod)) return 0;
   return 1;
 }

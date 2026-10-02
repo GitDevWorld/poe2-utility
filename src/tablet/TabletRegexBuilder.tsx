@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { regexStatus, REGEX_CHAR_LIMIT } from "./buildRegex";
-import { isDiscouragedMod } from "./discouraged";
 import { buildStashSearchQuery } from "./stashSearch";
 import {
   filterModsByQuery,
@@ -20,6 +19,8 @@ import {
   type ModTradePrices,
 } from "./tradeMarket";
 import { hasTradeStatForRef } from "./tradeStatMap";
+import { TabletTradeSearch } from "./TabletTradeSearch";
+import { buildTabletQuery, TABLET_ICONS, tradeSearchUrl } from "./tradeSearch";
 import { formatMarketAgo, useTabletMarket } from "./useTabletMarket";
 
 type Props = {
@@ -36,11 +37,22 @@ function toggleRef(list: ModRef[], ref: ModRef): ModRef[] {
   return [...list, ref];
 }
 
-function PriceBand({ label, stats }: { label: string; stats?: ModTradePrices["magic"] }) {
+function PriceBand({
+  label,
+  stats,
+  searchUrl,
+}: {
+  label: string;
+  stats?: ModTradePrices["magic"];
+  searchUrl: string;
+}) {
   const hot = stats && stats.lowestEx >= 5;
   return (
-    <span
+    <a
       className={`tablet-mod-price-col ${hot ? "hot" : ""}`}
+      href={searchUrl}
+      target="_blank"
+      rel="noreferrer"
       title={
         stats
           ? `${label === "M" ? "마법" : "희귀"} 즉시 구매 최저가 ${stats.lowestEx}ex` +
@@ -51,7 +63,10 @@ function PriceBand({ label, stats }: { label: string; stats?: ModTradePrices["ma
     >
       <span className="tablet-mod-price-label">{label}</span>
       {formatLowestPrice(stats)}
-    </span>
+      <span className="tablet-mod-price-go" aria-hidden>
+        ↗
+      </span>
+    </a>
   );
 }
 
@@ -64,6 +79,7 @@ function ModPicker({
   showTypeLabel,
   emptyLabel,
   pricesByRef,
+  league,
 }: {
   mods: TabletMod[];
   included: ModRef[];
@@ -73,6 +89,7 @@ function ModPicker({
   showTypeLabel?: boolean;
   emptyLabel?: string;
   pricesByRef?: Record<string, ModTradePrices>;
+  league: string;
 }) {
   const includedKeys = useMemo(() => new Set(included.map(modRefKey)), [included]);
   const excludedKeys = useMemo(() => new Set(excluded.map(modRefKey)), [excluded]);
@@ -89,11 +106,10 @@ function ModPicker({
             const added = includedKeys.has(key);
             const removed = excludedKeys.has(key);
             const active = mode === "include" ? added : removed;
-            const tierClass = isDiscouragedMod(ref) ? "tablet-mod-nrec" : undefined;
             const band = pricesByRef?.[key];
             const tradeMapped = hasTradeStatForRef(ref);
             return (
-              <li key={`${mode}-${key}`} className={tierClass}>
+              <li key={`${mode}-${key}`} className="tablet-mod-item">
                 <button
                   type="button"
                   className={`tablet-mod-row ${active ? "selected" : ""} ${mode === "exclude" ? "exclude-pick" : ""}`}
@@ -101,31 +117,44 @@ function ModPicker({
                 >
                   <span className="tablet-mod-row-body">
                     <strong>
-                      {isDiscouragedMod(ref) && <span className="tablet-nrec-badge">비추천</span>}
                       {added && <span className="tablet-state-badge added">추가됨</span>}
                       {removed && <span className="tablet-state-badge removed">제외됨</span>}
+                      {showTypeLabel && mod.tablet_type_id == null && <span className="tablet-mod-type-tag">공통</span>}
                       {showTypeLabel && mod.tablet_type_id != null && (
-                        <span className="tablet-mod-type-tag">{tabletTypeName(mod.tablet_type_id)}</span>
+                        <span className="tablet-mod-type-tag">
+                          {TABLET_ICONS[mod.tablet_type_id] && (
+                            <img src={TABLET_ICONS[mod.tablet_type_id]} alt="" width={14} height={14} loading="lazy" />
+                          )}
+                          {tabletTypeName(mod.tablet_type_id)}
+                        </span>
                       )}
                       {mod.text_ko}
                     </strong>
                     <small>{mod.pattern_ko}</small>
                   </span>
-                  {pricesByRef != null && (
-                    <span className="tablet-mod-prices">
-                      {tradeMapped ? (
-                        <>
-                          <PriceBand label="M" stats={band?.magic} />
-                          <PriceBand label="R" stats={band?.rare} />
-                        </>
-                      ) : (
-                        <span className="tablet-mod-no-trade" title="경매장 stat 미연동">
-                          —
-                        </span>
-                      )}
-                    </span>
-                  )}
                 </button>
+                {pricesByRef != null && (
+                  <span className="tablet-mod-prices">
+                    {tradeMapped ? (
+                      <>
+                        <PriceBand
+                          label="M"
+                          stats={band?.magic}
+                          searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "magic" }))}
+                        />
+                        <PriceBand
+                          label="R"
+                          stats={band?.rare}
+                          searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "rare" }))}
+                        />
+                      </>
+                    ) : (
+                      <span className="tablet-mod-no-trade" title="경매장 stat 미연동">
+                        —
+                      </span>
+                    )}
+                  </span>
+                )}
               </li>
             );
           })}
@@ -156,6 +185,7 @@ function ModPickArea({
   excluded,
   onPickMod,
   pricesByRef,
+  league,
 }: {
   addMode: boolean;
   prefixMods: TabletMod[];
@@ -165,6 +195,7 @@ function ModPickArea({
   excluded: ModRef[];
   onPickMod: (ref: ModRef) => void;
   pricesByRef?: Record<string, ModTradePrices>;
+  league: string;
 }) {
   const mode: PickMode = addMode ? "include" : "exclude";
   const typeName =
@@ -183,6 +214,7 @@ function ModPickArea({
             mode={mode}
             onPick={onPickMod}
             pricesByRef={pricesByRef}
+            league={league}
           />
         </div>
         <div className="tablet-col">
@@ -195,6 +227,7 @@ function ModPickArea({
             onPick={onPickMod}
             showTypeLabel={tabletFilter === "all"}
             pricesByRef={pricesByRef}
+            league={league}
           />
         </div>
       </div>
@@ -215,6 +248,7 @@ export function TabletRegexBuilder({ onCopy }: Props) {
   const [rareMinEx, setRareMinEx] = useState(5);
 
   const tabletType = typeof tabletFilter === "number" ? tabletTypes.find((item) => item.id === tabletFilter) : undefined;
+  const league = market?.league || "Forbidden Rites";
 
   useEffect(() => {
     if (tabletFilter === "all") {
@@ -223,7 +257,8 @@ export function TabletRegexBuilder({ onCopy }: Props) {
     }
     const keepSuffix = (ref: ModRef) => {
       if (ref.slot === "prefix") return true;
-      return getModByRef(ref)?.tablet_type_id === tabletFilter;
+      const typeId = getModByRef(ref)?.tablet_type_id;
+      return typeId == null || typeId === tabletFilter;
     };
     setIncluded((prev) => prev.filter(keepSuffix));
     setExcluded((prev) => prev.filter(keepSuffix));
@@ -344,6 +379,8 @@ export function TabletRegexBuilder({ onCopy }: Props) {
         </div>
       </div>
 
+      <TabletTradeSearch refs={included} tabletTypeId={tabletType?.id} league={league} />
+
       <div className="tablet-toolbar">
         <div className="tablet-type-row">
           <div className="tablet-type-chips">
@@ -361,6 +398,7 @@ export function TabletRegexBuilder({ onCopy }: Props) {
                 className={`ghost ${tabletFilter === type.id ? "active" : ""}`}
                 onClick={() => setTabletFilter(type.id)}
               >
+                {TABLET_ICONS[type.id] && <img src={TABLET_ICONS[type.id]} alt="" width={22} height={22} />}
                 {type.name_ko}
               </button>
             ))}
@@ -456,6 +494,7 @@ export function TabletRegexBuilder({ onCopy }: Props) {
         excluded={excluded}
         onPickMod={pickMod}
         pricesByRef={market?.prices ?? {}}
+        league={league}
       />
     </section>
   );
