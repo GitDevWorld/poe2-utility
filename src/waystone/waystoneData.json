@@ -1,0 +1,425 @@
+{
+  "source": "poe2db.tw/kr/Waystones + 경매장 data/stats (2026-10-06 확인)",
+  "tiers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "prefixOptions": [
+    {
+      "id": 2,
+      "type": "prefix",
+      "text_ko": "몬스터가 피해의 (5–24)%를 추가 화염 피해로 줌",
+      "extras": [
+        "몬스터의 효율 16% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "화염",
+      "stat": "explicit.stat_92381065"
+    },
+    {
+      "id": 3,
+      "type": "prefix",
+      "text_ko": "몬스터가 피해의 (5–24)%를 추가 냉기 피해로 줌",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 14% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "냉기",
+      "stat": "explicit.stat_211727"
+    },
+    {
+      "id": 4,
+      "type": "prefix",
+      "text_ko": "몬스터가 피해의 (5–24)%를 추가 번개 피해로 줌",
+      "extras": [
+        "무리 규모 8% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "번개",
+      "stat": "explicit.stat_512071314"
+    },
+    {
+      "id": 5,
+      "type": "prefix",
+      "text_ko": "몬스터 피해 (5–24)% 증가",
+      "extras": [
+        "마법 및 희귀 몬스터 25% 증폭",
+        "희귀 몬스터가 몬스터 속성을 보유할 확률 25% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "터.피해.\\d",
+      "stat": "explicit.stat_1890519597"
+    },
+    {
+      "id": 6,
+      "type": "prefix",
+      "text_ko": "몬스터의 공격, 시전 및 이동 속도 (10–15)% 증가",
+      "extras": [
+        "무리 규모 9% 증폭",
+        "지역에서 발견하는 경로석 25% 증폭"
+      ],
+      "pattern_ko": "공격",
+      "stat": "explicit.stat_3909654181"
+    },
+    {
+      "id": 7,
+      "type": "prefix",
+      "text_ko": "몬스터의 치명타 명중 확률 (80–300)% 증가",
+      "extras": [
+        "몬스터의 치명타 피해 보너스 +(11–30)%",
+        "무리 규모 9% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "의.치",
+      "stat": "explicit.stat_2753083623"
+    },
+    {
+      "id": 8,
+      "type": "prefix",
+      "text_ko": "몬스터의 생명력 (10–30)% 증폭",
+      "extras": [
+        "마법 및 희귀 몬스터 23% 증폭",
+        "희귀 몬스터가 몬스터 속성을 보유할 확률 23% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "터의.생",
+      "stat": "explicit.stat_95249895"
+    },
+    {
+      "id": 13,
+      "type": "prefix",
+      "text_ko": "몬스터가 명중 시 (13–40)%의 확률로 중독 유발",
+      "extras": [
+        "무리 규모 7% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "중독",
+      "stat": "explicit.stat_95221307"
+    },
+    {
+      "id": 14,
+      "type": "prefix",
+      "text_ko": "몬스터가 명중 시 (5–25)%의 확률로 출혈 유발",
+      "extras": [
+        "몬스터의 효율 13% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "출혈",
+      "stat": "explicit.stat_2506820610"
+    },
+    {
+      "id": 16,
+      "type": "prefix",
+      "text_ko": "몬스터가 준 물리 피해의 (15–45)%와 동일한 방어구 파괴",
+      "extras": [
+        "마법 및 희귀 몬스터 19% 증폭",
+        "희귀 몬스터가 몬스터 속성을 보유할 확률 19% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "물리",
+      "stat": "explicit.stat_1879340377"
+    },
+    {
+      "id": 17,
+      "type": "prefix",
+      "text_ko": "몬스터의 정확도 (10–50)% 증가",
+      "extras": [
+        "무리 규모 7% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "정확",
+      "stat": "explicit.stat_1588049749"
+    },
+    {
+      "id": 18,
+      "type": "prefix",
+      "text_ko": "몬스터가 피해의 (5–24)%를 추가 카오스 피해로 줌",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 15% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "카오",
+      "stat": "explicit.stat_2200661314"
+    },
+    {
+      "id": 19,
+      "type": "prefix",
+      "text_ko": "몬스터의 기절 축적 (50–110)% 증가",
+      "extras": [
+        "몬스터의 효율 13% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "축적",
+      "stat": "explicit.stat_115425161"
+    },
+    {
+      "id": 21,
+      "type": "prefix",
+      "text_ko": "몬스터가 투사체 (2–3)개 추가 발사",
+      "extras": [
+        "무리 규모 9% 증폭",
+        "지역에서 발견하는 경로석 25% 증폭"
+      ],
+      "pattern_ko": "투사",
+      "stat": "explicit.stat_1309819744"
+    },
+    {
+      "id": 29,
+      "type": "prefix",
+      "text_ko": "몬스터 피해가 (6–16)%의 원소 저항 관통",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 16% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "해가",
+      "stat": "explicit.stat_1898978455"
+    }
+  ],
+  "suffixOptions": [
+    {
+      "id": 1,
+      "type": "suffix",
+      "text_ko": "희귀 몬스터가 속성 부여 1개 추가 보유",
+      "extras": [
+        "희귀 몬스터 수 25% 증가",
+        "지역에서 발견하는 경로석 10% 증가"
+      ],
+      "pattern_ko": "부여",
+      "stat": "explicit.stat_2550456553"
+    },
+    {
+      "id": 9,
+      "type": "suffix",
+      "text_ko": "몬스터의 원소 저항 +(20–40)%",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 14% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "터의.원소.저",
+      "stat": "explicit.stat_1054098949"
+    },
+    {
+      "id": 10,
+      "type": "suffix",
+      "text_ko": "몬스터가 장갑을 두른 몬스터",
+      "extras": [
+        "마법 및 희귀 몬스터 18% 증폭",
+        "희귀 몬스터가 몬스터 속성을 보유할 확률 18% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "장갑",
+      "stat": "explicit.stat_2539290279"
+    },
+    {
+      "id": 11,
+      "type": "suffix",
+      "text_ko": "몬스터가 회피하는 몬스터",
+      "extras": [
+        "무리 규모 6% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "회피",
+      "stat": "explicit.stat_2570249991"
+    },
+    {
+      "id": 12,
+      "type": "suffix",
+      "text_ko": "몬스터가 최대 생명력의 (12–25)%를 추가 에너지 보호막 최대치로 획득",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 13% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "력의",
+      "stat": "explicit.stat_2887760183"
+    },
+    {
+      "id": 15,
+      "type": "suffix",
+      "text_ko": "몬스터의 상태 이상 한계치 (30–79)% 증가",
+      "extras": [
+        "몬스터의 기절 한계치 (30–79)% 증가",
+        "몬스터의 효율 13% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "한계",
+      "stat": "explicit.stat_1994551050"
+    },
+    {
+      "id": 20,
+      "type": "suffix",
+      "text_ko": "몬스터의 원소 상태 이상 적용 (60–130)% 증가",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 11% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "소.상",
+      "stat": "explicit.stat_3877264671"
+    },
+    {
+      "id": 22,
+      "type": "suffix",
+      "text_ko": "몬스터의 효과 범위 50% 증가",
+      "extras": [
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "범위",
+      "stat": "explicit.stat_1708461270"
+    },
+    {
+      "id": 23,
+      "type": "suffix",
+      "text_ko": "지역이 쇠약화 저주에 걸림",
+      "extras": [
+        "몬스터의 효율 16% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "쇠약",
+      "stat": "explicit.stat_2029171424"
+    },
+    {
+      "id": 24,
+      "type": "suffix",
+      "text_ko": "지역이 시간의 사슬 저주에 걸림",
+      "extras": [
+        "무리 규모 8% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "간의",
+      "stat": "explicit.stat_1629357380"
+    },
+    {
+      "id": 25,
+      "type": "suffix",
+      "text_ko": "지역이 원소 약화 저주에 걸림",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 13% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "이.원",
+      "stat": "explicit.stat_554690751"
+    },
+    {
+      "id": 26,
+      "type": "suffix",
+      "text_ko": "지역에 점화 지대 존재",
+      "extras": [
+        "몬스터의 효율 15% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭",
+        "ground fire art variation [1033]",
+        "map ground effect patches per 100 tiles [(4–7)]",
+        "map ground effect radius [20]"
+      ],
+      "pattern_ko": "점화",
+      "stat": "explicit.stat_133340941"
+    },
+    {
+      "id": 27,
+      "type": "suffix",
+      "text_ko": "지역에 얼음 지대 존재",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 12% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭",
+        "ground ice art variation [1014]",
+        "map ground effect patches per 100 tiles [(3–6)]",
+        "map ground effect radius [26]"
+      ],
+      "pattern_ko": "얼음",
+      "stat": "explicit.stat_349586058"
+    },
+    {
+      "id": 28,
+      "type": "suffix",
+      "text_ko": "지역에 감전 지대 존재",
+      "extras": [
+        "무리 규모 7% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭",
+        "ground lightning art variation [1011]",
+        "map ground effect patches per 100 tiles [(5–8)]",
+        "map ground effect radius [17]"
+      ],
+      "pattern_ko": "감전",
+      "stat": "explicit.stat_3477720557"
+    },
+    {
+      "id": 30,
+      "type": "suffix",
+      "text_ko": "플레이어 저항 최대치 -(3–10)%",
+      "extras": [
+        "무리 규모 10% 증폭",
+        "지역에서 발견하는 경로석 25% 증폭"
+      ],
+      "pattern_ko": "–-",
+      "stat": "explicit.stat_3376488707"
+    },
+    {
+      "id": 31,
+      "type": "suffix",
+      "text_ko": "플레이어의 플라스크 충전량 (20–35)% 감소",
+      "extras": [
+        "무리 규모 7% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "플라",
+      "stat": "explicit.stat_2549889921"
+    },
+    {
+      "id": 32,
+      "type": "suffix",
+      "text_ko": "플레이어의 생명력 및 에너지 보호막 회복 속도 (20–40)% 감폭",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 15% 증폭",
+        "지역에서 발견하는 경로석 20% 증폭"
+      ],
+      "pattern_ko": "력.및",
+      "stat": "explicit.stat_4181072906"
+    },
+    {
+      "id": 33,
+      "type": "suffix",
+      "text_ko": "플레이어의 재사용 대기시간 회복 속도 (15–30)% 감폭",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 12% 증폭",
+        "지역에서 발견하는 경로석 15% 증폭"
+      ],
+      "pattern_ko": "재사",
+      "stat": "explicit.stat_941368244"
+    },
+    {
+      "id": 34,
+      "type": "suffix",
+      "text_ko": "몬스터가 치명타 명중으로 받는 추가 피해 (15–30)% 감소",
+      "extras": [
+        "마법 및 희귀 몬스터 18% 증폭",
+        "희귀 몬스터가 몬스터 속성을 보유할 확률 18% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "중으",
+      "stat": "explicit.stat_337935900"
+    },
+    {
+      "id": 35,
+      "type": "suffix",
+      "text_ko": "몬스터에게 적용되는 저주 효과 (20–50)% 감폭",
+      "extras": [
+        "이 지역에서 발견하는 아이템의 희귀도 10% 증폭",
+        "지역에서 발견하는 경로석 10% 증폭"
+      ],
+      "pattern_ko": "터에",
+      "stat": "explicit.stat_3796523155"
+    }
+  ]
+}

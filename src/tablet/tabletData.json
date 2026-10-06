@@ -338,7 +338,7 @@
       "id": 124,
       "tablet_type_id": 3,
       "text_ko": "지도 내 탐험 폭발물 효과 범위 (5–10)% 증가",
-      "pattern_ko": "area",
+      "pattern_ko": "발물",
       "type": "suffix"
     },
     {

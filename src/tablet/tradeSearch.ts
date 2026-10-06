@@ -1,4 +1,4 @@
-import { getModByRef, tabletTypes, type ModRef } from "./data";
+import { getModByRef, tabletTypeName, tabletTypes, type ModRef } from "./data";
 import { tradeStatIdForRef } from "./tradeStatMap";
 
 /** 서판 종류별 이미지 (poe2db 게임 아이콘) */
@@ -15,6 +15,8 @@ export type TabletSearchInput = {
   refs: ModRef[];
   tabletTypeId?: number;
   rarity: SearchRarity;
+  /** 남은 사용 횟수 최소값 */
+  minUses?: number;
 };
 
 /** 서판 종류: 직접 고른 종류, 없으면 접미 옵션들이 모두 같은 종류일 때 그 종류. */
@@ -27,7 +29,7 @@ export function resolveTabletTypeId(refs: ModRef[], tabletTypeId?: number): numb
 }
 
 /** 선택한 옵션으로 경매장 검색 조건을 만든다. 옵션이 여러 개면 모두 붙은 매물만. */
-export function buildTabletQuery({ refs, tabletTypeId, rarity }: TabletSearchInput) {
+export function buildTabletQuery({ refs, tabletTypeId, rarity, minUses }: TabletSearchInput) {
   const statIds = [...new Set(refs.map(tradeStatIdForRef).filter((id): id is string => Boolean(id)))];
   const typeId = resolveTabletTypeId(refs, tabletTypeId);
 
@@ -39,9 +41,11 @@ export function buildTabletQuery({ refs, tabletTypeId, rarity }: TabletSearchInp
     filters: { type_filters: { filters: typeFilters } },
   };
   if (typeId != null && TABLET_BASE_KO[typeId]) query.type = TABLET_BASE_KO[typeId];
-  if (statIds.length) {
-    query.stats = [{ type: "and", filters: statIds.map((id) => ({ id })) }];
+  const filters: Record<string, unknown>[] = statIds.map((id) => ({ id }));
+  if (minUses != null && minUses > 0) {
+    filters.push({ id: "pseudo.pseudo_number_of_uses_remaining", value: { min: minUses } });
   }
+  if (filters.length) query.stats = [{ type: "and", filters }];
   return query;
 }
 
@@ -58,4 +62,26 @@ export async function encodeFilterCode(query: Record<string, unknown>): Promise<
   let binary = "";
   for (const b of gz) binary += String.fromCharCode(b);
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+export type ComboCheck = {
+  /** 한 서판에 같이 붙을 수 없는 조합 — 창고·경매장 모두 결과 없음 */
+  impossible?: string;
+  /** 마법 서판(접두·접미 각 1개)에서는 안 나오는 조합 */
+  rareOnly?: boolean;
+};
+
+/** 선택한 옵션을 "모두 포함"으로 찾을 때 실제로 존재할 수 있는 조합인지 확인한다. */
+export function checkCombo(refs: ModRef[]): ComboCheck {
+  const mods = refs.map(getModByRef).filter((mod): mod is NonNullable<typeof mod> => Boolean(mod));
+  const suffixTypes = [...new Set(mods.map((mod) => mod.tablet_type_id).filter((id): id is number => id != null))];
+  const prefixes = mods.filter((mod) => mod.type === "prefix").length;
+  const suffixes = mods.filter((mod) => mod.type === "suffix").length;
+  return {
+    impossible:
+      suffixTypes.length > 1
+        ? `${suffixTypes.map(tabletTypeName).join("·")} 서판 전용 접미는 한 서판에 같이 붙지 않아 결과가 없습니다.`
+        : undefined,
+    rareOnly: prefixes > 1 || suffixes > 1,
+  };
 }

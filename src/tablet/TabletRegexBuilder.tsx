@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { regexStatus, REGEX_CHAR_LIMIT } from "./buildRegex";
 import { buildStashSearchQuery } from "./stashSearch";
 import {
   filterModsByQuery,
@@ -13,18 +12,11 @@ import {
 } from "./data";
 import type { TabletMod } from "./types";
 import type { TabletFilter } from "./recommended";
-import {
-  formatLowestPrice,
-  type ModTradePrices,
-} from "./tradeMarket";
+import { ControlGroup, Segmented, SearchOutputs } from "../components/SearchOutputs";
 import { hasTradeStatForRef } from "./tradeStatMap";
-import { TabletTradeSearch } from "./TabletTradeSearch";
-import { buildTabletQuery, TABLET_ICONS, tradeSearchUrl } from "./tradeSearch";
-import { formatMarketAgo, useTabletMarket } from "./useTabletMarket";
+import { buildTabletQuery, checkCombo, TABLET_ICONS, type SearchRarity } from "./tradeSearch";
+import { useTradeLeague } from "./useTradeLeague";
 
-type Props = {
-  onCopy: (text: string) => void;
-};
 
 type PickMode = "include" | "exclude";
 
@@ -36,39 +28,6 @@ function toggleRef(list: ModRef[], ref: ModRef): ModRef[] {
   return [...list, ref];
 }
 
-function PriceBand({
-  label,
-  stats,
-  searchUrl,
-}: {
-  label: string;
-  stats?: ModTradePrices["magic"];
-  searchUrl: string;
-}) {
-  const hot = stats && stats.lowestEx >= 5;
-  return (
-    <a
-      className={`tablet-mod-price-col ${hot ? "hot" : ""}`}
-      href={searchUrl}
-      target="_blank"
-      rel="noreferrer"
-      title={
-        stats
-          ? `${label} 즉시 구매 최저가 ${stats.lowestEx}ex` +
-            (stats.medianEx != null ? ` · 하위 10개 중간값 ${stats.medianEx}ex` : "") +
-            (stats.listings != null ? ` · 매물 ${stats.listings >= 10000 ? "10000+" : stats.listings}개` : "")
-          : "시세 없음"
-      }
-    >
-      <span className="tablet-mod-price-label">{label}</span>
-      {formatLowestPrice(stats)}
-      <span className="tablet-mod-price-go" aria-hidden>
-        ↗
-      </span>
-    </a>
-  );
-}
-
 function ModPicker({
   mods,
   included,
@@ -77,8 +36,6 @@ function ModPicker({
   onPick,
   showTypeLabel,
   emptyLabel,
-  pricesByRef,
-  league,
 }: {
   mods: TabletMod[];
   included: ModRef[];
@@ -87,8 +44,6 @@ function ModPicker({
   onPick: (ref: ModRef) => void;
   showTypeLabel?: boolean;
   emptyLabel?: string;
-  pricesByRef?: Record<string, ModTradePrices>;
-  league: string;
 }) {
   const includedKeys = useMemo(() => new Set(included.map(modRefKey)), [included]);
   const excludedKeys = useMemo(() => new Set(excluded.map(modRefKey)), [excluded]);
@@ -105,8 +60,6 @@ function ModPicker({
             const added = includedKeys.has(key);
             const removed = excludedKeys.has(key);
             const active = mode === "include" ? added : removed;
-            const band = pricesByRef?.[key];
-            const tradeMapped = hasTradeStatForRef(ref);
             return (
               <li key={`${mode}-${key}`} className="tablet-mod-item">
                 <button
@@ -132,28 +85,6 @@ function ModPicker({
                     <small>{mod.pattern_ko}</small>
                   </span>
                 </button>
-                {pricesByRef != null && (
-                  <span className="tablet-mod-prices">
-                    {tradeMapped ? (
-                      <>
-                        <PriceBand
-                          label="마법"
-                          stats={band?.magic}
-                          searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "magic" }))}
-                        />
-                        <PriceBand
-                          label="희귀"
-                          stats={band?.rare}
-                          searchUrl={tradeSearchUrl(league, buildTabletQuery({ refs: [ref], rarity: "rare" }))}
-                        />
-                      </>
-                    ) : (
-                      <span className="tablet-mod-no-trade" title="경매장 stat 미연동">
-                        —
-                      </span>
-                    )}
-                  </span>
-                )}
               </li>
             );
           })}
@@ -183,8 +114,6 @@ function ModPickArea({
   included,
   excluded,
   onPickMod,
-  pricesByRef,
-  league,
 }: {
   addMode: boolean;
   prefixMods: TabletMod[];
@@ -193,8 +122,6 @@ function ModPickArea({
   included: ModRef[];
   excluded: ModRef[];
   onPickMod: (ref: ModRef) => void;
-  pricesByRef?: Record<string, ModTradePrices>;
-  league: string;
 }) {
   const mode: PickMode = addMode ? "include" : "exclude";
   const typeName =
@@ -212,8 +139,6 @@ function ModPickArea({
             excluded={excluded}
             mode={mode}
             onPick={onPickMod}
-            pricesByRef={pricesByRef}
-            league={league}
           />
         </div>
         <div className="tablet-col">
@@ -225,8 +150,6 @@ function ModPickArea({
             mode={mode}
             onPick={onPickMod}
             showTypeLabel={tabletFilter === "all"}
-            pricesByRef={pricesByRef}
-            league={league}
           />
         </div>
       </div>
@@ -234,18 +157,29 @@ function ModPickArea({
   );
 }
 
-export function TabletRegexBuilder({ onCopy }: Props) {
+const MODES: { id: "include" | "exclude"; label: string }[] = [
+  { id: "include", label: "추가" },
+  { id: "exclude", label: "제외" },
+];
+
+const RARITIES: { id: SearchRarity; label: string }[] = [
+  { id: "any", label: "전체" },
+  { id: "magic", label: "마법" },
+  { id: "rare", label: "희귀" },
+];
+
+export function TabletRegexBuilder() {
   const [tabletFilter, setTabletFilter] = useState<TabletFilter>("all");
-  const { market, loading: marketLoading, error: marketError, reload: reloadMarket } =
-    useTabletMarket(tabletFilter);
   const [includeTypePattern, setIncludeTypePattern] = useState(false);
   const [addMode, setAddMode] = useState(true);
   const [included, setIncluded] = useState<ModRef[]>([]);
   const [excluded, setExcluded] = useState<ModRef[]>([]);
   const [query, setQuery] = useState("");
+  const [rarity, setRarity] = useState<SearchRarity>("any");
+  const [minUses, setMinUses] = useState(10);
 
   const tabletType = typeof tabletFilter === "number" ? tabletTypes.find((item) => item.id === tabletFilter) : undefined;
-  const league = market?.league || "Forbidden Rites";
+  const league = useTradeLeague();
 
   useEffect(() => {
     if (tabletFilter === "all") {
@@ -261,50 +195,32 @@ export function TabletRegexBuilder({ onCopy }: Props) {
     setExcluded((prev) => prev.filter(keepSuffix));
   }, [tabletFilter]);
 
-  const sortByPrice = (mods: TabletMod[]) => {
-    const prices = market?.prices;
-    return [...mods].sort((a, b) => {
-      const refA = { slot: a.type, id: a.id } as ModRef;
-      const refB = { slot: b.type, id: b.id } as ModRef;
-      const mappedA = hasTradeStatForRef(refA);
-      const mappedB = hasTradeStatForRef(refB);
-      if (mappedA !== mappedB) return mappedA ? -1 : 1;
-      if (!prices) return 0;
-      const low = (ref: ModRef) => {
-        const p = prices[modRefKey(ref)];
-        const vals = [p?.magic?.lowestEx, p?.rare?.lowestEx].filter((v): v is number => v != null);
-        return vals.length ? Math.max(...vals) : -1;
-      };
-      return low(refB) - low(refA);
-    });
-  };
-
   const prefixFiltered = useMemo(
-    () => sortByPrice(filterModsByQuery(prefixOptions, query)),
-    [query, market?.prices],
+    () => filterModsByQuery(prefixOptions, query),
+    [query],
   );
 
   const suffixFiltered = useMemo(
-    () => sortByPrice(filterModsByQuery(suffixesForFilter(tabletFilter), query)),
-    [query, tabletFilter, market?.prices],
+    () => filterModsByQuery(suffixesForFilter(tabletFilter), query),
+    [query, tabletFilter],
   );
 
-  const includePatterns = useMemo(() => {
-    const patterns = patternsFromRefs(included);
-    if (includeTypePattern && tabletType?.pattern_ko && !patterns.includes(tabletType.pattern_ko)) {
-      patterns.unshift(tabletType.pattern_ko);
-    }
-    return patterns;
-  }, [included, includeTypePattern, tabletType?.pattern_ko]);
+  const includePatterns = useMemo(() => patternsFromRefs(included), [included]);
+  const typePattern = includeTypePattern ? tabletType?.pattern_ko : undefined;
 
   const excludePatterns = useMemo(() => patternsFromRefs(excluded), [excluded]);
 
   const search = useMemo(
-    () => buildStashSearchQuery(includePatterns, excludePatterns),
-    [includePatterns, excludePatterns],
+    () => buildStashSearchQuery(includePatterns, excludePatterns, typePattern),
+    [includePatterns, excludePatterns, typePattern],
   );
 
-  const status = regexStatus(search.query);
+  const tradeRefs = useMemo(() => included.filter(hasTradeStatForRef), [included]);
+  const tradeQuery = useMemo(
+    () => buildTabletQuery({ refs: tradeRefs, tabletTypeId: tabletType?.id, rarity, minUses }),
+    [tradeRefs, tabletType?.id, rarity, minUses],
+  );
+  const combo = useMemo(() => checkCombo(tradeRefs), [tradeRefs]);
 
   const pickMod = (ref: ModRef) => {
     if (addMode) {
@@ -324,41 +240,25 @@ export function TabletRegexBuilder({ onCopy }: Props) {
 
   return (
     <section className="table-wrap tablet-builder">
-      <div className="calc-head">
-        <h2>정규식 생성기</h2>
-      </div>
+      <SearchOutputs
+        regex={search.query}
+        tradeQuery={tradeQuery}
+        league={league}
+        note={
+          combo.impossible ? (
+            <span className="warn">경매장: {combo.impossible}</span>
+          ) : combo.rareOnly && rarity === "magic" ? (
+            <span className="warn">경매장: 마법 서판은 접두·접미가 1개씩이라 이 조합은 희귀에서만 나옵니다.</span>
+          ) : null
+        }
+      />
 
-      <div className="tablet-regex-top">
-        <span className="toolbar-label">결과</span>
-        <div className="tablet-recipe-regex">
-          <code>{search.query || "—"}</code>
-        </div>
-        <div className={`regex-meta ${status.overLimit ? "over" : ""}`}>
-          <span>
-            {status.length} / {REGEX_CHAR_LIMIT}자
-            {status.overLimit ? " · 초과" : ""}
-          </span>
-        </div>
-        <div className="dps-actions">
-          <button
-            type="button"
-            className="ghost active"
-            disabled={!search.query.trim()}
-            onClick={() => onCopy(search.query)}
-          >
-            복사
-          </button>
-        </div>
-      </div>
-
-      <TabletTradeSearch refs={included} tabletTypeId={tabletType?.id} league={league} />
-
-      <div className="tablet-toolbar">
-        <div className="tablet-type-row">
-          <div className="tablet-type-chips">
+      <div className="ctrl-panel">
+        <ControlGroup label="서판 종류" className="wide">
+          <div className="chip-row">
             <button
               type="button"
-              className={`ghost ${tabletFilter === "all" ? "active" : ""}`}
+              className={`chip ${tabletFilter === "all" ? "active" : ""}`}
               onClick={() => setTabletFilter("all")}
             >
               전체
@@ -367,74 +267,63 @@ export function TabletRegexBuilder({ onCopy }: Props) {
               <button
                 key={type.id}
                 type="button"
-                className={`ghost ${tabletFilter === type.id ? "active" : ""}`}
+                className={`chip ${tabletFilter === type.id ? "active" : ""}`}
                 onClick={() => setTabletFilter(type.id)}
               >
-                {TABLET_ICONS[type.id] && <img src={TABLET_ICONS[type.id]} alt="" width={22} height={22} />}
+                {TABLET_ICONS[type.id] && <img src={TABLET_ICONS[type.id]} alt="" width={20} height={20} />}
                 {type.name_ko}
               </button>
             ))}
           </div>
-        </div>
-
-        <div className="tablet-toolbar-grid">
-          <button
-            type="button"
-            className={`ghost ${includeTypePattern ? "active" : ""}`}
-            disabled={tabletFilter === "all"}
-            onClick={() => setIncludeTypePattern((v) => !v)}
-          >
-            종류 패턴{tabletType ? ` ${tabletType.pattern_ko}` : ""}
-          </button>
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="검색"
-            className="tablet-search-input"
-          />
-          <button
-            type="button"
-            className="ghost"
-            disabled={!included.length && !excluded.length && !includeTypePattern}
-            onClick={clear}
-          >
-            비우기
-          </button>
-        </div>
-        <p className="tablet-market-inline">
-          {marketLoading && "경매장 시세 불러오는 중…"}
-          {marketError && marketError}
-          {market && !marketError && (
-            <>
-              공식 경매장 즉시 구매 · {market.league} · {formatMarketAgo(market.updatedAt)} 갱신
-              {market.progress && market.progress.done < market.progress.total
-                ? ` · 수집 중 ${market.progress.done}/${market.progress.total} (모인 것부터 표시)`
-                : " · 1시간마다 갱신"}
-              {market.emptyHint && !marketLoading ? ` · ${market.emptyHint}` : ""}
-              {" · "}
-              <span className="tablet-price-legend">마법/희귀 = 즉시 구매 최저가(ex), 누르면 경매장 검색</span>
-              <button type="button" className="tablet-market-inline-btn" onClick={() => reloadMarket()}>
-                새로고침
-              </button>
-            </>
-          )}
-        </p>
+        </ControlGroup>
+        <ControlGroup label="창고 정규식">
+          <label className={`check${tabletFilter === "all" ? " disabled" : ""}`}>
+            <input
+              type="checkbox"
+              checked={includeTypePattern}
+              disabled={tabletFilter === "all"}
+              onChange={(event) => setIncludeTypePattern(event.target.checked)}
+            />
+            서판 종류도 조건에 넣기{tabletType ? ` (${tabletType.pattern_ko})` : ""}
+          </label>
+        </ControlGroup>
+        <ControlGroup label="경매장 조건" bodyClassName="nowrap">
+          <Segmented value={rarity} options={RARITIES} onChange={setRarity} />
+          <label className="inline-num">
+            사용
+            <input
+              type="number"
+              min={0}
+              value={minUses}
+              onChange={(event) => setMinUses(Math.max(0, Math.floor(Number(event.target.value) || 0)))}
+            />
+            회↑
+          </label>
+        </ControlGroup>
       </div>
 
-      <div className="tablet-pick-head">
-        <span className="toolbar-label">옵션</span>
-        <label className="tablet-mode-switch">
-          <span className={addMode ? "" : "on"}>제외</span>
-          <input
-            type="checkbox"
-            className="tablet-mode-switch-input"
-            checked={addMode}
-            onChange={(event) => setAddMode(event.target.checked)}
-          />
-          <span className={`tablet-mode-switch-track ${addMode ? "add" : "exclude"}`} aria-hidden />
-          <span className={addMode ? "on" : ""}>추가</span>
-        </label>
+      <div className="opt-bar">
+        <h3>옵션</h3>
+        <Segmented
+          value={addMode ? "include" : "exclude"}
+          options={MODES}
+          onChange={(mode) => setAddMode(mode === "include")}
+        />
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="옵션 검색"
+          className="opt-search"
+        />
+        <button
+          type="button"
+          className="btn"
+          disabled={!included.length && !excluded.length && !includeTypePattern}
+          onClick={clear}
+        >
+          비우기
+        </button>
       </div>
 
       <ModPickArea
@@ -445,8 +334,6 @@ export function TabletRegexBuilder({ onCopy }: Props) {
         included={included}
         excluded={excluded}
         onPickMod={pickMod}
-        pricesByRef={market?.prices ?? {}}
-        league={league}
       />
     </section>
   );
