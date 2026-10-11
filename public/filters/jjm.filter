@@ -15,7 +15,6 @@
 #                 (에메랄드 반지 Emerald Ring / 청금석 반지 Lazuli Ring / 철제 반지 Iron Ring / 무보석 반지 Unset Ring
 #                  진홍색 목걸이 Crimson Amulet / 담청색 목걸이 Azure Amulet)
 #   방어구/무기 : 전부 숨김 (일반/마법/희귀).
-#                 예외: 트라투스 대포(Trarthan Cannon)는 아이템 레벨 81 이상이면 등급 무관 표시
 #                 예외: 특출난 아이템(품질 21+ / 소켓 2~3개 이상 / 이중 타락)은 등급 무관 표시
 #   허리띠      : 전부 숨김 (일반/마법/희귀). 고유만 표시
 #   경로석      : T15 이상
@@ -247,18 +246,6 @@ Hide # %H3 $type->gold $tier->any !gold_pilesmall
 #===============================================================================================================
 # [[JJM]] 장비/악세사리 전체 숨김
 #===============================================================================================================
-
-Show # sskim: Trarthan Cannon - item level 81+
-	ItemLevel >= 81
-	Rarity Normal Magic Rare
-	BaseType == "Trarthan Cannon"
-	SetFontSize 45
-	SetTextColor 255 255 255 255
-	SetBorderColor 255 127 127 255
-	SetBackgroundColor 65 0 0
-	PlayEffect Red
-	MinimapIcon 0 Red Diamond
-CustomAlertSound "lv6.mp3" 300
 
 Hide # jjm: excluded rings/amulets (Emerald/Lazuli/Iron/Unset Ring, Crimson/Azure Amulet)
 	Rarity Normal Magic Rare
