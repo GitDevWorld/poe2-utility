@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+type Sound = { file: string; items: string };
+
 /** 필터 파일 머리말의 "설정 요약"을 옮긴 것. 필터를 고치면 여기도 같이 고친다. */
 type FilterInfo = {
   id: string;
@@ -8,6 +10,9 @@ type FilterInfo = {
   followUrl: string;
   summary: string;
   rules: { label: string; show: string }[];
+  /** 가치별 소리 (lv1이 가장 신나는 소리) */
+  valueSounds: Sound[];
+  typeSounds: Sound[];
 };
 
 const BASE = "NeverSink 6-UBER PLUS STRICT";
@@ -24,13 +29,31 @@ const FILTERS: FilterInfo[] = [
       { label: "반지·목걸이", show: "모든 등급 표시 (일반·마법·희귀·고유)" },
       {
         label: "방어구·무기",
-        show: "4~5등급만 표시 (석궁 포함). 특출난 아이템(고품질·소켓 초과·이중 타락)과 특수 베이스는 등급 무관 표시. 트라투스 대포는 아이템 레벨 81 이상이면 표시",
+        show: "4~5등급만 표시 (석궁 포함). 특출난 아이템(고품질·소켓 초과·이중 타락)과 특수 베이스는 등급 무관 표시",
       },
       { label: "허리띠", show: "원본 설정 (무거운·특수 허리띠 찬스 베이스 표시)" },
       { label: "경로석", show: "15등급 이상" },
       { label: "콘텐츠 화폐", show: "원본 등급 유지, 에센스만 전부 표시" },
       { label: "시련 열쇠", show: "숨김 (진 바리야, 시험 바리야, 새겨진 결전)" },
       { label: "고유·젬", show: "원본 설정 (1~2티어 고유, 19~20레벨 미가공 젬 등)" },
+    ],
+    valueSounds: [
+      { file: "lv1", items: "칼란드라의 거울, 히네코라의 머리카락, 1티어 고유, 21/21 젬, 금고 열쇠" },
+      { file: "lv2", items: "분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬, 탐험 일지" },
+      { file: "lv3", items: "건축가의 오브, 상위 징조(축성·절사·소멸), 보스·희귀 성유물 열쇠" },
+      {
+        file: "lv4",
+        items: "신성한 오브보다 살짝 위 S화폐(완벽한 쥬얼러·엑잘티드·카오스 오브 등), 고대 심연 뼈, 2티어 고유, A급 혈통 젬, 20레벨 미가공 젬",
+      },
+      { file: "lv5", items: "신성한 오브 + 나머지 S티어 화폐·징조·콘텐츠 화폐" },
+      { file: "lv6", items: "A티어 화폐·콘텐츠 화폐, 16등급 경로석, 5등급 장비, 특출난 최상급 장비, 찬스 허리띠, 조각 20개+" },
+      { file: "lv7", items: "B·C티어 화폐, 연금술의 오브, 하위 에센스, 서판, 15등급 경로석, 19레벨 젬" },
+    ],
+    typeSounds: [
+      { file: "t_ring", items: "반지·목걸이" },
+      { file: "t_popup", items: "4등급·특출난 장비, 주얼, 유물, 새 아이템" },
+      { file: "t_stack", items: "조각·베리시움" },
+      { file: "t_flask", items: "고품질 부적" },
     ],
   },
   {
@@ -53,6 +76,7 @@ const FILTERS: FilterInfo[] = [
       { label: "허리띠", show: "전부 숨김, 고유만 표시" },
       { label: "경로석", show: "15등급 이상" },
       { label: "콘텐츠 화폐", show: "원본 등급 유지, 에센스만 전부 표시" },
+      { label: "조각", show: "복제된 영토 파편 1개짜리는 숨김 (2개 이상 묶음만 표시)" },
       { label: "시련 열쇠", show: "숨김 (진 바리야, 시험 바리야, 새겨진 결전)" },
       {
         label: "고유",
@@ -61,28 +85,28 @@ const FILTERS: FilterInfo[] = [
       { label: "주얼", show: "희귀 주얼 숨김 (오래된 주얼·타락 주얼은 표시)" },
       { label: "젬", show: "원본 설정 (19~20레벨 미가공 젬 등)" },
     ],
+    valueSounds: [
+      { file: "lv1", items: "칼란드라의 거울, 히네코라의 머리카락, 헤드헌터·마법사의 피, 1티어 고유, 21/21 젬, 금고 열쇠" },
+      { file: "lv2", items: "분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬" },
+      { file: "lv3", items: "건축가의 오브, 상위 징조(축성·절사·소멸), 보스·희귀 성유물 열쇠" },
+      {
+        file: "lv4",
+        items: "신성한 오브보다 살짝 위 S화폐(완벽한 쥬얼러·엑잘티드·카오스 오브 등), 고대 심연 뼈, 2티어 고유, A급 혈통 젬, 20레벨 미가공 젬, 탐험 일지",
+      },
+      { file: "lv5", items: "신성한 오브 + 나머지 S티어 화폐·징조·콘텐츠 화폐" },
+      { file: "lv6", items: "A티어 화폐·콘텐츠 화폐, 16등급 경로석, A급 파편, 조각 20개+" },
+      { file: "lv7", items: "B·C티어 화폐, 연금술의 오브, 하위 에센스, 서판(고유 서판 포함), 15등급 경로석, 19레벨 젬" },
+    ],
+    typeSounds: [
+      { file: "t_ring", items: "반지·목걸이 4~5등급" },
+      { file: "t_popup", items: "고유 서판, 주얼, 유물, 퀘스트 아이템, 새 아이템" },
+      { file: "t_stack", items: "조각·베리시움" },
+      { file: "t_flask", items: "고품질 부적" },
+    ],
   },
 ];
 
-/** 가치별 소리 — 두 필터 공통 (lv1이 가장 신나는 소리) */
-const VALUE_SOUNDS: { file: string; items: string }[] = [
-  { file: "lv1", items: "칼란드라의 거울, 히네코라의 머리카락, 헤드헌터·마법사의 피, 1티어 고유, 21/21 젬, 금고 열쇠" },
-  { file: "lv2", items: "분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬" },
-  { file: "lv3", items: "건축가의 오브, 상위 징조(축성·절사·소멸), 보스·희귀 성유물 열쇠, 탐험 일지" },
-  { file: "lv4", items: "신성한 오브보다 살짝 위 S화폐(완벽한 쥬얼러·엑잘티드·카오스 오브 등), 고대 심연 뼈, 2티어 고유, A급 혈통 젬, 20레벨 미가공 젬" },
-  { file: "lv5", items: "신성한 오브 + 나머지 S티어 화폐·징조·콘텐츠 화폐" },
-  { file: "lv6", items: "A티어 화폐·콘텐츠 화폐, 16등급 경로석, 조각 20개+ (씹양태 필터는 5등급 장비·특출난 장비·찬스 허리띠도)" },
-  { file: "lv7", items: "B·C티어 화폐, 연금술의 오브, 하위 에센스, 서판(고유 서판 포함), 15등급 경로석, 19레벨 젬" },
-];
-
-const TYPE_SOUNDS: { file: string; items: string }[] = [
-  { file: "t_ring", items: "반지·목걸이" },
-  { file: "t_popup", items: "4등급·특출난 장비, 주얼, 유물, 새 아이템 (정정민 필터는 고유 서판·퀘스트 아이템)" },
-  { file: "t_stack", items: "조각·베리시움" },
-  { file: "t_flask", items: "고품질 부적" },
-];
-
-function SoundRow({ file, items }: { file: string; items: string }) {
+function SoundRow({ file, items }: Sound) {
   return (
     <li className="filter-sound">
       <span className="filter-sound-name">{file}</span>
@@ -164,14 +188,14 @@ export function FilterPage() {
           가치별 소리 <small>lv1이 가장 신나는 소리</small>
         </h3>
         <ul className="filter-sounds">
-          {VALUE_SOUNDS.map((s) => (
+          {filter.valueSounds.map((s) => (
             <SoundRow key={s.file} {...s} />
           ))}
         </ul>
 
         <h3 className="filter-subtitle">유형별 소리</h3>
         <ul className="filter-sounds">
-          {TYPE_SOUNDS.map((s) => (
+          {filter.typeSounds.map((s) => (
             <SoundRow key={s.file} {...s} />
           ))}
         </ul>

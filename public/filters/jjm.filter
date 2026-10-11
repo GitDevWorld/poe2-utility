@@ -26,12 +26,13 @@
 #                 + 모리오르 갑옷(Morior Invictus = Grand Regalia 베이스)
 #   주얼        : 희귀 주얼 숨김 (Time-Lost/타락 주얼은 표시)
 #   젬          : 원본 설정 (19~20레벨 미가공 젬 등)
+#   조각        : 복제된 영토 파편(Simulacrum Splinter) 1개짜리는 숨김
 #
 # [가치별 소리]  lv1이 가장 신나는 소리
 #   lv1 : 거울, Hinekora's Lock, 헤드헌터/마법사의 피(Heavy·Utility Belt 고유), 1티어 고유템, 21/21 젬, 금고 열쇠
 #   lv2 : 분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬
-#   lv3 : Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠, 탐험 일지
-#   lv4 : 디바인보다 살짝 위 S화폐(Perfect Jeweller's/Exalted/Chaos 등), 고대 심연 뼈, 2티어 고유템, A급 혈통 젬, 20레벨 미가공 젬
+#   lv3 : Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠
+#   lv4 : 디바인보다 살짝 위 S화폐(Perfect Jeweller's/Exalted/Chaos 등), 고대 심연 뼈, 2티어 고유템, A급 혈통 젬, 20레벨 미가공 젬, 탐험 일지
 #   lv5 : 디바인 수준 - 디바인 오브 + 나머지 S티어 화폐/징조/컨텐츠 화폐
 #   lv6 : A티어 화폐/컨텐츠 화폐, T16 경로석, A급 파편, 조각 20개+ (장비 관련은 숨김이라 소리 없음)
 #   lv7 : B/C티어 화폐, 연금술의 오브, 하위 에센스, 서판, T15 경로석, 19레벨 젬
@@ -4050,7 +4051,7 @@ Show # $type->maplike->special $tier->logbookshigh !apex_stier
 	SetBackgroundColor 255 255 255 255
 	PlayEffect Red
 	MinimapIcon 0 Red Star
-CustomAlertSound "lv3.mp3" 300
+CustomAlertSound "lv4.mp3" 300
 
 #===============================================================================================================
 # [[2900]] Uniques
@@ -4288,6 +4289,11 @@ CustomAlertSound "t_popup.mp3" 300
 # [[3000]] Splinters, Tablets, Fragments
 #===============================================================================================================
 # !! Waypoint c10.fragments.most : "Fragments and Splinters" : "Fragments"
+
+Hide # jjm: Simulacrum Splinter - single (stack 1)
+	StackSize == 1
+	Class == "Stackable Currency"
+	BaseType == "Simulacrum Splinter"
 
 Show # %H6 $type->currency->splinter $tier->t1 !fragments_splinter1
 	StackSize >= 20

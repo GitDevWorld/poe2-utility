@@ -12,7 +12,6 @@
 #   화폐        : C티어(상급 제왕의 오브) 이상 + 연금술의 오브. 제왕의 오브 이하 D티어는 숨김
 #   반지/목걸이 : 모든 등급 표시 (일반/마법/희귀/고유)
 #   방어구/무기 : 미확인 등급 4~5만 표시 (석궁 포함). 단, 특출난 아이템(고품질/소켓 초과/두 번 타락)과 특수 베이스는 등급 무관 표시
-#                 + 트라투스 대포(Trarthan Cannon)는 아이템 레벨 81 이상이면 등급 무관 표시
 #   허리띠      : 원본 설정 (Heavy/Utility Belt 찬스 베이스 표시)
 #   경로석      : T15 이상
 #   컨텐츠 화폐 : 원본 등급 유지, 에센스만 전부 표시
@@ -20,14 +19,13 @@
 #   고유템/젬   : 원본 설정 (1~2티어 고유, 19~20레벨 미가공 젬 등)
 #
 # [가치별 소리]  lv1이 가장 신나는 소리
-#   lv1 : 거울, Hinekora's Lock, 헤드헌터/마법사의 피(Heavy·Utility Belt 고유), 1티어 고유템, 21/21 젬, 금고 열쇠
-#   lv2 : 분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬
-#   lv3 : Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠, 탐험 일지
+#   lv1 : 거울, Hinekora's Lock, 1티어 고유템, 21/21 젬, 금고 열쇠
+#   lv2 : 분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬, 원정 일지
+#   lv3 : Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠
 #   lv4 : 디바인보다 살짝 위 S화폐(Perfect Jeweller's/Exalted/Chaos 등), 고대 심연 뼈, 2티어 고유템, A급 혈통 젬, 20레벨 미가공 젬
 #   lv5 : 디바인 수준 - 디바인 오브 + 나머지 S티어 화폐/징조/컨텐츠 화폐
 #   lv6 : A티어 화폐/컨텐츠 화폐, T16 경로석, 5등급 장비, 특출난 최상급 장비, 찬스 허리띠, 조각 20개+
 #   lv7 : B/C티어 화폐, 연금술의 오브, 하위 에센스, 서판, T15 경로석, 19레벨 젬
-#         (고유 서판도 lv7 = 엑잘티드 오브와 같은 소리)
 #
 # [유형별 소리]
 #   t_ring  : 반지/목걸이      t_popup : 4등급/특출난 장비, 주얼, 유물, 새 아이템
@@ -475,18 +473,6 @@ CustomAlertSound "t_popup.mp3" 300
 #===============================================================================================================
 # [[SSKIM]] Armour/Weapons - only Unidentified Item Tier 4-5 shown
 #===============================================================================================================
-
-Show # sskim: Trarthan Cannon - item level 81+
-	ItemLevel >= 81
-	Rarity Normal Magic Rare
-	BaseType == "Trarthan Cannon"
-	SetFontSize 45
-	SetTextColor 255 255 255 255
-	SetBorderColor 255 127 127 255
-	SetBackgroundColor 65 0 0
-	PlayEffect Red
-	MinimapIcon 0 Red Diamond
-CustomAlertSound "lv6.mp3" 300
 
 Show # sskim: Tier 5 armour and weapons
 	UnidentifiedItemTier >= 5
@@ -2460,8 +2446,8 @@ Show # %H7 $type->verisium $tier->huge !xeno_c
 	MinimapIcon 1 White UpsideDownHouse
 CustomAlertSound "t_stack.mp3" 300
 
-Show # %H6 $type->verisium $tier->large !xeno_d sskim: 101+ only
-	StackSize >= 101
+Show # %H6 $type->verisium $tier->large !xeno_d
+	StackSize >= 30
 	BaseType == "Verisium"
 	SetFontSize 40
 	SetTextColor 180 215 248 255
@@ -3936,7 +3922,7 @@ Show # $type->maplike->special $tier->logbookshigh !apex_stier
 	SetBackgroundColor 255 255 255 255
 	PlayEffect Red
 	MinimapIcon 0 Red Star
-CustomAlertSound "lv3.mp3" 300
+CustomAlertSound "lv2.mp3" 300
 
 #===============================================================================================================
 # [[2900]] Uniques
@@ -4012,27 +3998,15 @@ Show # $type->uniques $tier->vaalmodunique !uniques_exceptional
 	MinimapIcon 0 Purple Star
 CustomAlertSound "lv6.mp3" 300
 
-Show # sskim: Headhunter / Mageblood belts (Heavy/Utility Belt uniques)
+Show # $type->uniques $tier->multispecialhigh !uniques_x
 	Rarity Unique
-	Class == "Belts"
-	BaseType == "Heavy Belt" "Utility Belt"
-	SetFontSize 45
-	SetTextColor 255 0 0 255
-	SetBorderColor 255 0 0 255
-	SetBackgroundColor 255 255 255 255
-	PlayEffect Red
-	MinimapIcon 0 Red Star
-CustomAlertSound "lv1.mp3" 300
-
-Show # $type->uniques $tier->multispecialhigh !uniques_x sskim: unique tablet - Exalted Orb sound
-	Rarity Unique
-	BaseType == "Irradiated Tablet"
-	SetFontSize 40
+	BaseType == "Heavy Belt" "Irradiated Tablet" "Utility Belt"
+	SetFontSize 42
 	SetTextColor 0 0 0 255
 	SetBorderColor 0 0 0 255
 	SetBackgroundColor 188 96 37 255
-	PlayEffect Blue Temp
-	MinimapIcon 2 Blue Star
+	PlayEffect Blue
+	MinimapIcon 1 Blue Star
 CustomAlertSound "lv7.mp3" 300
 
 #Show # %D5 $type->uniques $tier->overqualityuniques !uniques_exceptional
