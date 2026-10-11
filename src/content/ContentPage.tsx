@@ -13,6 +13,8 @@ export function ContentPage({ setupId }: { setupId: string }) {
   const setup = CONTENT_SETUPS.find((s) => s.id === setupId) ?? CONTENT_SETUPS[0];
   const league = useTradeLeague();
   const [selectedKeys, setSelectedKeys] = useState(() => new Set(setup.defaultRefs.map(modRefKey)));
+  const [usesOn, setUsesOn] = useState(setup.minUses != null);
+  const minUses = usesOn ? setup.minUses : undefined;
 
   const type = tabletTypes.find((t) => t.id === setup.tabletTypeId);
   const selected = setup.tabletRefs.filter((ref) => selectedKeys.has(modRefKey(ref)));
@@ -23,16 +25,18 @@ export function ContentPage({ setupId }: { setupId: string }) {
 
   const regex = useMemo(() => {
     const patterns = selected.map((ref) => getModByRef(ref)?.pattern_ko).filter((p): p is string => Boolean(p));
+    // 아이템 문구 "잔여 사용 횟수 10회"
+    if (minUses != null) patterns.push(`횟수.${minUses}`);
     if (!patterns.length) return "";
     return [type?.pattern_ko, ...patterns]
       .filter(Boolean)
       .map((p) => `"${p}"`)
       .join(" ");
-  }, [selected, type]);
+  }, [selected, type, minUses]);
 
   const tradeQuery = useMemo(
-    () => buildTabletQuery({ refs: selected, tabletTypeId: setup.tabletTypeId, rarity: "any" }),
-    [selected, setup.tabletTypeId],
+    () => buildTabletQuery({ refs: selected, tabletTypeId: setup.tabletTypeId, rarity: "any", minUses }),
+    [selected, setup.tabletTypeId, minUses],
   );
 
   const toggle = (ref: ModRef) => {
@@ -95,6 +99,17 @@ export function ContentPage({ setupId }: { setupId: string }) {
                 </li>
               );
             })}
+            {setup.minUses != null && (
+              <li>
+                <button type="button" className={`ws-mod${usesOn ? " on" : ""}`} onClick={() => setUsesOn((v) => !v)}>
+                  <span className="ws-check" aria-hidden>
+                    {usesOn ? "✓" : ""}
+                  </span>
+                  <span className="content-slot">횟수</span>
+                  잔여 사용 횟수 {setup.minUses}회
+                </button>
+              </li>
+            )}
           </ul>
         </div>
 
