@@ -3,23 +3,30 @@ import App from "./App";
 import { TabletRegexPage } from "./tablet/TabletRegexPage";
 import { GuidePage, type GuideTab } from "./guide/GuidePage";
 import { WaystonePage } from "./waystone/WaystonePage";
+import { ContentPage } from "./content/ContentPage";
+import { CONTENT_SETUPS } from "./content/setups";
+import { FilterPage } from "./filter/FilterPage";
 
-type Page = "exchange" | "tablet" | "waystone" | "guide-ring" | "guide-jewel";
+type Page = "exchange" | "tablet" | "waystone" | "filter" | "guide-ring" | "guide-jewel" | `content-${string}`;
 
 const HASH: Record<Page, string> = {
   exchange: "",
   tablet: "#tablet",
   waystone: "#waystone",
+  filter: "#filter",
   "guide-ring": "#guide",
   "guide-jewel": "#guide-jewel",
+  ...Object.fromEntries(CONTENT_SETUPS.map((s) => [`content-${s.id}`, `#content-${s.id}`])),
 };
 
 const TITLES: Record<Page, string> = {
   exchange: "POE2 화폐 교환비",
   tablet: "POE2 서판",
   waystone: "POE2 경로석",
+  filter: "POE2 아이템 필터",
   "guide-ring": "POE2 제작 가이드 · 풀매찬 반지",
   "guide-jewel": "POE2 제작 가이드 · 5옵션 보석",
+  ...Object.fromEntries(CONTENT_SETUPS.map((s) => [`content-${s.id}`, `POE2 콘텐츠 세팅 · ${s.label}`])),
 };
 
 const NAV: { title?: string; items: { page: Page; label: string }[] }[] = [
@@ -28,7 +35,12 @@ const NAV: { title?: string; items: { page: Page; label: string }[] }[] = [
       { page: "exchange", label: "화폐" },
       { page: "tablet", label: "서판" },
       { page: "waystone", label: "경로석" },
+      { page: "filter", label: "아이템 필터" },
     ],
+  },
+  {
+    title: "콘텐츠 세팅",
+    items: CONTENT_SETUPS.map((s) => ({ page: `content-${s.id}` as Page, label: s.label })),
   },
   {
     title: "제작 가이드",
@@ -112,6 +124,10 @@ export default function Root() {
           <TabletRegexPage />
         ) : page === "waystone" ? (
           <WaystonePage />
+        ) : page === "filter" ? (
+          <FilterPage />
+        ) : page.startsWith("content-") ? (
+          <ContentPage key={page} setupId={page.slice("content-".length)} />
         ) : guideTab ? (
           <GuidePage tab={guideTab} />
         ) : (
