@@ -2930,7 +2930,23 @@ a.tablet-mod-price-col.hot {
 }
 
 .content-uses {
-  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.ws-mod.content-pick.on {
+  color: var(--up);
+  background: var(--success-bg);
+  border-color: var(--success-line);
+}
+
+.ws-mod.content-pick.on .ws-check {
+  border-color: var(--up);
+}
+
+.content-note {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted);
 }
 
 .content-chips {
