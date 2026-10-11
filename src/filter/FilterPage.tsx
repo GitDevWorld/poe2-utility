@@ -15,9 +15,9 @@ const BASE = "NeverSink 6-UBER PLUS STRICT";
 const FILTERS: FilterInfo[] = [
   {
     id: "sskim",
-    name: "SSKIM",
+    name: "씹양태증증미김성수 렛츠고",
     file: "/filters/sskim.filter",
-    followUrl: "https://poe2.kakaogames.com/kr/my-account/item-filters/BNPD81hx",
+    followUrl: "https://poe2.kakaogames.com/kr/my-account/item-filters/38zzK1TX",
     summary: "장신구는 다 보고, 장비는 4~5등급만 보는 기본 파밍용.",
     rules: [
       { label: "화폐", show: "C티어(상급 제왕의 오브) 이상 + 연금술의 오브. 제왕의 오브 이하 D티어는 숨김" },
@@ -35,10 +35,10 @@ const FILTERS: FilterInfo[] = [
   },
   {
     id: "jjm",
-    name: "JJM",
+    name: "돈만쳐먹는정정민필터",
     file: "/filters/jjm.filter",
-    followUrl: "https://poe2.kakaogames.com/kr/my-account/item-filters/38zzK1TX",
-    summary: "SSKIM에서 장비·골드·잡고유를 더 숨긴 화폐 위주 파밍용.",
+    followUrl: "https://poe2.kakaogames.com/kr/my-account/item-filters/BNPD81hx",
+    summary: "위 필터에서 장비·골드·잡고유를 더 숨긴 화폐 위주 파밍용.",
     rules: [
       { label: "골드", show: "전부 숨김" },
       { label: "화폐", show: "C티어(상급 제왕의 오브) 이상 + 연금술의 오브. 제왕의 오브 이하 D티어는 숨김" },
@@ -71,13 +71,13 @@ const VALUE_SOUNDS: { file: string; items: string }[] = [
   { file: "lv3", items: "건축가의 오브, 상위 징조(축성·절사·소멸), 보스·희귀 성유물 열쇠, 탐험 일지" },
   { file: "lv4", items: "신성한 오브보다 살짝 위 S화폐(완벽한 쥬얼러·엑잘티드·카오스 오브 등), 고대 심연 뼈, 2티어 고유, A급 혈통 젬, 20레벨 미가공 젬" },
   { file: "lv5", items: "신성한 오브 + 나머지 S티어 화폐·징조·콘텐츠 화폐" },
-  { file: "lv6", items: "A티어 화폐·콘텐츠 화폐, 16등급 경로석, 조각 20개+ (SSKIM은 5등급 장비·특출난 장비·찬스 허리띠도)" },
+  { file: "lv6", items: "A티어 화폐·콘텐츠 화폐, 16등급 경로석, 조각 20개+ (씹양태 필터는 5등급 장비·특출난 장비·찬스 허리띠도)" },
   { file: "lv7", items: "B·C티어 화폐, 연금술의 오브, 하위 에센스, 서판(고유 서판 포함), 15등급 경로석, 19레벨 젬" },
 ];
 
 const TYPE_SOUNDS: { file: string; items: string }[] = [
   { file: "t_ring", items: "반지·목걸이" },
-  { file: "t_popup", items: "4등급·특출난 장비, 주얼, 유물, 새 아이템 (JJM은 고유 서판·퀘스트 아이템)" },
+  { file: "t_popup", items: "4등급·특출난 장비, 주얼, 유물, 새 아이템 (정정민 필터는 고유 서판·퀘스트 아이템)" },
   { file: "t_stack", items: "조각·베리시움" },
   { file: "t_flask", items: "고품질 부적" },
 ];

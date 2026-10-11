@@ -82,40 +82,49 @@ export function ContentPage({ setupId }: { setupId: string }) {
               {type?.name_ko} 서판 <small>고른 옵션이 모두 붙은 서판을 찾습니다</small>
             </h3>
           </div>
-          <ul className="ws-mod-list">
-            {setup.tabletRefs.map((ref) => {
-              const mod = getModByRef(ref);
-              if (!mod) return null;
-              const on = selectedKeys.has(modRefKey(ref));
-              return (
-                <li key={modRefKey(ref)}>
-                  <button type="button" className={`ws-mod${on ? " on" : ""}`} onClick={() => toggle(ref)}>
-                    <span className="ws-check" aria-hidden>
-                      {on ? "✓" : ""}
-                    </span>
-                    <span className="content-slot">{ref.slot === "prefix" ? "접두" : "접미"}</span>
-                    {mod.text_ko}
-                  </button>
-                </li>
-              );
-            })}
-            {setup.minUses != null && (
+          <div className="tablet-two-cols">
+            {(["prefix", "suffix"] as const).map((slot) => (
+              <div key={slot} className="tablet-col">
+                <h4>{slot === "prefix" ? "접두" : "접미"}</h4>
+                <ul className="ws-mod-list">
+                  {setup.tabletRefs
+                    .filter((ref) => ref.slot === slot)
+                    .map((ref) => {
+                      const mod = getModByRef(ref);
+                      if (!mod) return null;
+                      const on = selectedKeys.has(modRefKey(ref));
+                      return (
+                        <li key={modRefKey(ref)}>
+                          <button type="button" className={`ws-mod${on ? " on" : ""}`} onClick={() => toggle(ref)}>
+                            <span className="ws-check" aria-hidden>
+                              {on ? "✓" : ""}
+                            </span>
+                            {mod.text_ko}
+                          </button>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            ))}
+          </div>
+          {setup.minUses != null && (
+            <ul className="ws-mod-list content-uses">
               <li>
                 <button type="button" className={`ws-mod${usesOn ? " on" : ""}`} onClick={() => setUsesOn((v) => !v)}>
                   <span className="ws-check" aria-hidden>
                     {usesOn ? "✓" : ""}
                   </span>
-                  <span className="content-slot">횟수</span>
                   잔여 사용 횟수 {setup.minUses}회
                 </button>
               </li>
-            )}
-          </ul>
+            </ul>
+          )}
         </div>
 
         {setup.mapSettings.length > 0 && (
           <div className="ctrl-panel">
-            <ControlGroup label="지도 세팅" className="wide">
+            <ControlGroup label="자도의 첩보술" className="wide">
               <ul className="content-chips">
                 {setup.mapSettings.map((name) => (
                   <li key={name}>{name}</li>

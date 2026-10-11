@@ -12,7 +12,7 @@ export type ContentSetup = {
   defaultRefs: ModRef[];
   /** 잔여 사용 횟수 조건 (서판 최대가 10회라 10이면 새 서판만) */
   minUses?: number;
-  /** 지도 세팅 (이름만) */
+  /** 자도의 첩보술 포인트 (이름만) */
   mapSettings: string[];
 };
 
