@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { joinPatterns } from "../tablet/buildRegex";
 import { ControlGroup, SearchOutputs } from "../components/SearchOutputs";
 import { getModByRef, modRefKey, tabletTypes } from "../tablet/data";
 import { buildTabletQuery, checkCombo, TABLET_ICONS } from "../tablet/tradeSearch";
@@ -7,8 +8,9 @@ import { useTradeLeague } from "../tablet/useTradeLeague";
 import { CONTENT_SETUPS, type SetupOption } from "./setups";
 
 /**
- * 콘텐츠별 서판 조합. 서판 탭과 달리 고른 옵션이 "모두" 붙은 서판을 찾는다:
- * 창고 검색은 옵션마다 따옴표 블록을 따로 만들어 AND로 묶는다.
+ * 콘텐츠별 서판 조합.
+ * 창고 검색은 고른 옵션 중 하나라도(OR) — 종류·잔여 횟수는 따로 AND 블록.
+ * 경매장은 고른 옵션이 모두(AND) 붙은 매물.
  */
 export function ContentPage({ setupId }: { setupId: string }) {
   const setup = CONTENT_SETUPS.find((s) => s.id === setupId) ?? CONTENT_SETUPS[0];
@@ -31,10 +33,11 @@ export function ContentPage({ setupId }: { setupId: string }) {
     const patterns = selected
       .map((o) => o.pattern ?? getModByRef(o.ref)?.pattern_ko)
       .filter((p): p is string => Boolean(p));
-    // 아이템 문구 "잔여 사용 횟수 10회"
-    if (minUses != null) patterns.push(`횟수.${minUses}`);
     if (!patterns.length) return "";
-    return [type?.pattern_ko, ...patterns]
+    const blocks = [type?.pattern_ko, joinPatterns([...new Set(patterns)], "or")];
+    // 아이템 문구 "잔여 사용 횟수 10회"
+    if (minUses != null) blocks.push(`횟수.${minUses}`);
+    return blocks
       .filter(Boolean)
       .map((p) => `"${p}"`)
       .join(" ");
@@ -93,8 +96,8 @@ export function ContentPage({ setupId }: { setupId: string }) {
           note={
             tooMany ? (
               <span className="warn">
-                접두 {prefixCount}개 · 접미 {suffixCount}개를 골랐습니다. 서판 하나에 접두·접미는 각각 최대 2개라 맞는 서판이
-                없습니다.
+                접두 {prefixCount}개 · 접미 {suffixCount}개를 골랐습니다. 서판 하나에 접두·접미는 각각 최대 2개라 경매장
+                검색 결과가 없습니다.
               </span>
             ) : combo.rareOnly ? (
               <span>이 조합은 희귀 서판에서만 나옵니다.</span>
@@ -106,7 +109,7 @@ export function ContentPage({ setupId }: { setupId: string }) {
           <div className="opt-bar">
             <h3 className="content-title">
               {TABLET_ICONS[setup.tabletTypeId] && <img src={TABLET_ICONS[setup.tabletTypeId]} alt="" width={28} height={28} />}
-              {type?.name_ko} 서판 <small>고른 옵션이 모두 붙은 서판을 찾습니다</small>
+              {type?.name_ko} 서판 <small>창고 검색은 옵션 중 하나라도, 경매장은 옵션이 모두 붙은 서판</small>
             </h3>
           </div>
           {setup.minUses != null && (

@@ -36,9 +36,9 @@ export const CONTENT_SETUPS: ContentSetup[] = [
     options: [
       { ref: { slot: "prefix", id: 4 }, selected: true }, // 희귀 몬스터 수 증가
       MONSTER_EFFECTIVENESS,
-      { ref: { slot: "suffix", id: 124 }, selected: true }, // 탐험 폭발물 효과 범위 증가
+      { ref: { slot: "suffix", id: 124 }, selected: true, note: "1~3서판" }, // 탐험 폭발물 효과 범위 증가
       { ref: { slot: "suffix", id: 132 }, selected: true }, // 베리시움 유적 1개 추가 등장 초과 확률
-      { ref: { slot: "suffix", id: 134 } }, // 베리시움 유적 추가 룬 속성 확률
+      { ref: { slot: "suffix", id: 134 }, note: "4서판" }, // 베리시움 유적 추가 룬 속성 확률
     ],
     mapSettings: ["뜻밖의 임무", "동방의 지식", "부분적인 해독", "예리한 감정"],
   },
