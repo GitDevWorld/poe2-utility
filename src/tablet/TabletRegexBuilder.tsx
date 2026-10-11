@@ -168,6 +168,11 @@ const RARITIES: { id: SearchRarity; label: string }[] = [
   { id: "rare", label: "희귀" },
 ];
 
+const REGEX_MODES: { id: "or" | "and"; label: string }[] = [
+  { id: "or", label: "하나라도 (OR)" },
+  { id: "and", label: "모두 (AND)" },
+];
+
 export function TabletRegexBuilder() {
   const [tabletFilter, setTabletFilter] = useState<TabletFilter>("all");
   const [includeTypePattern, setIncludeTypePattern] = useState(false);
@@ -177,6 +182,7 @@ export function TabletRegexBuilder() {
   const [query, setQuery] = useState("");
   const [rarity, setRarity] = useState<SearchRarity>("any");
   const [minUses, setMinUses] = useState(10);
+  const [regexMode, setRegexMode] = useState<"or" | "and">("or");
 
   const tabletType = typeof tabletFilter === "number" ? tabletTypes.find((item) => item.id === tabletFilter) : undefined;
   const league = useTradeLeague();
@@ -211,8 +217,8 @@ export function TabletRegexBuilder() {
   const excludePatterns = useMemo(() => patternsFromRefs(excluded), [excluded]);
 
   const search = useMemo(
-    () => buildStashSearchQuery(includePatterns, excludePatterns, typePattern),
-    [includePatterns, excludePatterns, typePattern],
+    () => buildStashSearchQuery(includePatterns, excludePatterns, typePattern, regexMode),
+    [includePatterns, excludePatterns, typePattern, regexMode],
   );
 
   const tradeRefs = useMemo(() => included.filter(hasTradeStatForRef), [included]);
@@ -277,6 +283,7 @@ export function TabletRegexBuilder() {
           </div>
         </ControlGroup>
         <ControlGroup label="창고 정규식">
+          <Segmented value={regexMode} options={REGEX_MODES} onChange={setRegexMode} />
           <label className={`check${tabletFilter === "all" ? " disabled" : ""}`}>
             <input
               type="checkbox"
