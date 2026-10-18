@@ -1,10 +1,11 @@
 /**
  * 티어 메이커식 필터 생성: 아이템을 티어에 넣고, 티어마다 소리·표시 여부를 정한다.
+ * 아이템 목록·분류는 poe2db 카탈로그, 기본 티어는 고른 기준 필터로 계산한다.
  * 생성한 필터 = 우리 티어 규칙(맨 위, 먼저 걸림) + 기준 필터 전체(티어에 없는 아이템용).
  */
+import catalog from "./catalog.json";
 import { evaluate, parseRules } from "./evaluate";
-import { buildExtraCategories, type Tone } from "./extras";
-import { CATEGORIES, cellKey, readDefaults, taggedBaseTypes } from "./generate";
+import { buildExtraCategories, type GearClass, type Tone } from "./extras";
 
 export type TierId = "sss" | "ss" | "s" | "a" | "b" | "c" | "d" | "e" | "f" | "hidden";
 
@@ -89,12 +90,13 @@ export const TIERS: TierDef[] = [
 
 export const tierById = (id: TierId) => TIERS.find((t) => t.id === id) ?? TIERS[TIERS.length - 1];
 
-/** 티어에 넣는 단위: 아이템 하나, 또는 조건으로 묶은 구간(조각 묶음 수, 경로석 등급, 장비 종류…) */
+export const SOUNDS = ["lv1", "lv2", "lv3", "lv4", "lv5", "lv6", "lv7", "t_popup", "t_stack", "t_ring", "t_flask"];
+
+/** 티어에 넣는 단위: 아이템 하나, 또는 조건으로 묶은 구간(조각 묶음 수, 장비 종류…) */
 export type TierItem = {
   id: string;
   label: string;
-  /** 아이콘을 찾을 경매장 이름 */
-  iconOf?: string;
+  icon?: string;
   baseTypes?: string[];
   /** 조건 줄 (예: StackSize >= 20). 없으면 BaseType 만으로 잡는다. */
   conditions?: string[];
@@ -103,80 +105,117 @@ export type TierItem = {
   tone?: Tone;
 };
 
-export type TierCategory = { id: string; label: string; items: TierItem[] };
+export type TierCategory = {
+  id: string;
+  label: string;
+  items: TierItem[];
+  /** BaseType 으로만 잡는 아이템 규칙에 덧붙일 조건 (예: 고유 서판·유물은 빼기) */
+  guard?: string[];
+};
 
-const SPLINTERS = ["Breach Splinter", "Petition Splinter", "Runic Splinter", "Simulacrum Splinter"];
+type CatalogItem = { en: string; ko: string; icon?: string };
+type CatalogClass = {
+  slug: string;
+  filterClass: string;
+  ko: string;
+  sections: { id: string; en: string; ko: string; items: CatalogItem[] }[];
+};
+type Catalog = { classes: CatalogClass[]; gear: GearClass[]; icons: Record<string, string> };
 
-/** 조각·경로석은 아이템 대신 구간을 티어에 넣는다. 구간이 겹치지 않아 티어 순서와 상관없다. */
-const SPLINTER_BUCKETS: { id: string; cell: string; label: string; conditions: string[] }[] = [
-  { id: "splinter:20", cell: "t1", label: "조각 20개 이상", conditions: ["StackSize >= 20"] },
-  { id: "splinter:8", cell: "t2", label: "조각 8~19개", conditions: ["StackSize >= 8", "StackSize <= 19"] },
-  { id: "splinter:4", cell: "t3", label: "조각 4~7개", conditions: ["StackSize >= 4", "StackSize <= 7"] },
-  { id: "splinter:2", cell: "t4", label: "조각 2~3개", conditions: ["StackSize >= 2", "StackSize <= 3"] },
-  { id: "splinter:1", cell: "t5", label: "조각 1개", conditions: ["StackSize 1"] },
+const CATALOG = catalog as Catalog;
+
+/** poe2db 탭 이름이 영어로 남은 것 등을 다듬는다. */
+const SECTION_LABEL: Record<string, string> = {
+  StackableCurrencyItem: "화폐",
+  Essence: "에센스",
+  SplinterItem: "조각",
+  CatalystItem: "기폭제",
+};
+
+const SPLINTER_RANGES: { id: string; label: string; conditions: string[]; stack: number }[] = [
+  { id: "20", label: "20개+", conditions: ["StackSize >= 20"], stack: 20 },
+  { id: "8", label: "8~19개", conditions: ["StackSize >= 8", "StackSize <= 19"], stack: 8 },
+  { id: "4", label: "4~7개", conditions: ["StackSize >= 4", "StackSize <= 7"], stack: 4 },
+  { id: "2", label: "2~3개", conditions: ["StackSize >= 2", "StackSize <= 3"], stack: 2 },
+  { id: "1", label: "1개", conditions: ["StackSize 1"], stack: 1 },
 ];
 
-const WAYSTONE_BUCKETS: { id: string; cell?: string; label: string; conditions: string[] }[] = [
-  { id: "waystone:16", cell: "t16", label: "경로석 16등급", conditions: ['Class == "Waystones"', "WaystoneTier >= 16"] },
-  { id: "waystone:15", cell: "t15", label: "경로석 15등급", conditions: ['Class == "Waystones"', "WaystoneTier 15"] },
-  { id: "waystone:14", label: "경로석 14등급 이하", conditions: ['Class == "Waystones"', "WaystoneTier <= 14"] },
-];
+/** 고유가 따로 있는 클래스: BaseType 규칙이 고유까지 잡지 않게 한다. */
+const RARITY_GUARD = new Set(["Tablet", "Relics"]);
 
-function tierFromGroup(group: { show: boolean; sound?: string } | undefined): TierId {
-  if (!group || !group.show) return "hidden";
-  const lv = group.sound?.match(/^lv(\d)$/);
+function tierFromResult(result: { show: boolean; sound?: string }): TierId {
+  if (!result.show) return "hidden";
+  const lv = result.sound?.match(/^lv(\d)$/);
   if (lv) return (["sss", "ss", "s", "a", "b", "c", "d"] as TierId[])[Number(lv[1]) - 1] ?? "d";
-  return group.sound ? "e" : "f";
+  return result.sound ? "e" : "f";
 }
 
 export type TierModel = {
   categories: TierCategory[];
-  /** 기준 필터에서 읽은 아이템별 티어 */
+  /** 기준 필터에서 계산한 아이템별 기본 티어 */
   defaults: Record<string, TierId>;
 };
 
-/** 기준 필터에서 종류별 아이템 목록과 기본 티어를 읽는다. 같은 아이템은 처음 나온 종류에만 둔다. */
-export function buildTierModel(text: string, labelOf: (baseType: string) => string): TierModel {
-  const info = readDefaults(text);
+/**
+ * 아이템 목록·분류는 poe2db 카탈로그를 따르고, 기본 티어만 기준 필터로 계산한다:
+ * 아이템마다 예시를 만들어 기준 필터에서 처음 걸리는 규칙의 표시 여부·소리를 본다.
+ */
+export function buildTierModel(baseText: string): TierModel {
+  const rules = parseRules(baseText);
   const defaults: Record<string, TierId> = {};
   const categories: TierCategory[] = [];
+  const seen = new Set<string>();
+  // poe2db "중첩 가능 화폐" 목록에는 액체 감정 등 다른 탭 아이템도 섞여 있어, 더 구체적인 탭에 둔다.
+  const specific = new Set(
+    CATALOG.classes.flatMap((c) =>
+      c.sections.filter((s) => s.id !== "StackableCurrencyItem").flatMap((s) => s.items.map((i) => i.en)),
+    ),
+  );
 
-  for (const category of CATEGORIES) {
-    const items: TierItem[] = [];
-    if (category.id === "splinter") {
-      for (const b of SPLINTER_BUCKETS) {
-        items.push({ id: b.id, label: b.label, iconOf: SPLINTERS[3], baseTypes: SPLINTERS, conditions: b.conditions });
-        defaults[b.id] = tierFromGroup(info[cellKey("splinter", b.cell)]?.groups[0]);
-      }
-    } else if (category.id === "waystones") {
-      for (const b of WAYSTONE_BUCKETS) {
-        items.push({ id: b.id, label: b.label, conditions: b.conditions, tone: "misc" });
-        defaults[b.id] = b.cell ? tierFromGroup(info[cellKey("waystones", b.cell)]?.groups[0]) : "hidden";
-      }
-    } else {
-      for (const cell of category.cells) {
-        for (const group of info[cellKey(category.id, cell.id)]?.groups ?? []) {
-          for (const name of group.items) {
-            if (name in defaults) continue;
-            defaults[name] = tierFromGroup(group);
-            items.push({ id: name, label: labelOf(name), iconOf: name, baseTypes: [name] });
+  for (const cls of CATALOG.classes) {
+    const multi = cls.sections.length > 1 && cls.slug !== "Map_Fragments";
+    const groups = multi
+      ? cls.sections.map((s) => ({ id: `${cls.slug}:${s.id}`, label: SECTION_LABEL[s.id] ?? s.ko, items: s.items, section: s.id }))
+      : [{ id: cls.slug, label: cls.ko, items: cls.sections.flatMap((s) => s.items), section: "" }];
+
+    for (const group of groups) {
+      const items: TierItem[] = [];
+      for (const item of group.items) {
+        if (seen.has(item.en)) continue;
+        if (group.section === "StackableCurrencyItem" && specific.has(item.en)) continue;
+        seen.add(item.en);
+        const base = { Class: cls.filterClass, BaseType: item.en, Rarity: "Normal" };
+        if (group.section === "SplinterItem") {
+          for (const range of SPLINTER_RANGES) {
+            const id = `${item.en}|${range.id}`;
+            items.push({
+              id,
+              label: `${item.ko} ${range.label}`,
+              icon: item.icon,
+              baseTypes: [item.en],
+              conditions: range.conditions,
+            });
+            defaults[id] = tierFromResult(evaluate(rules, { ...base, StackSize: range.stack }));
           }
+          continue;
         }
+        const tier = Number(item.en.match(/Tier (\d+)/)?.[1] ?? 0);
+        const sample = cls.filterClass === "Waystones" ? { ...base, WaystoneTier: tier } : base;
+        items.push({ id: item.en, label: item.ko, icon: item.icon, baseTypes: [item.en] });
+        defaults[item.en] = tierFromResult(evaluate(rules, sample));
       }
+      if (!items.length) continue;
+      categories.push({
+        id: group.id,
+        label: group.label,
+        items,
+        guard: RARITY_GUARD.has(cls.filterClass) ? ["Rarity Normal Magic Rare"] : undefined,
+      });
     }
-    if (items.length) categories.push({ id: category.id, label: category.label, items });
   }
 
-  // 장비·고유·젬 등: 예시 아이템이 기준 필터에서 어디에 걸리는지로 기본 티어를 정한다.
-  const rules = parseRules(text);
-  const uniqueTiers = {
-    t1: taggedBaseTypes(text, "uniques", ["t1"]),
-    t2: taggedBaseTypes(text, "uniques", ["t2"]),
-    t3: taggedBaseTypes(text, "uniques", ["t3", "t3boss"]),
-    t4: taggedBaseTypes(text, "uniques", ["hideable"]),
-  };
-  for (const extra of buildExtraCategories(uniqueTiers)) {
-    for (const item of extra.items) defaults[item.id] = tierFromGroup(evaluate(rules, item.sample));
+  for (const extra of buildExtraCategories(CATALOG.gear, CATALOG.icons)) {
+    for (const item of extra.items) defaults[item.id] = tierFromResult(evaluate(rules, item.sample));
     categories.push({
       id: extra.id,
       label: extra.label,
@@ -209,7 +248,7 @@ export function generateTierFilter(
 ): string {
   const out: string[] = [
     "#===============================================================================================================",
-    `# ${title} — poe2-utility 필터 생성기`,
+    `# ${title} — poe2-utility 필터 생성기 (아이템 분류: poe2db.tw)`,
     "# 위쪽 [티어] 규칙이 먼저 걸리고, 티어에 없는 아이템은 아래 기준 필터 규칙을 따른다.",
     "#===============================================================================================================",
   ];
@@ -232,17 +271,11 @@ export function generateTierFilter(
         if (!items.length) continue;
         summary.push(`${category.label} ${items.length}`);
         const names = items.filter((item) => !item.conditions).flatMap((item) => item.baseTypes ?? []);
-        // 고유 서판은 고유 규칙을 따르게, 서판은 일반·마법·희귀만 잡는다.
-        const tablets = names.filter((n) => n.endsWith(" Tablet"));
-        const others = names.filter((n) => !n.endsWith(" Tablet"));
-        if (others.length) {
-          blocks.push([`${keyword} # [티어 ${tier.label}] ${category.label}`, `\tBaseType == ${quoted(others)}`]);
-        }
-        if (tablets.length) {
+        if (names.length) {
           blocks.push([
-            `${keyword} # [티어 ${tier.label}] ${category.label} 서판`,
-            "\tRarity Normal Magic Rare",
-            `\tBaseType == ${quoted(tablets)}`,
+            `${keyword} # [티어 ${tier.label}] ${category.label}`,
+            ...(category.guard ?? []).map((c) => `\t${c}`),
+            `\tBaseType == ${quoted(names)}`,
           ]);
         }
         for (const item of items.filter((i) => i.conditions)) {

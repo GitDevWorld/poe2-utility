@@ -1,5 +1,6 @@
 /**
- * 화폐류 밖의 아이템(장비·장신구·특출난·고유·젬·주얼·플라스크·기타)을 티어에 넣는 항목.
+ * 하나씩이 아니라 조건으로 묶어 티어에 넣는 항목(장비·장신구·특출난·고유·젬·주얼·플라스크·기타).
+ * 종류(클래스) 목록과 아이콘은 poe2db 카탈로그(catalog.json)를 따른다.
  * 항목마다 필터 조건과, 기본 티어를 기준 필터로 계산할 예시 아이템(sample)을 둔다.
  *
  * order: 필터 안에서 먼저 걸려야 하는 순서(작을수록 위). 항목끼리 조건이 겹칠 때만 의미가 있다.
@@ -17,36 +18,16 @@ export type ExtraItem = {
   order: number;
   sample: Sample;
   tone?: Tone;
-  /** 아이콘을 찾을 경매장 이름 */
-  iconOf?: string;
+  icon?: string;
 };
 
 export type ExtraCategory = { id: string; label: string; items: ExtraItem[] };
 
-const GEAR: [string, string][] = [
-  ["Body Armours", "갑옷"],
-  ["Helmets", "투구"],
-  ["Gloves", "장갑"],
-  ["Boots", "장화"],
-  ["Shields", "방패"],
-  ["Bucklers", "버클러"],
-  ["Foci", "집중구"],
-  ["Quivers", "화살통"],
-  ["Bows", "활"],
-  ["Crossbows", "석궁"],
-  ["Quarterstaves", "육척봉"],
-  ["Spears", "창"],
-  ["One Hand Maces", "한손 철퇴"],
-  ["Two Hand Maces", "양손 철퇴"],
-  ["Sceptres", "셉터"],
-  ["Staves", "지팡이"],
-  ["Wands", "마법봉"],
-  ["Talismans", "부적"],
-];
-const GEAR_CLASSES = `Class == ${GEAR.map(([c]) => `"${c}"`).join(" ")}`;
-const BIG_GEAR = 'Class == "Body Armours" "Bows" "Crossbows" "Quarterstaves" "Staves" "Talismans" "Two Hand Maces"';
-const SMALL_GEAR =
-  'Class == "Boots" "Bucklers" "Foci" "Gloves" "Helmets" "One Hand Maces" "Sceptres" "Shields" "Spears" "Wands"';
+export type GearClass = { slug: string; filterClass: string; ko: string; icon?: string };
+
+const JEWELLERY = ["Rings", "Amulets", "Belts"];
+const NOT_GEAR = new Set([...JEWELLERY, "Jewels", "Charms", "Life Flasks", "Mana Flasks", "Skill Gems", "Support Gems", "Spirit Gems"]);
+const BIG = new Set(["Body Armours", "Bows", "Crossbows", "Quarterstaves", "Staves", "Talismans", "Two Hand Maces", "Two Hand Axes", "Two Hand Swords", "Traps"]);
 
 const RARITIES: [string, string, Tone][] = [
   ["Normal", "일반", "normal"],
@@ -54,37 +35,30 @@ const RARITIES: [string, string, Tone][] = [
   ["Rare", "희귀", "rare"],
 ];
 
-const JEWELLERY: [string, string][] = [
-  ["Rings", "반지"],
-  ["Amulets", "목걸이"],
-  ["Belts", "허리띠"],
-];
-
 const LOW_JEWELLERY = ["Azure Amulet", "Crimson Amulet", "Emerald Ring", "Iron Ring", "Lazuli Ring", "Unset Ring"];
 
-/** 기준 필터의 고유 등급 목록(NeverSink $type->uniques $tier->t1 …)으로 고유 항목을 만든다. */
-export function buildExtraCategories(uniqueTiers: Record<string, string[]>): ExtraCategory[] {
-  const gear: ExtraItem[] = GEAR.flatMap(([cls, ko]) =>
-    RARITIES.map(([rarity, rko, tone]) => ({
-      id: `gear:${cls}:${rarity}`,
-      label: `${rko} ${ko}`,
-      conditions: [`Rarity ${rarity}`, `Class == "${cls}"`],
-      order: 5,
-      tone,
-      sample: { Class: cls, Rarity: rarity, BaseType: "", UnidentifiedItemTier: 1 },
-    })),
-  );
+const classList = (list: GearClass[]) => `Class == ${list.map((g) => `"${g.filterClass}"`).join(" ")}`;
 
-  const jewellery: ExtraItem[] = JEWELLERY.flatMap(([cls, ko]) =>
-    RARITIES.map(([rarity, rko, tone]) => ({
-      id: `jewel:${cls}:${rarity}`,
-      label: `${rko} ${ko}`,
-      conditions: [`Rarity ${rarity}`, `Class == "${cls}"`],
-      order: 5,
-      tone,
-      sample: { Class: cls, Rarity: rarity, BaseType: "", UnidentifiedItemTier: 1 },
-    })),
-  );
+export function buildExtraCategories(classes: GearClass[], icons: Record<string, string>): ExtraCategory[] {
+  const byClass = new Map(classes.map((g) => [g.filterClass, g]));
+  const iconOf = (cls: string) => byClass.get(cls)?.icon;
+  const gearClasses = classes.filter((g) => !NOT_GEAR.has(g.filterClass));
+  const bigGear = gearClasses.filter((g) => BIG.has(g.filterClass));
+  const smallGear = gearClasses.filter((g) => !BIG.has(g.filterClass));
+  const GEAR = classList(gearClasses);
+
+  const byRarity = (list: GearClass[], prefix: string): ExtraItem[] =>
+    list.flatMap((g) =>
+      RARITIES.map(([rarity, rko, tone]) => ({
+        id: `${prefix}:${g.filterClass}:${rarity}`,
+        label: `${rko} ${g.ko}`,
+        conditions: [`Rarity ${rarity}`, `Class == "${g.filterClass}"`],
+        order: 5,
+        tone,
+        icon: g.icon,
+        sample: { Class: g.filterClass, Rarity: rarity, BaseType: "", UnidentifiedItemTier: 1 },
+      })),
+    );
 
   const exceptional: ExtraItem[] = [
     {
@@ -94,6 +68,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       baseTypes: LOW_JEWELLERY,
       order: 0,
       tone: "rare",
+      icon: iconOf("Rings"),
       sample: { Class: "Rings", Rarity: "Rare", BaseType: "Iron Ring", UnidentifiedItemTier: 4 },
     },
     {
@@ -102,30 +77,34 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["UnidentifiedItemTier >= 4", "Rarity Normal Magic Rare", 'Class == "Amulets" "Rings"'],
       order: 1,
       tone: "rare",
+      icon: iconOf("Amulets"),
       sample: { Class: "Rings", Rarity: "Rare", BaseType: "Ruby Ring", UnidentifiedItemTier: 4 },
     },
     {
       id: "ex:quality",
       label: "특출난 품질 21+",
-      conditions: ["Corrupted False", "Quality >= 21", "Rarity Normal Magic Rare", GEAR_CLASSES],
+      conditions: ["Corrupted False", "Quality >= 21", "Rarity Normal Magic Rare", GEAR],
       order: 2,
       tone: "rare",
+      icon: iconOf("Gloves"),
       sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Quality: 21 },
     },
     {
       id: "ex:socket3",
       label: "특출난 소켓 3개+ (양손·갑옷)",
-      conditions: ["Corrupted False", "Sockets >= 3", "Rarity Normal Magic Rare", BIG_GEAR],
+      conditions: ["Corrupted False", "Sockets >= 3", "Rarity Normal Magic Rare", classList(bigGear)],
       order: 2,
       tone: "rare",
+      icon: iconOf("Body Armours"),
       sample: { Class: "Body Armours", Rarity: "Rare", BaseType: "", Sockets: 3 },
     },
     {
       id: "ex:socket2",
       label: "특출난 소켓 2개+ (한손·방어구)",
-      conditions: ["Corrupted False", "Sockets >= 2", "Rarity Normal Magic Rare", SMALL_GEAR],
+      conditions: ["Corrupted False", "Sockets >= 2", "Rarity Normal Magic Rare", classList(smallGear)],
       order: 2,
       tone: "rare",
+      icon: iconOf("Helmets"),
       sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Sockets: 2 },
     },
     {
@@ -134,6 +113,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["TwiceCorrupted True", "Rarity Rare"],
       order: 2,
       tone: "rare",
+      icon: iconOf("Boots"),
       sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Corrupted: true, TwiceCorrupted: true },
     },
     {
@@ -142,49 +122,40 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["TwiceCorrupted True", "Rarity Normal Magic"],
       order: 2,
       tone: "magic",
+      icon: iconOf("Boots"),
       sample: { Class: "Gloves", Rarity: "Magic", BaseType: "", Corrupted: true, TwiceCorrupted: true },
     },
     {
       id: "ex:gear5",
       label: "장비 5등급",
-      conditions: ["UnidentifiedItemTier >= 5", "Rarity Normal Magic Rare", GEAR_CLASSES],
+      conditions: ["UnidentifiedItemTier >= 5", "Rarity Normal Magic Rare", GEAR],
       order: 3,
       tone: "rare",
+      icon: iconOf("Body Armours"),
       sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", UnidentifiedItemTier: 5 },
     },
     {
       id: "ex:gear4",
       label: "장비 4등급",
-      conditions: ["UnidentifiedItemTier 4", "Rarity Normal Magic Rare", GEAR_CLASSES],
+      conditions: ["UnidentifiedItemTier 4", "Rarity Normal Magic Rare", GEAR],
       order: 3,
       tone: "rare",
+      icon: iconOf("Body Armours"),
       sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", UnidentifiedItemTier: 4 },
     },
   ];
 
-  const uniqueTier = (id: string, label: string, list: string[] | undefined): ExtraItem[] =>
-    list?.length
-      ? [
-          {
-            id: `unique:${id}`,
-            label,
-            conditions: ["Rarity Unique"],
-            baseTypes: list,
-            order: 1,
-            tone: "unique",
-            sample: { Class: "Body Armours", Rarity: "Unique", BaseType: list[0] },
-          },
-        ]
-      : [];
-
+  // 고유: 클래스마다 하나씩. 헤드헌터·마법사의 피(무거운·특수 허리띠)와 고유 서판은 먼저 걸리게 둔다.
+  const uniqueClasses = classes.filter((g) => !["Skill Gems", "Support Gems", "Spirit Gems"].includes(g.filterClass));
   const uniques: ExtraItem[] = [
     {
-      id: "unique:belt",
+      id: "unique:belt-top",
       label: "고유 허리띠 (헤드헌터·마법사의 피)",
       conditions: ["Rarity Unique", 'Class == "Belts"'],
       baseTypes: ["Heavy Belt", "Utility Belt"],
       order: 0,
       tone: "unique",
+      icon: iconOf("Belts"),
       sample: { Class: "Belts", Rarity: "Unique", BaseType: "Heavy Belt" },
     },
     {
@@ -196,40 +167,29 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       sample: { Class: "Tablet", Rarity: "Unique", BaseType: "Ritual Tablet" },
     },
     {
-      id: "unique:ring",
-      label: "고유 반지",
-      conditions: ["Rarity Unique", 'Class == "Rings"'],
+      id: "unique:relic",
+      label: "고유 유물",
+      conditions: ["Rarity Unique", 'Class == "Relics"'],
       order: 0,
       tone: "unique",
-      sample: { Class: "Rings", Rarity: "Unique", BaseType: "Ruby Ring" },
+      sample: { Class: "Relics", Rarity: "Unique", BaseType: "Vase Relic" },
     },
-    {
-      id: "unique:amulet",
-      label: "고유 목걸이",
-      conditions: ["Rarity Unique", 'Class == "Amulets"'],
-      order: 0,
-      tone: "unique",
-      sample: { Class: "Amulets", Rarity: "Unique", BaseType: "Jade Amulet" },
-    },
-    {
-      id: "unique:jewel",
-      label: "고유 주얼",
-      conditions: ["Rarity Unique", 'Class == "Jewels"'],
-      order: 0,
-      tone: "unique",
-      sample: { Class: "Jewels", Rarity: "Unique", BaseType: "Ruby" },
-    },
-    ...uniqueTier("t1", "고유 1티어 베이스", uniqueTiers.t1),
-    ...uniqueTier("t2", "고유 2티어 베이스", uniqueTiers.t2),
-    ...uniqueTier("t3", "고유 3티어 베이스", uniqueTiers.t3),
-    ...uniqueTier("t4", "고유 4티어 베이스", uniqueTiers.t4),
+    ...uniqueClasses.map((g) => ({
+      id: `unique:${g.filterClass}`,
+      label: `고유 ${g.ko}`,
+      conditions: ["Rarity Unique", `Class == "${g.filterClass}"`],
+      order: 5,
+      tone: "unique" as Tone,
+      icon: g.icon,
+      sample: { Class: g.filterClass, Rarity: "Unique", BaseType: "Unlisted Base" },
+    })),
     {
       id: "unique:other",
       label: "그 외 고유",
       conditions: ["Rarity Unique"],
       order: 9,
       tone: "unique",
-      sample: { Class: "Body Armours", Rarity: "Unique", BaseType: "Unlisted Base" },
+      sample: { Class: "Unknown", Rarity: "Unique", BaseType: "Unlisted Base" },
     },
   ];
 
@@ -240,7 +200,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["GemLevel >= 20", `BaseType "${en}"`],
       order: 5,
       tone: "gem",
-      iconOf: `${en} (Level 20)`,
+      icon: icons[`${en} (Level 20)`],
       sample: { BaseType: en, GemLevel: 20 },
     },
     {
@@ -249,7 +209,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["GemLevel 19", `BaseType "${en}"`],
       order: 5,
       tone: "gem",
-      iconOf: `${en} (Level 19)`,
+      icon: icons[`${en} (Level 19)`],
       sample: { BaseType: en, GemLevel: 19 },
     },
     {
@@ -258,7 +218,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["GemLevel <= 18", `BaseType "${en}"`],
       order: 5,
       tone: "gem",
-      iconOf: `${en} (Level 10)`,
+      icon: icons[`${en} (Level 10)`],
       sample: { BaseType: en, GemLevel: 18 },
     },
   ];
@@ -272,7 +232,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ['BaseType "Uncut Support Gem"'],
       order: 5,
       tone: "gem",
-      iconOf: "Uncut Support Gem (Level 5)",
+      icon: icons["Uncut Support Gem (Level 5)"],
       sample: { BaseType: "Uncut Support Gem", GemLevel: 3 },
     },
     {
@@ -281,6 +241,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["TwiceCorrupted True", 'Class == "Skill Gems" "Support Gems"'],
       order: 1,
       tone: "gem",
+      icon: iconOf("Skill Gems"),
       sample: { Class: "Skill Gems", BaseType: "Fireball", Corrupted: true, TwiceCorrupted: true },
     },
     {
@@ -289,10 +250,12 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ['Class == "Skill Gems" "Support Gems"'],
       order: 9,
       tone: "gem",
+      icon: iconOf("Support Gems"),
       sample: { Class: "Skill Gems", BaseType: "Fireball" },
     },
   ];
 
+  const jewelIcon = iconOf("Jewels");
   const jewels: ExtraItem[] = [
     {
       id: "jewelitem:timelost",
@@ -301,6 +264,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       baseTypes: ["Time-Lost Emerald", "Time-Lost Ruby", "Time-Lost Sapphire"],
       order: 1,
       tone: "rare",
+      icon: jewelIcon,
       sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Time-Lost Ruby" },
     },
     {
@@ -309,6 +273,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["AnyEnchantment True", "Corrupted True", "Rarity Normal Magic Rare", 'Class == "Jewels"'],
       order: 1,
       tone: "rare",
+      icon: jewelIcon,
       sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Ruby", Corrupted: true, AnyEnchantment: true },
     },
     {
@@ -317,6 +282,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Rarity Rare", 'Class == "Jewels"'],
       order: 5,
       tone: "rare",
+      icon: jewelIcon,
       sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Ruby" },
     },
     {
@@ -325,6 +291,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Rarity Normal Magic", 'Class == "Jewels"'],
       order: 5,
       tone: "magic",
+      icon: jewelIcon,
       sample: { Class: "Jewels", Rarity: "Magic", BaseType: "Ruby" },
     },
   ];
@@ -336,6 +303,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Quality >= 18", "Rarity Normal Magic", 'Class == "Charms"'],
       order: 1,
       tone: "magic",
+      icon: iconOf("Charms"),
       sample: { Class: "Charms", Rarity: "Magic", BaseType: "Golden Charm", Quality: 20, ItemLevel: 82 },
     },
     {
@@ -344,6 +312,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Rarity Normal Magic", 'Class == "Charms"'],
       order: 5,
       tone: "magic",
+      icon: iconOf("Charms"),
       sample: { Class: "Charms", Rarity: "Magic", BaseType: "Golden Charm" },
     },
     {
@@ -352,6 +321,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Rarity Normal Magic", 'Class == "Life Flasks"'],
       order: 5,
       tone: "magic",
+      icon: iconOf("Life Flasks"),
       sample: { Class: "Life Flasks", Rarity: "Magic", BaseType: "Ultimate Life Flask" },
     },
     {
@@ -360,6 +330,7 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       conditions: ["Rarity Normal Magic", 'Class == "Mana Flasks"'],
       order: 5,
       tone: "magic",
+      icon: iconOf("Mana Flasks"),
       sample: { Class: "Mana Flasks", Rarity: "Magic", BaseType: "Ultimate Mana Flask" },
     },
   ];
@@ -374,65 +345,13 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
       sample: { Class: "Quest Items", BaseType: "" },
     },
     {
-      id: "misc:vault",
-      label: "금고 열쇠",
-      conditions: ['Class == "Vault Keys"'],
-      order: 5,
-      tone: "misc",
-      sample: { Class: "Vault Keys", BaseType: "" },
-    },
-    {
-      id: "misc:pinnacle",
-      label: "최상위 보스 열쇠",
-      conditions: ['Class == "Pinnacle Keys"'],
-      order: 5,
-      tone: "misc",
-      sample: { Class: "Pinnacle Keys", BaseType: "" },
-    },
-    {
       id: "misc:logbook",
       label: "탐험 일지",
       conditions: ['Class == "Expedition Logbook"'],
       order: 5,
       tone: "misc",
-      iconOf: "Expedition Logbook",
+      icon: icons["Expedition Logbook"],
       sample: { Class: "Expedition Logbook", BaseType: "Expedition Logbook" },
-    },
-    {
-      id: "misc:relic",
-      label: "유물",
-      conditions: ["Rarity Normal Magic"],
-      baseTypes: ["Amphora Relic", "Coffer Relic", "Incense Relic", "Seal Relic", "Tapestry Relic", "Urn Relic", "Vase Relic"],
-      order: 5,
-      tone: "misc",
-      sample: { Rarity: "Magic", BaseType: "Vase Relic" },
-    },
-    {
-      id: "misc:djinn",
-      label: "진 바리야",
-      conditions: [],
-      baseTypes: ["Djinn Barya"],
-      order: 5,
-      tone: "misc",
-      sample: { BaseType: "Djinn Barya", ItemLevel: 80 },
-    },
-    {
-      id: "misc:test",
-      label: "시험 바리야",
-      conditions: [],
-      baseTypes: ["Test of Cunning Barya", "Test of Strength Barya", "Test of Time Barya", "Test of Will Barya"],
-      order: 5,
-      tone: "misc",
-      sample: { BaseType: "Test of Will Barya" },
-    },
-    {
-      id: "misc:ultimatum",
-      label: "새겨진 결전",
-      conditions: [],
-      baseTypes: ["Inscribed Ultimatum"],
-      order: 5,
-      tone: "misc",
-      sample: { BaseType: "Inscribed Ultimatum", Rarity: "Normal", ItemLevel: 80 },
     },
     {
       id: "misc:gold-huge",
@@ -465,8 +384,8 @@ export function buildExtraCategories(uniqueTiers: Record<string, string[]>): Ext
 
   return [
     { id: "exceptional", label: "특출난·고급 장비", items: exceptional },
-    { id: "gear", label: "장비", items: gear },
-    { id: "jewellery", label: "장신구", items: jewellery },
+    { id: "gear", label: "장비", items: byRarity(gearClasses, "gear") },
+    { id: "jewellery", label: "장신구", items: byRarity(classes.filter((g) => JEWELLERY.includes(g.filterClass)), "jewel") },
     { id: "uniques", label: "고유", items: uniques },
     { id: "gems", label: "젬", items: gems },
     { id: "jewelitems", label: "주얼", items: jewels },

@@ -1,0 +1,4412 @@
+{
+ "classes": [
+  {
+   "slug": "Stackable_Currency",
+   "filterClass": "Stackable Currency",
+   "ko": "중첩 가능 화폐",
+   "sections": [
+    {
+     "id": "StackableCurrencyItem",
+     "en": "Stackable Currency Item",
+     "ko": "중첩 가능 화폐 아이템",
+     "items": [
+      {
+       "en": "Blacksmith's Whetstone",
+       "ko": "대장장이의 숫돌",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyWeaponQuality.webp"
+      },
+      {
+       "en": "Arcanist's Etcher",
+       "ko": "신비학자의 식각기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyWeaponMagicQuality.webp"
+      },
+      {
+       "en": "Scroll of Wisdom",
+       "ko": "감정 주문서",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyIdentification.webp"
+      },
+      {
+       "en": "Chaos Orb",
+       "ko": "카오스 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollRare.webp"
+      },
+      {
+       "en": "Greater Chaos Orb",
+       "ko": "상위 카오스 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollRare.webp"
+      },
+      {
+       "en": "Perfect Chaos Orb",
+       "ko": "완벽한 카오스 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollRare.webp"
+      },
+      {
+       "en": "Armourer's Scrap",
+       "ko": "방어구 장인의 고철",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyArmourQuality.webp"
+      },
+      {
+       "en": "Mirror of Kalandra",
+       "ko": "칼란드라의 거울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyDuplicate.webp"
+      },
+      {
+       "en": "Hinekora's Lock",
+       "ko": "히네코라의 머리카락",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/HinekorasLock.webp"
+      },
+      {
+       "en": "Orb of Alchemy",
+       "ko": "연금술의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToRare.webp"
+      },
+      {
+       "en": "Orb of Chance",
+       "ko": "기회의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToUnique.webp"
+      },
+      {
+       "en": "Orb of Transmutation",
+       "ko": "진화의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToMagic.webp"
+      },
+      {
+       "en": "Greater Orb of Transmutation",
+       "ko": "상위 진화의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToMagic.webp"
+      },
+      {
+       "en": "Perfect Orb of Transmutation",
+       "ko": "완벽한 진화의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToMagic.webp"
+      },
+      {
+       "en": "Exalted Orb",
+       "ko": "엑잘티드 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToRare.webp"
+      },
+      {
+       "en": "Greater Exalted Orb",
+       "ko": "상위 엑잘티드 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToRare.webp"
+      },
+      {
+       "en": "Perfect Exalted Orb",
+       "ko": "완벽한 엑잘티드 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToRare.webp"
+      },
+      {
+       "en": "Regal Orb",
+       "ko": "제왕의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.webp"
+      },
+      {
+       "en": "Greater Regal Orb",
+       "ko": "상위 제왕의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.webp"
+      },
+      {
+       "en": "Perfect Regal Orb",
+       "ko": "완벽한 제왕의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRare.webp"
+      },
+      {
+       "en": "Orb of Augmentation",
+       "ko": "확장의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToMagic.webp"
+      },
+      {
+       "en": "Greater Orb of Augmentation",
+       "ko": "상위 확장의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToMagic.webp"
+      },
+      {
+       "en": "Perfect Orb of Augmentation",
+       "ko": "완벽한 확장의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToMagic.webp"
+      },
+      {
+       "en": "Glassblower's Bauble",
+       "ko": "유리직공의 방울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyFlaskQuality.webp"
+      },
+      {
+       "en": "Gemcutter's Prism",
+       "ko": "세공사의 프리즘",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyGemQuality.webp"
+      },
+      {
+       "en": "Lesser Jeweller's Orb",
+       "ko": "하위 쥬얼러 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollSocketNumbers01.webp"
+      },
+      {
+       "en": "Greater Jeweller's Orb",
+       "ko": "상위 쥬얼러 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollSocketNumbers02.webp"
+      },
+      {
+       "en": "Perfect Jeweller's Orb",
+       "ko": "완벽한 쥬얼러 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollSocketNumbers03.webp"
+      },
+      {
+       "en": "Artificer's Orb",
+       "ko": "숙련공의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddEquipmentSocket.webp"
+      },
+      {
+       "en": "Divine Orb",
+       "ko": "신성한 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyModValues.webp"
+      },
+      {
+       "en": "Transmutation Shard",
+       "ko": "진화의 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToMagicShard.webp"
+      },
+      {
+       "en": "Chance Shard",
+       "ko": "기회의 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeToUniqueShard.webp"
+      },
+      {
+       "en": "Albino Rhoa Feather",
+       "ko": "흰 로아 깃털",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRhoaFeather.webp"
+      },
+      {
+       "en": "Vaal Orb",
+       "ko": "바알 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyVaal.webp"
+      },
+      {
+       "en": "Architect's Orb",
+       "ko": "건축가의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionGreaterVaalOrb.webp"
+      },
+      {
+       "en": "Crystallised Corruption",
+       "ko": "결정화된 타락",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCrystallisedCorruption.webp"
+      },
+      {
+       "en": "Core Destabiliser",
+       "ko": "핵 불안정화기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCoreDestabliser.webp"
+      },
+      {
+       "en": "Ancient Infuser",
+       "ko": "고대 주입기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionAncientInfusion.webp"
+      },
+      {
+       "en": "Vaal Cultivation Orb",
+       "ko": "바알 함양 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionHistoricVaalOrb.webp"
+      },
+      {
+       "en": "Yaomac's Orb of Sacrifice",
+       "ko": "야오맥의 희생의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCorruptionOrb1.webp"
+      },
+      {
+       "en": "Kopec's Orb of Sacrifice",
+       "ko": "코펙의 희생의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCorruptionOrb2.webp"
+      },
+      {
+       "en": "Kamasa's Orb of Sacrifice",
+       "ko": "카마사의 희생의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCorruptionOrb3.webp"
+      },
+      {
+       "en": "Yugul's Orb of Sacrifice",
+       "ko": "유굴의 희생의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCorruptionOrb4.webp"
+      },
+      {
+       "en": "Vaal Armourer's Infuser",
+       "ko": "바알 방어구 장인의 주입기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/VaakArmourersScrap.webp"
+      },
+      {
+       "en": "Vaal Blacksmith's Infuser",
+       "ko": "바알 대장장이의 주입기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/VaalBlacksmithsWhetstone.webp"
+      },
+      {
+       "en": "Vaal Arcanist's Infuser",
+       "ko": "바알 신비학자의 주입기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/VaalArcanistsEtcher.webp"
+      },
+      {
+       "en": "Vaal Catalysing Infuser",
+       "ko": "바알 촉진시키는 주입기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/VaalCatalyst.webp"
+      },
+      {
+       "en": "Orb of Extraction",
+       "ko": "추출의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionSocketableExtractorCurrency.webp"
+      },
+      {
+       "en": "Orb of Annulment",
+       "ko": "소멸의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AnnullOrb.webp"
+      },
+      {
+       "en": "Fracturing Orb",
+       "ko": "분열의 오브",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/FracturingOrb.webp"
+      },
+      {
+       "en": "Regal Shard",
+       "ko": "제왕의 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyUpgradeMagicToRareShard.webp"
+      },
+      {
+       "en": "Artificer's Shard",
+       "ko": "숙련공의 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddEquipmentSocketShard.webp"
+      },
+      {
+       "en": "Diluted Liquid Ire",
+       "ko": "희석된 액체 진노",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledIre.webp"
+      },
+      {
+       "en": "Diluted Liquid Guilt",
+       "ko": "희석된 액체 죄책감",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledGuilt.webp"
+      },
+      {
+       "en": "Diluted Liquid Greed",
+       "ko": "희석된 액체 탐욕",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledGreed.webp"
+      },
+      {
+       "en": "Liquid Paranoia",
+       "ko": "액체 집착",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledParanoia.webp"
+      },
+      {
+       "en": "Liquid Envy",
+       "ko": "액체 선망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledEnvy.webp"
+      },
+      {
+       "en": "Liquid Disgust",
+       "ko": "액체 혐오",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledDisgust.webp"
+      },
+      {
+       "en": "Liquid Despair",
+       "ko": "액체 절망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledDespair.webp"
+      },
+      {
+       "en": "Concentrated Liquid Fear",
+       "ko": "농축된 액체 두려움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledFear.webp"
+      },
+      {
+       "en": "Concentrated Liquid Suffering",
+       "ko": "농축된 액체 고통",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledSuffering.webp"
+      },
+      {
+       "en": "Concentrated Liquid Isolation",
+       "ko": "농축된 액체 고립",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledIsolation.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Ire",
+       "ko": "고대 희석된 액체 진노",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledIre.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Guilt",
+       "ko": "고대 희석된 액체 죄책감",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledGuilt.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Greed",
+       "ko": "고대 희석된 액체 탐욕",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledGreed.webp"
+      },
+      {
+       "en": "Ancient Liquid Paranoia",
+       "ko": "고대 액체 집착",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledParanoia.webp"
+      },
+      {
+       "en": "Ancient Liquid Envy",
+       "ko": "고대 액체 선망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledEnvy.webp"
+      },
+      {
+       "en": "Ancient Liquid Disgust",
+       "ko": "고대 액체 혐오",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledDisgust.webp"
+      },
+      {
+       "en": "Ancient Liquid Despair",
+       "ko": "고대 액체 절망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledDespair.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Fear",
+       "ko": "고대 농축된 액체 두려움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledFear.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Suffering",
+       "ko": "고대 농축된 액체 고통",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledSuffering.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Isolation",
+       "ko": "고대 농축된 액체 고립",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledIsolation.webp"
+      },
+      {
+       "en": "Potent Liquid Melancholy",
+       "ko": "위력적인 액체 우울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueHumansEmotion.webp"
+      },
+      {
+       "en": "Potent Liquid Ferocity",
+       "ko": "위력적인 액체 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueConstructsEmotion.webp"
+      },
+      {
+       "en": "Potent Liquid Contempt",
+       "ko": "위력적인 액체 경멸",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueBeastEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Melancholy",
+       "ko": "고대 위력적인 액체 우울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelessUniqueHumansEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Ferocity",
+       "ko": "고대 위력적인 액체 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimlessUniqueConstructsEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Contempt",
+       "ko": "고대 위력적인 액체 경멸",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelessUniqueBeastEmotion.webp"
+      },
+      {
+       "en": "Rogue's Marker",
+       "ko": "도둑의 증표",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Heist/HeistCoinCurrency.webp"
+      },
+      {
+       "en": "Exotic Coinage",
+       "ko": "특이한 주화",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/BarterRefreshCurrency.webp"
+      },
+      {
+       "en": "Broken Circle Artifact",
+       "ko": "끊어진 원 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/Rune16.webp"
+      },
+      {
+       "en": "Black Scythe Artifact",
+       "ko": "검은 낫 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/Rune6.webp"
+      },
+      {
+       "en": "Order Artifact",
+       "ko": "성배단 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/Rune13.webp"
+      },
+      {
+       "en": "Sun Artifact",
+       "ko": "태양 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/Rune17.webp"
+      },
+      {
+       "en": "Gold",
+       "ko": "골드",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ruthless/CoinPileTier2.webp"
+      },
+      {
+       "en": "Shattered Triskelion",
+       "ko": "산산이 조각난 트리스켈리온",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/DamagedKalguuranTriskellion.webp"
+      },
+      {
+       "en": "Gnawed Jawbone",
+       "ko": "갉힌 턱뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/GnawedJawbone.webp"
+      },
+      {
+       "en": "Preserved Jawbone",
+       "ko": "보존된 턱뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedJawbone.webp"
+      },
+      {
+       "en": "Ancient Jawbone",
+       "ko": "고대 턱뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientJawbone.webp"
+      },
+      {
+       "en": "Gnawed Rib",
+       "ko": "갉힌 갈비뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/GnawedRibs.webp"
+      },
+      {
+       "en": "Preserved Rib",
+       "ko": "보존된 갈비뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedRibs.webp"
+      },
+      {
+       "en": "Ancient Rib",
+       "ko": "고대 갈비뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientRibs.webp"
+      },
+      {
+       "en": "Gnawed Collarbone",
+       "ko": "갉힌 빗장뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/GnawedClavicle.webp"
+      },
+      {
+       "en": "Preserved Collarbone",
+       "ko": "보존된 빗장뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedCalvicle.webp"
+      },
+      {
+       "en": "Ancient Collarbone",
+       "ko": "고대 빗장뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientClavicle.webp"
+      },
+      {
+       "en": "Preserved Cranium",
+       "ko": "보존된 두개골",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedCranium.webp"
+      },
+      {
+       "en": "Preserved Vertebrae",
+       "ko": "보존된 등골",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedSpine.webp"
+      },
+      {
+       "en": "Altered Collarbone",
+       "ko": "뒤바뀐 빗장뼈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachDesecration.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 5)",
+       "ko": "마석학 유동체 (5레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 6)",
+       "ko": "마석학 유동체 (6레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 7)",
+       "ko": "마석학 유동체 (7레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 8)",
+       "ko": "마석학 유동체 (8레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 9)",
+       "ko": "마석학 유동체 (9레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 10)",
+       "ko": "마석학 유동체 (10레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 11)",
+       "ko": "마석학 유동체 (11레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 12)",
+       "ko": "마석학 유동체 (12레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 13)",
+       "ko": "마석학 유동체 (13레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 14)",
+       "ko": "마석학 유동체 (14레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 15)",
+       "ko": "마석학 유동체 (15레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 16)",
+       "ko": "마석학 유동체 (16레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 17)",
+       "ko": "마석학 유동체 (17레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 18)",
+       "ko": "마석학 유동체 (18레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 19)",
+       "ko": "마석학 유동체 (19레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Thaumaturgic Flux (Level 20)",
+       "ko": "마석학 유동체 (20레벨)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrency.webp"
+      },
+      {
+       "en": "Verisium",
+       "ko": "베리시움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RefinedVerisium.webp"
+      },
+      {
+       "en": "Exceptional Verisium",
+       "ko": "특출난 베리시움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/PerfectVerisium.webp"
+      },
+      {
+       "en": "Medved's Crest of the Circle",
+       "ko": "메드베드의 원 문양",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/UhtredCrest.webp"
+      },
+      {
+       "en": "Vorana's Crest of the Scythe",
+       "ko": "보라나의 낫 문양",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/VoranaCrest.webp"
+      },
+      {
+       "en": "Uhtred's Crest of the Chalice",
+       "ko": "우트레드의 성배 문양",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/MedvedCrest.webp"
+      },
+      {
+       "en": "Olroth's Crest of the Sun",
+       "ko": "올로스의 태양 문양",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/OlrothCrest.webp"
+      },
+      {
+       "en": "Runic Alloy",
+       "ko": "룬 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ScrapVerisium.webp"
+      },
+      {
+       "en": "Adaptive Alloy",
+       "ko": "적응형 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ChippedVerisium.webp"
+      },
+      {
+       "en": "Protective Alloy",
+       "ko": "보호의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ImpureVerisium.webp"
+      },
+      {
+       "en": "Expansive Alloy",
+       "ko": "팽창하는 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/StandardVerisium.webp"
+      },
+      {
+       "en": "Swift Alloy",
+       "ko": "재빠른 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/PureVerisium.webp"
+      },
+      {
+       "en": "Cyclonic Alloy",
+       "ko": "회오리바람 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ImbuedVerisium.webp"
+      },
+      {
+       "en": "Prismatic Alloy",
+       "ko": "분광 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SovereignVerisium.webp"
+      },
+      {
+       "en": "Mystic Alloy",
+       "ko": "신비한 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/CelestialVerisium.webp"
+      },
+      {
+       "en": "Sovereign Alloy",
+       "ko": "군왕의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy1.webp"
+      },
+      {
+       "en": "Celestial Alloy",
+       "ko": "천공의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy4.webp"
+      },
+      {
+       "en": "Transcendent Alloy",
+       "ko": "초월의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy5.webp"
+      },
+      {
+       "en": "The Runebinder's Alloy",
+       "ko": "룬 결속사의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy2.webp"
+      },
+      {
+       "en": "The Runefather's Alloy",
+       "ko": "룬 아버지의 합금",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy3.webp"
+      },
+      {
+       "en": "Venerable Starlit Ore",
+       "ko": "덕망 있는 별빛 광석",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Crafting/Verisium/VerisiumOre_Starlit_2x3.webp"
+      },
+      {
+       "en": "Revered Starlit Ore",
+       "ko": "존경받는 별빛 광석",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Crafting/Verisium/VerisiumOre_Starlit_2x4_Armour.webp"
+      },
+      {
+       "en": "Veridical Starlit Ore",
+       "ko": "진실한 별빛 광석",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Crafting/Verisium/VerisiumOre_Starlit_1x1.webp"
+      },
+      {
+       "en": "Warding Starlit Ore",
+       "ko": "수호하는 별빛 광석",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Crafting/Verisium/VerisiumOre_Starlit_2x4_Weapon.webp"
+      },
+      {
+       "en": "Starlit Ore",
+       "ko": "별빛 광석",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Crafting/Verisium/VerisiumOre_Starlit_2x2.webp"
+      },
+      {
+       "en": "Blazing Flux",
+       "ko": "맹렬한 유동체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ArcaneFluxFire.webp"
+      },
+      {
+       "en": "Chilling Flux",
+       "ko": "오싹한 유동체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ArcaneFluxCold.webp"
+      },
+      {
+       "en": "Crackling Flux",
+       "ko": "치직대는 유동체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ArcaneFluxLightning.webp"
+      },
+      {
+       "en": "Void Flux",
+       "ko": "공허 유동체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ArcaneFlux.webp"
+      },
+      {
+       "en": "Liquid Verisium",
+       "ko": "액체 베리시움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/LiquidMetalVerisium.webp"
+      },
+      {
+       "en": "Perfect Flux",
+       "ko": "완벽한 유동체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrencyPowerful.webp"
+      },
+      {
+       "en": "Cryptic Key",
+       "ko": "난해한 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/StrongboxSkeletonKey.webp"
+      }
+     ]
+    },
+    {
+     "id": "Essence",
+     "en": "Essence",
+     "ko": "에센스",
+     "items": [
+      {
+       "en": "Lesser Essence of the Body",
+       "ko": "하위 육신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LifeEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of the Mind",
+       "ko": "하위 정신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ManaEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Enhancement",
+       "ko": "하위 강화의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/DefencesEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Abrasion",
+       "ko": "하위 마모의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/PhysicalEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Flames",
+       "ko": "하위 화염의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Ice",
+       "ko": "하위 얼음의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Electricity",
+       "ko": "하위 전기의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Ruin",
+       "ko": "하위 폐허의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ChaosEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Battle",
+       "ko": "하위 전투의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttackEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Sorcery",
+       "ko": "하위 마술의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CasterEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of Haste",
+       "ko": "하위 가속의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedEssenceLesser.webp"
+      },
+      {
+       "en": "Lesser Essence of the Infinite",
+       "ko": "하위 무한의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttributeEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of the Body",
+       "ko": "육신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LifeEssence.webp"
+      },
+      {
+       "en": "Essence of the Mind",
+       "ko": "정신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ManaEssence.webp"
+      },
+      {
+       "en": "Essence of Enhancement",
+       "ko": "강화의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/DefencesEssence.webp"
+      },
+      {
+       "en": "Essence of Abrasion",
+       "ko": "마모의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/PhysicalEssence.webp"
+      },
+      {
+       "en": "Essence of Flames",
+       "ko": "화염의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireEssence.webp"
+      },
+      {
+       "en": "Essence of Ice",
+       "ko": "얼음의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdEssence.webp"
+      },
+      {
+       "en": "Essence of Electricity",
+       "ko": "전기의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningEssence.webp"
+      },
+      {
+       "en": "Essence of Ruin",
+       "ko": "폐허의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ChaosEssence.webp"
+      },
+      {
+       "en": "Essence of Battle",
+       "ko": "전투의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttackEssence.webp"
+      },
+      {
+       "en": "Essence of Sorcery",
+       "ko": "마술의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CasterEssence.webp"
+      },
+      {
+       "en": "Essence of Haste",
+       "ko": "가속의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedEssence.webp"
+      },
+      {
+       "en": "Essence of the Infinite",
+       "ko": "무한의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttributeEssence.webp"
+      },
+      {
+       "en": "Greater Essence of the Body",
+       "ko": "상위 육신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterLifeEssence.webp"
+      },
+      {
+       "en": "Greater Essence of the Mind",
+       "ko": "상위 정신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterManaEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Enhancement",
+       "ko": "상위 강화의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterDefencesEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Abrasion",
+       "ko": "상위 마모의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterPhysicalEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Flames",
+       "ko": "상위 화염의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterFireEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Ice",
+       "ko": "상위 얼음의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterColdEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Electricity",
+       "ko": "상위 전기의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterLightningEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Ruin",
+       "ko": "상위 폐허의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterChaosEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Battle",
+       "ko": "상위 전투의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterAttackEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Sorcery",
+       "ko": "상위 마술의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterCasterEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Haste",
+       "ko": "상위 가속의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterSpeedEssence.webp"
+      },
+      {
+       "en": "Greater Essence of the Infinite",
+       "ko": "상위 무한의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterAttributeEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of the Body",
+       "ko": "완벽한 육신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LifeEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of the Mind",
+       "ko": "완벽한 정신의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ManaEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Enhancement",
+       "ko": "완벽한 강화의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/DefencesEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Abrasion",
+       "ko": "완벽한 마모의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/PhysicalEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Flames",
+       "ko": "완벽한 화염의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Ice",
+       "ko": "완벽한 얼음의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Electricity",
+       "ko": "완벽한 전기의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Ruin",
+       "ko": "완벽한 폐허의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ChaosEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Battle",
+       "ko": "완벽한 전투의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttackEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Sorcery",
+       "ko": "완벽한 마술의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CasterEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of Haste",
+       "ko": "완벽한 가속의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedEssencePerfect.webp"
+      },
+      {
+       "en": "Perfect Essence of the Infinite",
+       "ko": "완벽한 무한의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AttributeEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Seeking",
+       "ko": "하위 추구의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CriticalEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Seeking",
+       "ko": "추구의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CriticalEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Seeking",
+       "ko": "상위 추구의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterCriticalEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Seeking",
+       "ko": "완벽한 추구의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CriticalEssencePerfect.webp"
+      },
+      {
+       "en": "Essence of Hysteria",
+       "ko": "발작의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CorruptedEssenceHysteria.webp"
+      },
+      {
+       "en": "Essence of Delirium",
+       "ko": "섬망의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CorruptedEssenceDelirium.webp"
+      },
+      {
+       "en": "Essence of Horror",
+       "ko": "경악의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CorruptedEssenceHorror.webp"
+      },
+      {
+       "en": "Essence of Insanity",
+       "ko": "광기의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CorruptedEssenceInsanity.webp"
+      },
+      {
+       "en": "Essence of the Abyss",
+       "ko": "심연의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AbyssalEssence.webp"
+      },
+      {
+       "en": "Essence of the Breach",
+       "ko": "균열의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/BreachEssence.webp"
+      },
+      {
+       "en": "Lesser Essence of Insulation",
+       "ko": "하위 절연의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireResistanceEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Insulation",
+       "ko": "절연의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireResistanceEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Insulation",
+       "ko": "상위 절연의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterFireResistanceEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Insulation",
+       "ko": "완벽한 절연의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/FireResistanceEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Thawing",
+       "ko": "하위 해동의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdResistanceEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Thawing",
+       "ko": "해동의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdResistanceEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Thawing",
+       "ko": "상위 해동의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterColdResistanceEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Thawing",
+       "ko": "완벽한 해동의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/ColdResistanceEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Grounding",
+       "ko": "하위 접지의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningResistanceEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Grounding",
+       "ko": "접지의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningResistanceEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Grounding",
+       "ko": "상위 접지의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterLightningResistanceEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Grounding",
+       "ko": "완벽한 접지의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/LightningResistanceEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Alacrity",
+       "ko": "하위 기민성의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedCasterEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Alacrity",
+       "ko": "기민성의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedCasterEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Alacrity",
+       "ko": "상위 기민성의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterSpeedCasterEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Alacrity",
+       "ko": "완벽한 기민성의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/SpeedCasterEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Opulence",
+       "ko": "하위 풍요의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/RarityResistanceEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Opulence",
+       "ko": "풍요의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/RarityResistanceEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Opulence",
+       "ko": "상위 풍요의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterRarityResistanceEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Opulence",
+       "ko": "완벽한 풍요의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/RarityResistanceEssencePerfect.webp"
+      },
+      {
+       "en": "Lesser Essence of Command",
+       "ko": "하위 지휘의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AllyEssenceLesser.webp"
+      },
+      {
+       "en": "Essence of Command",
+       "ko": "지휘의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AllyEssence.webp"
+      },
+      {
+       "en": "Greater Essence of Command",
+       "ko": "상위 지휘의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/GreaterAllyEssence.webp"
+      },
+      {
+       "en": "Perfect Essence of Command",
+       "ko": "완벽한 지휘의 에센스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/AllyEssencePerfect.webp"
+      }
+     ]
+    },
+    {
+     "id": "SplinterItem",
+     "en": "Splinter Item",
+     "ko": "Splinter 아이템",
+     "items": [
+      {
+       "en": "Breach Splinter",
+       "ko": "균열 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachstoneSplinter.webp"
+      },
+      {
+       "en": "Simulacrum Splinter",
+       "ko": "복제된 영토 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/DeliriumSplinter.webp"
+      },
+      {
+       "en": "Petition Splinter",
+       "ko": "탄원 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/NewRitualSplinter.webp"
+      },
+      {
+       "en": "Runic Splinter",
+       "ko": "룬 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition/ExpeditionSplinter.webp"
+      }
+     ]
+    },
+    {
+     "id": "CatalystItem",
+     "en": "Catalyst Item",
+     "ko": "Catalyst 아이템",
+     "items": [
+      {
+       "en": "Flesh Catalyst",
+       "ko": "육체 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystLife.webp"
+      },
+      {
+       "en": "Neural Catalyst",
+       "ko": "신경 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystMana.webp"
+      },
+      {
+       "en": "Carapace Catalyst",
+       "ko": "갑각 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystDefences.webp"
+      },
+      {
+       "en": "Uul-Netol's Catalyst",
+       "ko": "울네톨의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystPhysical.webp"
+      },
+      {
+       "en": "Xoph's Catalyst",
+       "ko": "조프의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystFire.webp"
+      },
+      {
+       "en": "Tul's Catalyst",
+       "ko": "툴의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystCold.webp"
+      },
+      {
+       "en": "Esh's Catalyst",
+       "ko": "에쉬의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystLightning.webp"
+      },
+      {
+       "en": "Chayula's Catalyst",
+       "ko": "차율라의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystChaos.webp"
+      },
+      {
+       "en": "Reaver Catalyst",
+       "ko": "강탈자 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystAttack.webp"
+      },
+      {
+       "en": "Sibilant Catalyst",
+       "ko": "쇳소리 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystCaster.webp"
+      },
+      {
+       "en": "Skittering Catalyst",
+       "ko": "달리는 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystSpeed.webp"
+      },
+      {
+       "en": "Adaptive Catalyst",
+       "ko": "적응형 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystAttribute.webp"
+      },
+      {
+       "en": "Necrotic Catalyst",
+       "ko": "괴사의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/BreachCatalystNecrotic.webp"
+      },
+      {
+       "en": "Refined Flesh Catalyst",
+       "ko": "제련된 육체 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystLife.webp"
+      },
+      {
+       "en": "Refined Neural Catalyst",
+       "ko": "제련된 신경 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystMana.webp"
+      },
+      {
+       "en": "Refined Carapace Catalyst",
+       "ko": "제련된 갑각 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystDefences.webp"
+      },
+      {
+       "en": "Refined Uul-Netol's Catalyst",
+       "ko": "제련된 울네톨의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystPhysical.webp"
+      },
+      {
+       "en": "Refined Xoph's Catalyst",
+       "ko": "제련된 조프의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystFire.webp"
+      },
+      {
+       "en": "Refined Tul's Catalyst",
+       "ko": "제련된 툴의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystCold.webp"
+      },
+      {
+       "en": "Refined Esh's Catalyst",
+       "ko": "제련된 에쉬의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystLightning.webp"
+      },
+      {
+       "en": "Refined Chayula's Catalyst",
+       "ko": "제련된 차율라의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystChaos.webp"
+      },
+      {
+       "en": "Refined Reaver Catalyst",
+       "ko": "제련된 강탈자 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystAttack.webp"
+      },
+      {
+       "en": "Refined Sibilant Catalyst",
+       "ko": "제련된 쇳소리 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystCaster.webp"
+      },
+      {
+       "en": "Refined Skittering Catalyst",
+       "ko": "제련된 달리는 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystSpeed.webp"
+      },
+      {
+       "en": "Refined Adaptive Catalyst",
+       "ko": "제련된 적응형 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystAttribute.webp"
+      },
+      {
+       "en": "Refined Necrotic Catalyst",
+       "ko": "제련된 괴사의 기폭제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystNecrotic.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Liquid_Emotions",
+   "filterClass": "Stackable Currency",
+   "ko": "액체 감정",
+   "sections": [
+    {
+     "id": "LiquidItem",
+     "en": "Liquid Item",
+     "ko": "Liquid 아이템",
+     "items": [
+      {
+       "en": "Diluted Liquid Ire",
+       "ko": "희석된 액체 진노",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledIre.webp"
+      },
+      {
+       "en": "Diluted Liquid Guilt",
+       "ko": "희석된 액체 죄책감",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledGuilt.webp"
+      },
+      {
+       "en": "Diluted Liquid Greed",
+       "ko": "희석된 액체 탐욕",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DilutedDistilledGreed.webp"
+      },
+      {
+       "en": "Liquid Paranoia",
+       "ko": "액체 집착",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledParanoia.webp"
+      },
+      {
+       "en": "Liquid Envy",
+       "ko": "액체 선망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledEnvy.webp"
+      },
+      {
+       "en": "Liquid Disgust",
+       "ko": "액체 혐오",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledDisgust.webp"
+      },
+      {
+       "en": "Liquid Despair",
+       "ko": "액체 절망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/DistilledDespair.webp"
+      },
+      {
+       "en": "Concentrated Liquid Fear",
+       "ko": "농축된 액체 두려움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledFear.webp"
+      },
+      {
+       "en": "Concentrated Liquid Suffering",
+       "ko": "농축된 액체 고통",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledSuffering.webp"
+      },
+      {
+       "en": "Concentrated Liquid Isolation",
+       "ko": "농축된 액체 고립",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledIsolation.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Ire",
+       "ko": "고대 희석된 액체 진노",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledIre.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Guilt",
+       "ko": "고대 희석된 액체 죄책감",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledGuilt.webp"
+      },
+      {
+       "en": "Ancient Diluted Liquid Greed",
+       "ko": "고대 희석된 액체 탐욕",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDilutedDistilledGreed.webp"
+      },
+      {
+       "en": "Ancient Liquid Paranoia",
+       "ko": "고대 액체 집착",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledParanoia.webp"
+      },
+      {
+       "en": "Ancient Liquid Envy",
+       "ko": "고대 액체 선망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledEnvy.webp"
+      },
+      {
+       "en": "Ancient Liquid Disgust",
+       "ko": "고대 액체 혐오",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledDisgust.webp"
+      },
+      {
+       "en": "Ancient Liquid Despair",
+       "ko": "고대 액체 절망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostDistilledDespair.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Fear",
+       "ko": "고대 농축된 액체 두려움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledFear.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Suffering",
+       "ko": "고대 농축된 액체 고통",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledSuffering.webp"
+      },
+      {
+       "en": "Ancient Concentrated Liquid Isolation",
+       "ko": "고대 농축된 액체 고립",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelostConcentratedDistilledIsolation.webp"
+      },
+      {
+       "en": "Potent Liquid Melancholy",
+       "ko": "위력적인 액체 우울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueHumansEmotion.webp"
+      },
+      {
+       "en": "Potent Liquid Ferocity",
+       "ko": "위력적인 액체 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueConstructsEmotion.webp"
+      },
+      {
+       "en": "Potent Liquid Contempt",
+       "ko": "위력적인 액체 경멸",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueBeastEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Melancholy",
+       "ko": "고대 위력적인 액체 우울",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelessUniqueHumansEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Ferocity",
+       "ko": "고대 위력적인 액체 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimlessUniqueConstructsEmotion.webp"
+      },
+      {
+       "en": "Ancient Potent Liquid Contempt",
+       "ko": "고대 위력적인 액체 경멸",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelessUniqueBeastEmotion.webp"
+      },
+      {
+       "en": "Liquid Verisium",
+       "ko": "액체 베리시움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/LiquidMetalVerisium.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Omen",
+   "filterClass": "Omen",
+   "ko": "징조",
+   "sections": [
+    {
+     "id": "OmenItem",
+     "en": "Omen Item",
+     "ko": "징조 아이템",
+     "items": [
+      {
+       "en": "Aldur's Saga",
+       "ko": "알두르의 영웅담",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage5.webp"
+      },
+      {
+       "en": "Medved's Saga",
+       "ko": "메드베드의 영웅담",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage3.webp"
+      },
+      {
+       "en": "Vorana's Saga",
+       "ko": "보라나의 영웅담",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage2.webp"
+      },
+      {
+       "en": "Uhtred's Saga",
+       "ko": "우트레드의 영웅담",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage4.webp"
+      },
+      {
+       "en": "Olroth's Saga",
+       "ko": "올로스의 영웅담",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage1.webp"
+      },
+      {
+       "en": "Omen of Refreshment",
+       "ko": "원기 회복의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Blue.webp"
+      },
+      {
+       "en": "Omen of Resurgence",
+       "ko": "재기의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Blue.webp"
+      },
+      {
+       "en": "Omen of Amelioration",
+       "ko": "개량의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Blue.webp"
+      },
+      {
+       "en": "Omen of Whittling",
+       "ko": "절사의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Dark.webp"
+      },
+      {
+       "en": "Omen of Sinistral Erasure",
+       "ko": "좌측 말소의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Dark.webp"
+      },
+      {
+       "en": "Omen of Dextral Erasure",
+       "ko": "우측 말소의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Dark.webp"
+      },
+      {
+       "en": "Omen of Sinistral Alchemy",
+       "ko": "좌측 연금술의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Green.webp"
+      },
+      {
+       "en": "Omen of Dextral Alchemy",
+       "ko": "우측 연금술의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Green.webp"
+      },
+      {
+       "en": "Omen of Sinistral Coronation",
+       "ko": "좌측 대관식의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Red.webp"
+      },
+      {
+       "en": "Omen of Dextral Coronation",
+       "ko": "우측 대관식의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Red.webp"
+      },
+      {
+       "en": "Omen of Corruption",
+       "ko": "타락의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Red.webp"
+      },
+      {
+       "en": "Omen of Greater Exaltation",
+       "ko": "상위 찬미의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Yellow.webp"
+      },
+      {
+       "en": "Omen of Sinistral Exaltation",
+       "ko": "좌측 찬미의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Yellow.webp"
+      },
+      {
+       "en": "Omen of Dextral Exaltation",
+       "ko": "우측 찬미의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Yellow.webp"
+      },
+      {
+       "en": "Omen of Greater Annulment",
+       "ko": "상위 소멸의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Purple.webp"
+      },
+      {
+       "en": "Omen of Sinistral Annulment",
+       "ko": "좌측 소멸의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Purple.webp"
+      },
+      {
+       "en": "Omen of Dextral Annulment",
+       "ko": "우측 소멸의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Purple.webp"
+      },
+      {
+       "en": "Omen of Answered Prayers",
+       "ko": "응답받은 기도의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens4Blue.webp"
+      },
+      {
+       "en": "Omen of Secret Compartments",
+       "ko": "비밀 공간의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens4Dark.webp"
+      },
+      {
+       "en": "Omen of the Hunt",
+       "ko": "사냥의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens4Green.webp"
+      },
+      {
+       "en": "Omen of Reinforcements",
+       "ko": "보강의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens4Purple.webp"
+      },
+      {
+       "en": "Omen of Homogenising Exaltation",
+       "ko": "동질화하는 찬미의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnExaltAddExistingModType.webp"
+      },
+      {
+       "en": "Omen of Homogenising Coronation",
+       "ko": "동질화하는 대관식의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnRegalAddExistingModType.webp"
+      },
+      {
+       "en": "Omen of Gambling",
+       "ko": "도박의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenGambleNoGoldCost.webp"
+      },
+      {
+       "en": "Omen of Bartering",
+       "ko": "물물교환의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenSellVendorRandomise.webp"
+      },
+      {
+       "en": "Omen of Recombination",
+       "ko": "재조합의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenSellVendorRandomise.webp"
+      },
+      {
+       "en": "Omen of the Blessed",
+       "ko": "축복받은 자의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnDivineRerollImplicits.webp"
+      },
+      {
+       "en": "Omen of Chaotic Rarity",
+       "ko": "혼란스러운 희귀도의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChaosMapItemRarity.webp"
+      },
+      {
+       "en": "Omen of Chaotic Quantity",
+       "ko": "혼란스러운 수량의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChaosMapPackSize.webp"
+      },
+      {
+       "en": "Omen of Chaotic Monsters",
+       "ko": "혼란스러운 괴물의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChaosMapItemQuantity.webp"
+      },
+      {
+       "en": "Omen of Chaotic Effectiveness",
+       "ko": "혼란스러운 효율의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChaosMapMonsterEffectiveness.webp"
+      },
+      {
+       "en": "Omen of Chance",
+       "ko": "기회의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChanceNotDestroy.webp"
+      },
+      {
+       "en": "Omen of the Ancients",
+       "ko": "고대인의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChanceAncientOrb.webp"
+      },
+      {
+       "en": "Omen of Sanctification",
+       "ko": "축성의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnDivineSanctify.webp"
+      },
+      {
+       "en": "Omen of Dextral Crystallisation",
+       "ko": "우측 결정화의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnPerfectEssenceSuffix.webp"
+      },
+      {
+       "en": "Omen of Sinistral Crystallisation",
+       "ko": "좌측 결정화의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnPerfectEssencePrefix.webp"
+      },
+      {
+       "en": "Omen of Catalysing Exaltation",
+       "ko": "촉진하는 찬미의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnExaltConsumeQuality.webp"
+      },
+      {
+       "en": "Omen of Abyssal Echoes",
+       "ko": "심연의 메아리의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssRerollOptions.webp"
+      },
+      {
+       "en": "Omen of the Sovereign",
+       "ko": "군주의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssGuarenteedLichTypeMod1.webp"
+      },
+      {
+       "en": "Omen of the Liege",
+       "ko": "군왕의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssGuarenteedLichTypeMod2.webp"
+      },
+      {
+       "en": "Omen of the Blackblooded",
+       "ko": "검은 피의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssGuarenteedLichTypeMod3.webp"
+      },
+      {
+       "en": "Omen of Putrefaction",
+       "ko": "부패의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssVeilAllAndCorrupt.webp"
+      },
+      {
+       "en": "Omen of Light",
+       "ko": "빛의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAnnulRemoveAbyssMod.webp"
+      },
+      {
+       "en": "Omen of Sinistral Necromancy",
+       "ko": "좌측 강령술의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssAddPrefixes.webp"
+      },
+      {
+       "en": "Omen of Dextral Necromancy",
+       "ko": "우측 강령술의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAbyssAddSuffixes.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Augment",
+   "filterClass": "Augment",
+   "ko": "증강물",
+   "sections": [
+    {
+     "id": "AugmentItem",
+     "en": "Augment Item",
+     "ko": "증강물 아이템",
+     "items": [
+      {
+       "en": "Desert Rune",
+       "ko": "사막 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/FireRune.webp"
+      },
+      {
+       "en": "Glacial Rune",
+       "ko": "빙하 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ColdRune.webp"
+      },
+      {
+       "en": "Storm Rune",
+       "ko": "폭풍 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRune.webp"
+      },
+      {
+       "en": "Iron Rune",
+       "ko": "철 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/EnhanceRune.webp"
+      },
+      {
+       "en": "Body Rune",
+       "ko": "육신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRune.webp"
+      },
+      {
+       "en": "Mind Rune",
+       "ko": "정신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRune.webp"
+      },
+      {
+       "en": "Rebirth Rune",
+       "ko": "부활 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRecoveryRune.webp"
+      },
+      {
+       "en": "Inspiration Rune",
+       "ko": "영감 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRecoveryRune.webp"
+      },
+      {
+       "en": "Stone Rune",
+       "ko": "돌 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StunRune.webp"
+      },
+      {
+       "en": "Vision Rune",
+       "ko": "환영 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/AccuracyRune.webp"
+      },
+      {
+       "en": "Lesser Desert Rune",
+       "ko": "하위 사막 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/FireRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Glacial Rune",
+       "ko": "하위 빙하 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ColdRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Storm Rune",
+       "ko": "하위 폭풍 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Iron Rune",
+       "ko": "하위 철 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/EnhanceRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Body Rune",
+       "ko": "하위 육신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Mind Rune",
+       "ko": "하위 정신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Rebirth Rune",
+       "ko": "하위 부활 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRecoveryRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Inspiration Rune",
+       "ko": "하위 영감 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRecoveryRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Stone Rune",
+       "ko": "하위 돌 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StunRuneTier1.webp"
+      },
+      {
+       "en": "Lesser Vision Rune",
+       "ko": "하위 환영 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/AccuracyRuneTier1.webp"
+      },
+      {
+       "en": "Greater Desert Rune",
+       "ko": "상위 사막 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/FireRuneTier2.webp"
+      },
+      {
+       "en": "Greater Glacial Rune",
+       "ko": "상위 빙하 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ColdRuneTier2.webp"
+      },
+      {
+       "en": "Greater Storm Rune",
+       "ko": "상위 폭풍 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneTier2.webp"
+      },
+      {
+       "en": "Greater Iron Rune",
+       "ko": "상위 철 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/EnhanceRuneTier2.webp"
+      },
+      {
+       "en": "Greater Body Rune",
+       "ko": "상위 육신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRuneTier2.webp"
+      },
+      {
+       "en": "Greater Mind Rune",
+       "ko": "상위 정신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRuneTier2.webp"
+      },
+      {
+       "en": "Greater Rebirth Rune",
+       "ko": "상위 부활 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LifeRecoveryRuneTier2.webp"
+      },
+      {
+       "en": "Greater Inspiration Rune",
+       "ko": "상위 영감 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/ManaRecoveryRuneTier2.webp"
+      },
+      {
+       "en": "Greater Stone Rune",
+       "ko": "상위 돌 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StunRuneTier2.webp"
+      },
+      {
+       "en": "Greater Vision Rune",
+       "ko": "상위 환영 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/AccuracyRuneTier2.webp"
+      },
+      {
+       "en": "Perfect Desert Rune",
+       "ko": "완벽한 사막 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneFire.webp"
+      },
+      {
+       "en": "Perfect Glacial Rune",
+       "ko": "완벽한 빙하 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneCold.webp"
+      },
+      {
+       "en": "Perfect Storm Rune",
+       "ko": "완벽한 폭풍 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneLightning.webp"
+      },
+      {
+       "en": "Perfect Iron Rune",
+       "ko": "완벽한 철 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneEnhance.webp"
+      },
+      {
+       "en": "Perfect Body Rune",
+       "ko": "완벽한 육신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneLife.webp"
+      },
+      {
+       "en": "Perfect Mind Rune",
+       "ko": "완벽한 정신 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneMana.webp"
+      },
+      {
+       "en": "Perfect Rebirth Rune",
+       "ko": "완벽한 부활 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneLifeRecovery.webp"
+      },
+      {
+       "en": "Perfect Inspiration Rune",
+       "ko": "완벽한 영감 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneManaRecovery.webp"
+      },
+      {
+       "en": "Perfect Stone Rune",
+       "ko": "완벽한 돌 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneStun.webp"
+      },
+      {
+       "en": "Perfect Vision Rune",
+       "ko": "완벽한 환영 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneAccuracy.webp"
+      },
+      {
+       "en": "Lesser Robust Rune",
+       "ko": "하위 왕성 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StrengthRuneTier1.webp"
+      },
+      {
+       "en": "Robust Rune",
+       "ko": "왕성한 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StrengthRune.webp"
+      },
+      {
+       "en": "Greater Robust Rune",
+       "ko": "상위 왕성 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/StrengthRuneTier3.webp"
+      },
+      {
+       "en": "Perfect Robust Rune",
+       "ko": "완벽한 왕성한 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneStrength.webp"
+      },
+      {
+       "en": "Lesser Adept Rune",
+       "ko": "하위 숙달 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/DexRuneTier1.webp"
+      },
+      {
+       "en": "Adept Rune",
+       "ko": "숙달 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/DexRune.webp"
+      },
+      {
+       "en": "Greater Adept Rune",
+       "ko": "상위 숙달 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/DexRuneTier3.webp"
+      },
+      {
+       "en": "Perfect Adept Rune",
+       "ko": "완벽한 숙달 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneDexterity.webp"
+      },
+      {
+       "en": "Lesser Resolve Rune",
+       "ko": "하위 투지 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/IntRuneTier1.webp"
+      },
+      {
+       "en": "Resolve Rune",
+       "ko": "투지 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/IntRune.webp"
+      },
+      {
+       "en": "Greater Resolve Rune",
+       "ko": "상위 투지 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/IntRuneTier3.webp"
+      },
+      {
+       "en": "Perfect Resolve Rune",
+       "ko": "완벽한 투지 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneIntelligence.webp"
+      },
+      {
+       "en": "Lesser Tempered Rune",
+       "ko": "하위 단조 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PhyDmgRuneTier1.webp"
+      },
+      {
+       "en": "Tempered Rune",
+       "ko": "단조 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PhyDmgRune.webp"
+      },
+      {
+       "en": "Greater Tempered Rune",
+       "ko": "상위 단조 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PhyDmgRuneTier3.webp"
+      },
+      {
+       "en": "Greater Rune of Leadership",
+       "ko": "통솔의 상위 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneSpecial1.webp"
+      },
+      {
+       "en": "Greater Rune of Tithing",
+       "ko": "십일조의 상위 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneSpecial2.webp"
+      },
+      {
+       "en": "Greater Rune of Alacrity",
+       "ko": "기민성의 상위 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneSpecial3.webp"
+      },
+      {
+       "en": "Greater Rune of Nobility",
+       "ko": "고결성의 상위 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/LightningRuneSpecial4.webp"
+      },
+      {
+       "en": "Hedgewitch Assandra's Rune of Wisdom",
+       "ko": "산울마녀 아산드라의 지혜의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune1.webp"
+      },
+      {
+       "en": "Saqawal's Rune of the Sky",
+       "ko": "사카왈의 하늘의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune2.webp"
+      },
+      {
+       "en": "Fenumus' Rune of Agony",
+       "ko": "페누무스의 괴로움의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune3.webp"
+      },
+      {
+       "en": "Farrul's Rune of Grace",
+       "ko": "페룰의 은총의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune4.webp"
+      },
+      {
+       "en": "Farrul's Rune of the Chase",
+       "ko": "페룰의 추격의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune5.webp"
+      },
+      {
+       "en": "Craiceann's Rune of Warding",
+       "ko": "크라칸의 수호의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune6.webp"
+      },
+      {
+       "en": "Saqawal's Rune of Memory",
+       "ko": "사카왈의 기억의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune7.webp"
+      },
+      {
+       "en": "Saqawal's Rune of Erosion",
+       "ko": "사카왈의 침식의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune8.webp"
+      },
+      {
+       "en": "Farrul's Rune of the Hunt",
+       "ko": "페룰의 사냥의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune9.webp"
+      },
+      {
+       "en": "Craiceann's Rune of Recovery",
+       "ko": "크라칸의 회복의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune10.webp"
+      },
+      {
+       "en": "Courtesan Mannan's Rune of Cruelty",
+       "ko": "매춘부 마난의 잔혹의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune11.webp"
+      },
+      {
+       "en": "Thane Grannell's Rune of Mastery",
+       "ko": "테인 그라넬의 숙련의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune12.webp"
+      },
+      {
+       "en": "Fenumus' Rune of Spinning",
+       "ko": "페누무스의 회전의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune13.webp"
+      },
+      {
+       "en": "Countess Seske's Rune of Archery",
+       "ko": "세스케 백작 부인의 궁술의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune14.webp"
+      },
+      {
+       "en": "Thane Girt's Rune of Wildness",
+       "ko": "테인 거트의 야생의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune15.webp"
+      },
+      {
+       "en": "Fenumus' Rune of Draining",
+       "ko": "페누무스의 고갈의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune16.webp"
+      },
+      {
+       "en": "Thane Myrk's Rune of Summer",
+       "ko": "테인 머크의 여름의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune17.webp"
+      },
+      {
+       "en": "Lady Hestra's Rune of Winter",
+       "ko": "헤스트라 부인의 겨울의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune18.webp"
+      },
+      {
+       "en": "Thane Leld's Rune of Spring",
+       "ko": "테인 렐드의 봄의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune19.webp"
+      },
+      {
+       "en": "The Greatwolf's Rune of Claws",
+       "ko": "위대한 늑대의 발톱의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune20.webp"
+      },
+      {
+       "en": "The Greatwolf's Rune of Willpower",
+       "ko": "위대한 늑대의 의지의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune21.webp"
+      },
+      {
+       "en": "Masterwork Rune",
+       "ko": "일품 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/UpgradeRune.webp"
+      },
+      {
+       "en": "Idol of Sirrius",
+       "ko": "시리우스의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableWolfSpecial.webp"
+      },
+      {
+       "en": "Idol of Thruldana",
+       "ko": "스룰다나의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableSnakeSpecial.webp"
+      },
+      {
+       "en": "Idol of Grold",
+       "ko": "그롤드의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableBearSpecial.webp"
+      },
+      {
+       "en": "Idol of Eeshta",
+       "ko": "이쉬타의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableOwlSpecial.webp"
+      },
+      {
+       "en": "Idol of Egrin",
+       "ko": "에그린의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableCatSpecial.webp"
+      },
+      {
+       "en": "Idol of Maxarius",
+       "ko": "막사리우스의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableStagSpecial.webp"
+      },
+      {
+       "en": "Idol of Ralakesh",
+       "ko": "랄라케쉬의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableMonkeySpecial.webp"
+      },
+      {
+       "en": "Idol of Greust",
+       "ko": "그루스트의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdolofGreust.webp"
+      },
+      {
+       "en": "Idol of Yeena",
+       "ko": "이이나의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdolofYeena.webp"
+      },
+      {
+       "en": "Idol of Eramir",
+       "ko": "에라미어의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdolofEramir.webp"
+      },
+      {
+       "en": "Idol of Oak",
+       "ko": "오크의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdolofOak.webp"
+      },
+      {
+       "en": "Idol of Alira",
+       "ko": "알리라의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdoloAlira.webp"
+      },
+      {
+       "en": "Idol of Kraityn",
+       "ko": "크레이틴의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdoloKraityn.webp"
+      },
+      {
+       "en": "Idol of Silk",
+       "ko": "실크의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/IdolofSilk.webp"
+      },
+      {
+       "en": "Idol of the Sycophant",
+       "ko": "아첨꾼의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/RitualCorruptedIdol1.webp"
+      },
+      {
+       "en": "Idol of the Martyr",
+       "ko": "순교자의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/RitualCorruptedIdol2.webp"
+      },
+      {
+       "en": "Idol of the Pharisee",
+       "ko": "바리새인의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/RitualCorruptedIdol3.webp"
+      },
+      {
+       "en": "Panther Idol",
+       "ko": "흑표 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketablePanther.webp"
+      },
+      {
+       "en": "Hawk Idol",
+       "ko": "매 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableHawk.webp"
+      },
+      {
+       "en": "Stoat Idol",
+       "ko": "담비 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableStoat.webp"
+      },
+      {
+       "en": "Hayoxi's Soul Core of Heatproofing",
+       "ko": "하욕시의 내열의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreIce.webp"
+      },
+      {
+       "en": "Zalatl's Soul Core of Insulation",
+       "ko": "잘라틀의 절연의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreLightning.webp"
+      },
+      {
+       "en": "Topotante's Soul Core of Dampening",
+       "ko": "토포탄테의 완화의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreFire.webp"
+      },
+      {
+       "en": "Atmohua's Soul Core of Retreat",
+       "ko": "앗모후아의 후퇴의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreEnergyShield.webp"
+      },
+      {
+       "en": "Quipolatl's Soul Core of Flow",
+       "ko": "퀴폴라틀의 흐름의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreTimeCooldown.webp"
+      },
+      {
+       "en": "Tzamoto's Soul Core of Ferocity",
+       "ko": "자모토의 흉포함의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreRage.webp"
+      },
+      {
+       "en": "Uromoti's Soul Core of Attenuation",
+       "ko": "우로모티의 감쇠의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreCurses2.webp"
+      },
+      {
+       "en": "Opiloti's Soul Core of Assault",
+       "ko": "오필로티의 맹공의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreFrenzyCharge.webp"
+      },
+      {
+       "en": "Guatelitzi's Soul Core of Endurance",
+       "ko": "과텔리치의 인내의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreEnduranceCharge.webp"
+      },
+      {
+       "en": "Xopec's Soul Core of Power",
+       "ko": "조펙의 힘의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCorePowerCharge.webp"
+      },
+      {
+       "en": "Estazunti's Soul Core of Convalescence",
+       "ko": "에스타준티의 요양의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreTimeSlow.webp"
+      },
+      {
+       "en": "Tacati's Soul Core of Affliction",
+       "ko": "타카티의 수난의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreChaos1.webp"
+      },
+      {
+       "en": "Cholotl's Soul Core of War",
+       "ko": "촐로틀의 전쟁의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreProjectile.webp"
+      },
+      {
+       "en": "Citaqualotl's Soul Core of Foulness",
+       "ko": "시타콰로틀의 부정의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreChaos2.webp"
+      },
+      {
+       "en": "Xipocado's Soul Core of Dominion",
+       "ko": "지포카도의 지배의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/NewSoulCoreMinion.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Automation",
+       "ko": "지콰니의 자동화 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreTotems.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Malediction",
+       "ko": "지콰니의 악담 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreCurses.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Targeting",
+       "ko": "지콰니의 대상 지정 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreMarks.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Rallying",
+       "ko": "지콰니의 재집결 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreWarcries.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Radiance",
+       "ko": "지콰니의 광휘 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreHeralds.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Severing",
+       "ko": "지콰니의 단절 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreStrikes.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Rippling",
+       "ko": "지콰니의 물결 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreNovas.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Quaking",
+       "ko": "지콰니의 진동 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreSlams.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Munitions",
+       "ko": "지콰니의 군수품 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreGrenades.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Snares",
+       "ko": "지콰니의 올가미 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreHazards.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Abundance",
+       "ko": "지콰니의 풍부 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCorePlants.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Squalls",
+       "ko": "지콰니의 돌풍 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreWind.webp"
+      },
+      {
+       "en": "Jiquani's Soul Core of Thundering",
+       "ko": "지콰니의 천둥 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/RareSoulCoreStorms.webp"
+      },
+      {
+       "en": "Atziri's Soul Core of Devotion",
+       "ko": "앗지리의 헌신 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/SoulCoreSpecialHelmet.webp"
+      },
+      {
+       "en": "Atziri's Soul Core of Vitality",
+       "ko": "앗지리의 활력 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/SoulCoreSpecialBodyArmour.webp"
+      },
+      {
+       "en": "Atziri's Soul Core of Alacrity",
+       "ko": "앗지리의 기민성 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/SoulCoreSpecialGloves.webp"
+      },
+      {
+       "en": "Atziri's Soul Core of Inoculation",
+       "ko": "앗지리의 접종 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/SoulCoreSpecialBoots.webp"
+      },
+      {
+       "en": "Soul Core of Vizoma",
+       "ko": "비조마의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreVision.webp"
+      },
+      {
+       "en": "Soul Core of Tacati",
+       "ko": "타카티의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreChaos.webp"
+      },
+      {
+       "en": "Soul Core of Opiloti",
+       "ko": "오필로티의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCorePhysical.webp"
+      },
+      {
+       "en": "Soul Core of Jiquani",
+       "ko": "지콰니의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreLife.webp"
+      },
+      {
+       "en": "Soul Core of Zalatl",
+       "ko": "잘라틀의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreMana.webp"
+      },
+      {
+       "en": "Soul Core of Citaqualotl",
+       "ko": "시타콰로틀의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreElementalResist.webp"
+      },
+      {
+       "en": "Soul Core of Puhuarte",
+       "ko": "푸후알테의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreFire.webp"
+      },
+      {
+       "en": "Soul Core of Tzamoto",
+       "ko": "자모토의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreCold.webp"
+      },
+      {
+       "en": "Soul Core of Xopec",
+       "ko": "조펙의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreLightning.webp"
+      },
+      {
+       "en": "Soul Core of Azcapa",
+       "ko": "아즈카파의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreWealthRarity.webp"
+      },
+      {
+       "en": "Soul Core of Topotante",
+       "ko": "토포탄테의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreTriElement.webp"
+      },
+      {
+       "en": "Soul Core of Quipolatl",
+       "ko": "퀴폴라틀의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreSpeed.webp"
+      },
+      {
+       "en": "Soul Core of Ticaba",
+       "ko": "티카바의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreCrit.webp"
+      },
+      {
+       "en": "Soul Core of Atmohua",
+       "ko": "앗모후아의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreStrength.webp"
+      },
+      {
+       "en": "Soul Core of Cholotl",
+       "ko": "촐로틀의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreDex.webp"
+      },
+      {
+       "en": "Soul Core of Zantipi",
+       "ko": "잔티피의 영혼 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreint.webp"
+      },
+      {
+       "en": "Snake Idol",
+       "ko": "독사 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableSnake.webp"
+      },
+      {
+       "en": "Primate Idol",
+       "ko": "영장류 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableMonkey.webp"
+      },
+      {
+       "en": "Owl Idol",
+       "ko": "올빼미 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableOwl.webp"
+      },
+      {
+       "en": "Cat Idol",
+       "ko": "고양이 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableCat.webp"
+      },
+      {
+       "en": "Wolf Idol",
+       "ko": "늑대 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableWolf.webp"
+      },
+      {
+       "en": "Stag Idol",
+       "ko": "수사슴 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableStag.webp"
+      },
+      {
+       "en": "Boar Idol",
+       "ko": "멧돼지 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableBoar.webp"
+      },
+      {
+       "en": "Bear Idol",
+       "ko": "곰 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableBear.webp"
+      },
+      {
+       "en": "Ox Idol",
+       "ko": "소 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableOx.webp"
+      },
+      {
+       "en": "Rabbit Idol",
+       "ko": "토끼 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableRabbit.webp"
+      },
+      {
+       "en": "Fox Idol",
+       "ko": "여우 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableFox.webp"
+      },
+      {
+       "en": "Amanamu's Gaze",
+       "ko": "아마나무의 응시",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/AmanamusGaze.webp"
+      },
+      {
+       "en": "Tecrod's Gaze",
+       "ko": "테크로드의 응시",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/TecrodsGaze.webp"
+      },
+      {
+       "en": "Kurgal's Gaze",
+       "ko": "쿠르갈의 응시",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/KurgalsGaze.webp"
+      },
+      {
+       "en": "Ulaman's Gaze",
+       "ko": "울라만의 응시",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/UlamansGaze.webp"
+      },
+      {
+       "en": "Guatelitzi's Thesis",
+       "ko": "과텔리치의 명제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreBlood.webp"
+      },
+      {
+       "en": "Citaqualotl's Thesis",
+       "ko": "시타콰로틀의 명제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreSacrifice.webp"
+      },
+      {
+       "en": "Jiquani's Thesis",
+       "ko": "지콰니의 명제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreSoul.webp"
+      },
+      {
+       "en": "Quipolatl's Thesis",
+       "ko": "퀴폴라틀의 명제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreScience.webp"
+      },
+      {
+       "en": "Emergent Vigour",
+       "ko": "발현된 활력",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionReligionAncientAugment.webp"
+      },
+      {
+       "en": "Emergent Possibility",
+       "ko": "발현된 가능성",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionScienceAncientAugment.webp"
+      },
+      {
+       "en": "Emergent Protection",
+       "ko": "발현된 보호",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionValorAncientAugment.webp"
+      },
+      {
+       "en": "Emergent Instinct",
+       "ko": "발현된 본능",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionWarAncientAugment.webp"
+      },
+      {
+       "en": "Carved Cunning",
+       "ko": "조각된 교활함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualAmbushPredators.webp"
+      },
+      {
+       "en": "Carved Majesty",
+       "ko": "조각된 위엄",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualMajesticBeasts.webp"
+      },
+      {
+       "en": "Carved Mischief",
+       "ko": "조각된 장난기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualMischievousCreatures.webp"
+      },
+      {
+       "en": "Carved Tenacity",
+       "ko": "조각된 참을성",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualTenaciousBeasts.webp"
+      },
+      {
+       "en": "Raven-Touched Shard",
+       "ko": "큰까마귀의 손길에 닿은 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Delirium/DeliriumEndgameSocketable.webp"
+      },
+      {
+       "en": "Lesser Ward Rune",
+       "ko": "하위 수호 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardLesser.webp"
+      },
+      {
+       "en": "Ward Rune",
+       "ko": "수호 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardNormal.webp"
+      },
+      {
+       "en": "Greater Ward Rune",
+       "ko": "상위 수호 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardGreater.webp"
+      },
+      {
+       "en": "Perfect Ward Rune",
+       "ko": "완벽한 수호 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardPerfect.webp"
+      },
+      {
+       "en": "Lesser Charging Rune",
+       "ko": "하위 충전 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/WardRegenerationLesser.webp"
+      },
+      {
+       "en": "Charging Rune",
+       "ko": "충전 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/WardRegenerationNormal.webp"
+      },
+      {
+       "en": "Greater Charging Rune",
+       "ko": "상위 충전 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/WardRegenerationGreater.webp"
+      },
+      {
+       "en": "Perfect Charging Rune",
+       "ko": "완벽한 충전 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/WardRegenerationPerfect.webp"
+      },
+      {
+       "en": "Warding Rune of Reinforcement",
+       "ko": "보강의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard1.webp"
+      },
+      {
+       "en": "Warding Rune of Protection",
+       "ko": "보호의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard2.webp"
+      },
+      {
+       "en": "Warding Rune of Disintegration",
+       "ko": "분해의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard3.webp"
+      },
+      {
+       "en": "Warding Rune of Desperation",
+       "ko": "필사의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard4.webp"
+      },
+      {
+       "en": "Warding Rune of Symbiosis",
+       "ko": "공생의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard8.webp"
+      },
+      {
+       "en": "Warding Rune of Courage",
+       "ko": "용기의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard9.webp"
+      },
+      {
+       "en": "Warding Rune of Stability",
+       "ko": "안정성의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard10.webp"
+      },
+      {
+       "en": "Warding Rune of Glancing",
+       "ko": "튕김의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard13.webp"
+      },
+      {
+       "en": "Warding Rune of Heart",
+       "ko": "심장의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard14.webp"
+      },
+      {
+       "en": "Warding Rune of Nourishment",
+       "ko": "자양분의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard15.webp"
+      },
+      {
+       "en": "Warding Rune of Annihilation",
+       "ko": "전멸의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard16.webp"
+      },
+      {
+       "en": "Warding Rune of Armature",
+       "ko": "골조의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard18.webp"
+      },
+      {
+       "en": "Warding Rune of Obsession",
+       "ko": "집착의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard19.webp"
+      },
+      {
+       "en": "Warding Rune of Equinox",
+       "ko": "지점의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard20.webp"
+      },
+      {
+       "en": "Warding Rune of Salvaging",
+       "ko": "분해의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard21.webp"
+      },
+      {
+       "en": "Warding Rune of Bodyguards",
+       "ko": "호위병의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard23.webp"
+      },
+      {
+       "en": "Warding Rune of Hollowing",
+       "ko": "공동화의 수호하는 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard24.webp"
+      },
+      {
+       "en": "Passion of Aldur",
+       "ko": "알두르의 열정",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ElementalConversionRuneFire.webp"
+      },
+      {
+       "en": "Breath of Aldur",
+       "ko": "알두르의 숨결",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ElementalConversionRuneCold.webp"
+      },
+      {
+       "en": "Ire of Aldur",
+       "ko": "알두르의 노여움",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ElementalConversionRuneLightning.webp"
+      },
+      {
+       "en": "Betrayal of Aldur",
+       "ko": "알두르의 배신",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ElementalConversionRuneChaos.webp"
+      },
+      {
+       "en": "Ancient Rune of Splinters",
+       "ko": "파편의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune1.webp"
+      },
+      {
+       "en": "Ancient Rune of Dueling",
+       "ko": "결투의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune2.webp"
+      },
+      {
+       "en": "Ancient Rune of the Titan",
+       "ko": "거신의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune3.webp"
+      },
+      {
+       "en": "Ancient Rune of Shattering",
+       "ko": "산산조각의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune4.webp"
+      },
+      {
+       "en": "Ancient Rune of Prowess",
+       "ko": "기량의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune5.webp"
+      },
+      {
+       "en": "Ancient Rune of Control",
+       "ko": "통제의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune6.webp"
+      },
+      {
+       "en": "Ancient Rune of Discovery",
+       "ko": "발견의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune7.webp"
+      },
+      {
+       "en": "Ancient Rune of Decay",
+       "ko": "부패의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune8.webp"
+      },
+      {
+       "en": "Ancient Rune of Witchcraft",
+       "ko": "마술의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune9.webp"
+      },
+      {
+       "en": "Ancient Rune of the Horde",
+       "ko": "떼의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune10.webp"
+      },
+      {
+       "en": "Ancient Rune of Animosity",
+       "ko": "적대감의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune11.webp"
+      },
+      {
+       "en": "Ancient Rune of Detonation",
+       "ko": "기폭의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune12.webp"
+      },
+      {
+       "en": "Ancient Rune of Retaliation",
+       "ko": "보복의 고대 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune13.webp"
+      },
+      {
+       "en": "Rune of Vitality",
+       "ko": "활력의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune1.webp"
+      },
+      {
+       "en": "Rune of the Hunt",
+       "ko": "사냥의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune2.webp"
+      },
+      {
+       "en": "Rune of Acrobatics",
+       "ko": "곡예의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune3.webp"
+      },
+      {
+       "en": "Rune of Culmination",
+       "ko": "고조의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune4.webp"
+      },
+      {
+       "en": "Rune of Renown",
+       "ko": "명성의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune5.webp"
+      },
+      {
+       "en": "Rune of Accumulation",
+       "ko": "축적의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune6.webp"
+      },
+      {
+       "en": "Rune of Foundations",
+       "ko": "기초의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune7.webp"
+      },
+      {
+       "en": "Rune of the Prism",
+       "ko": "분광기의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune8.webp"
+      },
+      {
+       "en": "Rune of the Blossom",
+       "ko": "만개의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune9.webp"
+      },
+      {
+       "en": "Rune of Consistency",
+       "ko": "일관성의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune10.webp"
+      },
+      {
+       "en": "Rune of Reach",
+       "ko": "범위의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune11.webp"
+      },
+      {
+       "en": "Rune of Vital Flame",
+       "ko": "활력 불길의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune12.webp"
+      },
+      {
+       "en": "Rune of Confrontation",
+       "ko": "대적의 룬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune13.webp"
+      },
+      {
+       "en": "Serle's Triumph",
+       "ko": "세를의 승리",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune2.webp"
+      },
+      {
+       "en": "Cadigan's Epiphany",
+       "ko": "캐디건의 통찰",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune3.webp"
+      },
+      {
+       "en": "Astrid's Creativity",
+       "ko": "아스트리드의 창의성",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune1.webp"
+      },
+      {
+       "en": "Uhtred's Sidereus",
+       "ko": "우트레드의 성좌",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneTime.webp"
+      },
+      {
+       "en": "Kolr's Hunt",
+       "ko": "콜르의 사냥",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneDex.webp"
+      },
+      {
+       "en": "Vorana's Carnage",
+       "ko": "보라나의 학살",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRunePhysical.webp"
+      },
+      {
+       "en": "Thrud's Might",
+       "ko": "스루드의 완력",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneFire.webp"
+      },
+      {
+       "en": "Medved's Tending",
+       "ko": "메드베드의 보살핌",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneCold.webp"
+      },
+      {
+       "en": "Katla's Gloom",
+       "ko": "카틀라의 순흑",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneChaos.webp"
+      },
+      {
+       "en": "Aldur's Legacy",
+       "ko": "알두르의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUnique.webp"
+      },
+      {
+       "en": "Legacy of Bramblejack",
+       "ko": "가시나무 갑옷의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Blackbraid",
+       "ko": "검은끈의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Edyrn's Tusks",
+       "ko": "에디른의 엄니의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Kingsguard",
+       "ko": "왕의 보호구의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Bristleboar",
+       "ko": "가시털멧돼지의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Foxshade",
+       "ko": "여우 그림자의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Ashrend",
+       "ko": "부서진 잿더미의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Briskwrap",
+       "ko": "활력의 겉옷의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Unleashed",
+       "ko": "해방된 자의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Horns of Bynden",
+       "ko": "빈덴의 뿔의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Wings of Caelyn",
+       "ko": "카일린의 날개의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Ezomyte Peak",
+       "ko": "에조미어의 면갑의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Deidbell",
+       "ko": "죽음의 종의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Elevore",
+       "ko": "원소포식의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Starkonja's Head",
+       "ko": "스타콘자의 머리의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Crown of Thorns",
+       "ko": "가시 왕관의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Greymake",
+       "ko": "회색작품의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Erian's Cobble",
+       "ko": "에리안의 수선의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Smiling Knight",
+       "ko": "미소 짓는 기사의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Vile Knight",
+       "ko": "끔찍한 기사의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Northpaw",
+       "ko": "북방발의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Candlemaker",
+       "ko": "양초 제작자의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Deathblow",
+       "ko": "죽음의 일격의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Legionstride",
+       "ko": "군단의 보조의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Trampletoe",
+       "ko": "짓발가락의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Briarpatch",
+       "ko": "가시밭의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Bushwhack",
+       "ko": "덤불 매복의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Wanderlust",
+       "ko": "방랑벽의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Knight-errant",
+       "ko": "무사 수행 기사의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Obern's Bastion",
+       "ko": "오베른의 보루의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Dionadair",
+       "ko": "다이오나데어의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Wulfsbane",
+       "ko": "늑대의 천적의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Chernobog's Pillar",
+       "ko": "체르노보그의 기둥의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Alkem Eira",
+       "ko": "알켐 에이라의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Oaksworn",
+       "ko": "참나무맹세의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Dunkelhalt",
+       "ko": "둥켈할트의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Rondel de Ezo",
+       "ko": "론델 데 에소의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Brynhand's Mark",
+       "ko": "브린핸드의 징표의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Trenchtimbre",
+       "ko": "참호목의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Mjölner",
+       "ko": "묠니르의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Twisted Empyrean",
+       "ko": "뒤틀린 천공인의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Hoghunt",
+       "ko": "돼지사냥의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Hrimnor's Hymn",
+       "ko": "흐림노르의 찬가의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Brain Rattler",
+       "ko": "요동치는 두뇌의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Lifesprig",
+       "ko": "생명의 가지의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Duality",
+       "ko": "이중성의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Tyranny's Grip",
+       "ko": "폭정의 손아귀의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Sentry",
+       "ko": "보초의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Adonia's Ego",
+       "ko": "아도니아의 자아의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Cursecarver",
+       "ko": "저주난자의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Dusk Vigil",
+       "ko": "황혼의 불침번의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of The Blood Thorn",
+       "ko": "피의 가시의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Quill Rain",
+       "ko": "화살 비의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Ironbound",
+       "ko": "철결속의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Amor Mandragora",
+       "ko": "아모르 만드라고라의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Spiteful Floret",
+       "ko": "악의에 찬 소화의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Svalinn",
+       "ko": "스발린의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Keeper of the Arc",
+       "ko": "전호의 보관자의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Olrovasara",
+       "ko": "올로바사라의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of A Worthy Foe",
+       "ko": "호적수의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Serle's Grit",
+       "ko": "세를의 근성의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Runeseeker's Call",
+       "ko": "룬 탐구자의 소명의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      },
+      {
+       "en": "Legacy of Facebreaker",
+       "ko": "페이스브레이커의 유산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUniqueFragment.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Map_Fragments",
+   "filterClass": "Map Fragments",
+   "ko": "지도 조각",
+   "sections": [
+    {
+     "id": "MapFragmentsItem",
+     "en": "Map Fragments Item",
+     "ko": "지도 조각 아이템",
+     "items": [
+      {
+       "en": "Head of the King",
+       "ko": "왕의 머리",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/KingoftheMistHead.webp"
+      },
+      {
+       "en": "Breachlord Sac",
+       "ko": "균열 군주 낭",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/BreachlordSac.webp"
+      },
+      {
+       "en": "An Audience with the King",
+       "ko": "왕 알현",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/VoodooKingEffigy.webp"
+      },
+      {
+       "en": "Kulemak's Invitation",
+       "ko": "쿨레막의 초대",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/KulemaksInvitation.webp"
+      },
+      {
+       "en": "Raven's Reflection",
+       "ko": "큰까마귀의 투영",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TangamazuKey.webp"
+      },
+      {
+       "en": "The Triskelion Reforged",
+       "ko": "재련된 트리스켈리온",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/KalguuranTriskellion.webp"
+      },
+      {
+       "en": "Idol of Estazunti",
+       "ko": "에스타준티의 우상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/VaalGoldenFigureKey.webp"
+      },
+      {
+       "en": "Cowardly Fate",
+       "ko": "비겁한 운명",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/TrialmasterKey1.webp"
+      },
+      {
+       "en": "Deadly Fate",
+       "ko": "치명적인 운명",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/TrialmasterKey2.webp"
+      },
+      {
+       "en": "Victorious Fate",
+       "ko": "승리의 운명",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/TrialmasterKey3.webp"
+      }
+     ]
+    },
+    {
+     "id": "MapFragmentsItem_Item2",
+     "en": "Map Fragments Item",
+     "ko": "지도 조각 아이템",
+     "items": [
+      {
+       "en": "Simulacrum",
+       "ko": "복제된 영토",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/DeliriumFragment.webp"
+      },
+      {
+       "en": "Sacred Bloom",
+       "ko": "신성한 꽃",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Harvest/SacredLifeforce.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Tablet",
+   "filterClass": "Tablet",
+   "ko": "서판",
+   "sections": [
+    {
+     "id": "TabletItem",
+     "en": "Tablet Item",
+     "ko": "서판 아이템",
+     "items": [
+      {
+       "en": "Breach Tablet",
+       "ko": "균열 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletBreach.webp"
+      },
+      {
+       "en": "Expedition Tablet",
+       "ko": "탐험 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletExpedition.webp"
+      },
+      {
+       "en": "Delirium Tablet",
+       "ko": "환영 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletDelirium.webp"
+      },
+      {
+       "en": "Ritual Tablet",
+       "ko": "의식 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletRitual.webp"
+      },
+      {
+       "en": "Irradiated Tablet",
+       "ko": "방사능 노출 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletGeneric.webp"
+      },
+      {
+       "en": "Overseer Tablet",
+       "ko": "감독관 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletBoss.webp"
+      },
+      {
+       "en": "Abyss Tablet",
+       "ko": "심연 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletAbyss.webp"
+      },
+      {
+       "en": "Temple Tablet",
+       "ko": "사원 서판",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletIncursion.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Incubators",
+   "filterClass": "Incubators",
+   "ko": "인큐베이터",
+   "sections": [
+    {
+     "id": "IncubatorsItem",
+     "en": "Incubators Item",
+     "ko": "인큐베이터 아이템",
+     "items": [
+      {
+       "en": "Vaal Siphoner",
+       "ko": "바알 착취기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionVaalSiphoner.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Inscribed_Ultimatum",
+   "filterClass": "Inscribed Ultimatum",
+   "ko": "새겨진 결전",
+   "sections": [
+    {
+     "id": "InscribedUltimatumItem",
+     "en": "Inscribed Ultimatum Item",
+     "ko": "새겨진 결전 아이템",
+     "items": [
+      {
+       "en": "Inscribed Ultimatum",
+       "ko": "새겨진 결전",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/UltimatumTrialItem.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Trial_Coins",
+   "filterClass": "Trial Coins",
+   "ko": "시련 주화",
+   "sections": [
+    {
+     "id": "all",
+     "en": "",
+     "ko": "",
+     "items": [
+      {
+       "en": "Djinn Barya",
+       "ko": "진 바리야",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Sanctum/BalbalaCoin1.webp"
+      },
+      {
+       "en": "Test of Strength Barya",
+       "ko": "힘의 시험 바리야",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Sanctum/BalbalaCoin1.webp"
+      },
+      {
+       "en": "Test of Will Barya",
+       "ko": "의지의 시험 바리야",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Sanctum/BalbalaCoin2.webp"
+      },
+      {
+       "en": "Test of Cunning Barya",
+       "ko": "지혜의 시험 바리야",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Sanctum/BalbalaCoin3.webp"
+      },
+      {
+       "en": "Test of Time Barya",
+       "ko": "시간의 시험 바리야",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Sanctum/BalbalaCoin4.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Vault_Keys",
+   "filterClass": "Vault Keys",
+   "ko": "금고실 열쇠",
+   "sections": [
+    {
+     "id": "all",
+     "en": "",
+     "ko": "",
+     "items": [
+      {
+       "en": "Ancient Reliquary Key",
+       "ko": "고대의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/VaultMap.webp"
+      },
+      {
+       "en": "Timeworn Reliquary Key",
+       "ko": "오래된 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/VaultMap3.webp"
+      },
+      {
+       "en": "Vaal Reliquary Key",
+       "ko": "바알 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/VaultMap4.webp"
+      },
+      {
+       "en": "Forgotten Reliquary Key",
+       "ko": "잊혀진 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/VenariusFoil.webp"
+      },
+      {
+       "en": "Visceral Reliquary Key",
+       "ko": "본능적인 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EaterOfWorldsFoil.webp"
+      },
+      {
+       "en": "Shiny Reliquary Key",
+       "ko": "반짝이는 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/MavenFoil.webp"
+      },
+      {
+       "en": "Archive Reliquary Key",
+       "ko": "서고 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/SearingExarchFoil.webp"
+      },
+      {
+       "en": "Oubliette Reliquary Key",
+       "ko": "지하 감옥 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/SirusFoil.webp"
+      },
+      {
+       "en": "Cosmic Reliquary Key",
+       "ko": "우주의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/ShaperFoil.webp"
+      },
+      {
+       "en": "Decaying Reliquary Key",
+       "ko": "부패하는 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/ElderFoil.webp"
+      },
+      {
+       "en": "Voidborn Reliquary Key",
+       "ko": "공허의 시초 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/CosmicCoreSupporterVaultKey.webp"
+      },
+      {
+       "en": "Twilight Reliquary Key",
+       "ko": "황혼 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyWorld.webp"
+      },
+      {
+       "en": "Xesht's Reliquary Key",
+       "ko": "제쉬트의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyBreach.webp"
+      },
+      {
+       "en": "The Trialmaster's Reliquary Key",
+       "ko": "시련의 대가의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyUltimatum.webp"
+      },
+      {
+       "en": "Ritualistic Reliquary Key",
+       "ko": "의식의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyRitual.webp"
+      },
+      {
+       "en": "Tangmazu's Reliquary Key",
+       "ko": "탕마주의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyDelirium.webp"
+      },
+      {
+       "en": "Olroth's Reliquary Key",
+       "ko": "올로스의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyExpedition.webp"
+      },
+      {
+       "en": "The Arbiter's Reliquary Key",
+       "ko": "중재자의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyPinnacle.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key",
+       "ko": "자로크의 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum1.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key: Against the Darkness",
+       "ko": "자로크의 성유물 보관실 열쇠: 어둠 저항",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum2.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key: Sandstorm Visage",
+       "ko": "자로크의 성유물 보관실 열쇠: 모래 폭풍의 얼굴",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum3.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key: Blessed Bonds",
+       "ko": "자로크의 성유물 보관실 열쇠: 축복받은 유대",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum4.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key: Sekhema's Resolve",
+       "ko": "자로크의 성유물 보관실 열쇠: 세케마의 결의",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum5.webp"
+      },
+      {
+       "en": "Zarokh's Reliquary Key: Temporalis",
+       "ko": "자로크의 성유물 보관실 열쇠: 템포랄리스",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeySanctum6.webp"
+      },
+      {
+       "en": "Azmeri Reliquary Key",
+       "ko": "아즈메리 성유물 보관실 열쇠",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/TwilightOrderReliquaryKeyAzmeri.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Pinnacle_Keys",
+   "filterClass": "Pinnacle Keys",
+   "ko": "최종 열쇠",
+   "sections": [
+    {
+     "id": "all",
+     "en": "",
+     "ko": "",
+     "items": [
+      {
+       "en": "Ancient Crisis Fragment",
+       "ko": "고대 위기 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/PinnacleKey1.webp"
+      },
+      {
+       "en": "Faded Crisis Fragment",
+       "ko": "빛바랜 위기 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/PinnacleKey2.webp"
+      },
+      {
+       "en": "Weathered Crisis Fragment",
+       "ko": "풍화된 위기 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/PinnacleKey3.webp"
+      },
+      {
+       "en": "Primary Calamity Fragment",
+       "ko": "1차 대재난 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/UberPinnacleKey1.webp"
+      },
+      {
+       "en": "Secondary Calamity Fragment",
+       "ko": "2차 대재난 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/UberPinnacleKey2.webp"
+      },
+      {
+       "en": "Tertiary Calamity Fragment",
+       "ko": "3차 대재난 조각",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/UberPinnacleKey3.webp"
+      },
+      {
+       "en": "Origin Cradle",
+       "ko": "기원 요람",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorEgg.webp"
+      },
+      {
+       "en": "Origin Spark",
+       "ko": "기원 전기불꽃",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorSeed.webp"
+      },
+      {
+       "en": "Origin Core",
+       "ko": "기원 핵",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorSeedEggCombined.webp"
+      },
+      {
+       "en": "Call of the Shadows",
+       "ko": "그림자의 부름",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualEffigyPieces.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Relics",
+   "filterClass": "Relics",
+   "ko": "유물",
+   "sections": [
+    {
+     "id": "RelicsItem",
+     "en": "Relics Item",
+     "ko": "유물 아이템",
+     "items": [
+      {
+       "en": "Urn Relic",
+       "ko": "단지 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase1x2.webp"
+      },
+      {
+       "en": "Amphora Relic",
+       "ko": "손잡이 항아리 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase1x3.webp"
+      },
+      {
+       "en": "Vase Relic",
+       "ko": "화병 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase1x4.webp"
+      },
+      {
+       "en": "Seal Relic",
+       "ko": "인장 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase2x1.webp"
+      },
+      {
+       "en": "Coffer Relic",
+       "ko": "궤짝 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase2x2.webp"
+      },
+      {
+       "en": "Tapestry Relic",
+       "ko": "융단 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase3x1.webp"
+      },
+      {
+       "en": "Incense Relic",
+       "ko": "향 유물",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Relics/RelicBase4x1.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Waystones",
+   "filterClass": "Waystones",
+   "ko": "경로석",
+   "sections": [
+    {
+     "id": "WaystonesItem",
+     "en": "Waystones Item",
+     "ko": "경로석 아이템",
+     "items": [
+      {
+       "en": "Waystone (Tier 1)",
+       "ko": "경로석 (1등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap1.webp"
+      },
+      {
+       "en": "Waystone (Tier 2)",
+       "ko": "경로석 (2등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap2.webp"
+      },
+      {
+       "en": "Waystone (Tier 3)",
+       "ko": "경로석 (3등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap3.webp"
+      },
+      {
+       "en": "Waystone (Tier 4)",
+       "ko": "경로석 (4등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap4.webp"
+      },
+      {
+       "en": "Waystone (Tier 5)",
+       "ko": "경로석 (5등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap5.webp"
+      },
+      {
+       "en": "Waystone (Tier 6)",
+       "ko": "경로석 (6등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap6.webp"
+      },
+      {
+       "en": "Waystone (Tier 7)",
+       "ko": "경로석 (7등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap7.webp"
+      },
+      {
+       "en": "Waystone (Tier 8)",
+       "ko": "경로석 (8등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap8.webp"
+      },
+      {
+       "en": "Waystone (Tier 9)",
+       "ko": "경로석 (9등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap9.webp"
+      },
+      {
+       "en": "Waystone (Tier 10)",
+       "ko": "경로석 (10등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap10.webp"
+      },
+      {
+       "en": "Waystone (Tier 11)",
+       "ko": "경로석 (11등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap11.webp"
+      },
+      {
+       "en": "Waystone (Tier 12)",
+       "ko": "경로석 (12등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap12.webp"
+      },
+      {
+       "en": "Waystone (Tier 13)",
+       "ko": "경로석 (13등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap13.webp"
+      },
+      {
+       "en": "Waystone (Tier 14)",
+       "ko": "경로석 (14등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap14.webp"
+      },
+      {
+       "en": "Waystone (Tier 15)",
+       "ko": "경로석 (15등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap15.webp"
+      },
+      {
+       "en": "Waystone (Tier 16)",
+       "ko": "경로석 (16등급)",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/EndgameMaps/EndgameMap16.webp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "Lineage_Supports",
+   "filterClass": "Support Gems",
+   "ko": "혈통 보조 젬",
+   "sections": [
+    {
+     "id": "main",
+     "en": "",
+     "ko": "",
+     "items": [
+      {
+       "en": "Oisín's Oath",
+       "ko": "오이신의 서약",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/WalkeroftheWilds.webp"
+      },
+      {
+       "en": "Vilenta's Propulsion",
+       "ko": "바일렌타의 추진",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageVilenta.webp"
+      },
+      {
+       "en": "Brutus' Brain",
+       "ko": "브루투스의 두뇌",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageMeatshield.webp"
+      },
+      {
+       "en": "Atalui's Bloodletting",
+       "ko": "아탈루이의 사혈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageLifetap.webp"
+      },
+      {
+       "en": "Einhar's Beastrite",
+       "ko": "아인하르의 야수의식",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageEinhar.webp"
+      },
+      {
+       "en": "Ahn's Citadel",
+       "ko": "안의 성채",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageAhnChisel.webp"
+      },
+      {
+       "en": "Eonyr's Thunder",
+       "ko": "에오니르의 천둥",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/ScaleofEonyr.webp"
+      },
+      {
+       "en": "Tecrod's Revenge",
+       "ko": "테크로드의 복수",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTecrod.webp"
+      },
+      {
+       "en": "Uruk's Smelting",
+       "ko": "우루크의 제련",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageArmourBreak.webp"
+      },
+      {
+       "en": "Paquate's Pact",
+       "ko": "파콰테의 맹약",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Paquate.webp"
+      },
+      {
+       "en": "Ailith's Chimes",
+       "ko": "아일리트의 종",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Monastic.webp"
+      },
+      {
+       "en": "Doedre's Undoing",
+       "ko": "도이드리의 파멸",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageDoedre.webp"
+      },
+      {
+       "en": "Ratha's Assault",
+       "ko": "라타의 공격",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Azadian.webp"
+      },
+      {
+       "en": "Arjun's Medal",
+       "ko": "아르준의 메달",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AmmoConservation.webp"
+      },
+      {
+       "en": "Kaom's Madness",
+       "ko": "카옴의 광기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageKaom.webp"
+      },
+      {
+       "en": "Sione's Temper",
+       "ko": "시온의 성미",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Wildshards.webp"
+      },
+      {
+       "en": "Guatelitzi's Ablation",
+       "ko": "과텔리치의 삭마",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Guatelitzi.webp"
+      },
+      {
+       "en": "Ixchel's Torment",
+       "ko": "익스첼의 고통",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Trialmaster.webp"
+      },
+      {
+       "en": "Cirel's Cultivation",
+       "ko": "키렐의 함양",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Greatwood.webp"
+      },
+      {
+       "en": "Romira's Requital",
+       "ko": "로미라의 보답",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageRomira.webp"
+      },
+      {
+       "en": "Tawhoa's Tending",
+       "ko": "타호아의 보살핌",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Tukohama.webp"
+      },
+      {
+       "en": "Dominus' Grasp",
+       "ko": "도미누스의 장악",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageMercy.webp"
+      },
+      {
+       "en": "Dialla's Desire",
+       "ko": "디알라의 갈망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Dialla.webp"
+      },
+      {
+       "en": "Kalisa's Crescendo",
+       "ko": "칼리사의 크레센도",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageKalisaChorus.webp"
+      },
+      {
+       "en": "Xoph's Pyre",
+       "ko": "조프의 장작",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageXoph.webp"
+      },
+      {
+       "en": "Esh's Radiance",
+       "ko": "에쉬의 광휘",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageEsh.webp"
+      },
+      {
+       "en": "Tul's Stillness",
+       "ko": "툴의 고요",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTul.webp"
+      },
+      {
+       "en": "Uul-Netol's Embrace",
+       "ko": "울네톨의 포옹",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUulNetol.webp"
+      },
+      {
+       "en": "Rakiata's Flow",
+       "ko": "라키아타의 흐름",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Rakiata.webp"
+      },
+      {
+       "en": "Rigwald's Ferocity",
+       "ko": "리그월드의 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Rigwald.webp"
+      },
+      {
+       "en": "Uhtred's Exodus",
+       "ko": "우트레드의 탈출",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUhtredLesser.webp"
+      },
+      {
+       "en": "Uhtred's Omen",
+       "ko": "우트레드의 징조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUhtredStandard.webp"
+      },
+      {
+       "en": "Uhtred's Augury",
+       "ko": "우트레드의 점술",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUhtredGreater.webp"
+      },
+      {
+       "en": "Daresso's Passion",
+       "ko": "다레소의 열정",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageDaresso.webp"
+      },
+      {
+       "en": "Atziri's Allure",
+       "ko": "앗지리의 매혹",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageAtziri.webp"
+      },
+      {
+       "en": "Atziri's Communion",
+       "ko": "앗지리의 성찬식",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AtziriCommunion.webp"
+      },
+      {
+       "en": "Atziri's Impatience",
+       "ko": "앗지리의 조바심",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AtziriImpatience.webp"
+      },
+      {
+       "en": "Tacati's Ire",
+       "ko": "타카티의 진노",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTacati.webp"
+      },
+      {
+       "en": "Zarokh's Refrain",
+       "ko": "자로크의 절제",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Zarokh.webp"
+      },
+      {
+       "en": "Garukhan's Resolve",
+       "ko": "가루칸의 투지",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Garukhan.webp"
+      },
+      {
+       "en": "Kurgal's Leash",
+       "ko": "쿠르갈의 가죽끈",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AbyssKurgal.webp"
+      },
+      {
+       "en": "Kulemak's Dominion",
+       "ko": "쿨레막의 지배",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageKulemakSpire.webp"
+      },
+      {
+       "en": "Amanamu's Tithe",
+       "ko": "아마나무의 십일조",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageAmanamu.webp"
+      },
+      {
+       "en": "Varashta's Blessing",
+       "ko": "바라시타의 축복",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageDjinn.webp"
+      },
+      {
+       "en": "Arbiter's Ignition",
+       "ko": "중재자의 점화",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageArbiter.webp"
+      },
+      {
+       "en": "Arakaali's Lust",
+       "ko": "아라칼리의 욕망",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageArakaali.webp"
+      },
+      {
+       "en": "Tasalio's Rhythm",
+       "ko": "타살리오의 리듬",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTasalio.webp"
+      },
+      {
+       "en": "Xibaqua's Rending",
+       "ko": "지바콰의 분리",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageXibaqua.webp"
+      },
+      {
+       "en": "Khatal's Rejuvenation",
+       "ko": "카탈의 회춘",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageKhatal.webp"
+      },
+      {
+       "en": "Morgana's Tempest",
+       "ko": "모르가나의 폭풍",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MorganasTempest.webp"
+      },
+      {
+       "en": "Hayoxi's Fulmination",
+       "ko": "하욕시의 뇌전",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Hayoxi.webp"
+      },
+      {
+       "en": "Zerphi's Infamy",
+       "ko": "제르피의 악명",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/ZerphisLegacy.webp"
+      },
+      {
+       "en": "Helbrym's Hide",
+       "ko": "헬브림의 가죽",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/HideofHelbrym.webp"
+      },
+      {
+       "en": "Her Declaration",
+       "ko": "그녀의 선언",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MothersDeclaration.webp"
+      },
+      {
+       "en": "Prototype Seventeen",
+       "ko": "프로토타입 17호",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/PrototypeSeventeen.webp"
+      },
+      {
+       "en": "Seraph's Heart",
+       "ko": "고위 천사의 심장",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/SeraphsHeart.webp"
+      },
+      {
+       "en": "Uhtred's Rite",
+       "ko": "우트레드의 의례",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/UthredsChalice.webp"
+      },
+      {
+       "en": "Trickster's Shard",
+       "ko": "협잡꾼의 파편",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/TrickstersShard.webp"
+      },
+      {
+       "en": "Arbiter's Reach",
+       "ko": "중재자의 역량",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MothersWard.webp"
+      },
+      {
+       "en": "Tangmazu's Thurible",
+       "ko": "탕마주의 향로",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/TangmazusThurible.webp"
+      },
+      {
+       "en": "Esh's Prowess",
+       "ko": "에쉬의 기량",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/EshsProwess.webp"
+      },
+      {
+       "en": "Breachlord's Rift",
+       "ko": "균열 군주의 틈새",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/BreachlordsRemorse.webp"
+      },
+      {
+       "en": "Breachlord's Amalgam",
+       "ko": "균열 군주의 융합체",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/BreachlordsAmalgam.webp"
+      },
+      {
+       "en": "Vruun's Aftermath",
+       "ko": "브룬의 여파",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/VruunsAftermath.webp"
+      },
+      {
+       "en": "Vruun's Inevitability",
+       "ko": "브룬의 필연",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/VruunsSpike.webp"
+      },
+      {
+       "en": "Uhtred's Constellation",
+       "ko": "우트레드의 별자리",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/UhtredsConstellation.webp"
+      },
+      {
+       "en": "Medved's Felling",
+       "ko": "메드베드의 살상",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MedvedsFelling.webp"
+      },
+      {
+       "en": "Vorana's Siege",
+       "ko": "보라나의 공성",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/VoranasSiege.webp"
+      },
+      {
+       "en": "Styrn's Mountain",
+       "ko": "스티른의 산",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/KnightsLegacy.webp"
+      },
+      {
+       "en": "Styrn's Ferocity",
+       "ko": "스티른의 흉포함",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/KnightsFerocity.webp"
+      },
+      {
+       "en": "Catha's Brilliance",
+       "ko": "캐사의 광채",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/CathasBrilliance.webp"
+      },
+      {
+       "en": "Mórrigan's Insight",
+       "ko": "모리건의 통찰",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MorrigansRefuge.webp"
+      },
+      {
+       "en": "Tul's Avalanche",
+       "ko": "툴의 산사태",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/TulsProgeny.webp"
+      },
+      {
+       "en": "Olroth's Conviction",
+       "ko": "올로스의 신념",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/OlrothsConviction.webp"
+      },
+      {
+       "en": "Olroth's Hubris",
+       "ko": "올로스의 오만",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/OlrothsHubris.webp"
+      },
+      {
+       "en": "Bhatair's Vengeance",
+       "ko": "바타이르의 복수",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/ShatteredFang.webp"
+      },
+      {
+       "en": "Zarokh's Revolt",
+       "ko": "자로크의 봉기",
+       "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/ZarokhsRevolt.webp"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "gear": [
+  {
+   "slug": "Body_Armours",
+   "filterClass": "Body Armours",
+   "ko": "갑옷",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Armours/BodyArmours/DemigodsArmour.webp"
+  },
+  {
+   "slug": "Helmets",
+   "filterClass": "Helmets",
+   "ko": "투구",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Armours/Helmets/Demigodstriumph.webp"
+  },
+  {
+   "slug": "Gloves",
+   "filterClass": "Gloves",
+   "ko": "장갑",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Armours/Gloves/DemigodsTouch.webp"
+  },
+  {
+   "slug": "Boots",
+   "filterClass": "Boots",
+   "ko": "장화",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Armours/Boots/DemigodsStride.webp"
+  },
+  {
+   "slug": "Shields",
+   "filterClass": "Shields",
+   "ko": "방패",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Armours/Shields/DemigodsShield.webp"
+  },
+  {
+   "slug": "Bucklers",
+   "filterClass": "Bucklers",
+   "ko": "버클러",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Offhand/Shields/Buckler01.webp"
+  },
+  {
+   "slug": "Foci",
+   "filterClass": "Foci",
+   "ko": "집중구",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Offhand/Foci/Basetypes/Focus01.webp"
+  },
+  {
+   "slug": "Quivers",
+   "filterClass": "Quivers",
+   "ko": "화살통",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Quivers/Basetypes/QuiverBroadhead.webp"
+  },
+  {
+   "slug": "Bows",
+   "filterClass": "Bows",
+   "ko": "활",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/TwoHandWeapons/Bows/Basetypes/Bow01.webp"
+  },
+  {
+   "slug": "Crossbows",
+   "filterClass": "Crossbows",
+   "ko": "쇠뇌",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/TwoHandWeapons/Crossbows/2HCrossbow01.webp"
+  },
+  {
+   "slug": "Quarterstaves",
+   "filterClass": "Quarterstaves",
+   "ko": "육척봉",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/TwoHandWeapons/WarStaves/Warstaff01.webp"
+  },
+  {
+   "slug": "Spears",
+   "filterClass": "Spears",
+   "ko": "창",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/OneHandWeapons/OneHandSpears/1HSpear01.webp"
+  },
+  {
+   "slug": "One_Hand_Maces",
+   "filterClass": "One Hand Maces",
+   "ko": "한손 철퇴",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/OneHandWeapons/OneHandMaces/Basetypes/1HMace01.webp"
+  },
+  {
+   "slug": "Two_Hand_Maces",
+   "filterClass": "Two Hand Maces",
+   "ko": "양손 철퇴",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/TwoHandWeapons/TwoHandMaces/Basetypes/2HMace01.webp"
+  },
+  {
+   "slug": "Sceptres",
+   "filterClass": "Sceptres",
+   "ko": "셉터",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/OneHandWeapons/Scepters/Basetypes/Sceptre01.webp"
+  },
+  {
+   "slug": "Staves",
+   "filterClass": "Staves",
+   "ko": "지팡이",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/TwoHandWeapons/Staves/Basetypes/Staff01.webp"
+  },
+  {
+   "slug": "Wands",
+   "filterClass": "Wands",
+   "ko": "마법봉",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Weapons/OneHandWeapons/Wands/Basetypes/Wand01.webp"
+  },
+  {
+   "slug": "Talismans",
+   "filterClass": "Talismans",
+   "ko": "부적",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Offhand/Talismans/ChangelingTalisman.webp"
+  },
+  {
+   "slug": "Rings",
+   "filterClass": "Rings",
+   "ko": "반지",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Rings/DemigodsBand.webp"
+  },
+  {
+   "slug": "Amulets",
+   "filterClass": "Amulets",
+   "ko": "목걸이",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Amulets/Basetypes/CrimsonAmulet.webp"
+  },
+  {
+   "slug": "Belts",
+   "filterClass": "Belts",
+   "ko": "허리띠",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Belts/Demibelt1.webp"
+  },
+  {
+   "slug": "Jewels",
+   "filterClass": "Jewels",
+   "ko": "주얼",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Jewels/Timeless.webp"
+  },
+  {
+   "slug": "Charms",
+   "filterClass": "Charms",
+   "ko": "호신부",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Charms/Basetypes/ThawingCharm.webp"
+  },
+  {
+   "slug": "Life_Flasks",
+   "filterClass": "Life Flasks",
+   "ko": "생명력 플라스크",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Flasks/Basetypes/FlaskLife01.webp"
+  },
+  {
+   "slug": "Mana_Flasks",
+   "filterClass": "Mana Flasks",
+   "ko": "마나 플라스크",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Flasks/Basetypes/FlaskMana01.webp"
+  },
+  {
+   "slug": "Skill_Gems",
+   "filterClass": "Skill Gems",
+   "ko": "스킬 젬",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DArt/SkillIcons/BruteLeapSlam.webp"
+  },
+  {
+   "slug": "Support_Gems",
+   "filterClass": "Support Gems",
+   "ko": "보조 젬",
+   "icon": "https://cdn.poe2db.tw/image/Art/2DArt/SkillIcons/Support/OverpowerSupport.webp"
+  },
+  {
+   "slug": "Spirit_Gems",
+   "filterClass": "Spirit Gems",
+   "ko": "Spirit Gems"
+  }
+ ],
+ "icons": {
+  "Uncut Skill Gem (Level 20)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png",
+  "Uncut Skill Gem (Level 19)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png",
+  "Uncut Skill Gem (Level 10)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png",
+  "Uncut Spirit Gem (Level 20)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png",
+  "Uncut Spirit Gem (Level 19)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png",
+  "Uncut Spirit Gem (Level 10)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png",
+  "Uncut Support Gem (Level 5)": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFN1cHBvcnRHZW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/d1ffe1c951/UncutSupportGem.png",
+  "Expedition Logbook": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRXhwZWRpdGlvbkxvZ2Jvb2s1Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/841a5e9622/ExpeditionLogbook5.png"
+ }
+}

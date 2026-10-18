@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState, type DragEvent } from "react";
+import { Fragment, useEffect, useMemo, useState, type DragEvent } from "react";
 import { Segmented } from "../components/SearchOutputs";
 import { iconUrl } from "../format";
-import { SOUNDS } from "./generate";
-import itemData from "./items.json";
 import {
   buildTierModel,
   generateTierFilter,
+  SOUNDS,
   TIERS,
   type TierId,
   type TierItem,
@@ -20,8 +19,9 @@ const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
   { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
 ];
 
-const ITEMS = itemData as Record<string, { ko: string; icon?: string }>;
-const STORAGE_KEY = "filtergen.tiers.v1";
+// 아이템 id 가 poe2db 기준으로 바뀌어 저장 키를 새로 쓴다.
+const STORAGE_KEY = "filtergen.tiers.v2";
+const ALL = "all";
 
 type Saved = { baseId: BaseId; assign: Record<string, TierId>; settings: Partial<Record<TierId, TierSetting>> };
 
@@ -50,7 +50,7 @@ function ItemTile({
   selected: boolean;
   onSelect: () => void;
 }) {
-  const icon = item.iconOf ? ITEMS[item.iconOf]?.icon : undefined;
+  const icon = item.icon;
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData("text/plain", item.id);
     event.dataTransfer.effectAllowed = "move";
@@ -86,7 +86,7 @@ export function FilterGenPage() {
   const [error, setError] = useState("");
   const [assign, setAssign] = useState<Record<string, TierId>>(saved?.assign ?? {});
   const [settings, setSettings] = useState<Record<TierId, TierSetting>>({ ...defaultSettings(), ...saved?.settings });
-  const [categoryId, setCategoryId] = useState("currency");
+  const [categoryId, setCategoryId] = useState(ALL);
   const [selected, setSelected] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState<TierId | null>(null);
 
@@ -117,12 +117,12 @@ export function FilterGenPage() {
   }, [baseId, assign, settings]);
 
   const model = useMemo<TierModel | null>(
-    () => (text ? buildTierModel(text, (name) => ITEMS[name]?.ko ?? name) : null),
+    () => (text ? buildTierModel(text) : null),
     [text],
   );
 
   const tierOf = (id: string): TierId => assign[id] ?? model?.defaults[id] ?? "hidden";
-  const category = model?.categories.find((c) => c.id === categoryId) ?? model?.categories[0];
+  const shown = model ? (categoryId === ALL ? model.categories : model.categories.filter((c) => c.id === categoryId)) : [];
   const movedCount = model ? Object.keys(assign).filter((id) => assign[id] !== model.defaults[id]).length : 0;
 
   const counts = useMemo(() => {
@@ -200,7 +200,8 @@ export function FilterGenPage() {
         <p className="fg-help">
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
           정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 처음 배치와 소리는 고른 기본값 필터를 따릅니다.
-          장비·장신구·특출난·고유·젬·주얼·플라스크·기타 탭까지 있고, 어느 티어에도 해당하지 않는 아이템만 기본값 필터 규칙을 따릅니다. 내려받은 파일과{" "}
+          아이템 목록과 분류는 poe2db.tw 를 따르고, "전체" 탭에서 모든 종류를 한 번에 볼 수 있습니다. 어느 티어에도 해당하지 않는
+          아이템만 기본값 필터 규칙을 따릅니다. 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             사운드 mp3
           </a>
@@ -210,18 +211,30 @@ export function FilterGenPage() {
         {error && <p className="fg-error">{error}</p>}
         {!model && !error && <p className="fg-help">기본값 필터 불러오는 중…</p>}
 
-        {model && category && (
+        {model && (
           <>
             <div className="chip-row tm-tabs" role="tablist" aria-label="아이템 종류">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={categoryId === ALL}
+                className={`chip ${categoryId === ALL ? "active" : ""}`}
+                onClick={() => {
+                  setCategoryId(ALL);
+                  setSelected(null);
+                }}
+              >
+                전체
+              </button>
               {model.categories.map((c) => {
-                const icon = c.items.map((i) => (i.iconOf ? ITEMS[i.iconOf]?.icon : undefined)).find(Boolean);
+                const icon = c.items.map((i) => i.icon).find(Boolean);
                 return (
                   <button
                     key={c.id}
                     type="button"
                     role="tab"
-                    aria-selected={c.id === category.id}
-                    className={`chip ${c.id === category.id ? "active" : ""}`}
+                    aria-selected={c.id === categoryId}
+                    className={`chip ${c.id === categoryId ? "active" : ""}`}
                     onClick={() => {
                       setCategoryId(c.id);
                       setSelected(null);
@@ -238,7 +251,9 @@ export function FilterGenPage() {
               {TIERS.map((tier) => {
                 const setting = settings[tier.id];
                 const visible = tier.id !== "hidden" && setting.show;
-                const items = category.items.filter((item) => tierOf(item.id) === tier.id);
+                const groups = shown
+                  .map((c) => ({ category: c, items: c.items.filter((item) => tierOf(item.id) === tier.id) }))
+                  .filter((g) => g.items.length);
                 return (
                   <div
                     key={tier.id}
@@ -300,13 +315,18 @@ export function FilterGenPage() {
                         if (selected && event.target === event.currentTarget) moveTo(selected, tier.id);
                       }}
                     >
-                      {items.map((item) => (
-                        <ItemTile
-                          key={item.id}
-                          item={item}
-                          selected={selected === item.id}
-                          onSelect={() => setSelected((v) => (v === item.id ? null : item.id))}
-                        />
+                      {groups.map((group) => (
+                        <Fragment key={group.category.id}>
+                          {categoryId === ALL && <li className="tm-group">{group.category.label}</li>}
+                          {group.items.map((item) => (
+                            <ItemTile
+                              key={item.id}
+                              item={item}
+                              selected={selected === item.id}
+                              onSelect={() => setSelected((v) => (v === item.id ? null : item.id))}
+                            />
+                          ))}
+                        </Fragment>
                       ))}
                     </ul>
                   </div>
