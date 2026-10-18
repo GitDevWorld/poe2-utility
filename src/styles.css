@@ -3234,17 +3234,69 @@ a.tablet-mod-price-col.hot {
   border-radius: 10px;
 }
 
-.tm-variant-groups {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-}
-
-.tm-variant-group {
+.tm-rules,
+.tm-builder {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: 6px 8px;
+}
+
+.tm-builder {
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+
+.tm-rule {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--hover);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+.tm-rule.active {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.tm-rule-name,
+.tm-rule-del {
+  min-height: 28px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.tm-rule.active .tm-rule-name,
+.tm-rule.active .tm-rule-del {
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.tm-rule-del {
+  padding: 0 8px 0 2px;
+  opacity: 0.6;
+}
+
+.tm-rule-del:hover {
+  opacity: 1;
+}
+
+.tm-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.tm-check input {
+  min-width: 0;
 }
 
 .tm-variant-title {

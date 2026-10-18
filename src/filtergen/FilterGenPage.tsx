@@ -2,6 +2,16 @@ import { Fragment, useEffect, useMemo, useState, type DragEvent } from "react";
 import { Segmented } from "../components/SearchOutputs";
 import { iconUrl } from "../format";
 import {
+  EQUIPMENT_TABS,
+  exceptionalLabel,
+  RARITY_KO,
+  TIER_KO,
+  type Exceptional,
+  type Rarity,
+  type RuleDef,
+  type TierCond,
+} from "./extras";
+import {
   buildTierModel,
   generateTierFilter,
   SOUNDS,
@@ -28,27 +38,14 @@ const STORAGE_KEY = "filtergen.tiers";
 const OLD_KEYS = ["filtergen.tiers.v4", "filtergen.tiers.v3", "filtergen.tiers.v2", "filtergen.tiers.v1"];
 const ALL = "all";
 
-/** 장비류 조건 버튼 묶음. 특출난 = 품질 21+·소켓 초과·이중 타락·타락 인챈트 (NeverSink 의 Exceptional) */
-const VARIANT_GROUPS = ["희귀도", "미확인 등급", "특출난", "아이템 레벨"];
-const VARIANT_GROUP: Record<string, string> = {
-  normal: "희귀도",
-  magic: "희귀도",
-  rare: "희귀도",
-  t5: "미확인 등급",
-  t4: "미확인 등급",
-  quality: "특출난",
-  sockets: "특출난",
-  twice: "특출난",
-  enchanted: "특출난",
-  ilvl82: "아이템 레벨",
-};
-
 type View = { categoryId: string; subId: string | null; variantId: string | null };
 type Saved = {
   baseId: BaseId;
   assign: Record<string, TierId>;
   settings: Partial<Record<TierId, TierSetting>>;
   view?: View;
+  /** 장비류 탭별 조건 조합 (없으면 기본 조합) */
+  rules?: Record<string, RuleDef[]>;
 };
 
 function parseSaved(raw: string | null): Saved | undefined {
@@ -60,6 +57,7 @@ function parseSaved(raw: string | null): Saved | undefined {
     assign: data.assign ?? {},
     settings: data.settings ?? {},
     view: data.view,
+    rules: data.rules,
   };
 }
 
@@ -143,6 +141,13 @@ export function FilterGenPage() {
   const [subId, setSubId] = useState<string | null>(saved?.view?.subId ?? null);
   const [variantId, setVariantId] = useState<string | null>(saved?.view?.variantId ?? null);
   const [saveState, setSaveState] = useState<"saved" | "failed" | null>(null);
+  const [rules, setRules] = useState<Record<string, RuleDef[]>>(saved?.rules ?? {});
+  const [draft, setDraft] = useState<{ rarity: Rarity[]; tier: TierCond | ""; exceptional: Exceptional | ""; ilvl: boolean }>({
+    rarity: ["Rare"],
+    tier: "",
+    exceptional: "",
+    ilvl: false,
+  });
   const [notice, setNotice] = useState("");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
@@ -170,15 +175,15 @@ export function FilterGenPage() {
   useEffect(() => {
     try {
       const view: View = { categoryId, subId, variantId };
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ baseId, assign, settings, view } satisfies Saved));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ baseId, assign, settings, view, rules } satisfies Saved));
       setSaveState("saved");
     } catch {
       // 사생활 보호 모드 등에서는 저장이 안 될 수 있다. 화면은 그대로 동작한다.
       setSaveState("failed");
     }
-  }, [baseId, assign, settings, categoryId, subId, variantId]);
+  }, [baseId, assign, settings, categoryId, subId, variantId, rules]);
 
-  const model = useMemo<TierModel | null>(() => (text ? buildTierModel(text) : null), [text]);
+  const model = useMemo<TierModel | null>(() => (text ? buildTierModel(text, rules) : null), [text, rules]);
   const tierOf = (id: string): TierId => assign[id] ?? model?.defaultOf(id) ?? "hidden";
 
   const category: TierCategory | undefined =
@@ -186,6 +191,50 @@ export function FilterGenPage() {
   const sub = category?.subs ? (category.subs.find((s) => s.id === subId) ?? category.subs[0]) : undefined;
   const variants = sub ? (category?.variants?.[sub.id] ?? []) : [];
   const variant = variants.find((v) => v.id === variantId) ?? variants[0];
+  const tabSpec = EQUIPMENT_TABS.find((t) => t.id === categoryId);
+  const tabRules = tabSpec ? (rules[tabSpec.id] ?? tabSpec.defaults) : [];
+
+  const addRule = () => {
+    if (!tabSpec || !draft.rarity.length) return;
+    const rule: RuleDef = {
+      id: `c${Date.now().toString(36)}`,
+      rarity: tabSpec.rarities.filter((r) => draft.rarity.includes(r)),
+      ...(draft.tier ? { tier: draft.tier } : {}),
+      ...(draft.exceptional ? { exceptional: draft.exceptional } : {}),
+      ...(draft.ilvl ? { ilvl: 82 } : {}),
+    };
+    const same = tabRules.find(
+      (r) =>
+        r.rarity.join() === rule.rarity.join() &&
+        r.tier === rule.tier &&
+        r.exceptional === rule.exceptional &&
+        r.ilvl === rule.ilvl,
+    );
+    if (same) {
+      setVariantId(same.id);
+      setNotice("이미 있는 조합입니다.");
+      return;
+    }
+    setRules((prev) => ({ ...prev, [tabSpec.id]: [...tabRules, rule] }));
+    setVariantId(rule.id);
+    setNotice("");
+  };
+
+  const removeRule = (id: string) => {
+    if (!tabSpec || tabRules.length <= 1) return;
+    setRules((prev) => ({ ...prev, [tabSpec.id]: tabRules.filter((r) => r.id !== id) }));
+    if (variantId === id) setVariantId(null);
+  };
+
+  const resetRules = () => {
+    if (!tabSpec) return;
+    setRules((prev) => {
+      const next = { ...prev };
+      delete next[tabSpec.id];
+      return next;
+    });
+    setVariantId(null);
+  };
 
   /** 지금 화면에 보일 종류·아이템 (클래스·조건·검색어 반영) */
   const shown = useMemo(() => {
@@ -242,7 +291,7 @@ export function FilterGenPage() {
 
   /** 설정 백업: 다른 PC·브라우저로 옮기거나 브라우저 데이터를 지우기 전에 */
   const exportSettings = () => {
-    const data = { app: "poe2-utility-filtergen", version: 1, baseId, assign, settings };
+    const data = { app: "poe2-utility-filtergen", version: 2, baseId, assign, settings, rules };
     const blob = new Blob([JSON.stringify(data, null, 1)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -262,6 +311,7 @@ export function FilterGenPage() {
         setBaseId(data.baseId);
         setAssign(data.assign);
         setSettings({ ...defaultSettings(), ...data.settings });
+        setRules(data.rules ?? {});
         setNotice(`설정을 가져왔습니다 (옮긴 아이템 ${Object.keys(data.assign).length}개).`);
       })
       .catch(() => setNotice("설정 파일을 읽지 못했습니다."));
@@ -334,8 +384,9 @@ export function FilterGenPage() {
         <p className="fg-help">
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
           정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 아이템 목록과 분류는 poe2db.tw 를 따르고,
-          처음 배치는 고른 기본값 필터로 정해집니다. 장비·장신구·주얼·플라스크는 클래스와 조건(희귀도·등급·특출난·이중 타락·아이템
-          레벨)을 골라 베이스마다 티어를 정합니다. 고유는 필터가 이름이 아니라 베이스로만 구분하므로, 베이스 하나에 그 베이스를 쓰는 고유
+          처음 배치는 고른 기본값 필터로 정해집니다. 장비·장신구·주얼·플라스크는 클래스와 조건 조합을 골라 베이스마다 티어를 정합니다.
+          조합은 희귀도·미확인 등급·특출난·아이템 레벨을 모두 만족(AND)하는 아이템이고, 조건이 많이 걸린 조합이 먼저 적용됩니다
+          (예: "희귀 · 5등급"을 C에, "희귀"를 숨김에 두면 5등급 희귀만 보입니다). 고유는 필터가 이름이 아니라 베이스로만 구분하므로, 베이스 하나에 그 베이스를 쓰는 고유
           아이템을 함께 보여 주고 함께 옮깁니다(고유 이름으로도 검색됩니다). 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             사운드 mp3
@@ -395,29 +446,97 @@ export function FilterGenPage() {
                   ))}
                 </div>
                 {variants.length > 0 && (
-                  <div className="tm-variant-groups">
-                    {VARIANT_GROUPS.map((group) => {
-                      const list = variants.filter((v) => (VARIANT_GROUP[v.id] ?? "희귀도") === group);
-                      if (!list.length) return null;
-                      return (
-                        <div key={group} className="tm-variant-group" role="group" aria-label={group}>
-                          <span className="tm-variant-title">{group}</span>
-                          {list.map((v) => (
-                            <button
-                              key={v.id}
-                              type="button"
-                              className={`chip small variant ${v.id === variant?.id ? "active" : ""}`}
-                              onClick={() => {
-                                setVariantId(v.id);
-                                setSelected(null);
-                              }}
-                            >
-                              {v.label}
-                            </button>
-                          ))}
-                        </div>
-                      );
-                    })}
+                  <div className="tm-rules">
+                    <span className="tm-variant-title">조건 조합</span>
+                    {variants.map((v) => (
+                      <span key={v.id} className={`tm-rule${v.id === variant?.id ? " active" : ""}`}>
+                        <button
+                          type="button"
+                          className="tm-rule-name"
+                          onClick={() => {
+                            setVariantId(v.id);
+                            setSelected(null);
+                          }}
+                        >
+                          {v.label}
+                        </button>
+                        {variants.length > 1 && (
+                          <button
+                            type="button"
+                            className="tm-rule-del"
+                            aria-label={`${v.label} 조합 지우기`}
+                            title="조합 지우기"
+                            onClick={() => removeRule(v.id)}
+                          >
+                            ×
+                          </button>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {tabSpec && (
+                  <div className="tm-builder">
+                    <span className="tm-variant-title">조합 만들기 (모두 만족)</span>
+                    {tabSpec.rarities.map((r) => (
+                      <label key={r} className="tm-check">
+                        <input
+                          type="checkbox"
+                          checked={draft.rarity.includes(r)}
+                          onChange={(event) =>
+                            setDraft((d) => ({
+                              ...d,
+                              rarity: event.target.checked ? [...d.rarity, r] : d.rarity.filter((x) => x !== r),
+                            }))
+                          }
+                        />
+                        {RARITY_KO[r]}
+                      </label>
+                    ))}
+                    {tabSpec.tiers && (
+                      <select
+                        className="tm-bulk-select"
+                        aria-label="미확인 등급"
+                        value={draft.tier}
+                        onChange={(event) => setDraft((d) => ({ ...d, tier: event.target.value as TierCond | "" }))}
+                      >
+                        <option value="">등급 상관없음</option>
+                        {(Object.keys(TIER_KO) as TierCond[]).map((t) => (
+                          <option key={t} value={t}>
+                            {TIER_KO[t]}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    <select
+                      className="tm-bulk-select"
+                      aria-label="특출난"
+                      value={draft.exceptional}
+                      onChange={(event) => setDraft((d) => ({ ...d, exceptional: event.target.value as Exceptional | "" }))}
+                    >
+                      <option value="">특출난 상관없음</option>
+                      {tabSpec.exceptionals.map((e) => (
+                        <option key={e} value={e}>
+                          특출난: {exceptionalLabel(e, sub?.id)}
+                        </option>
+                      ))}
+                    </select>
+                    {tabSpec.ilvl && (
+                      <label className="tm-check">
+                        <input
+                          type="checkbox"
+                          checked={draft.ilvl}
+                          onChange={(event) => setDraft((d) => ({ ...d, ilvl: event.target.checked }))}
+                        />
+                        아이템 레벨 82+
+                      </label>
+                    )}
+                    <button type="button" className="btn" disabled={!draft.rarity.length} onClick={addRule}>
+                      조합 추가
+                    </button>
+                    <button type="button" className="btn" onClick={resetRules}>
+                      기본 조합으로
+                    </button>
                   </div>
                 )}
               </div>

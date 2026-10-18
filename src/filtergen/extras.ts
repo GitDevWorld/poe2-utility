@@ -1,25 +1,12 @@
 /**
  * 장비·장신구·주얼·플라스크·고유·젬·기타 항목.
  * 장비류는 poe2db 카탈로그의 클래스 → 베이스(실제 아이템) 단위이고, 같은 베이스를
- * 조건(희귀도·미확인 등급·특출난·이중 타락·아이템 레벨)별로 따로 티어에 넣는다.
- *
- * order: 필터 안에서 먼저 걸려야 하는 순서(작을수록 위). 조건이 겹칠 때만 의미가 있다.
- *   1 이중 타락 → 2 특출난 → 3 5등급 → 4 4등급 → 5 아이템 레벨 82+ → 6 희귀도 → 9 나머지 잡기
+ * "조건 조합"(희귀도·미확인 등급·특출난·아이템 레벨을 AND 로 묶은 것)마다 따로 티어에 넣는다.
+ * 조건이 많이 걸린 조합이 필터에서 먼저 걸린다.
  */
 import type { Sample } from "./evaluate";
 
 export type Tone = "normal" | "magic" | "rare" | "unique" | "gem" | "misc";
-
-/** 조건 하나: 같은 베이스를 이 조건으로 따로 티어에 넣는다. */
-export type Variant = {
-  id: string;
-  label: string;
-  conditions: string[];
-  order: number;
-  tone: Tone;
-  /** 기본 티어 계산용 예시 값 */
-  sample: Sample;
-};
 
 export type CatalogBase = { en: string; ko: string; icon?: string; level?: number };
 export type CatalogUnique = { en: string; ko: string; base: string; icon?: string; level?: number };
@@ -32,147 +19,176 @@ export type GearClass = {
   uniques: CatalogUnique[];
 };
 
-const NMR = "Rarity Normal Magic Rare";
+export type Rarity = "Normal" | "Magic" | "Rare";
+export type TierCond = "4" | "5" | "45";
+export type Exceptional = "quality" | "sockets" | "twice" | "enchanted" | "quality18";
+
+/** 조건 조합: 걸린 조건을 모두 만족하는 아이템 (AND) */
+export type RuleDef = {
+  id: string;
+  rarity: Rarity[];
+  tier?: TierCond;
+  exceptional?: Exceptional;
+  ilvl?: number;
+};
+
+export const RARITY_KO: Record<Rarity, string> = { Normal: "일반", Magic: "마법", Rare: "희귀" };
+export const TIER_KO: Record<TierCond, string> = { "4": "4등급", "5": "5등급", "45": "4~5등급" };
+
 const BIG = new Set(["Body Armours", "Bows", "Crossbows", "Quarterstaves", "Staves", "Talismans", "Two Hand Maces"]);
+const socketsFor = (filterClass?: string) => (filterClass && BIG.has(filterClass) ? 3 : 2);
 
-const rarityVariants: Variant[] = [
-  { id: "normal", label: "일반", conditions: ["Rarity Normal"], order: 6, tone: "normal", sample: { Rarity: "Normal" } },
-  { id: "magic", label: "마법", conditions: ["Rarity Magic"], order: 6, tone: "magic", sample: { Rarity: "Magic" } },
-  { id: "rare", label: "희귀", conditions: ["Rarity Rare"], order: 6, tone: "rare", sample: { Rarity: "Rare" } },
-];
-
-const tierVariants: Variant[] = [
-  {
-    id: "t5",
-    label: "5등급",
-    conditions: ["UnidentifiedItemTier >= 5", NMR],
-    order: 3,
-    tone: "rare",
-    sample: { Rarity: "Rare", UnidentifiedItemTier: 5 },
-  },
-  {
-    id: "t4",
-    label: "4등급",
-    conditions: ["UnidentifiedItemTier 4", NMR],
-    order: 4,
-    tone: "rare",
-    sample: { Rarity: "Rare", UnidentifiedItemTier: 4 },
-  },
-];
-
-const twice: Variant = {
-  id: "twice",
-  label: "이중 타락",
-  conditions: ["TwiceCorrupted True", NMR],
-  order: 1,
-  tone: "rare",
-  sample: { Rarity: "Rare", Corrupted: true, TwiceCorrupted: true },
-};
-
-const ilvl82: Variant = {
-  id: "ilvl82",
-  label: "아이템 레벨 82+",
-  conditions: ["ItemLevel >= 82", "Rarity Normal Magic"],
-  order: 5,
-  tone: "normal",
-  sample: { Rarity: "Normal", ItemLevel: 82 },
-};
-
-/** 장비(무기·방어구) 조건. 소켓 초과 기준은 양손·갑옷 3개, 나머지 2개. */
-function gearVariants(filterClass: string): Variant[] {
-  const sockets = BIG.has(filterClass) ? 3 : 2;
-  return [
-    ...rarityVariants,
-    ...tierVariants,
-    {
-      id: "quality",
-      label: "품질 21+",
-      conditions: ["Corrupted False", "Quality >= 21", NMR],
-      order: 2,
-      tone: "rare",
-      sample: { Rarity: "Rare", Quality: 21 },
-    },
-    {
-      id: "sockets",
-      label: `소켓 ${sockets}개+`,
-      conditions: ["Corrupted False", `Sockets >= ${sockets}`, NMR],
-      order: 2,
-      tone: "rare",
-      sample: { Rarity: "Rare", Sockets: sockets },
-    },
-    twice,
-    ilvl82,
-  ];
+export function exceptionalLabel(e: Exceptional, filterClass?: string): string {
+  switch (e) {
+    case "quality":
+      return "품질 21+";
+    case "sockets":
+      return filterClass ? `소켓 ${socketsFor(filterClass)}개+` : "소켓 초과";
+    case "twice":
+      return "이중 타락";
+    case "enchanted":
+      return "타락 인챈트";
+    case "quality18":
+      return "품질 18+";
+  }
 }
 
-const JEWELLERY_VARIANTS: Variant[] = [...rarityVariants, ...tierVariants, twice, ilvl82];
-
-const JEWEL_VARIANTS: Variant[] = [
-  {
-    id: "enchanted",
-    label: "타락 인챈트",
-    conditions: ["AnyEnchantment True", "Corrupted True", NMR],
-    order: 2,
-    tone: "rare",
-    sample: { Rarity: "Rare", Corrupted: true, AnyEnchantment: true },
-  },
-  { id: "rare", label: "희귀", conditions: ["Rarity Rare"], order: 6, tone: "rare", sample: { Rarity: "Rare" } },
-  {
-    id: "magic",
-    label: "일반·마법",
-    conditions: ["Rarity Normal Magic"],
-    order: 6,
-    tone: "magic",
-    sample: { Rarity: "Magic" },
-  },
-];
-
-const FLASK_VARIANTS: Variant[] = [
-  {
-    id: "quality",
-    label: "품질 18+",
-    conditions: ["Quality >= 18", "Rarity Normal Magic"],
-    order: 2,
-    tone: "magic",
-    sample: { Rarity: "Magic", Quality: 20, ItemLevel: 82 },
-  },
-  {
-    id: "magic",
-    label: "일반·마법",
-    conditions: ["Rarity Normal Magic"],
-    order: 6,
-    tone: "magic",
-    sample: { Rarity: "Magic" },
-  },
-];
-
-/** 장비류 탭: 어떤 클래스를 넣고 조건을 어떻게 나눌지 */
-export const EQUIPMENT_TABS: {
+/** 장비류 탭이 어떤 조건을 고를 수 있는지와 기본 조합 */
+export type TabSpec = {
   id: string;
   label: string;
   match: (g: GearClass) => boolean;
-  variants: (g: GearClass) => Variant[];
-}[] = [
+  rarities: Rarity[];
+  tiers: boolean;
+  exceptionals: Exceptional[];
+  ilvl: boolean;
+  /** 처음 주어지는 조합 (예전 단일 조건 버튼과 같은 id 라 저장된 배치가 이어진다) */
+  defaults: RuleDef[];
+};
+
+const NMR: Rarity[] = ["Normal", "Magic", "Rare"];
+
+export const EQUIPMENT_TABS: TabSpec[] = [
   {
     id: "gear",
     label: "장비",
     match: (g) => !/Rings|Amulets|Belts|Jewels|Charms|Flasks|Gems|Tablet|Relics/.test(g.filterClass),
-    variants: (g) => gearVariants(g.filterClass),
+    rarities: NMR,
+    tiers: true,
+    exceptionals: ["quality", "sockets", "twice"],
+    ilvl: true,
+    defaults: [
+      { id: "normal", rarity: ["Normal"] },
+      { id: "magic", rarity: ["Magic"] },
+      { id: "rare", rarity: ["Rare"] },
+      { id: "t5", rarity: NMR, tier: "5" },
+      { id: "t4", rarity: NMR, tier: "4" },
+      { id: "quality", rarity: NMR, exceptional: "quality" },
+      { id: "sockets", rarity: NMR, exceptional: "sockets" },
+      { id: "twice", rarity: NMR, exceptional: "twice" },
+      { id: "ilvl82", rarity: ["Normal", "Magic"], ilvl: 82 },
+    ],
   },
   {
     id: "jewellery",
     label: "장신구",
     match: (g) => ["Rings", "Amulets", "Belts"].includes(g.filterClass),
-    variants: () => JEWELLERY_VARIANTS,
+    rarities: NMR,
+    tiers: true,
+    exceptionals: ["twice"],
+    ilvl: true,
+    defaults: [
+      { id: "normal", rarity: ["Normal"] },
+      { id: "magic", rarity: ["Magic"] },
+      { id: "rare", rarity: ["Rare"] },
+      { id: "t5", rarity: NMR, tier: "5" },
+      { id: "t4", rarity: NMR, tier: "4" },
+      { id: "twice", rarity: NMR, exceptional: "twice" },
+      { id: "ilvl82", rarity: ["Normal", "Magic"], ilvl: 82 },
+    ],
   },
-  { id: "jewels", label: "주얼", match: (g) => g.filterClass === "Jewels", variants: () => JEWEL_VARIANTS },
+  {
+    id: "jewels",
+    label: "주얼",
+    match: (g) => g.filterClass === "Jewels",
+    rarities: NMR,
+    tiers: false,
+    exceptionals: ["enchanted"],
+    ilvl: false,
+    defaults: [
+      { id: "enchanted", rarity: NMR, exceptional: "enchanted" },
+      { id: "rare", rarity: ["Rare"] },
+      { id: "magic", rarity: ["Normal", "Magic"] },
+    ],
+  },
   {
     id: "flasks",
     label: "플라스크·호신부",
     match: (g) => /Charms|Flasks/.test(g.filterClass),
-    variants: () => FLASK_VARIANTS,
+    rarities: ["Normal", "Magic"],
+    tiers: false,
+    exceptionals: ["quality18"],
+    ilvl: false,
+    defaults: [
+      { id: "quality", rarity: ["Normal", "Magic"], exceptional: "quality18" },
+      { id: "magic", rarity: ["Normal", "Magic"] },
+    ],
   },
 ];
+
+/** 조합 이름: "희귀 · 5등급 · 품질 21+ · 아이템 레벨 82+" */
+export function ruleLabel(rule: RuleDef, spec: TabSpec, filterClass?: string): string {
+  const parts: string[] = [];
+  const allRarities = spec.rarities.every((r) => rule.rarity.includes(r));
+  if (!allRarities || (!rule.tier && !rule.exceptional && !rule.ilvl)) parts.push(rule.rarity.map((r) => RARITY_KO[r]).join("·"));
+  if (rule.tier) parts.push(TIER_KO[rule.tier]);
+  if (rule.exceptional) parts.push(exceptionalLabel(rule.exceptional, filterClass));
+  if (rule.ilvl) parts.push(`아이템 레벨 ${rule.ilvl}+`);
+  return parts.join(" · ");
+}
+
+/** 필터 안 순서: 조건이 많이 걸릴수록 먼저(작은 값). 특출난 > 등급 > 아이템 레벨 > 희귀도 순으로 무게를 둔다. */
+export function ruleOrder(rule: RuleDef, spec: TabSpec): number {
+  let weight = 0;
+  if (rule.exceptional) weight += 4;
+  if (rule.tier) weight += 3;
+  if (rule.ilvl) weight += 2;
+  if (!spec.rarities.every((r) => rule.rarity.includes(r))) weight += 1;
+  return 6 - weight;
+}
+
+export function ruleConditions(rule: RuleDef, filterClass: string): string[] {
+  const out: string[] = [];
+  if (rule.exceptional === "quality") out.push("Corrupted False", "Quality >= 21");
+  if (rule.exceptional === "sockets") out.push("Corrupted False", `Sockets >= ${socketsFor(filterClass)}`);
+  if (rule.exceptional === "twice") out.push("TwiceCorrupted True");
+  if (rule.exceptional === "enchanted") out.push("AnyEnchantment True", "Corrupted True");
+  if (rule.exceptional === "quality18") out.push("Quality >= 18");
+  if (rule.tier === "4") out.push("UnidentifiedItemTier 4");
+  if (rule.tier === "5") out.push("UnidentifiedItemTier >= 5");
+  if (rule.tier === "45") out.push("UnidentifiedItemTier >= 4");
+  if (rule.ilvl) out.push(`ItemLevel >= ${rule.ilvl}`);
+  out.push(`Rarity ${rule.rarity.join(" ")}`, `Class == "${filterClass}"`);
+  return out;
+}
+
+/** 기본 티어 계산용 예시: 조합을 만족하는 대표 아이템 (가장 높은 희귀도) */
+export function ruleSample(rule: RuleDef, filterClass: string): Sample {
+  const sample: Sample = { Rarity: rule.rarity[rule.rarity.length - 1] ?? "Normal" };
+  if (rule.exceptional === "quality") sample.Quality = 21;
+  if (rule.exceptional === "sockets") sample.Sockets = socketsFor(filterClass);
+  if (rule.exceptional === "twice") Object.assign(sample, { Corrupted: true, TwiceCorrupted: true });
+  if (rule.exceptional === "enchanted") Object.assign(sample, { Corrupted: true, AnyEnchantment: true });
+  if (rule.exceptional === "quality18") Object.assign(sample, { Quality: 20, ItemLevel: 82 });
+  if (rule.tier) sample.UnidentifiedItemTier = rule.tier === "4" ? 4 : 5;
+  if (rule.ilvl) sample.ItemLevel = rule.ilvl;
+  return sample;
+}
+
+export function ruleTone(rule: RuleDef): Tone {
+  const top = rule.rarity[rule.rarity.length - 1];
+  return top === "Rare" ? "rare" : top === "Magic" ? "magic" : "normal";
+}
 
 /** 조건 없이 하나씩 넣는 항목(젬·기타) */
 export type ExtraItem = {

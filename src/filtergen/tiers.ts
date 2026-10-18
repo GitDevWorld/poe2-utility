@@ -5,7 +5,19 @@
  */
 import catalog from "./catalog.json";
 import { evaluate, parseRules, type Sample } from "./evaluate";
-import { buildExtraCategories, EQUIPMENT_TABS, type CatalogUnique, type GearClass, type Tone } from "./extras";
+import {
+  buildExtraCategories,
+  EQUIPMENT_TABS,
+  ruleConditions,
+  ruleLabel,
+  ruleOrder,
+  ruleSample,
+  ruleTone,
+  type CatalogUnique,
+  type GearClass,
+  type RuleDef,
+  type Tone,
+} from "./extras";
 
 export type TierId = "sss" | "ss" | "s" | "a" | "b" | "c" | "d" | "e" | "f" | "hidden";
 
@@ -174,7 +186,7 @@ export type TierModel = {
  * 아이템 목록·분류는 poe2db 카탈로그를 따르고, 기본 티어만 기준 필터로 계산한다:
  * 아이템마다 예시를 만들어 기준 필터에서 처음 걸리는 규칙의 표시 여부·소리를 본다.
  */
-export function buildTierModel(baseText: string): TierModel {
+export function buildTierModel(baseText: string, rulesByTab: Record<string, RuleDef[]> = {}): TierModel {
   const rules = parseRules(baseText);
   const samples = new Map<string, Sample>();
   const cache = new Map<string, TierId>();
@@ -232,32 +244,41 @@ export function buildTierModel(baseText: string): TierModel {
     }
   }
 
-  // 장비류: 클래스 → 조건 → 베이스
+  // 장비류: 클래스 → 조건 조합(AND) → 베이스. 조합이 많이 걸린 것부터 필터에서 먼저 걸린다.
   for (const tab of EQUIPMENT_TABS) {
     const classes = CATALOG.gear.filter((g) => tab.match(g) && g.bases.length);
+    const rules = [...(rulesByTab[tab.id] ?? tab.defaults)].sort((a, b) => ruleOrder(a, tab) - ruleOrder(b, tab));
     const items: TierItem[] = [];
     const variants: Record<string, { id: string; label: string }[]> = {};
     for (const g of classes) {
-      const list = tab.variants(g);
-      variants[g.filterClass] = list.map(({ id, label }) => ({ id, label }));
+      variants[g.filterClass] = rules.map((r) => ({ id: r.id, label: ruleLabel(r, tab, g.filterClass) }));
       const bases = [...g.bases].sort((a, b) => (a.level ?? 0) - (b.level ?? 0));
-      for (const v of list) {
-        const conditions = [...v.conditions, `Class == "${g.filterClass}"`];
+      for (const rule of rules) {
+        const conditions = ruleConditions(rule, g.filterClass);
+        const order = ruleOrder(rule, tab);
+        const tone = ruleTone(rule);
+        const ruleSampleValues = ruleSample(rule, g.filterClass);
         for (const b of bases) {
-          const id = `${tab.id}|${g.filterClass}|${v.id}|${b.en}`;
+          const id = `${tab.id}|${g.filterClass}|${rule.id}|${b.en}`;
           items.push({
             id,
             label: b.ko,
             icon: b.icon,
             baseTypes: [b.en],
             conditions,
-            order: v.order,
-            tone: v.tone,
+            order,
+            tone,
             sub: g.filterClass,
-            variant: v.id,
+            variant: rule.id,
             level: b.level,
           });
-          samples.set(id, { Class: g.filterClass, BaseType: b.en, DropLevel: b.level || 1, UnidentifiedItemTier: 1, ...v.sample });
+          samples.set(id, {
+            Class: g.filterClass,
+            BaseType: b.en,
+            DropLevel: b.level || 1,
+            UnidentifiedItemTier: 1,
+            ...ruleSampleValues,
+          });
         }
       }
     }
