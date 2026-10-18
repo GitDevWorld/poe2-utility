@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import App from "./App";
 import { TabletRegexPage } from "./tablet/TabletRegexPage";
 import { GuidePage, type GuideTab } from "./guide/GuidePage";
@@ -6,9 +6,11 @@ import { WaystonePage } from "./waystone/WaystonePage";
 import { ContentPage } from "./content/ContentPage";
 import { CONTENT_SETUPS } from "./content/setups";
 import { FilterPage } from "./filter/FilterPage";
-import { FilterGenPage } from "./filtergen/FilterGenPage";
 
 type Page = "exchange" | "tablet" | "waystone" | "filter" | "filter-gen" | "guide-ring" | "guide-jewel" | `content-${string}`;
+
+// 아이템 데이터(이름·아이콘)가 커서 필터 생성기는 열 때 불러온다.
+const FilterGenPage = lazy(() => import("./filtergen/FilterGenPage").then((m) => ({ default: m.FilterGenPage })));
 
 const HASH: Record<Page, string> = {
   exchange: "",
@@ -131,7 +133,9 @@ export default function Root() {
         ) : page === "filter" ? (
           <FilterPage />
         ) : page === "filter-gen" ? (
-          <FilterGenPage />
+          <Suspense fallback={<div className="page">불러오는 중…</div>}>
+            <FilterGenPage />
+          </Suspense>
         ) : page.startsWith("content-") ? (
           <ContentPage key={page} setupId={page.slice("content-".length)} />
         ) : guideTab ? (

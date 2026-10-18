@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { Segmented } from "../components/SearchOutputs";
+import { iconUrl } from "../format";
 import {
   CATEGORIES,
   cellKey,
   generateFilter,
   readDefaults,
   SOUNDS,
+  type CellGroup,
   type CellInfo,
   type Changes,
 } from "./generate";
+import itemData from "./items.json";
 
 type BaseId = "sskim" | "jjm";
 
@@ -16,6 +19,52 @@ const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
   { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
   { id: "jjm", label: "정정민 필터", name: "돈만쳐먹는정정민필터", file: "/filters/jjm.filter" },
 ];
+
+const ITEMS = itemData as Record<string, { ko: string; icon?: string }>;
+const PREVIEW = 14;
+
+function ItemChip({ name }: { name: string }) {
+  const item = ITEMS[name];
+  const label = item?.ko ?? name;
+  return (
+    <li className="fg-item" title={name}>
+      {item?.icon ? (
+        <img src={iconUrl(item.icon)} alt="" width={22} height={22} loading="lazy" />
+      ) : (
+        <span className="fg-item-fallback" aria-hidden>
+          {label.slice(0, 1)}
+        </span>
+      )}
+      {label}
+    </li>
+  );
+}
+
+function GroupItems({ group, sound }: { group: CellGroup; sound?: string }) {
+  const [open, setOpen] = useState(false);
+  const items = open ? group.items : group.items.slice(0, PREVIEW);
+  const shownSound = group.show ? (sound === "none" ? undefined : sound || group.sound) : undefined;
+  return (
+    <div className="fg-group">
+      <span className={`fg-level${shownSound ? "" : " mute"}`}>{shownSound ?? "소리 없음"}</span>
+      {group.note && <span className="fg-note">{group.note}</span>}
+      {group.items.length > 0 && (
+        <ul className="fg-items">
+          {items.map((name) => (
+            <ItemChip key={name} name={name} />
+          ))}
+          {group.items.length > PREVIEW && (
+            <li>
+              <button type="button" className="fg-more" onClick={() => setOpen((v) => !v)}>
+                {open ? "접기" : `+${group.items.length - PREVIEW}개 더`}
+              </button>
+            </li>
+          )}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export function FilterGenPage() {
   const [baseId, setBaseId] = useState<BaseId>("jjm");
@@ -98,7 +147,8 @@ export function FilterGenPage() {
         </div>
 
         <p className="fg-help">
-          칸마다 스위치로 표시/숨김을 정하고, 소리는 "기본"이면 기준 필터 그대로입니다. 내려받은 파일과 사운드 mp3를{" "}
+          등급마다 스위치로 표시/숨김을 정하고, 소리는 "기본"이면 기준 필터 그대로입니다. 줄마다 그 등급에 들어 있는 아이템과
+          소리 레벨(lv1이 가장 신나는 소리)이 보입니다. 내려받은 파일과 사운드 mp3를{" "}
           <code>문서\My Games\Path of Exile 2</code> 폴더에 넣고 게임에서 고르면 됩니다. 사운드는{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             여기
@@ -110,52 +160,68 @@ export function FilterGenPage() {
         {!text && !error && <p className="fg-help">기준 필터 불러오는 중…</p>}
 
         {text &&
-          CATEGORIES.map((category) => (
-            <div key={category.id} className="fg-category">
-              <h3>{category.label}</h3>
-              <div className="fg-cells">
-                {category.cells.map((cell) => {
-                  const key = cellKey(category.id, cell.id);
-                  const info = defaults[key];
-                  if (!info?.found) return null;
-                  const change = changes[key] ?? {};
-                  const show = change.show ?? info.show;
-                  const changed = change.show !== undefined || Boolean(change.sound);
-                  return (
-                    <div key={key} className={`fg-cell${show ? " on" : ""}${changed ? " changed" : ""}`}>
-                      <div className="fg-cell-head">
-                        <span className="fg-cell-label">{cell.label}</span>
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={show}
-                          aria-label={`${category.label} ${cell.label} ${show ? "표시" : "숨김"}`}
-                          className={`fg-switch${show ? " on" : ""}`}
-                          onClick={() => setCell(key, { show: !show })}
-                        >
-                          <span />
-                        </button>
+          CATEGORIES.map((category) => {
+            const firstIcon = category.cells
+              .flatMap((cell) => defaults[cellKey(category.id, cell.id)]?.groups ?? [])
+              .flatMap((g) => g.items)
+              .map((name) => ITEMS[name]?.icon)
+              .find(Boolean);
+            return (
+              <div key={category.id} className="fg-category">
+                <h3>
+                  {firstIcon && <img src={iconUrl(firstIcon)} alt="" width={28} height={28} />}
+                  {category.label}
+                </h3>
+                <div className="fg-rows">
+                  {category.cells.map((cell) => {
+                    const key = cellKey(category.id, cell.id);
+                    const info = defaults[key];
+                    if (!info?.found) return null;
+                    const change = changes[key] ?? {};
+                    const show = change.show ?? info.show;
+                    const changed = change.show !== undefined || Boolean(change.sound);
+                    return (
+                      <div key={key} className={`fg-row${show ? " on" : ""}${changed ? " changed" : ""}`}>
+                        <div className="fg-row-ctrl">
+                          <span className="fg-tier">{cell.label}</span>
+                          <button
+                            type="button"
+                            role="switch"
+                            aria-checked={show}
+                            aria-label={`${category.label} ${cell.label} ${show ? "표시" : "숨김"}`}
+                            className={`fg-switch${show ? " on" : ""}`}
+                            onClick={() => setCell(key, { show: !show })}
+                          >
+                            <span />
+                          </button>
+                          <select
+                            className="fg-sound"
+                            aria-label={`${category.label} ${cell.label} 소리`}
+                            value={change.sound ?? ""}
+                            disabled={!show}
+                            onChange={(event) => setCell(key, { sound: event.target.value })}
+                          >
+                            <option value="">소리 기본</option>
+                            {SOUNDS.map((s) => (
+                              <option key={s} value={s}>
+                                {s}
+                              </option>
+                            ))}
+                            <option value="none">소리 없음</option>
+                          </select>
+                        </div>
+                        <div className="fg-row-items">
+                          {info.groups.map((group, i) => (
+                            <GroupItems key={i} group={{ ...group, show }} sound={change.sound} />
+                          ))}
+                        </div>
                       </div>
-                      <select
-                        className="fg-sound"
-                        value={change.sound ?? ""}
-                        disabled={!show}
-                        onChange={(event) => setCell(key, { sound: event.target.value })}
-                      >
-                        <option value="">기본{info.sound ? ` (${info.sound})` : " (소리 없음)"}</option>
-                        {SOUNDS.map((s) => (
-                          <option key={s} value={s}>
-                            {s}
-                          </option>
-                        ))}
-                        <option value="none">소리 없음</option>
-                      </select>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
       </section>
     </div>
   );

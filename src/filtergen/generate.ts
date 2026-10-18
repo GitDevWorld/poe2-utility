@@ -119,7 +119,29 @@ function blockSound(lines: string[], block: Block): string | undefined {
   return undefined;
 }
 
-export type CellInfo = { found: boolean; show: boolean; sound?: string };
+/** 칸 안의 블록 하나: 같은 소리로 묶인 아이템들 */
+export type CellGroup = { show: boolean; sound?: string; items: string[]; note?: string };
+export type CellInfo = { found: boolean; show: boolean; sound?: string; groups: CellGroup[] };
+
+function blockItems(lines: string[], block: Block): string[] {
+  const items: string[] = [];
+  for (let i = block.start; i < block.end; i++) {
+    const m = lines[i].match(/^\s*BaseType ==? (.*)$/);
+    if (m) for (const q of m[1].match(/"[^"]+"/g) ?? []) items.push(q.slice(1, -1));
+  }
+  return items;
+}
+
+/** BaseType 없이 조건으로 거르는 블록(조각 묶음 수, 경로석 등급)의 설명 */
+function blockNote(lines: string[], block: Block): string | undefined {
+  for (let i = block.start; i < block.end; i++) {
+    const stack = lines[i].match(/^\s*StackSize >= (\d+)/);
+    if (stack) return `${stack[1]}개 이상 묶음`;
+    const tier = lines[i].match(/^\s*WaystoneTier (>= )?(\d+)/);
+    if (tier) return `경로석 ${tier[2]}등급${tier[1] ? " 이상" : ""}`;
+  }
+  return undefined;
+}
 
 /** 기준 필터에서 칸마다 지금 상태(표시 여부, 첫 블록의 소리)를 읽는다. */
 export function readDefaults(text: string): Record<string, CellInfo> {
@@ -127,12 +149,31 @@ export function readDefaults(text: string): Record<string, CellInfo> {
   const blocks = findBlocks(lines);
   const out: Record<string, CellInfo> = {};
   for (const category of CATEGORIES) {
+    // 필터는 위에서부터 먼저 걸리는 블록이 이긴다: 같은 종류 안에서 앞 블록(다른 칸 포함)에
+    // 이미 잡힌 아이템은 뒤 블록에서 빼고 보여 준다. 예) 연금술의 오브는 D가 아니라 연금술 칸.
+    const owned = new Map<Block, string[]>();
+    const seen = new Set<string>();
+    const all = blocks.filter((b) => category.cells.some((cell) => matches(b, category, cell)));
+    for (const b of all) {
+      const items = blockItems(lines, b).filter((name) => !seen.has(name));
+      // 묶음 수·등급 같은 조건이 붙은 블록은 그 아이템을 전부 잡지 않는다.
+      if (!blockNote(lines, b)) items.forEach((name) => seen.add(name));
+      owned.set(b, items);
+    }
     for (const cell of category.cells) {
-      const hit = blocks.filter((b) => matches(b, category, cell));
+      const hit = all.filter((b) => matches(b, category, cell));
+      const groups: CellGroup[] = [];
+      for (const b of hit) {
+        const items = owned.get(b) ?? [];
+        const note = blockNote(lines, b);
+        if (!items.length && !note) continue;
+        groups.push({ show: b.header.startsWith("Show"), sound: blockSound(lines, b), items, note });
+      }
       out[cellKey(category.id, cell.id)] = {
         found: hit.length > 0,
         show: hit.some((b) => b.header.startsWith("Show")),
         sound: hit.map((b) => blockSound(lines, b)).find(Boolean),
+        groups,
       };
     }
   }
