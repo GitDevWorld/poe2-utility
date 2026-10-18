@@ -3234,6 +3234,25 @@ a.tablet-mod-price-col.hot {
   border-radius: 10px;
 }
 
+.tm-variant-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.tm-variant-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.tm-variant-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
 .chip.small {
   min-height: 28px;
   padding: 0 10px;

@@ -28,6 +28,21 @@ const STORAGE_KEY = "filtergen.tiers";
 const OLD_KEYS = ["filtergen.tiers.v4", "filtergen.tiers.v3", "filtergen.tiers.v2", "filtergen.tiers.v1"];
 const ALL = "all";
 
+/** 장비류 조건 버튼 묶음. 특출난 = 품질 21+·소켓 초과·이중 타락·타락 인챈트 (NeverSink 의 Exceptional) */
+const VARIANT_GROUPS = ["희귀도", "미확인 등급", "특출난", "아이템 레벨"];
+const VARIANT_GROUP: Record<string, string> = {
+  normal: "희귀도",
+  magic: "희귀도",
+  rare: "희귀도",
+  t5: "미확인 등급",
+  t4: "미확인 등급",
+  quality: "특출난",
+  sockets: "특출난",
+  twice: "특출난",
+  enchanted: "특출난",
+  ilvl82: "아이템 레벨",
+};
+
 type View = { categoryId: string; subId: string | null; variantId: string | null };
 type Saved = {
   baseId: BaseId;
@@ -380,20 +395,29 @@ export function FilterGenPage() {
                   ))}
                 </div>
                 {variants.length > 0 && (
-                  <div className="chip-row" role="group" aria-label="조건">
-                    {variants.map((v) => (
-                      <button
-                        key={v.id}
-                        type="button"
-                        className={`chip small variant ${v.id === variant?.id ? "active" : ""}`}
-                        onClick={() => {
-                          setVariantId(v.id);
-                          setSelected(null);
-                        }}
-                      >
-                        {v.label}
-                      </button>
-                    ))}
+                  <div className="tm-variant-groups">
+                    {VARIANT_GROUPS.map((group) => {
+                      const list = variants.filter((v) => (VARIANT_GROUP[v.id] ?? "희귀도") === group);
+                      if (!list.length) return null;
+                      return (
+                        <div key={group} className="tm-variant-group" role="group" aria-label={group}>
+                          <span className="tm-variant-title">{group}</span>
+                          {list.map((v) => (
+                            <button
+                              key={v.id}
+                              type="button"
+                              className={`chip small variant ${v.id === variant?.id ? "active" : ""}`}
+                              onClick={() => {
+                                setVariantId(v.id);
+                                setSelected(null);
+                              }}
+                            >
+                              {v.label}
+                            </button>
+                          ))}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
