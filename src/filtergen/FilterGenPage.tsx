@@ -20,16 +20,46 @@ const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
   { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
 ];
 
-// 고유를 베이스 단위 타일로 바꿔 아이템 id 가 달라졌다.
-const STORAGE_KEY = "filtergen.tiers.v4";
+/**
+ * 설정은 브라우저에 자동 저장한다. 키는 바꾸지 않는다: 아이템 id 가 바뀌어도 모르는 id 는 그냥 무시되므로
+ * 지울 필요가 없다. 예전 버전 키에 남은 설정은 처음 한 번 옮겨 온다.
+ */
+const STORAGE_KEY = "filtergen.tiers";
+const OLD_KEYS = ["filtergen.tiers.v4", "filtergen.tiers.v3", "filtergen.tiers.v2", "filtergen.tiers.v1"];
 const ALL = "all";
 
-type Saved = { baseId: BaseId; assign: Record<string, TierId>; settings: Partial<Record<TierId, TierSetting>> };
+type View = { categoryId: string; subId: string | null; variantId: string | null };
+type Saved = {
+  baseId: BaseId;
+  assign: Record<string, TierId>;
+  settings: Partial<Record<TierId, TierSetting>>;
+  view?: View;
+};
+
+function parseSaved(raw: string | null): Saved | undefined {
+  if (!raw) return undefined;
+  const data = JSON.parse(raw) as Partial<Saved>;
+  if (!data || typeof data !== "object" || typeof data.assign !== "object") return undefined;
+  return {
+    baseId: data.baseId === "sskim" ? "sskim" : "jjm",
+    assign: data.assign ?? {},
+    settings: data.settings ?? {},
+    view: data.view,
+  };
+}
 
 function loadSaved(): Saved | undefined {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Saved) : undefined;
+    const current = parseSaved(window.localStorage.getItem(STORAGE_KEY));
+    if (current) return current;
+    // 예전 키에 남은 배치를 모두 합쳐 옮겨 온다 (최근 키가 우선).
+    const old = OLD_KEYS.map((key) => parseSaved(window.localStorage.getItem(key))).filter(Boolean) as Saved[];
+    if (!old.length) return undefined;
+    return {
+      baseId: old[0].baseId,
+      assign: Object.assign({}, ...[...old].reverse().map((s) => s.assign)),
+      settings: old[0].settings,
+    };
   } catch {
     return undefined;
   }
@@ -94,9 +124,11 @@ export function FilterGenPage() {
   const [error, setError] = useState("");
   const [assign, setAssign] = useState<Record<string, TierId>>(saved?.assign ?? {});
   const [settings, setSettings] = useState<Record<TierId, TierSetting>>({ ...defaultSettings(), ...saved?.settings });
-  const [categoryId, setCategoryId] = useState(ALL);
-  const [subId, setSubId] = useState<string | null>(null);
-  const [variantId, setVariantId] = useState<string | null>(null);
+  const [categoryId, setCategoryId] = useState(saved?.view?.categoryId ?? ALL);
+  const [subId, setSubId] = useState<string | null>(saved?.view?.subId ?? null);
+  const [variantId, setVariantId] = useState<string | null>(saved?.view?.variantId ?? null);
+  const [saveState, setSaveState] = useState<"saved" | "failed" | null>(null);
+  const [notice, setNotice] = useState("");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState<TierId | null>(null);
@@ -122,11 +154,14 @@ export function FilterGenPage() {
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ baseId, assign, settings } satisfies Saved));
+      const view: View = { categoryId, subId, variantId };
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ baseId, assign, settings, view } satisfies Saved));
+      setSaveState("saved");
     } catch {
-      // 저장 못 해도 화면은 그대로 동작한다.
+      // 사생활 보호 모드 등에서는 저장이 안 될 수 있다. 화면은 그대로 동작한다.
+      setSaveState("failed");
     }
-  }, [baseId, assign, settings]);
+  }, [baseId, assign, settings, categoryId, subId, variantId]);
 
   const model = useMemo<TierModel | null>(() => (text ? buildTierModel(text) : null), [text]);
   const tierOf = (id: string): TierId => assign[id] ?? model?.defaultOf(id) ?? "hidden";
@@ -181,14 +216,40 @@ export function FilterGenPage() {
     setSelected(null);
   };
 
-  const changeBase = (id: BaseId) => {
-    setBaseId(id);
-    setAssign({});
-  };
+  // 기본값 필터를 바꿔도 직접 옮긴 배치는 그대로 두고, 옮기지 않은 아이템만 새 기본값을 따른다.
+  const changeBase = (id: BaseId) => setBaseId(id);
 
   const reset = () => {
+    if (!window.confirm("옮긴 배치와 티어 설정을 모두 지우고 기본값으로 되돌릴까요?")) return;
     setAssign({});
     setSettings(defaultSettings());
+  };
+
+  /** 설정 백업: 다른 PC·브라우저로 옮기거나 브라우저 데이터를 지우기 전에 */
+  const exportSettings = () => {
+    const data = { app: "poe2-utility-filtergen", version: 1, baseId, assign, settings };
+    const blob = new Blob([JSON.stringify(data, null, 1)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "poe2-filtergen-settings.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importSettings = (file: File | undefined) => {
+    if (!file) return;
+    file
+      .text()
+      .then((body) => {
+        const data = parseSaved(body);
+        if (!data) throw new Error("bad");
+        setBaseId(data.baseId);
+        setAssign(data.assign);
+        setSettings({ ...defaultSettings(), ...data.settings });
+        setNotice(`설정을 가져왔습니다 (옮긴 아이템 ${Object.keys(data.assign).length}개).`);
+      })
+      .catch(() => setNotice("설정 파일을 읽지 못했습니다."));
   };
 
   const download = () => {
@@ -226,7 +287,25 @@ export function FilterGenPage() {
             <Segmented value={baseId} options={BASES} onChange={changeBase} />
           </div>
           <div className="fg-actions">
-            <span className="fg-count">{movedCount ? `${movedCount}개 옮김` : "기본 배치"}</span>
+            <span className="fg-count">
+              {movedCount ? `${movedCount}개 옮김` : "기본 배치"}
+              {saveState === "saved" && " · 브라우저에 자동 저장됨"}
+              {saveState === "failed" && " · 이 브라우저에서는 저장이 안 됩니다 (설정 내보내기로 백업하세요)"}
+            </span>
+            <button type="button" className="btn" onClick={exportSettings}>
+              설정 내보내기
+            </button>
+            <label className="btn fg-import">
+              설정 가져오기
+              <input
+                type="file"
+                accept="application/json,.json"
+                onChange={(event) => {
+                  importSettings(event.target.files?.[0]);
+                  event.target.value = "";
+                }}
+              />
+            </label>
             <button type="button" className="btn" onClick={reset}>
               초기화
             </button>
@@ -235,6 +314,7 @@ export function FilterGenPage() {
             </button>
           </div>
         </div>
+        {notice && <p className="fg-notice">{notice}</p>}
 
         <p className="fg-help">
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를

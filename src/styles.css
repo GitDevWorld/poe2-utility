@@ -3155,6 +3155,29 @@ a.tablet-mod-price-col.hot {
   color: var(--gold);
 }
 
+.fg-import {
+  position: relative;
+  cursor: pointer;
+}
+
+.fg-import input {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fg-notice {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
 .fg-error {
   margin: 0;
   color: var(--down);
