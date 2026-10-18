@@ -3108,3 +3108,149 @@ a.tablet-mod-price-col.hot {
     grid-column: 1 / -1;
   }
 }
+
+/* 필터 생성기 */
+.fg-page {
+  display: grid;
+  gap: 16px;
+}
+
+.fg-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fg-base,
+.fg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.fg-count {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.fg-help {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.fg-help code {
+  padding: 1px 6px;
+  color: var(--text);
+  background: var(--card-2);
+  border-radius: 4px;
+}
+
+.fg-help a {
+  color: var(--gold);
+}
+
+.fg-error {
+  margin: 0;
+  color: var(--down);
+}
+
+.fg-category h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.fg-cells {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.fg-cell {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.fg-cell.on {
+  background: var(--card);
+}
+
+.fg-cell.changed {
+  border-color: var(--gold);
+}
+
+.fg-cell-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fg-cell-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fg-cell:not(.on) .fg-cell-label {
+  color: var(--faint);
+}
+
+.fg-switch {
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 20px;
+  padding: 0;
+  background: var(--line-strong);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.fg-switch span {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--text);
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+.fg-switch.on {
+  background: var(--up);
+}
+
+.fg-switch.on span {
+  transform: translateX(16px);
+}
+
+.fg-switch:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.fg-sound {
+  width: 100%;
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+}
+
+.fg-sound:disabled {
+  opacity: 0.4;
+}

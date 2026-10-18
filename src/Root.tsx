@@ -6,14 +6,16 @@ import { WaystonePage } from "./waystone/WaystonePage";
 import { ContentPage } from "./content/ContentPage";
 import { CONTENT_SETUPS } from "./content/setups";
 import { FilterPage } from "./filter/FilterPage";
+import { FilterGenPage } from "./filtergen/FilterGenPage";
 
-type Page = "exchange" | "tablet" | "waystone" | "filter" | "guide-ring" | "guide-jewel" | `content-${string}`;
+type Page = "exchange" | "tablet" | "waystone" | "filter" | "filter-gen" | "guide-ring" | "guide-jewel" | `content-${string}`;
 
 const HASH: Record<Page, string> = {
   exchange: "",
   tablet: "#tablet",
   waystone: "#waystone",
   filter: "#filter",
+  "filter-gen": "#filter-gen",
   "guide-ring": "#guide",
   "guide-jewel": "#guide-jewel",
   ...Object.fromEntries(CONTENT_SETUPS.map((s) => [`content-${s.id}`, `#content-${s.id}`])),
@@ -24,6 +26,7 @@ const TITLES: Record<Page, string> = {
   tablet: "POE2 서판",
   waystone: "POE2 경로석",
   filter: "POE2 아이템 필터",
+  "filter-gen": "POE2 필터 생성기",
   "guide-ring": "POE2 제작 가이드 · 풀매찬 반지",
   "guide-jewel": "POE2 제작 가이드 · 5옵션 보석",
   ...Object.fromEntries(CONTENT_SETUPS.map((s) => [`content-${s.id}`, `POE2 콘텐츠 세팅 · ${s.label}`])),
@@ -36,6 +39,7 @@ const NAV: { title?: string; items: { page: Page; label: string }[] }[] = [
       { page: "tablet", label: "서판" },
       { page: "waystone", label: "경로석" },
       { page: "filter", label: "아이템 필터" },
+      { page: "filter-gen", label: "필터 생성기" },
     ],
   },
   {
@@ -126,6 +130,8 @@ export default function Root() {
           <WaystonePage />
         ) : page === "filter" ? (
           <FilterPage />
+        ) : page === "filter-gen" ? (
+          <FilterGenPage />
         ) : page.startsWith("content-") ? (
           <ContentPage key={page} setupId={page.slice("content-".length)} />
         ) : guideTab ? (
