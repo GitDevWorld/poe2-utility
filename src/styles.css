@@ -3208,8 +3208,7 @@ a.tablet-mod-price-col.hot {
   font-weight: 700;
 }
 
-.fg-row:not(.on) .fg-tier,
-.fg-row:not(.on) .fg-row-items {
+.fg-row:not(.on) .fg-tier {
   opacity: 0.45;
 }
 
@@ -3259,15 +3258,50 @@ a.tablet-mod-price-col.hot {
   align-items: center;
   gap: 4px;
   padding: 2px 8px 2px 3px;
+  font: inherit;
   font-size: 12px;
+  color: var(--faint);
+  text-decoration: line-through;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 999px;
+  cursor: pointer;
+}
+
+.fg-item img {
+  opacity: 0.35;
+}
+
+.fg-item.on {
+  color: var(--text);
+  text-decoration: none;
+  background: var(--card-2);
+  border-color: var(--line-strong);
+}
+
+.fg-item.on img {
+  opacity: 1;
+}
+
+.fg-item.changed {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold) inset;
+}
+
+.fg-item:hover {
+  border-color: var(--gold);
+}
+
+.fg-limit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .fg-item img {
   flex: none;
   object-fit: contain;
+  transition: opacity 0.15s;
 }
 
 .fg-item-fallback {
