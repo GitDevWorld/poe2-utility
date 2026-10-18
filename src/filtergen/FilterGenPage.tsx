@@ -85,7 +85,15 @@ function defaultSettings(): Record<TierId, TierSetting> {
   >;
 }
 
-function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: boolean; onSelect: () => void }) {
+function ItemTile({
+  item,
+  selected,
+  onSelect,
+}: {
+  item: TierItem;
+  selected: boolean;
+  onSelect: (shift: boolean) => void;
+}) {
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData("text/plain", item.id);
     event.dataTransfer.effectAllowed = "move";
@@ -108,7 +116,7 @@ function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: bool
         className={`tm-item${selected ? " selected" : ""}${item.members ? " unique" : ""}`}
         title={title}
         aria-pressed={selected}
-        onClick={onSelect}
+        onClick={(event) => onSelect(event.shiftKey)}
       >
         {item.icon ? (
           <img src={iconUrl(item.icon)} alt="" width={36} height={36} loading="lazy" draggable={false} />
@@ -150,7 +158,9 @@ export function FilterGenPage() {
   });
   const [notice, setNotice] = useState("");
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<string | null>(null);
+  // 여러 개 선택: 누를 때마다 넣고 빼고, Shift+클릭은 같은 줄의 범위를 고른다.
+  const [selected, setSelected] = useState<string[]>([]);
+  const [anchor, setAnchor] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState<TierId | null>(null);
   const [bulkTier, setBulkTier] = useState<TierId>("hidden");
 
@@ -269,15 +279,35 @@ export function FilterGenPage() {
       }
       return next;
     });
-    setSelected(null);
+    setSelected([]);
   };
   const moveTo = (itemId: string, tier: TierId) => moveMany([itemId], tier);
+
+  const toggleSelect = (rowItems: TierItem[], id: string, shift: boolean) => {
+    const ids = rowItems.map((i) => i.id);
+    if (shift && anchor && ids.includes(anchor)) {
+      const [a, b] = [ids.indexOf(anchor), ids.indexOf(id)].sort((x, y) => x - y);
+      const range = ids.slice(a, b + 1);
+      setSelected((prev) => [...new Set([...prev, ...range])]);
+    } else {
+      setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    }
+    setAnchor(id);
+  };
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelected([]);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const pickCategory = (id: string) => {
     setCategoryId(id);
     setSubId(null);
     setVariantId(null);
-    setSelected(null);
+    setSelected([]);
   };
 
   // 기본값 필터를 바꿔도 직접 옮긴 배치는 그대로 두고, 옮기지 않은 아이템만 새 기본값을 따른다.
@@ -333,7 +363,9 @@ export function FilterGenPage() {
     event.preventDefault();
     setDragOver(null);
     const id = event.dataTransfer.getData("text/plain");
-    if (id) moveTo(id, tier);
+    if (!id) return;
+    if (selected.includes(id)) moveMany(selected, tier);
+    else moveTo(id, tier);
   };
 
   return (
@@ -382,7 +414,8 @@ export function FilterGenPage() {
         {notice && <p className="fg-notice">{notice}</p>}
 
         <p className="fg-help">
-          아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
+          아이템을 끌어서 다른 티어에 놓거나, 아이템을 눌러 고른 다음 티어 이름을 누르면 옮겨집니다. 여러 개를 고를 수 있고
+          (Shift+클릭은 범위, "이 줄 전체 선택"도 있음), 고른 것 중 하나를 끌어도 모두 함께 옮겨집니다. 티어마다 소리와 표시 여부를
           정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 아이템 목록과 분류는 poe2db.tw 를 따르고,
           처음 배치는 고른 기본값 필터로 정해집니다. 장비·장신구·주얼·플라스크는 클래스와 조건 조합을 골라 베이스마다 티어를 정합니다.
           조합은 희귀도·미확인 등급·특출난·아이템 레벨을 모두 만족(AND)하는 아이템이고, 조건이 많이 걸린 조합이 먼저 적용됩니다
@@ -437,7 +470,7 @@ export function FilterGenPage() {
                       className={`chip small ${s.id === sub?.id ? "active" : ""}`}
                       onClick={() => {
                         setSubId(s.id);
-                        setSelected(null);
+                        setSelected([]);
                       }}
                     >
                       {s.icon && <img src={iconUrl(s.icon)} alt="" width={18} height={18} />}
@@ -455,7 +488,7 @@ export function FilterGenPage() {
                           className="tm-rule-name"
                           onClick={() => {
                             setVariantId(v.id);
-                            setSelected(null);
+                            setSelected([]);
                           }}
                         >
                           {v.label}
@@ -551,6 +584,15 @@ export function FilterGenPage() {
                 placeholder="아이템 검색 (한글·영문)"
                 aria-label="아이템 검색"
               />
+              {selected.length > 0 && (
+                <div className="tm-selection">
+                  <strong>{selected.length}개 선택됨</strong>
+                  <span>티어 이름이나 빈 칸을 누르거나 끌어다 놓으면 함께 옮겨집니다 (Esc: 해제)</span>
+                  <button type="button" className="btn" onClick={() => setSelected([])}>
+                    선택 해제
+                  </button>
+                </div>
+              )}
               <div className="tm-bulk">
                 <span>보이는 {visibleItems.length}개 모두</span>
                 <select
@@ -583,6 +625,8 @@ export function FilterGenPage() {
                 const groups = shown
                   .map((g) => ({ category: g.category, items: g.items.filter((item) => tierOf(item.id) === tier.id) }))
                   .filter((g) => g.items.length);
+                const rowItems = groups.flatMap((g) => g.items);
+                const rowAllSelected = rowItems.length > 0 && rowItems.every((i) => selected.includes(i.id));
                 return (
                   <div
                     key={tier.id}
@@ -598,13 +642,28 @@ export function FilterGenPage() {
                       <button
                         type="button"
                         className="tm-label-name"
-                        disabled={!selected}
-                        onClick={() => selected && moveTo(selected, tier.id)}
-                        title={selected ? `${tier.label} 티어로 옮기기` : undefined}
+                        disabled={!selected.length}
+                        onClick={() => selected.length && moveMany(selected, tier.id)}
+                        title={selected.length ? `선택한 ${selected.length}개를 ${tier.label} 티어로 옮기기` : undefined}
                       >
                         {tier.label}
                       </button>
                       <span className="tm-label-count">{counts[tier.id]}개</span>
+                      {rowItems.length > 0 && (
+                        <button
+                          type="button"
+                          className="tm-row-select"
+                          onClick={() =>
+                            setSelected((prev) =>
+                              rowAllSelected
+                                ? prev.filter((id) => !rowItems.some((i) => i.id === id))
+                                : [...new Set([...prev, ...rowItems.map((i) => i.id)])],
+                            )
+                          }
+                        >
+                          {rowAllSelected ? "줄 선택 해제" : "이 줄 전체 선택"}
+                        </button>
+                      )}
                       {tier.id !== "hidden" && (
                         <div className="tm-label-ctrl">
                           <select
@@ -641,7 +700,7 @@ export function FilterGenPage() {
                     <ul
                       className="tm-items"
                       onClick={(event) => {
-                        if (selected && event.target === event.currentTarget) moveTo(selected, tier.id);
+                        if (selected.length && event.target === event.currentTarget) moveMany(selected, tier.id);
                       }}
                     >
                       {groups.map((group) => (
@@ -651,8 +710,8 @@ export function FilterGenPage() {
                             <ItemTile
                               key={item.id}
                               item={item}
-                              selected={selected === item.id}
-                              onSelect={() => setSelected((v) => (v === item.id ? null : item.id))}
+                              selected={selected.includes(item.id)}
+                              onSelect={(shift) => toggleSelect(rowItems, item.id, shift)}
                             />
                           ))}
                         </Fragment>
