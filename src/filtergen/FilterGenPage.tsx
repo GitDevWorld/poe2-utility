@@ -1,135 +1,94 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type DragEvent } from "react";
 import { Segmented } from "../components/SearchOutputs";
 import { iconUrl } from "../format";
-import {
-  CATEGORIES,
-  cellKey,
-  effectiveSound,
-  generateFilter,
-  ITEMLESS,
-  itemShown,
-  readDefaults,
-  SOUNDS,
-  type CellChange,
-  type CellGroup,
-  type CellInfo,
-  type Changes,
-  type LevelLimit,
-} from "./generate";
+import { SOUNDS } from "./generate";
 import itemData from "./items.json";
+import {
+  buildTierModel,
+  generateTierFilter,
+  TIERS,
+  type TierId,
+  type TierItem,
+  type TierModel,
+  type TierSetting,
+} from "./tiers";
 
 type BaseId = "sskim" | "jjm";
 
 const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
-  { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
   { id: "jjm", label: "정정민 필터", name: "돈만쳐먹는정정민필터", file: "/filters/jjm.filter" },
+  { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
 ];
 
 const ITEMS = itemData as Record<string, { ko: string; icon?: string }>;
-const PREVIEW = 14;
-const LIMITS = [1, 2, 3, 4, 5, 6, 7];
+const STORAGE_KEY = "filtergen.tiers.v1";
 
-function ItemToggle({
-  name,
-  label,
-  shown,
-  overridden,
-  onToggle,
+type Saved = { baseId: BaseId; assign: Record<string, TierId>; settings: Partial<Record<TierId, TierSetting>> };
+
+function loadSaved(): Saved | undefined {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Saved) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function defaultSettings(): Record<TierId, TierSetting> {
+  return Object.fromEntries(TIERS.map((t) => [t.id, { sound: t.sound, show: t.id !== "hidden" }])) as Record<
+    TierId,
+    TierSetting
+  >;
+}
+
+function ItemTile({
+  item,
+  selected,
+  onSelect,
 }: {
-  name: string;
-  label: string;
-  shown: boolean;
-  overridden: boolean;
-  onToggle: () => void;
+  item: TierItem;
+  selected: boolean;
+  onSelect: () => void;
 }) {
-  const icon = ITEMS[name]?.icon;
+  const icon = item.iconOf ? ITEMS[item.iconOf]?.icon : undefined;
+  const onDragStart = (event: DragEvent) => {
+    event.dataTransfer.setData("text/plain", item.id);
+    event.dataTransfer.effectAllowed = "move";
+  };
   return (
     <li>
       <button
         type="button"
-        className={`fg-item${shown ? " on" : ""}${overridden ? " changed" : ""}`}
-        aria-pressed={shown}
-        title={`${name} — 눌러서 ${shown ? "끄기" : "켜기"}`}
-        onClick={onToggle}
+        draggable
+        onDragStart={onDragStart}
+        className={`tm-item${selected ? " selected" : ""}`}
+        title={item.baseTypes?.length === 1 ? `${item.label} (${item.baseTypes[0]})` : item.label}
+        aria-pressed={selected}
+        onClick={onSelect}
       >
         {icon ? (
-          <img src={iconUrl(icon)} alt="" width={22} height={22} loading="lazy" />
+          <img src={iconUrl(icon)} alt="" width={36} height={36} loading="lazy" draggable={false} />
         ) : (
-          <span className="fg-item-fallback" aria-hidden>
-            {label.slice(0, 1)}
+          <span className="tm-item-fallback" aria-hidden>
+            {item.label.slice(0, 2)}
           </span>
         )}
-        {label}
+        <span className="tm-item-name">{item.label}</span>
       </button>
     </li>
   );
 }
 
-function GroupItems({
-  group,
-  change,
-  limit,
-  onToggleItem,
-}: {
-  group: CellGroup;
-  change?: CellChange;
-  limit: LevelLimit;
-  onToggleItem: (item: string, shown: boolean, baseline: boolean) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const sound = effectiveSound(change, group.sound);
-  const withoutOverrides = change ? { ...change, items: undefined } : undefined;
-  const state = (item: string) => ({
-    shown: itemShown(change, group.show, group.sound, item, limit),
-    baseline: itemShown(withoutOverrides, group.show, group.sound, item, limit),
-    overridden: change?.items?.[item] !== undefined,
-  });
-  const names = group.items.length ? group.items : [ITEMLESS];
-  const visible = open ? names : names.slice(0, PREVIEW);
-  const shownCount = names.filter((n) => state(n).shown).length;
-
-  return (
-    <div className="fg-group">
-      <span className={`fg-level${shownCount && sound ? "" : " mute"}`}>{sound ?? "소리 없음"}</span>
-      {names.length > 1 && (
-        <span className="fg-note">
-          {shownCount}/{names.length} 표시
-        </span>
-      )}
-      <ul className="fg-items">
-        {visible.map((name) => {
-          const s = state(name);
-          const label = name === ITEMLESS ? (group.note ?? "전체") : (ITEMS[name]?.ko ?? name);
-          return (
-            <ItemToggle
-              key={name}
-              name={name === ITEMLESS ? label : name}
-              label={label}
-              shown={s.shown}
-              overridden={s.overridden}
-              onToggle={() => onToggleItem(name, !s.shown, s.baseline)}
-            />
-          );
-        })}
-        {names.length > PREVIEW && (
-          <li>
-            <button type="button" className="fg-more" onClick={() => setOpen((v) => !v)}>
-              {open ? "접기" : `+${names.length - PREVIEW}개 더`}
-            </button>
-          </li>
-        )}
-      </ul>
-      {group.note && group.items.length > 0 && <span className="fg-note">{group.note}</span>}
-    </div>
-  );
-}
-
 export function FilterGenPage() {
-  const [baseId, setBaseId] = useState<BaseId>("jjm");
+  const saved = useMemo(loadSaved, []);
+  const [baseId, setBaseId] = useState<BaseId>(saved?.baseId ?? "jjm");
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-  const [changes, setChanges] = useState<Changes>({});
-  const [limit, setLimit] = useState<LevelLimit>(null);
+  const [assign, setAssign] = useState<Record<string, TierId>>(saved?.assign ?? {});
+  const [settings, setSettings] = useState<Record<TierId, TierSetting>>({ ...defaultSettings(), ...saved?.settings });
+  const [categoryId, setCategoryId] = useState("currency");
+  const [selected, setSelected] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState<TierId | null>(null);
 
   const base = BASES.find((b) => b.id === baseId) ?? BASES[0];
 
@@ -137,7 +96,6 @@ export function FilterGenPage() {
     let alive = true;
     setText("");
     setError("");
-    setChanges({});
     fetch(base.file)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -150,59 +108,67 @@ export function FilterGenPage() {
     };
   }, [base.file]);
 
-  const defaults = useMemo<Record<string, CellInfo>>(() => (text ? readDefaults(text) : {}), [text]);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ baseId, assign, settings } satisfies Saved));
+    } catch {
+      // 저장 못 해도 화면은 그대로 동작한다.
+    }
+  }, [baseId, assign, settings]);
 
-  const changedCount = Object.values(changes).reduce(
-    (n, c) => n + (c.show !== undefined ? 1 : 0) + (c.sound ? 1 : 0) + Object.keys(c.items ?? {}).length,
-    0,
+  const model = useMemo<TierModel | null>(
+    () => (text ? buildTierModel(text, (name) => ITEMS[name]?.ko ?? name) : null),
+    [text],
   );
 
-  const updateCell = (key: string, update: (prev: CellChange) => CellChange) => {
-    setChanges((prev) => {
-      const next = update({ ...prev[key] });
-      if (next.items && !Object.keys(next.items).length) delete next.items;
-      if (!next.sound) delete next.sound;
-      const out = { ...prev };
-      if (next.show === undefined && !next.sound && !next.items) delete out[key];
-      else out[key] = next;
-      return out;
-    });
-  };
+  const tierOf = (id: string): TierId => assign[id] ?? model?.defaults[id] ?? "hidden";
+  const category = model?.categories.find((c) => c.id === categoryId) ?? model?.categories[0];
+  const movedCount = model ? Object.keys(assign).filter((id) => assign[id] !== model.defaults[id]).length : 0;
 
-  const toggleRow = (key: string, show: boolean) =>
-    updateCell(key, (c) => {
-      // 줄 스위치를 바꾸면 그 줄의 개별 설정은 지운다.
-      const next: CellChange = { ...c, show, items: undefined };
-      if (show === defaults[key]?.show) delete next.show;
+  const counts = useMemo(() => {
+    const out = Object.fromEntries(TIERS.map((t) => [t.id, 0])) as Record<TierId, number>;
+    for (const c of model?.categories ?? []) for (const item of c.items) out[tierOf(item.id)]++;
+    return out;
+    // tierOf 는 assign·model 로만 정해진다.
+  }, [model, assign]);
+
+  const moveTo = (itemId: string, tier: TierId) => {
+    setAssign((prev) => {
+      const next = { ...prev };
+      if (model && model.defaults[itemId] === tier) delete next[itemId];
+      else next[itemId] = tier;
       return next;
     });
+    setSelected(null);
+  };
 
-  const setSound = (key: string, sound: string) => updateCell(key, (c) => ({ ...c, sound }));
-
-  const toggleItem = (key: string, item: string, shown: boolean, baseline: boolean) =>
-    updateCell(key, (c) => {
-      const items = { ...c.items };
-      // 줄 설정·레벨 제한으로 정해지는 값과 같으면 개별 설정이 필요 없다.
-      if (shown === baseline) delete items[item];
-      else items[item] = shown;
-      return { ...c, items };
-    });
+  const changeBase = (id: BaseId) => {
+    setBaseId(id);
+    setAssign({});
+  };
 
   const reset = () => {
-    setChanges({});
-    setLimit(null);
+    setAssign({});
+    setSettings(defaultSettings());
   };
 
   const download = () => {
-    if (!text) return;
-    const out = generateFilter(text, changes, base.name, limit);
+    if (!model || !text) return;
+    const out = generateTierFilter(model, assign, settings, text, base.name);
     const blob = new Blob([out], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${base.id}-custom.filter`;
+    a.download = "poe2-tier.filter";
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const onDrop = (event: DragEvent, tier: TierId) => {
+    event.preventDefault();
+    setDragOver(null);
+    const id = event.dataTransfer.getData("text/plain");
+    if (id) moveTo(id, tier);
   };
 
   return (
@@ -217,94 +183,95 @@ export function FilterGenPage() {
       <section className="table-wrap fg-page">
         <div className="fg-toolbar">
           <div className="fg-base">
-            <span className="ctrl-label">기준 필터</span>
-            <Segmented value={baseId} options={BASES} onChange={setBaseId} />
-            <label className="fg-limit">
-              <span className="ctrl-label">소리 레벨 제한</span>
-              <select
-                className="fg-sound"
-                value={limit ?? ""}
-                onChange={(event) => setLimit(event.target.value === "" ? null : Number(event.target.value))}
-              >
-                <option value="">제한 없음</option>
-                {LIMITS.map((n) => (
-                  <option key={n} value={n}>
-                    lv{n}까지만 표시
-                  </option>
-                ))}
-              </select>
-            </label>
+            <span className="ctrl-label">기본값</span>
+            <Segmented value={baseId} options={BASES} onChange={changeBase} />
           </div>
           <div className="fg-actions">
-            <span className="fg-count">
-              {changedCount || limit != null
-                ? `${changedCount}곳 바꿈${limit != null ? ` · lv${limit}까지` : ""}`
-                : "바꾼 곳 없음"}
-            </span>
-            <button type="button" className="btn" disabled={!changedCount && limit == null} onClick={reset}>
+            <span className="fg-count">{movedCount ? `${movedCount}개 옮김` : "기본 배치"}</span>
+            <button type="button" className="btn" onClick={reset}>
               초기화
             </button>
-            <button type="button" className="btn btn-primary" disabled={!text} onClick={download}>
+            <button type="button" className="btn btn-primary" disabled={!model} onClick={download}>
               필터 내려받기
             </button>
           </div>
         </div>
 
         <p className="fg-help">
-          아이템을 눌러 하나씩 켜고 끄고, 줄 스위치로 등급 전체를 켜고 끕니다. 소리 레벨 제한을 고르면 그보다 낮은 레벨(숫자가
-          큰 쪽) 아이템이 한꺼번에 꺼집니다(lv1이 가장 신나는 소리, t_ 소리는 제한과 상관없음). 내려받은 파일과 사운드 mp3를{" "}
-          <code>문서\My Games\Path of Exile 2</code> 폴더에 넣고 게임에서 고르면 됩니다. 사운드는{" "}
+          아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
+          정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 처음 배치와 소리는 고른 기본값 필터를 따릅니다.
+          티어에 없는 장비·고유·젬 등은 기본값 필터 규칙을 그대로 씁니다. 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
-            여기
+            사운드 mp3
           </a>
-          서 받습니다.
+          를 <code>문서\My Games\Path of Exile 2</code> 폴더에 넣고 게임에서 고르면 됩니다.
         </p>
 
         {error && <p className="fg-error">{error}</p>}
-        {!text && !error && <p className="fg-help">기준 필터 불러오는 중…</p>}
+        {!model && !error && <p className="fg-help">기본값 필터 불러오는 중…</p>}
 
-        {text &&
-          CATEGORIES.map((category) => {
-            const firstIcon = category.cells
-              .flatMap((cell) => defaults[cellKey(category.id, cell.id)]?.groups ?? [])
-              .flatMap((g) => g.items)
-              .map((name) => ITEMS[name]?.icon)
-              .find(Boolean);
-            return (
-              <div key={category.id} className="fg-category">
-                <h3>
-                  {firstIcon && <img src={iconUrl(firstIcon)} alt="" width={28} height={28} />}
-                  {category.label}
-                </h3>
-                <div className="fg-rows">
-                  {category.cells.map((cell) => {
-                    const key = cellKey(category.id, cell.id);
-                    const info = defaults[key];
-                    if (!info?.found) return null;
-                    const change = changes[key];
-                    const show = change?.show ?? info.show;
-                    const changed = Boolean(change);
-                    return (
-                      <div key={key} className={`fg-row${show ? " on" : ""}${changed ? " changed" : ""}`}>
-                        <div className="fg-row-ctrl">
-                          <span className="fg-tier">{cell.label}</span>
-                          <button
-                            type="button"
-                            role="switch"
-                            aria-checked={show}
-                            aria-label={`${category.label} ${cell.label} 전체 ${show ? "표시" : "숨김"}`}
-                            className={`fg-switch${show ? " on" : ""}`}
-                            onClick={() => toggleRow(key, !show)}
-                          >
-                            <span />
-                          </button>
+        {model && category && (
+          <>
+            <div className="chip-row tm-tabs" role="tablist" aria-label="아이템 종류">
+              {model.categories.map((c) => {
+                const icon = c.items.map((i) => (i.iconOf ? ITEMS[i.iconOf]?.icon : undefined)).find(Boolean);
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={c.id === category.id}
+                    className={`chip ${c.id === category.id ? "active" : ""}`}
+                    onClick={() => {
+                      setCategoryId(c.id);
+                      setSelected(null);
+                    }}
+                  >
+                    {icon && <img src={iconUrl(icon)} alt="" width={20} height={20} />}
+                    {c.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="tm-board">
+              {TIERS.map((tier) => {
+                const setting = settings[tier.id];
+                const visible = tier.id !== "hidden" && setting.show;
+                const items = category.items.filter((item) => tierOf(item.id) === tier.id);
+                return (
+                  <div
+                    key={tier.id}
+                    className={`tm-row${visible ? "" : " off"}${dragOver === tier.id ? " over" : ""}`}
+                    onDragOver={(event) => {
+                      event.preventDefault();
+                      setDragOver(tier.id);
+                    }}
+                    onDragLeave={() => setDragOver((v) => (v === tier.id ? null : v))}
+                    onDrop={(event) => onDrop(event, tier.id)}
+                  >
+                    <div className="tm-label" style={{ background: tier.color }}>
+                      <button
+                        type="button"
+                        className="tm-label-name"
+                        disabled={!selected}
+                        onClick={() => selected && moveTo(selected, tier.id)}
+                        title={selected ? `${tier.label} 티어로 옮기기` : undefined}
+                      >
+                        {tier.label}
+                      </button>
+                      <span className="tm-label-count">{counts[tier.id]}개</span>
+                      {tier.id !== "hidden" && (
+                        <div className="tm-label-ctrl">
                           <select
-                            className="fg-sound"
-                            aria-label={`${category.label} ${cell.label} 소리`}
-                            value={change?.sound ?? ""}
-                            onChange={(event) => setSound(key, event.target.value)}
+                            className="tm-sound"
+                            aria-label={`${tier.label} 티어 소리`}
+                            value={setting.sound}
+                            disabled={!setting.show}
+                            onChange={(event) =>
+                              setSettings((prev) => ({ ...prev, [tier.id]: { ...prev[tier.id], sound: event.target.value } }))
+                            }
                           >
-                            <option value="">소리 기본</option>
                             {SOUNDS.map((s) => (
                               <option key={s} value={s}>
                                 {s}
@@ -312,25 +279,42 @@ export function FilterGenPage() {
                             ))}
                             <option value="none">소리 없음</option>
                           </select>
+                          <button
+                            type="button"
+                            role="switch"
+                            aria-checked={setting.show}
+                            aria-label={`${tier.label} 티어 ${setting.show ? "표시" : "숨김"}`}
+                            className={`fg-switch${setting.show ? " on" : ""}`}
+                            onClick={() =>
+                              setSettings((prev) => ({ ...prev, [tier.id]: { ...prev[tier.id], show: !prev[tier.id].show } }))
+                            }
+                          >
+                            <span />
+                          </button>
                         </div>
-                        <div className="fg-row-items">
-                          {info.groups.map((group, i) => (
-                            <GroupItems
-                              key={i}
-                              group={group}
-                              change={change}
-                              limit={limit}
-                              onToggleItem={(item, shown, baseline) => toggleItem(key, item, shown, baseline)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+                      )}
+                    </div>
+                    <ul
+                      className="tm-items"
+                      onClick={(event) => {
+                        if (selected && event.target === event.currentTarget) moveTo(selected, tier.id);
+                      }}
+                    >
+                      {items.map((item) => (
+                        <ItemTile
+                          key={item.id}
+                          item={item}
+                          selected={selected === item.id}
+                          onSelect={() => setSelected((v) => (v === item.id ? null : item.id))}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </section>
     </div>
   );

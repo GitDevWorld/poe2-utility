@@ -1,5 +1,5 @@
 /**
- * 필터 생성기: 기준 필터(NeverSink 기반)의 블록을 종류·등급별로 켜고 끄거나 소리를 바꾼다.
+ * 기준 필터(NeverSink 기반) 읽기: 종류·등급별 블록과 블록마다 잡는 아이템·소리.
  * 블록은 `$type->종류 $tier->등급` 태그(또는 우리가 붙인 머리말)로 찾는다.
  */
 
@@ -83,45 +83,7 @@ export const CATEGORIES: Category[] = [
 
 export const SOUNDS = ["lv1", "lv2", "lv3", "lv4", "lv5", "lv6", "lv7", "t_popup", "t_stack", "t_ring", "t_flask"];
 
-/**
- * 사용자가 바꾼 칸. show 미지정이면 기준 필터 그대로, sound "" 는 기본, "none" 은 소리 없음.
- * items: 아이템별 켜기/끄기 (BaseType 영문 이름 → 표시 여부). 조건만 있는 블록은 ITEMLESS 키를 쓴다.
- */
-export type CellChange = { show?: boolean; sound?: string; items?: Record<string, boolean> };
-export type Changes = Record<string, CellChange>;
-/** 소리 레벨 제한: N이면 lv1~lvN 아이템만 표시 (t_* 소리나 소리 없는 아이템은 영향 없음) */
-export type LevelLimit = number | null;
-
-/** BaseType 없이 조건(묶음 수·등급)으로만 거르는 블록을 한 아이템처럼 다룰 때 쓰는 키 */
-export const ITEMLESS = "*";
-
 export const cellKey = (categoryId: string, cellId: string) => `${categoryId}.${cellId}`;
-
-export function soundLevel(sound?: string): number | undefined {
-  const m = sound?.match(/^lv(\d)$/);
-  return m ? Number(m[1]) : undefined;
-}
-
-/** 칸 설정을 반영한 블록의 소리 */
-export function effectiveSound(change: CellChange | undefined, blockSound?: string): string | undefined {
-  if (!change?.sound) return blockSound;
-  return change.sound === "none" ? undefined : change.sound;
-}
-
-/** 아이템이 최종적으로 보이는지: 개별 설정 > 칸 스위치 > 레벨 제한 */
-export function itemShown(
-  change: CellChange | undefined,
-  blockShow: boolean,
-  blockSound: string | undefined,
-  item: string,
-  limit: LevelLimit,
-): boolean {
-  const override = change?.items?.[item];
-  if (override !== undefined) return override;
-  if (!(change?.show ?? blockShow)) return false;
-  const level = soundLevel(effectiveSound(change, blockSound));
-  return !(limit != null && level != null && level > limit);
-}
 
 type Block = { start: number; end: number; header: string };
 
@@ -220,110 +182,4 @@ export function readDefaults(text: string): Record<string, CellInfo> {
     }
   }
   return out;
-}
-
-const STYLE_ON_SHOW = /^\s*(PlayEffect|MinimapIcon)\b|^CustomAlertSound\b/;
-
-/** 블록 본문을 표시/숨김·소리에 맞게 고친다. items가 있으면 BaseType을 그 아이템들로 바꾼다. */
-function rewriteBlock(
-  body: string[],
-  show: boolean,
-  sound: string | undefined,
-  options: { header?: string; items?: string[] } = {},
-): string[] {
-  const [header, ...rest] = body;
-  const keyword = show ? "Show" : "Hide";
-  const out = [options.header ? `${keyword} # ${options.header}` : header.replace(/^(Show|Hide)/, keyword)];
-  // 숨김 블록에는 효과·아이콘·소리가 필요 없다.
-  let kept = show ? rest : rest.filter((line) => !STYLE_ON_SHOW.test(line));
-  if (options.items) {
-    const list = options.items.map((name) => `"${name}"`).join(" ");
-    kept = kept.map((line) => (/^\s*BaseType\b/.test(line) ? `\tBaseType == ${list}` : line));
-  }
-  if (show && sound !== undefined) {
-    out.push(...kept.filter((line) => !/^CustomAlertSound\b/.test(line)));
-    if (sound !== "none") out.push(`CustomAlertSound "${sound}.mp3" 300`);
-  } else {
-    out.push(...kept);
-  }
-  return out;
-}
-
-/** 바꾼 칸·아이템·레벨 제한을 반영한 새 필터 텍스트 (CRLF) */
-export function generateFilter(text: string, changes: Changes, title: string, limit: LevelLimit = null): string {
-  const lines = text.split(/\r?\n/);
-  const blocks = findBlocks(lines);
-  const summary: string[] = [];
-  if (limit != null) summary.push(`#   소리 레벨 제한: lv${limit}까지만 표시`);
-
-  const edits: { block: Block; replacement: string[] }[] = [];
-
-  for (const category of CATEGORIES) {
-    const { all, owned } = categoryBlocks(lines, blocks, category);
-    for (const cell of category.cells) {
-      const change = changes[cellKey(category.id, cell.id)];
-      const parts: string[] = [];
-      if (change?.show !== undefined) parts.push(change.show ? "표시" : "숨김");
-      if (change?.sound) parts.push(change.sound === "none" ? "소리 없음" : `소리 ${change.sound}`);
-      const offItems: string[] = [];
-      const onItems: string[] = [];
-
-      for (const block of all.filter((b) => matches(b, category, cell))) {
-        const original = block.header.startsWith("Show");
-        const sound = blockSound(lines, block);
-        const items = owned.get(block) ?? [];
-        // 조건만 있는 블록은 블록 전체를 한 아이템처럼 다룬다.
-        let finalShow = items.length
-          ? (change?.show ?? original)
-          : itemShown(change, original, sound, ITEMLESS, limit);
-        let flipped = items.filter((name) => itemShown(change, original, sound, name, limit) !== finalShow);
-        // 블록 아이템이 모두 뒤집히면 개별 블록 없이 블록 자체를 뒤집는다.
-        if (items.length && flipped.length === items.length) {
-          (finalShow ? offItems : onItems).push(...flipped);
-          finalShow = !finalShow;
-          flipped = [];
-        }
-        const soundOverride = change?.sound || undefined;
-        if (finalShow === original && !soundOverride && !flipped.length) continue;
-        if (!items.length && finalShow !== original && change?.show === undefined) {
-          parts.push(finalShow ? "표시" : "숨김");
-        }
-
-        (finalShow ? offItems : onItems).push(...flipped);
-        const body = lines.slice(block.start, block.end);
-        const replacement: string[] = [];
-        if (flipped.length) {
-          // 바뀐 아이템만 원래 블록 바로 앞에 같은 조건으로 넣어 먼저 걸리게 한다.
-          replacement.push(
-            ...rewriteBlock(body, !finalShow, soundOverride, {
-              header: `poe2-utility: ${category.label} ${cell.label} 개별 설정`,
-              items: flipped,
-            }),
-            "",
-          );
-        }
-        replacement.push(...rewriteBlock(body, finalShow, soundOverride));
-        edits.push({ block, replacement });
-      }
-
-      if (offItems.length) parts.push(`${offItems.length}개 끔`);
-      if (onItems.length) parts.push(`${onItems.length}개 켬`);
-      if (parts.length) summary.push(`#   ${category.label} ${cell.label}: ${parts.join(", ")}`);
-    }
-  }
-
-  // 뒤에서부터 고쳐야 줄 번호가 밀리지 않는다.
-  edits.sort((a, b) => b.block.start - a.block.start);
-  for (const { block, replacement } of edits) {
-    lines.splice(block.start, block.end - block.start, ...replacement);
-  }
-
-  const head = [
-    "#------------------------------------",
-    `# ${title} — poe2-utility 필터 생성기로 바꾼 설정`,
-    "#------------------------------------",
-    ...(summary.length ? summary : ["#   (바꾼 설정 없음)"]),
-    "#",
-  ];
-  return [...head, ...lines].join("\r\n");
 }
