@@ -3381,9 +3381,21 @@ a.tablet-mod-price-col.hot {
   position: relative;
 }
 
-.tm-item.shared {
-  border-style: dashed;
-  border-color: #af6025;
+.tm-item.unique {
+  width: 148px;
+  border-color: #6b3f1d;
+}
+
+.tm-item-members {
+  width: 100%;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #e8a35a;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .tm-item-level {

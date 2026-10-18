@@ -20,8 +20,8 @@ const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
   { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
 ];
 
-// 장비를 베이스 단위로 바꿔 아이템 id 가 달라졌다.
-const STORAGE_KEY = "filtergen.tiers.v3";
+// 고유를 베이스 단위 타일로 바꿔 아이템 id 가 달라졌다.
+const STORAGE_KEY = "filtergen.tiers.v4";
 const ALL = "all";
 
 type Saved = { baseId: BaseId; assign: Record<string, TierId>; settings: Partial<Record<TierId, TierSetting>> };
@@ -47,7 +47,13 @@ function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: bool
     event.dataTransfer.setData("text/plain", item.id);
     event.dataTransfer.effectAllowed = "move";
   };
-  const title = [item.label, item.baseTypes?.length === 1 ? item.baseTypes[0] : "", item.level ? `요구 레벨 ${item.level}` : "", item.note ?? ""]
+  const title = [
+    item.label,
+    item.baseTypes?.length === 1 ? item.baseTypes[0] : "",
+    item.level ? `요구 레벨 ${item.level}` : "",
+    item.members ? `이 베이스의 고유: ${item.members.join(", ")}` : "",
+    item.note ?? "",
+  ]
     .filter(Boolean)
     .join("\n");
   return (
@@ -56,7 +62,7 @@ function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: bool
         type="button"
         draggable
         onDragStart={onDragStart}
-        className={`tm-item${selected ? " selected" : ""}${item.note ? " shared" : ""}`}
+        className={`tm-item${selected ? " selected" : ""}${item.members ? " unique" : ""}`}
         title={title}
         aria-pressed={selected}
         onClick={onSelect}
@@ -70,6 +76,12 @@ function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: bool
         )}
         {item.level ? <span className="tm-item-level">Lv{item.level}</span> : null}
         <span className="tm-item-name">{item.label}</span>
+        {item.members && (
+          <span className="tm-item-members">
+            {item.members.slice(0, 3).join(" · ")}
+            {item.members.length > 3 ? ` 외 ${item.members.length - 3}` : ""}
+          </span>
+        )}
       </button>
     </li>
   );
@@ -136,7 +148,10 @@ export function FilterGenPage() {
         (item) =>
           (!sub || c !== category || item.sub === sub.id) &&
           (!variant || c !== category || item.variant === variant.id) &&
-          (!q || item.label.toLowerCase().includes(q) || item.baseTypes?.some((b) => b.toLowerCase().includes(q))),
+          (!q ||
+            item.label.toLowerCase().includes(q) ||
+            item.baseTypes?.some((b) => b.toLowerCase().includes(q)) ||
+            item.members?.some((m) => m.toLowerCase().includes(q))),
       ),
     }));
   }, [model, categoryId, category, sub, variant, query]);
@@ -225,8 +240,8 @@ export function FilterGenPage() {
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
           정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 아이템 목록과 분류는 poe2db.tw 를 따르고,
           처음 배치는 고른 기본값 필터로 정해집니다. 장비·장신구·주얼·플라스크는 클래스와 조건(희귀도·등급·특출난·이중 타락·아이템
-          레벨)을 골라 베이스마다 티어를 정합니다. 고유는 필터가 이름이 아니라 베이스로만 구분하므로, 같은 베이스를 쓰는 고유는 함께
-          움직입니다(점선 테두리). 내려받은 파일과{" "}
+          레벨)을 골라 베이스마다 티어를 정합니다. 고유는 필터가 이름이 아니라 베이스로만 구분하므로, 베이스 하나에 그 베이스를 쓰는 고유
+          아이템을 함께 보여 주고 함께 옮깁니다(고유 이름으로도 검색됩니다). 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             사운드 mp3
           </a>

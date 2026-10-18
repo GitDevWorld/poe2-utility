@@ -5,7 +5,7 @@
  */
 import catalog from "./catalog.json";
 import { evaluate, parseRules, type Sample } from "./evaluate";
-import { buildExtraCategories, EQUIPMENT_TABS, type GearClass, type Tone } from "./extras";
+import { buildExtraCategories, EQUIPMENT_TABS, type CatalogUnique, type GearClass, type Tone } from "./extras";
 
 export type TierId = "sss" | "ss" | "s" | "a" | "b" | "c" | "d" | "e" | "f" | "hidden";
 
@@ -110,6 +110,8 @@ export type TierItem = {
   level?: number;
   /** 같은 베이스를 쓰는 다른 고유 등 덧붙일 설명 */
   note?: string;
+  /** 고유 베이스 타일: 이 베이스를 쓰는 고유 아이템 이름 */
+  members?: string[];
 };
 
 export type TierCategory = {
@@ -269,29 +271,29 @@ export function buildTierModel(baseText: string): TierModel {
     });
   }
 
-  // 고유: 실제 고유 아이템. 필터는 고유를 이름이 아니라 베이스로만 가리므로 같은 베이스 고유는 함께 움직인다.
+  // 고유: 필터는 고유를 이름이 아니라 베이스로만 가리므로, 베이스 하나를 타일 하나로 두고 그 베이스의 고유를 함께 보여 준다.
   const uniqueClasses = CATALOG.gear.filter((g) => g.uniques.length);
   const uniqueItems: TierItem[] = [];
   for (const g of uniqueClasses) {
-    const byBase = new Map<string, string[]>();
-    for (const u of g.uniques) byBase.set(u.base, [...(byBase.get(u.base) ?? []), u.ko]);
+    const baseKo = new Map(g.bases.map((b) => [b.en, b.ko]));
+    const byBase = new Map<string, CatalogUnique[]>();
+    for (const u of g.uniques) byBase.set(u.base, [...(byBase.get(u.base) ?? []), u]);
     const conditions = ["Rarity Unique", `Class == "${g.filterClass}"`];
-    for (const u of g.uniques) {
-      const id = `unique|${g.filterClass}|${u.en}`;
-      const siblings = (byBase.get(u.base) ?? []).filter((n) => n !== u.ko);
+    for (const [base, list] of byBase) {
+      const id = `unique|${g.filterClass}|${base}`;
       uniqueItems.push({
         id,
-        label: u.ko,
-        icon: u.icon,
-        baseTypes: [u.base],
+        label: baseKo.get(base) ?? base,
+        icon: list.find((u) => u.icon)?.icon,
+        baseTypes: [base],
         conditions,
         order: 6,
         tone: "unique",
         sub: g.filterClass,
-        level: u.level,
-        note: siblings.length ? `같은 베이스(${u.base}) 고유와 함께 움직임: ${siblings.join(", ")}` : undefined,
+        level: Math.min(...list.map((u) => u.level ?? 0)) || undefined,
+        members: list.map((u) => u.ko),
       });
-      samples.set(id, { Class: g.filterClass, Rarity: "Unique", BaseType: u.base });
+      samples.set(id, { Class: g.filterClass, Rarity: "Unique", BaseType: base });
     }
   }
   categories.push({
