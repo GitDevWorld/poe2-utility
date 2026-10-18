@@ -38,11 +38,14 @@ export function parseRules(text: string): Rule[] {
     if (!/^(Show|Hide)\b/.test(header)) continue;
     const body: string[] = [];
     let j = i + 1;
-    for (; j < lines.length && lines[j].trim() !== ""; j++) body.push(lines[j].trim());
+    for (; j < lines.length && lines[j].trim() !== ""; j++)
+      body.push(lines[j].trim());
     i = j - 1;
     // Continue 규칙은 꾸미기만 하고 다음 규칙으로 넘어가므로 표시 여부를 정하지 않는다.
     if (body.some((l) => /^Continue\b/.test(l))) continue;
-    const sound = body.map((l) => l.match(/^CustomAlertSound "([^"]+)\.mp3"/)?.[1]).find(Boolean);
+    const sound = body
+      .map((l) => l.match(/^CustomAlertSound "([^"]+)\.mp3"/)?.[1])
+      .find(Boolean);
     rules.push({
       show: header.startsWith("Show"),
       sound,
@@ -54,7 +57,9 @@ export function parseRules(text: string): Rule[] {
 
 function values(rest: string): string[] {
   const quoted = rest.match(/"[^"]*"/g);
-  return quoted ? quoted.map((q) => q.slice(1, -1)) : rest.split(/\s+/).filter(Boolean);
+  return quoted
+    ? quoted.map((q) => q.slice(1, -1))
+    : rest.split(/\s+/).filter(Boolean);
 }
 
 function compare(op: string, a: number, b: number): boolean {
@@ -86,7 +91,8 @@ function test(condition: string, sample: Sample): boolean {
 
   if (key === "Rarity") {
     const idx = RARITY.indexOf(String(value));
-    if (["<", "<=", ">", ">="].includes(op)) return compare(op, idx, RARITY.indexOf(list[0]));
+    if (["<", "<=", ">", ">="].includes(op))
+      return compare(op, idx, RARITY.indexOf(list[0]));
     const hit = list.includes(String(value));
     return op === "!" || op === "!=" ? !hit : hit;
   }
@@ -99,14 +105,24 @@ function test(condition: string, sample: Sample): boolean {
       : compare(op, value, nums[0]);
   }
   const text = String(value);
-  const hit = op === "==" ? list.includes(text) : list.some((v) => text.includes(v));
+  const hit =
+    op === "==" ? list.includes(text) : list.some((v) => text.includes(v));
   return op === "!" || op === "!=" ? !hit : hit;
 }
 
+/** 예시 아이템이 조건 줄을 모두 만족하는지 */
+export function matches(conditions: string[], sample: Sample): boolean {
+  return conditions.every((c) => test(c, sample));
+}
+
 /** 예시 아이템이 처음 걸리는 규칙의 표시 여부·소리. 아무 규칙에도 안 걸리면 게임 기본(표시). */
-export function evaluate(rules: Rule[], sample: Sample): { show: boolean; sound?: string } {
+export function evaluate(
+  rules: Rule[],
+  sample: Sample,
+): { show: boolean; sound?: string } {
   for (const rule of rules) {
-    if (rule.conditions.every((c) => test(c, sample))) return { show: rule.show, sound: rule.sound };
+    if (rule.conditions.every((c) => test(c, sample)))
+      return { show: rule.show, sound: rule.sound };
   }
   return { show: true };
 }

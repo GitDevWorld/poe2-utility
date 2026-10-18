@@ -3234,58 +3234,376 @@ a.tablet-mod-price-col.hot {
   border-radius: 10px;
 }
 
-.tm-rules,
-.tm-builder {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 8px;
-}
-
-.tm-builder {
-  padding-top: 8px;
-  border-top: 1px dashed var(--line);
-}
-
-.tm-rule {
-  display: inline-flex;
-  align-items: center;
-  overflow: hidden;
-  background: var(--hover);
-  border: 1px solid var(--line-strong);
+.tm-tab-count {
+  min-width: 18px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  color: var(--on-accent);
+  background: var(--gold);
   border-radius: 999px;
 }
 
-.tm-rule.active {
-  background: var(--gold);
+.gr {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.gr-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gr-tierset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 4px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.gr-tierset.off {
+  opacity: 0.55;
+}
+
+.gr-tierset-name {
+  min-width: 34px;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  color: #111;
+  border-radius: 5px;
+}
+
+.gr-tierset .tm-sound {
+  width: 92px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.gr-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gr-rule {
+  min-width: 0;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gr-rule.open {
   border-color: var(--gold);
 }
 
-.tm-rule-name,
-.tm-rule-del {
-  min-height: 28px;
-  padding: 0 10px;
-  font: inherit;
+.gr-rule.off .gr-summary,
+.gr-rule.off .gr-tier {
+  opacity: 0.45;
+}
+
+.gr-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+}
+
+.gr-index {
+  min-width: 26px;
   font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--muted);
+}
+
+.gr-summary {
+  display: flex;
+  flex: 1 1 260px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  min-width: 0;
+  padding: 6px 4px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
   color: var(--text);
   background: transparent;
   border: 0;
   cursor: pointer;
 }
 
-.tm-rule.active .tm-rule-name,
-.tm-rule.active .tm-rule-del {
-  color: var(--on-accent);
+.gr-summary.static {
+  cursor: default;
+  color: var(--muted);
+}
+
+.gr-edit {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.gr-arrow {
+  color: var(--muted);
+}
+
+select.gr-tier {
+  min-width: 0;
+  width: 96px;
+  padding: 6px 8px;
+  font-weight: 800;
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.gr-rest-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.gr-btns {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.gr-btns .btn {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.gr-rest {
+  border-style: dashed;
+  background: transparent;
+}
+
+.gr-body {
+  display: grid;
+  gap: 10px;
+  padding: 10px 12px 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.gr-field {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.gr-key {
+  padding-top: 6px;
+  font-size: 13px;
   font-weight: 700;
+  color: var(--muted);
 }
 
-.tm-rule-del {
-  padding: 0 8px 0 2px;
-  opacity: 0.6;
+.gr-val {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
 }
 
-.tm-rule-del:hover {
-  opacity: 1;
+.gr-val.chip-row,
+.gr-nums {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+
+.gr-classes {
+  align-items: center;
+}
+
+.gr-group {
+  min-width: 78px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.gr-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.gr-num input,
+.gr-num select {
+  min-width: 0;
+  width: 92px;
+  padding: 5px 8px;
+}
+
+.gr-num-unit {
+  color: var(--muted);
+}
+
+.gr-num > span {
+  white-space: nowrap;
+}
+
+.gr-tester select {
+  min-width: 0;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+.chip.small.rarity-normal.active {
+  color: #111;
+  background: #c8c8c8;
+  border-color: #c8c8c8;
+}
+
+.chip.small.rarity-magic.active {
+  color: #111;
+  background: #8888ff;
+  border-color: #8888ff;
+}
+
+.chip.small.rarity-rare.active {
+  color: #111;
+  background: #ffff77;
+  border-color: #ffff77;
+}
+
+.gr-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.gr-bases {
+  display: grid;
+  gap: 6px;
+}
+
+.gr-base-search {
+  max-width: 320px;
+}
+
+.gr-base-chosen,
+.gr-base-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gr-base-list {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.gr-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 2px 8px 2px 4px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--hover);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gr-base.on {
+  background: color-mix(in srgb, var(--gold) 18%, var(--card));
+  border-color: var(--gold);
+}
+
+.gr-base-lv,
+.gr-more {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.gr-add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.gr-tester {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gr-tester-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.gr-result {
+  margin: 0;
+  font-size: 14px;
+}
+
+.gr-result-tier {
+  padding: 2px 8px;
+  font-weight: 800;
+  color: #111;
+  border-radius: 5px;
+}
+
+@media (max-width: 640px) {
+  .gr-field {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .gr-btns {
+    margin-left: 0;
+  }
+
+  .gr-tiers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .gr-tierset {
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .gr-tierset .tm-sound {
+    flex: 1;
+    width: auto;
+  }
+
+  .gr-num input,
+  .gr-num select {
+    width: 76px;
+  }
 }
 
 .tm-check {
@@ -3309,12 +3627,6 @@ a.tablet-mod-price-col.hot {
   min-height: 28px;
   padding: 0 10px;
   font-size: 13px;
-}
-
-.chip.small.variant.active {
-  color: var(--on-accent);
-  background: var(--gold);
-  border-color: var(--gold);
 }
 
 .tm-tools {
