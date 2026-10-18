@@ -3112,6 +3112,7 @@ a.tablet-mod-price-col.hot {
 /* 필터 생성기 */
 .fg-page {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -3211,7 +3212,7 @@ a.tablet-mod-price-col.hot {
 
 .tm-row {
   display: grid;
-  grid-template-columns: 132px 1fr;
+  grid-template-columns: 148px minmax(0, 1fr);
   min-height: 84px;
   border-top: 2px solid #000;
 }
@@ -3230,7 +3231,8 @@ a.tablet-mod-price-col.hot {
   align-content: center;
   justify-items: center;
   gap: 6px;
-  padding: 8px 6px;
+  min-width: 0;
+  padding: 8px;
   color: #111;
 }
 
@@ -3264,11 +3266,14 @@ a.tablet-mod-price-col.hot {
   display: flex;
   align-items: center;
   gap: 6px;
+  width: 100%;
 }
 
 .tm-sound {
-  max-width: 76px;
-  padding: 2px 4px;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 3px 4px;
   font: inherit;
   font-size: 11px;
   color: #111;
@@ -3328,11 +3333,38 @@ a.tablet-mod-price-col.hot {
   place-items: center;
   width: 36px;
   height: 36px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
   color: var(--muted);
   background: var(--bg);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
+}
+
+.tm-item-fallback.tone-normal {
+  color: #e6e8eb;
+  border-color: #c8c8c8;
+}
+
+.tm-item-fallback.tone-magic {
+  color: #8888ff;
+  border-color: #8888ff;
+}
+
+.tm-item-fallback.tone-rare {
+  color: #ffff77;
+  border-color: #c8a800;
+}
+
+.tm-item-fallback.tone-unique {
+  color: #e8a35a;
+  border-color: #af6025;
+}
+
+.tm-item-fallback.tone-gem {
+  color: #1ba29b;
+  border-color: #1ba29b;
 }
 
 .tm-item-name {
@@ -3349,7 +3381,7 @@ a.tablet-mod-price-col.hot {
 
 @media (max-width: 640px) {
   .tm-row {
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 104px minmax(0, 1fr);
   }
 
   .tm-label-name {

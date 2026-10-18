@@ -69,8 +69,8 @@ function ItemTile({
         {icon ? (
           <img src={iconUrl(icon)} alt="" width={36} height={36} loading="lazy" draggable={false} />
         ) : (
-          <span className="tm-item-fallback" aria-hidden>
-            {item.label.slice(0, 2)}
+          <span className={`tm-item-fallback tone-${item.tone ?? "misc"}`} aria-hidden>
+            {(item.label.split(" (")[0].split(" ").pop() ?? item.label).slice(0, 3)}
           </span>
         )}
         <span className="tm-item-name">{item.label}</span>
@@ -200,7 +200,7 @@ export function FilterGenPage() {
         <p className="fg-help">
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
           정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 처음 배치와 소리는 고른 기본값 필터를 따릅니다.
-          티어에 없는 장비·고유·젬 등은 기본값 필터 규칙을 그대로 씁니다. 내려받은 파일과{" "}
+          장비·장신구·특출난·고유·젬·주얼·플라스크·기타 탭까지 있고, 어느 티어에도 해당하지 않는 아이템만 기본값 필터 규칙을 따릅니다. 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             사운드 mp3
           </a>

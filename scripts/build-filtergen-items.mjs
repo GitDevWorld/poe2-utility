@@ -43,6 +43,8 @@ const TYPES = new Set([
   "xenotiering",
   "currency->splinter",
   "fragments->generic",
+  "gems->lineage",
+  "maplike->special",
 ]);
 const used = new Set();
 for (const file of ["public/filters/sskim.filter", "public/filters/jjm.filter"]) {
@@ -67,6 +69,20 @@ for (const t of tablets) {
   if (en && byName.has(en)) {
     byName.get(en).icon = `https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/${t.icon}.webp`;
   }
+}
+
+// 조건으로 묶은 항목(미가공 젬, 탐험 일지)의 아이콘
+for (const name of [
+  "Uncut Skill Gem (Level 20)",
+  "Uncut Skill Gem (Level 19)",
+  "Uncut Skill Gem (Level 10)",
+  "Uncut Spirit Gem (Level 20)",
+  "Uncut Spirit Gem (Level 19)",
+  "Uncut Spirit Gem (Level 10)",
+  "Uncut Support Gem (Level 5)",
+  "Expedition Logbook",
+]) {
+  used.add(name);
 }
 
 const out = {};

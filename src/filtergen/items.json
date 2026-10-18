@@ -15,6 +15,14 @@
   "ko": "숙달 룬",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUnVuZXMvRGV4UnVuZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/efa54e5585/DexRune.png"
  },
+ "Ahn's Citadel": {
+  "ko": "안의 성채",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBaG5DaGlzZWwiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/5e34f72a34/LineageAhnChisel.png"
+ },
+ "Ailith's Chimes": {
+  "ko": "아일리트의 종",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01vbmFzdGljIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/795375ce2d/Monastic.png"
+ },
  "Aldur's Legacy": {
   "ko": "알두르의 유산",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvR2FtZVdhcnBSdW5lVW5pcXVlIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/0eca412563/GameWarpRuneUnique.png"
@@ -30,6 +38,10 @@
  "Amanamu's Gaze": {
   "ko": "아마나무의 응시",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQWJ5c3NhbEV5ZVNvY2tldGFibGVzL0FtYW5hbXVzR2F6ZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/53ba66a7d4/AmanamusGaze.png"
+ },
+ "Amanamu's Tithe": {
+  "ko": "아마나무의 십일조",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBbWFuYW11Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/715766340e/LineageAmanamu.png"
  },
  "An Audience with the King": {
   "ko": "왕 알현",
@@ -161,6 +173,18 @@
  "Animus Splinters": {
   "ko": "아니무스 파편"
  },
+ "Arakaali's Lust": {
+  "ko": "아라칼리의 욕망",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBcmFrYWFsaSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/be37cb2c77/LineageArakaali.png"
+ },
+ "Arbiter's Ignition": {
+  "ko": "중재자의 점화",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBcmJpdGVyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/52bc86c140/LineageArbiter.png"
+ },
+ "Arbiter's Reach": {
+  "ko": "중재자의 역량",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01vdGhlcnNXYXJkIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/3da74f1c62/MothersWard.png"
+ },
  "Arcanist's Etcher": {
   "ko": "신비학자의 식각기",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lXZWFwb25NYWdpY1F1YWxpdHkiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/516e8f1131/CurrencyWeaponMagicQuality.png"
@@ -168,6 +192,10 @@
  "Architect's Orb": {
   "ko": "건축가의 오브",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdXJzaW9uQ3JhZnRpbmdPcmJzL0luY3Vyc2lvbkdyZWF0ZXJWYWFsT3JiIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/7ba6f79f63/IncursionGreaterVaalOrb.png"
+ },
+ "Arjun's Medal": {
+  "ko": "아르준의 메달",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0FtbW9Db25zZXJ2YXRpb24iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/8220863d61/AmmoConservation.png"
  },
  "Armourer's Scrap": {
   "ko": "방어구 장인의 고철",
@@ -185,9 +213,25 @@
   "ko": "아스트리드의 창의성",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvR2FtZVdhcnBSdW5lMSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/96e9eecf72/GameWarpRune1.png"
  },
+ "Atalui's Bloodletting": {
+  "ko": "아탈루이의 사혈",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VMaWZldGFwIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/4d9a20ab28/LineageLifetap.png"
+ },
  "Atmohua's Soul Core of Retreat": {
   "ko": "앗모후아의 후퇴의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlRW5lcmd5U2hpZWxkIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/10e16bc3ea/NewSoulCoreEnergyShield.png"
+ },
+ "Atziri's Allure": {
+  "ko": "앗지리의 매혹",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBdHppcmkiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/422053dc32/LineageAtziri.png"
+ },
+ "Atziri's Communion": {
+  "ko": "앗지리의 성찬식",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0F0emlyaUNvbW11bmlvbiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/10509800d7/AtziriCommunion.png"
+ },
+ "Atziri's Impatience": {
+  "ko": "앗지리의 조바심",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0F0emlyaUltcGF0aWVuY2UiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/9598c10260/AtziriImpatience.png"
  },
  "Banded Wombgift": {
   "ko": "줄로 묶인 생명의 결실",
@@ -200,6 +244,10 @@
  "Betrayal of Aldur": {
   "ko": "알두르의 배신",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRWxlbWVudGFsQ29udmVyc2lvblJ1bmVDaGFvcyIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/691fe14404/ElementalConversionRuneChaos.png"
+ },
+ "Bhatair's Vengeance": {
+  "ko": "바타이르의 복수",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1NoYXR0ZXJlZEZhbmciLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/ed794a9e4b/ShatteredFang.png"
  },
  "Bitter Dead": {
   "ko": "원통한 망자"
@@ -232,6 +280,14 @@
   "ko": "균열 군주 낭",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvUXVlc3RJdGVtcy9CcmVhY2hsb3JkU2FjIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/07670f51fe/BreachlordSac.png"
  },
+ "Breachlord's Amalgam": {
+  "ko": "균열 군주의 융합체",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0JyZWFjaGxvcmRzQW1hbGdhbSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/bdbefcb65b/BreachlordsAmalgam.png"
+ },
+ "Breachlord's Rift": {
+  "ko": "균열 군주의 틈새",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0JyZWFjaGxvcmRzUmVtb3JzZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/6a18a03016/BreachlordsRemorse.png"
+ },
  "Breachstone": {
   "ko": "균열석",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaHN0b25lIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/d60587d724/Breachstone.png"
@@ -239,6 +295,10 @@
  "Breath of Aldur": {
   "ko": "알두르의 숨결",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRWxlbWVudGFsQ29udmVyc2lvblJ1bmVDb2xkIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/508c419670/ElementalConversionRuneCold.png"
+ },
+ "Brutus' Brain": {
+  "ko": "브루투스의 두뇌",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VNZWF0c2hpZWxkIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/115edf7e2f/LineageMeatshield.png"
  },
  "Cadigan's Epiphany": {
   "ko": "캐디건의 통찰",
@@ -272,6 +332,10 @@
   "ko": "고양이 우상",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvVG9ybWVudGVkU3Bpcml0U29ja2V0YWJsZXMvQXptZXJpU29ja2V0YWJsZUNhdCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/3d5bc70405/AzmeriSocketableCat.png"
  },
+ "Catha's Brilliance": {
+  "ko": "캐사의 광채",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0NhdGhhc0JyaWxsaWFuY2UiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/101f7491fe/CathasBrilliance.png"
+ },
  "Celestial Alloy": {
   "ko": "천공의 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvQWxsb3k0Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/df21374115/Alloy4.png"
@@ -299,6 +363,10 @@
  "Cholotl's Soul Core of War": {
   "ko": "촐로틀의 전쟁의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlUHJvamVjdGlsZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/dfc35bed7f/NewSoulCoreProjectile.png"
+ },
+ "Cirel's Cultivation": {
+  "ko": "키렐의 함양",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0dyZWF0d29vZCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/9d2739c22d/Greatwood.png"
  },
  "Citaqualotl's Soul Core of Foulness": {
   "ko": "시타콰로틀의 부정의 영혼 핵",
@@ -366,6 +434,10 @@
   "ko": "회오리바람 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvSW1idWVkVmVyaXNpdW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/083dc3c30d/ImbuedVerisium.png"
  },
+ "Daresso's Passion": {
+  "ko": "다레소의 열정",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VEYXJlc3NvIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/31805870df/LineageDaresso.png"
+ },
  "Deadly Fate": {
   "ko": "치명적인 운명",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL1RyaWFsbWFzdGVyS2V5MiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/cccae44832/TrialmasterKey2.png"
@@ -380,6 +452,10 @@
  },
  "Detonate Living": {
   "ko": "생체 폭발"
+ },
+ "Dialla's Desire": {
+  "ko": "디알라의 갈망",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0RpYWxsYSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/1b959c86b4/Dialla.png"
  },
  "Diluted Liquid Greed": {
   "ko": "희석된 액체 탐욕",
@@ -397,6 +473,18 @@
   "ko": "신성한 오브",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lNb2RWYWx1ZXMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/2986e220b3/CurrencyModValues.png"
  },
+ "Doedre's Undoing": {
+  "ko": "도이드리의 파멸",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VEb2VkcmUiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/83dad35313/LineageDoedre.png"
+ },
+ "Dominus' Grasp": {
+  "ko": "도미누스의 장악",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VNZXJjeSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/38123ca95d/LineageMercy.png"
+ },
+ "Einhar's Beastrite": {
+  "ko": "아인하르의 야수의식",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VFaW5oYXIiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/aec9088873/LineageEinhar.png"
+ },
  "Emergent Instinct": {
   "ko": "발현된 본능",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRXhwZWRpdGlvbldhckFuY2llbnRBdWdtZW50Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/cc4d7ae04b/ExpeditionWarAncientAugment.png"
@@ -413,9 +501,20 @@
   "ko": "발현된 활력",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRXhwZWRpdGlvblJlbGlnaW9uQW5jaWVudEF1Z21lbnQiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/508419c851/ExpeditionReligionAncientAugment.png"
  },
+ "Eonyr's Thunder": {
+  "ko": "에오니르의 천둥"
+ },
  "Esh's Catalyst": {
   "ko": "에쉬의 기폭제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaENhdGFseXN0TGlnaHRuaW5nIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/299e62fc33/BreachCatalystLightning.png"
+ },
+ "Esh's Prowess": {
+  "ko": "에쉬의 기량",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0VzaHNQcm93ZXNzIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/5deb667226/EshsProwess.png"
+ },
+ "Esh's Radiance": {
+  "ko": "에쉬의 광휘",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VFc2giLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/2bdbf8be07/LineageEsh.png"
  },
  "Essence of Abrasion": {
   "ko": "마모의 에센스",
@@ -536,6 +635,10 @@
   "ko": "팽창하는 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvU3RhbmRhcmRWZXJpc2l1bSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/4ee9afb77c/StandardVerisium.png"
  },
+ "Expedition Logbook": {
+  "ko": "탐험 일지",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRXhwZWRpdGlvbkxvZ2Jvb2s1Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/841a5e9622/ExpeditionLogbook5.png"
+ },
  "Explosive Transmutation": {
   "ko": "폭발성 변형"
  },
@@ -577,6 +680,10 @@
  },
  "Frostflame Nova": {
   "ko": "서리불꽃 폭발"
+ },
+ "Garukhan's Resolve": {
+  "ko": "가루칸의 투지",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0dhcnVraGFuIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/392773e9fd/Garukhan.png"
  },
  "Gemcutter's Prism": {
   "ko": "세공사의 프리즘",
@@ -781,6 +888,10 @@
  "Grim Pillars": {
   "ko": "으스스한 기둥"
  },
+ "Guatelitzi's Ablation": {
+  "ko": "과텔리치의 삭마",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0d1YXRlbGl0emkiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/8ea2f0077d/Guatelitzi.png"
+ },
  "Guatelitzi's Soul Core of Endurance": {
   "ko": "과텔리치의 인내의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlRW5kdXJhbmNlQ2hhcmdlIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/8da8c1e799/NewSoulCoreEnduranceCharge.png"
@@ -788,6 +899,10 @@
  "Guatelitzi's Thesis": {
   "ko": "과텔리치의 명제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUGVyZmVjdFNvdWxDb3Jlcy9Tb3VsQ29yZUJsb29kIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/eaea6fa77d/SoulCoreBlood.png"
+ },
+ "Hayoxi's Fulmination": {
+  "ko": "하욕시의 뇌전",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0hheW94aSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/e0817c923c/Hayoxi.png"
  },
  "Hayoxi's Soul Core of Heatproofing": {
   "ko": "하욕시의 내열의 영혼 핵",
@@ -803,6 +918,13 @@
  "Hedgewitch Assandra's Rune of Wisdom": {
   "ko": "산울마녀 아산드라의 지혜의 룬",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUnVuZXMvTmV3UnVuZTEiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/ea21196cfb/NewRune1.png"
+ },
+ "Helbrym's Hide": {
+  "ko": "헬브림의 가죽"
+ },
+ "Her Declaration": {
+  "ko": "그녀의 선언",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01vdGhlcnNEZWNsYXJhdGlvbiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/b3b8f71aec/MothersDeclaration.png"
  },
  "Hinekora's Lock": {
   "ko": "히네코라의 머리카락",
@@ -899,17 +1021,33 @@
   "ko": "방사능 노출 서판",
   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletGeneric.webp"
  },
+ "Ixchel's Torment": {
+  "ko": "익스첼의 고통",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1RyaWFsbWFzdGVyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/231195f1b3/Trialmaster.png"
+ },
  "Jiquani's Thesis": {
   "ko": "지콰니의 명제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUGVyZmVjdFNvdWxDb3Jlcy9Tb3VsQ29yZVNvdWwiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/a45ab2bca2/SoulCoreSoul.png"
+ },
+ "Kalisa's Crescendo": {
+  "ko": "칼리사의 크레센도",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VLYWxpc2FDaG9ydXMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/1d60b0db2f/LineageKalisaChorus.png"
  },
  "Kamasa's Orb of Sacrifice": {
   "ko": "카마사의 희생의 오브",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdXJzaW9uQ3JhZnRpbmdPcmJzL0luY3Vyc2lvbkNvcnJ1cHRpb25PcmIzIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/00e0cd1060/IncursionCorruptionOrb3.png"
  },
+ "Kaom's Madness": {
+  "ko": "카옴의 광기",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VLYW9tIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/82eacd9fdc/LineageKaom.png"
+ },
  "Katla's Gloom": {
   "ko": "카틀라의 순흑",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvR2FtZVdhcnBSdW5lQ2hhb3MiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/c59f912034/GameWarpRuneChaos.png"
+ },
+ "Khatal's Rejuvenation": {
+  "ko": "카탈의 회춘",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VLaGF0YWwiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/e67d6a908e/LineageKhatal.png"
  },
  "Kolr's Hunt": {
   "ko": "콜르의 사냥",
@@ -919,6 +1057,10 @@
   "ko": "코펙의 희생의 오브",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdXJzaW9uQ3JhZnRpbmdPcmJzL0luY3Vyc2lvbkNvcnJ1cHRpb25PcmIyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/911b28ea18/IncursionCorruptionOrb2.png"
  },
+ "Kulemak's Dominion": {
+  "ko": "쿨레막의 지배",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VLdWxlbWFrU3BpcmUiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/7f63599d16/LineageKulemakSpire.png"
+ },
  "Kulemak's Invitation": {
   "ko": "쿨레막의 초대",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvS3VsZW1ha3NJbnZpdGF0aW9uIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/c7e6e86681/KulemaksInvitation.png"
@@ -926,6 +1068,10 @@
  "Kurgal's Gaze": {
   "ko": "쿠르갈의 응시",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQWJ5c3NhbEV5ZVNvY2tldGFibGVzL0t1cmdhbHNHYXplIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/c21eb07bab/KurgalsGaze.png"
+ },
+ "Kurgal's Leash": {
+  "ko": "쿠르갈의 가죽끈",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0FieXNzS3VyZ2FsIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/3fbc251a84/AbyssKurgal.png"
  },
  "Lady Hestra's Rune of Winter": {
   "ko": "헤스트라 부인의 겨울의 룬",
@@ -1106,6 +1252,10 @@
   "ko": "메드베드의 원 문양",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvVWh0cmVkQ3Jlc3QiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/273a9b8731/UhtredCrest.png"
  },
+ "Medved's Felling": {
+  "ko": "메드베드의 살상",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01lZHZlZHNGZWxsaW5nIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/e4c502b452/MedvedsFelling.png"
+ },
  "Medved's Saga": {
   "ko": "메드베드의 영웅담",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvU3BlY2lhbEV4cGVkaXRpb25QYWdlMyIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/9eb5b576fc/SpecialExpeditionPage3.png"
@@ -1122,9 +1272,17 @@
   "ko": "칼란드라의 거울",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lEdXBsaWNhdGUiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/26bc31680e/CurrencyDuplicate.png"
  },
+ "Morgana's Tempest": {
+  "ko": "모르가나의 폭풍",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01vcmdhbmFzVGVtcGVzdCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/55ddb1bfc8/MorganasTempest.png"
+ },
  "Mystic Alloy": {
   "ko": "신비한 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvQ2VsZXN0aWFsVmVyaXNpdW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/1478b03254/CelestialVerisium.png"
+ },
+ "Mórrigan's Insight": {
+  "ko": "모리건의 통찰",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL01vcnJpZ2Fuc1JlZnVnZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/38291028f0/MorrigansRefuge.png"
  },
  "Necrotic Catalyst": {
   "ko": "괴사의 기폭제",
@@ -1134,9 +1292,25 @@
   "ko": "신경 기폭제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaENhdGFseXN0TWFuYSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/61d3a7a832/BreachCatalystMana.png"
  },
+ "Oisín's Oath": {
+  "ko": "오이신의 서약",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1dhbGtlcm9mdGhlV2lsZHMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/50c27082f9/WalkeroftheWilds.png"
+ },
+ "Olroth's Conviction": {
+  "ko": "올로스의 신념",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL09scm90aHNDb252aWN0aW9uIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/1c1940061e/OlrothsConviction.png"
+ },
  "Olroth's Crest of the Sun": {
   "ko": "올로스의 태양 문양",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvT2xyb3RoQ3Jlc3QiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/7af5ff0fcb/OlrothCrest.png"
+ },
+ "Olroth's Hubris": {
+  "ko": "올로스의 오만",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL09scm90aHNIdWJyaXMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/60d750261f/OlrothsHubris.png"
+ },
+ "Olroth's Reliquary Key": {
+  "ko": "올로스의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5RXhwZWRpdGlvbiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/0433c7beb8/TwilightOrderReliquaryKeyExpedition.png"
  },
  "Olroth's Saga": {
   "ko": "올로스의 영웅담",
@@ -1341,6 +1515,10 @@
  "Ox Idol": {
   "ko": "소 우상",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvVG9ybWVudGVkU3Bpcml0U29ja2V0YWJsZXMvQXptZXJpU29ja2V0YWJsZU94Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/5ebdb092f5/AzmeriSocketableOx.png"
+ },
+ "Paquate's Pact": {
+  "ko": "파콰테의 맹약",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1BhcXVhdGUiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/48c3b0fca2/Paquate.png"
  },
  "Passion of Aldur": {
   "ko": "알두르의 열정",
@@ -1557,6 +1735,10 @@
   "ko": "보호의 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvSW1wdXJlVmVyaXNpdW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/240b446d85/ImpureVerisium.png"
  },
+ "Prototype Seventeen": {
+  "ko": "프로토타입 17호",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1Byb3RvdHlwZVNldmVudGVlbiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/85059c19da/PrototypeSeventeen.png"
+ },
  "Quipolatl's Soul Core of Flow": {
   "ko": "퀴폴라틀의 흐름의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlVGltZUNvb2xkb3duIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/dab6d943f3/NewSoulCoreTimeCooldown.png"
@@ -1571,6 +1753,14 @@
  },
  "Rain of Blades": {
   "ko": "칼날의 비"
+ },
+ "Rakiata's Flow": {
+  "ko": "라키아타의 흐름",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1Jha2lhdGEiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/20a70b7bd3/Rakiata.png"
+ },
+ "Ratha's Assault": {
+  "ko": "라타의 공격",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0F6YWRpYW4iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/a77457eef2/Azadian.png"
  },
  "Raven's Reflection": {
   "ko": "큰까마귀의 투영"
@@ -1668,13 +1858,25 @@
   "ko": "존경받는 별빛 광석",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3JhZnRpbmcvVmVyaXNpdW0vVmVyaXNpdW1PcmVfU3RhcmxpdF8yeDRfQXJtb3VyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/6b74e4cff7/VerisiumOre_Starlit_2x4_Armour.png"
  },
+ "Rigwald's Ferocity": {
+  "ko": "리그월드의 흉포함",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1JpZ3dhbGQiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/a053a2b077/Rigwald.png"
+ },
  "Ritual Tablet": {
   "ko": "의식 서판",
   "icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorTablets/PrecursorTabletRitual.webp"
  },
+ "Ritualistic Reliquary Key": {
+  "ko": "의식의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5Uml0dWFsIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/d4d4229ab8/TwilightOrderReliquaryKeyRitual.png"
+ },
  "Robust Rune": {
   "ko": "왕성한 룬",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUnVuZXMvU3RyZW5ndGhSdW5lIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/1e585207d2/StrengthRune.png"
+ },
+ "Romira's Requital": {
+  "ko": "로미라의 보답",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VSb21pcmEiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/62c07d95f0/LineageRomira.png"
  },
  "Rune of Accumulation": {
   "ko": "축적의 룬",
@@ -1767,6 +1969,10 @@
   "ko": "감정 주문서",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lJZGVudGlmaWNhdGlvbiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/884f7bc58b/CurrencyIdentification.png"
  },
+ "Seraph's Heart": {
+  "ko": "고위 천사의 심장",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1NlcmFwaHNIZWFydCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/b24b182f0b/SeraphsHeart.png"
+ },
  "Serle's Triumph": {
   "ko": "세를의 승리",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvR2FtZVdhcnBSdW5lMiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/4a1b9c272c/GameWarpRune2.png"
@@ -1786,6 +1992,10 @@
  "Simulacrum Splinter": {
   "ko": "복제된 영토 파편",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9EZWxpcml1bVNwbGludGVyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/81906b3522/DeliriumSplinter.png"
+ },
+ "Sione's Temper": {
+  "ko": "시온의 성미",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1dpbGRzaGFyZHMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/6d700adf17/Wildshards.png"
  },
  "Skittering Catalyst": {
   "ko": "달리는 기폭제",
@@ -1878,17 +2088,49 @@
   "ko": "폭풍 룬",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUnVuZXMvTGlnaHRuaW5nUnVuZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/98319b3998/LightningRune.png"
  },
+ "Styrn's Ferocity": {
+  "ko": "스티른의 흉포함",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0tuaWdodHNGZXJvY2l0eSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/e015819246/KnightsFerocity.png"
+ },
+ "Styrn's Mountain": {
+  "ko": "스티른의 산",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0tuaWdodHNMZWdhY3kiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/2564cea11c/KnightsLegacy.png"
+ },
  "Swift Alloy": {
   "ko": "재빠른 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvUHVyZVZlcmlzaXVtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/8418cd5cc3/PureVerisium.png"
+ },
+ "Tacati's Ire": {
+  "ko": "타카티의 진노",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VUYWNhdGkiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/d5ded1baa6/LineageTacati.png"
  },
  "Tacati's Soul Core of Affliction": {
   "ko": "타카티의 수난의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlQ2hhb3MxIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/276b585906/NewSoulCoreChaos1.png"
  },
+ "Tangmazu's Reliquary Key": {
+  "ko": "탕마주의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5RGVsaXJpdW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/1a87e735c6/TwilightOrderReliquaryKeyDelirium.png"
+ },
+ "Tangmazu's Thurible": {
+  "ko": "탕마주의 향로",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1RhbmdtYXp1c1RodXJpYmxlIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/ae244c7e9f/TangmazusThurible.png"
+ },
+ "Tasalio's Rhythm": {
+  "ko": "타살리오의 리듬",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VUYXNhbGlvIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/19f9a64786/LineageTasalio.png"
+ },
+ "Tawhoa's Tending": {
+  "ko": "타호아의 보살핌",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1R1a29oYW1hIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/8b469f3f5e/Tukohama.png"
+ },
  "Tecrod's Gaze": {
   "ko": "테크로드의 응시",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQWJ5c3NhbEV5ZVNvY2tldGFibGVzL1RlY3JvZHNHYXplIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/ef2a9355b4/TecrodsGaze.png"
+ },
+ "Tecrod's Revenge": {
+  "ko": "테크로드의 복수",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VUZWNyb2QiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/783b026592/LineageTecrod.png"
  },
  "Temple Tablet": {
   "ko": "사원 서판",
@@ -1986,6 +2228,10 @@
   "ko": "마석학 유동체 (9레벨)",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvRXhwZWRpdGlvbkdlbUN1cnJlbmN5Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/51fec6d0d5/ExpeditionGemCurrency.png"
  },
+ "The Arbiter's Reliquary Key": {
+  "ko": "중재자의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5UGlubmFjbGUiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/c2e7758a33/TwilightOrderReliquaryKeyPinnacle.png"
+ },
  "The Greatwolf's Rune of Claws": {
   "ko": "위대한 늑대의 발톱의 룬",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvUnVuZXMvTmV3UnVuZTIwIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/ae83a7c954/NewRune20.png"
@@ -2001,6 +2247,10 @@
  "The Runefather's Alloy": {
   "ko": "룬 아버지의 합금",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvQWxsb3kzIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/226e099997/Alloy3.png"
+ },
+ "The Trialmaster's Reliquary Key": {
+  "ko": "시련의 대가의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5VWx0aW1hdHVtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/92ccd5ad96/TwilightOrderReliquaryKeyUltimatum.png"
  },
  "The Triskelion Reforged": {
   "ko": "재련된 트리스켈리온"
@@ -2021,20 +2271,56 @@
   "ko": "진화의 파편",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lVcGdyYWRlVG9NYWdpY1NoYXJkIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/e67bca229b/CurrencyUpgradeToMagicShard.png"
  },
+ "Trickster's Shard": {
+  "ko": "협잡꾼의 파편",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1RyaWNrc3RlcnNTaGFyZCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ad689de215/TrickstersShard.png"
+ },
  "Triskelion Cascade": {
   "ko": "트리스켈리온의 폭포"
+ },
+ "Tul's Avalanche": {
+  "ko": "툴의 산사태",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1R1bHNQcm9nZW55Iiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/c0458a3aa3/TulsProgeny.png"
  },
  "Tul's Catalyst": {
   "ko": "툴의 기폭제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaENhdGFseXN0Q29sZCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/c3bc9abf43/BreachCatalystCold.png"
  },
+ "Tul's Stillness": {
+  "ko": "툴의 고요",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VUdWwiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/cff647542b/LineageTul.png"
+ },
+ "Twilight Reliquary Key": {
+  "ko": "황혼 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5V29ybGQiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/27f2d492e7/TwilightOrderReliquaryKeyWorld.png"
+ },
  "Tzamoto's Soul Core of Ferocity": {
   "ko": "자모토의 흉포함의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlUmFnZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/7bbacc1706/NewSoulCoreRage.png"
  },
+ "Uhtred's Augury": {
+  "ko": "우트레드의 점술",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VVaHRyZWRHcmVhdGVyIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/207f49bf94/LineageUhtredGreater.png"
+ },
+ "Uhtred's Constellation": {
+  "ko": "우트레드의 별자리",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1VodHJlZHNDb25zdGVsbGF0aW9uIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/feb7bc09b0/UhtredsConstellation.png"
+ },
  "Uhtred's Crest of the Chalice": {
   "ko": "우트레드의 성배 문양",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvTWVkdmVkQ3Jlc3QiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/75a8fb110a/MedvedCrest.png"
+ },
+ "Uhtred's Exodus": {
+  "ko": "우트레드의 탈출",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VVaHRyZWRMZXNzZXIiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/b286006915/LineageUhtredLesser.png"
+ },
+ "Uhtred's Omen": {
+  "ko": "우트레드의 징조",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VVaHRyZWRTdGFuZGFyZCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/2e603483a5/LineageUhtredStandard.png"
+ },
+ "Uhtred's Rite": {
+  "ko": "우트레드의 의례",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1V0aHJlZHNDaGFsaWNlIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/484fb5bdbb/UthredsChalice.png"
  },
  "Uhtred's Saga": {
   "ko": "우트레드의 영웅담",
@@ -2048,13 +2334,49 @@
   "ko": "울라만의 응시",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQWJ5c3NhbEV5ZVNvY2tldGFibGVzL1VsYW1hbnNHYXplIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/b39b0a03bc/UlamansGaze.png"
  },
+ "Uncut Skill Gem (Level 10)": {
+  "ko": "미가공 스킬 젬 (10레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png"
+ },
+ "Uncut Skill Gem (Level 19)": {
+  "ko": "미가공 스킬 젬 (19레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png"
+ },
+ "Uncut Skill Gem (Level 20)": {
+  "ko": "미가공 스킬 젬 (20레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/97f0ceba15/UncutSkillGem.png"
+ },
+ "Uncut Spirit Gem (Level 10)": {
+  "ko": "미가공 정신력 젬 (10레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png"
+ },
+ "Uncut Spirit Gem (Level 19)": {
+  "ko": "미가공 정신력 젬 (19레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png"
+ },
+ "Uncut Spirit Gem (Level 20)": {
+  "ko": "미가공 정신력 젬 (20레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFNraWxsR2VtQnVmZiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/ab25e9aa3b/UncutSkillGemBuff.png"
+ },
+ "Uncut Support Gem (Level 5)": {
+  "ko": "미가공 보조 젬 (5레벨)",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9VbmN1dFN1cHBvcnRHZW0iLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/d1ffe1c951/UncutSupportGem.png"
+ },
  "Uromoti's Soul Core of Attenuation": {
   "ko": "우로모티의 감쇠의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlQ3Vyc2VzMiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/25919ac93d/NewSoulCoreCurses2.png"
  },
+ "Uruk's Smelting": {
+  "ko": "우루크의 제련",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VBcm1vdXJCcmVhayIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/821e3c1334/LineageArmourBreak.png"
+ },
  "Uul-Netol's Catalyst": {
   "ko": "울네톨의 기폭제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaENhdGFseXN0UGh5c2ljYWwiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/bc9406c106/BreachCatalystPhysical.png"
+ },
+ "Uul-Netol's Embrace": {
+  "ko": "울네톨의 포옹",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VVdWxOZXRvbCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/751151f142/LineageUulNetol.png"
  },
  "Vaal Arcanist's Infuser": {
   "ko": "바알 신비학자의 주입기",
@@ -2084,6 +2406,10 @@
   "ko": "바알 착취기",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdXJzaW9uQ3JhZnRpbmdPcmJzL0luY3Vyc2lvblZhYWxTaXBob25lciIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/070fd020d7/IncursionVaalSiphoner.png"
  },
+ "Varashta's Blessing": {
+  "ko": "바라시타의 축복",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VEamlubiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/62882cee00/LineageDjinn.png"
+ },
  "Venerable Starlit Ore": {
   "ko": "덕망 있는 별빛 광석",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3JhZnRpbmcvVmVyaXNpdW0vVmVyaXNpdW1PcmVfU3RhcmxpdF8yeDMiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/ef8350565a/VerisiumOre_Starlit_2x3.png"
@@ -2098,6 +2424,10 @@
  "Victorious Fate": {
   "ko": "승리의 운명",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL1RyaWFsbWFzdGVyS2V5MyIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/0270951a73/TrialmasterKey3.png"
+ },
+ "Vilenta's Propulsion": {
+  "ko": "바일렌타의 추진",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VWaWxlbnRhIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/abda900f3c/LineageVilenta.png"
  },
  "Vision Rune": {
   "ko": "환영 룬",
@@ -2121,6 +2451,18 @@
  "Vorana's Saga": {
   "ko": "보라나의 영웅담",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRXhwZWRpdGlvbjIvU3BlY2lhbEV4cGVkaXRpb25QYWdlMiIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/057899d625/SpecialExpeditionPage2.png"
+ },
+ "Vorana's Siege": {
+  "ko": "보라나의 공성",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1ZvcmFuYXNTaWVnZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/c3df9f3c9a/VoranasSiege.png"
+ },
+ "Vruun's Aftermath": {
+  "ko": "브룬의 여파",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1ZydXVuc0FmdGVybWF0aCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/209e0d5270/VruunsAftermath.png"
+ },
+ "Vruun's Inevitability": {
+  "ko": "브룬의 필연",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1ZydXVuc1NwaWtlIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/13d2115682/VruunsSpike.png"
  },
  "Ward Rune": {
   "ko": "수호 룬",
@@ -2205,6 +2547,14 @@
   "ko": "늑대 우상",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvVG9ybWVudGVkU3Bpcml0U29ja2V0YWJsZXMvQXptZXJpU29ja2V0YWJsZVdvbGYiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/c0deeb6d94/AzmeriSocketableWolf.png"
  },
+ "Xesht's Reliquary Key": {
+  "ko": "제쉬트의 성유물 보관실 열쇠",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9Ud2lsaWdodE9yZGVyUmVsaXF1YXJ5S2V5QnJlYWNoIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/866c9d5c45/TwilightOrderReliquaryKeyBreach.png"
+ },
+ "Xibaqua's Rending": {
+  "ko": "지바콰의 분리",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VYaWJhcXVhIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/e4e4642563/LineageXibaqua.png"
+ },
  "Xipocado's Soul Core of Dominion": {
   "ko": "지포카도의 지배의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlTWluaW9uIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/b1e7975db2/NewSoulCoreMinion.png"
@@ -2217,6 +2567,10 @@
   "ko": "조프의 기폭제",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaENhdGFseXN0RmlyZSIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/05b1999374/BreachCatalystFire.png"
  },
+ "Xoph's Pyre": {
+  "ko": "조프의 장작",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL0xpbmVhZ2VYb3BoIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/09f4b817dc/LineageXoph.png"
+ },
  "Yaomac's Orb of Sacrifice": {
   "ko": "야오맥의 희생의 오브",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdXJzaW9uQ3JhZnRpbmdPcmJzL0luY3Vyc2lvbkNvcnJ1cHRpb25PcmIxIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/d8bf3af5d5/IncursionCorruptionOrb1.png"
@@ -2228,5 +2582,17 @@
  "Zalatl's Soul Core of Insulation": {
   "ko": "잘라틀의 절연의 영혼 핵",
   "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU291bENvcmVzL05ld1NvdWxDb3JlTGlnaHRuaW5nIiwic2NhbGUiOjEsInJlYWxtIjoicG9lMiJ9XQ/80c455f775/NewSoulCoreLightning.png"
+ },
+ "Zarokh's Refrain": {
+  "ko": "자로크의 절제",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1phcm9raCIsInNjYWxlIjoxLCJyZWFsbSI6InBvZTIifV0/78c9566961/Zarokh.png"
+ },
+ "Zarokh's Revolt": {
+  "ko": "자로크의 봉기",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1phcm9raHNSZXZvbHQiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/a611b32c57/ZarokhsRevolt.png"
+ },
+ "Zerphi's Infamy": {
+  "ko": "제르피의 악명",
+  "icon": "/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9OZXcvTmV3U3VwcG9ydC9MaW5lYWdlL1plcnBoaXNMZWdhY3kiLCJzY2FsZSI6MSwicmVhbG0iOiJwb2UyIn1d/3b039ea679/ZerphisLegacy.png"
  }
 }

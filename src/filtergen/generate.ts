@@ -70,6 +70,16 @@ export const CATEGORIES: Category[] = [
     ],
   },
   { id: "fragments", label: "파편·서판", type: "fragments->generic", cells: grade("s", "a", "b", "c") },
+  { id: "lineage", label: "혈통 젬", type: "gems->lineage", cells: grade("s", "a", "b", "c") },
+  {
+    id: "keys",
+    label: "성유물 열쇠",
+    type: "maplike->special",
+    cells: [
+      { id: "rare", label: "희귀", tiers: ["vaultkeysrare"] },
+      { id: "common", label: "일반", tiers: ["vaultkeys"] },
+    ],
+  },
   {
     id: "waystones",
     label: "경로석",
@@ -179,6 +189,19 @@ export function readDefaults(text: string): Record<string, CellInfo> {
         sound: hit.map((b) => blockSound(lines, b)).find(Boolean),
         groups,
       };
+    }
+  }
+  return out;
+}
+
+/** 태그(`$type->type $tier->tier`)가 붙은 블록들의 BaseType 목록 */
+export function taggedBaseTypes(text: string, type: string, tiers: string[]): string[] {
+  const lines = text.split(/\r?\n/);
+  const out: string[] = [];
+  for (const b of findBlocks(lines)) {
+    const tag = b.header.match(TAG);
+    if (tag && tag[1] === type && tiers.includes(tag[2])) {
+      for (const name of blockItems(lines, b)) if (!out.includes(name)) out.push(name);
     }
   }
   return out;
