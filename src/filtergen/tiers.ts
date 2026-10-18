@@ -4,8 +4,8 @@
  * 생성한 필터 = 우리 티어 규칙(맨 위, 먼저 걸림) + 기준 필터 전체(티어에 없는 아이템용).
  */
 import catalog from "./catalog.json";
-import { evaluate, parseRules } from "./evaluate";
-import { buildExtraCategories, type GearClass, type Tone } from "./extras";
+import { evaluate, parseRules, type Sample } from "./evaluate";
+import { buildExtraCategories, EQUIPMENT_TABS, type GearClass, type Tone } from "./extras";
 
 export type TierId = "sss" | "ss" | "s" | "a" | "b" | "c" | "d" | "e" | "f" | "hidden";
 
@@ -92,7 +92,7 @@ export const tierById = (id: TierId) => TIERS.find((t) => t.id === id) ?? TIERS[
 
 export const SOUNDS = ["lv1", "lv2", "lv3", "lv4", "lv5", "lv6", "lv7", "t_popup", "t_stack", "t_ring", "t_flask"];
 
-/** 티어에 넣는 단위: 아이템 하나, 또는 조건으로 묶은 구간(조각 묶음 수, 장비 종류…) */
+/** 티어에 넣는 단위: 아이템(베이스) 하나, 또는 조건으로 묶은 구간 */
 export type TierItem = {
   id: string;
   label: string;
@@ -100,9 +100,16 @@ export type TierItem = {
   baseTypes?: string[];
   /** 조건 줄 (예: StackSize >= 20). 없으면 BaseType 만으로 잡는다. */
   conditions?: string[];
-  /** 필터 안에서 먼저 걸려야 하는 순서 (작을수록 위, 기본 5) */
+  /** 필터 안에서 먼저 걸려야 하는 순서 (작을수록 위, 기본 6) */
   order?: number;
   tone?: Tone;
+  /** 장비류: 클래스(필터 Class)와 조건 id */
+  sub?: string;
+  variant?: string;
+  /** 요구 레벨 (poe2db) */
+  level?: number;
+  /** 같은 베이스를 쓰는 다른 고유 등 덧붙일 설명 */
+  note?: string;
 };
 
 export type TierCategory = {
@@ -111,6 +118,11 @@ export type TierCategory = {
   items: TierItem[];
   /** BaseType 으로만 잡는 아이템 규칙에 덧붙일 조건 (예: 고유 서판·유물은 빼기) */
   guard?: string[];
+  /** 장비류: 클래스 목록과 클래스별 조건 목록 */
+  subs?: { id: string; label: string; icon?: string }[];
+  variants?: Record<string, { id: string; label: string }[]>;
+  /** 너무 많아 "전체" 탭에서는 뺀다 */
+  hideInAll?: boolean;
 };
 
 type CatalogItem = { en: string; ko: string; icon?: string };
@@ -152,8 +164,8 @@ function tierFromResult(result: { show: boolean; sound?: string }): TierId {
 
 export type TierModel = {
   categories: TierCategory[];
-  /** 기준 필터에서 계산한 아이템별 기본 티어 */
-  defaults: Record<string, TierId>;
+  /** 기준 필터로 계산한 기본 티어 (처음 물어볼 때 계산하고 기억한다) */
+  defaultOf: (id: string) => TierId;
 };
 
 /**
@@ -162,7 +174,18 @@ export type TierModel = {
  */
 export function buildTierModel(baseText: string): TierModel {
   const rules = parseRules(baseText);
-  const defaults: Record<string, TierId> = {};
+  const samples = new Map<string, Sample>();
+  const cache = new Map<string, TierId>();
+  const defaultOf = (id: string): TierId => {
+    let tier = cache.get(id);
+    if (!tier) {
+      const sample = samples.get(id);
+      tier = sample ? tierFromResult(evaluate(rules, sample)) : "hidden";
+      cache.set(id, tier);
+    }
+    return tier;
+  };
+
   const categories: TierCategory[] = [];
   const seen = new Set<string>();
   // poe2db "중첩 가능 화폐" 목록에는 액체 감정 등 다른 탭 아이템도 섞여 있어, 더 구체적인 탭에 둔다.
@@ -188,21 +211,14 @@ export function buildTierModel(baseText: string): TierModel {
         if (group.section === "SplinterItem") {
           for (const range of SPLINTER_RANGES) {
             const id = `${item.en}|${range.id}`;
-            items.push({
-              id,
-              label: `${item.ko} ${range.label}`,
-              icon: item.icon,
-              baseTypes: [item.en],
-              conditions: range.conditions,
-            });
-            defaults[id] = tierFromResult(evaluate(rules, { ...base, StackSize: range.stack }));
+            items.push({ id, label: `${item.ko} ${range.label}`, icon: item.icon, baseTypes: [item.en], conditions: range.conditions });
+            samples.set(id, { ...base, StackSize: range.stack });
           }
           continue;
         }
         const tier = Number(item.en.match(/Tier (\d+)/)?.[1] ?? 0);
-        const sample = cls.filterClass === "Waystones" ? { ...base, WaystoneTier: tier } : base;
         items.push({ id: item.en, label: item.ko, icon: item.icon, baseTypes: [item.en] });
-        defaults[item.en] = tierFromResult(evaluate(rules, sample));
+        samples.set(item.en, cls.filterClass === "Waystones" ? { ...base, WaystoneTier: tier } : base);
       }
       if (!items.length) continue;
       categories.push({
@@ -214,15 +230,86 @@ export function buildTierModel(baseText: string): TierModel {
     }
   }
 
+  // 장비류: 클래스 → 조건 → 베이스
+  for (const tab of EQUIPMENT_TABS) {
+    const classes = CATALOG.gear.filter((g) => tab.match(g) && g.bases.length);
+    const items: TierItem[] = [];
+    const variants: Record<string, { id: string; label: string }[]> = {};
+    for (const g of classes) {
+      const list = tab.variants(g);
+      variants[g.filterClass] = list.map(({ id, label }) => ({ id, label }));
+      const bases = [...g.bases].sort((a, b) => (a.level ?? 0) - (b.level ?? 0));
+      for (const v of list) {
+        const conditions = [...v.conditions, `Class == "${g.filterClass}"`];
+        for (const b of bases) {
+          const id = `${tab.id}|${g.filterClass}|${v.id}|${b.en}`;
+          items.push({
+            id,
+            label: b.ko,
+            icon: b.icon,
+            baseTypes: [b.en],
+            conditions,
+            order: v.order,
+            tone: v.tone,
+            sub: g.filterClass,
+            variant: v.id,
+            level: b.level,
+          });
+          samples.set(id, { Class: g.filterClass, BaseType: b.en, DropLevel: b.level || 1, UnidentifiedItemTier: 1, ...v.sample });
+        }
+      }
+    }
+    categories.push({
+      id: tab.id,
+      label: tab.label,
+      items,
+      subs: classes.map((g) => ({ id: g.filterClass, label: g.ko, icon: g.icon })),
+      variants,
+      hideInAll: true,
+    });
+  }
+
+  // 고유: 실제 고유 아이템. 필터는 고유를 이름이 아니라 베이스로만 가리므로 같은 베이스 고유는 함께 움직인다.
+  const uniqueClasses = CATALOG.gear.filter((g) => g.uniques.length);
+  const uniqueItems: TierItem[] = [];
+  for (const g of uniqueClasses) {
+    const byBase = new Map<string, string[]>();
+    for (const u of g.uniques) byBase.set(u.base, [...(byBase.get(u.base) ?? []), u.ko]);
+    const conditions = ["Rarity Unique", `Class == "${g.filterClass}"`];
+    for (const u of g.uniques) {
+      const id = `unique|${g.filterClass}|${u.en}`;
+      const siblings = (byBase.get(u.base) ?? []).filter((n) => n !== u.ko);
+      uniqueItems.push({
+        id,
+        label: u.ko,
+        icon: u.icon,
+        baseTypes: [u.base],
+        conditions,
+        order: 6,
+        tone: "unique",
+        sub: g.filterClass,
+        level: u.level,
+        note: siblings.length ? `같은 베이스(${u.base}) 고유와 함께 움직임: ${siblings.join(", ")}` : undefined,
+      });
+      samples.set(id, { Class: g.filterClass, Rarity: "Unique", BaseType: u.base });
+    }
+  }
+  categories.push({
+    id: "uniques",
+    label: "고유",
+    items: uniqueItems,
+    subs: uniqueClasses.map((g) => ({ id: g.filterClass, label: g.ko, icon: g.icon })),
+  });
+
   for (const extra of buildExtraCategories(CATALOG.gear, CATALOG.icons)) {
-    for (const item of extra.items) defaults[item.id] = tierFromResult(evaluate(rules, item.sample));
+    for (const item of extra.items) samples.set(item.id, item.sample);
     categories.push({
       id: extra.id,
       label: extra.label,
       items: extra.items.map(({ sample: _sample, ...item }) => item),
     });
   }
-  return { categories, defaults };
+  return { categories, defaultOf };
 }
 
 export type TierSetting = { sound: string; show: boolean };
@@ -253,10 +340,32 @@ export function generateTierFilter(
     "#===============================================================================================================",
   ];
 
-  const tierOf = (item: TierItem) => assign[item.id] ?? model.defaults[item.id];
-  const orders = [...new Set(model.categories.flatMap((c) => c.items.map((i) => i.order ?? 5)))].sort((a, b) => a - b);
+  const tierOf = (item: TierItem) => assign[item.id] ?? model.defaultOf(item.id);
+  const orders = [...new Set(model.categories.flatMap((c) => c.items.map((i) => i.order ?? 6)))].sort((a, b) => a - b);
 
-  // 겹치는 조건(특출난 vs 일반 장비 등)은 order 가 작은 쪽이 먼저 걸리고, 같은 order 안에서는 티어 순서.
+  // 파일 크기 줄이기: 클래스·조건 묶음(같은 order) 안에서 가장 많은 티어가 그 묶음의 마지막 티어라면,
+  // 그 티어 규칙은 BaseType 목록 없이 "나머지 전부"로 쓴다. 앞 티어 규칙이 먼저 걸리므로 결과는 같다.
+  const catchAll = new Map<string, TierId>();
+  const tierIndex = new Map(TIERS.map((t, i) => [t.id, i]));
+  for (const category of model.categories) {
+    const groups = new Map<string, Map<TierId, number>>();
+    for (const item of category.items) {
+      if (!item.conditions?.some((c) => c.startsWith("Class ")) || !item.baseTypes) continue;
+      const key = `${category.id}\n${item.conditions.join("\n")}`;
+      const counts = groups.get(key) ?? new Map<TierId, number>();
+      const tier = tierOf(item);
+      counts.set(tier, (counts.get(tier) ?? 0) + 1);
+      groups.set(key, counts);
+    }
+    for (const [key, counts] of groups) {
+      const tiers = [...counts.keys()];
+      const last = tiers.reduce((a, b) => (tierIndex.get(a)! > tierIndex.get(b)! ? a : b));
+      const most = tiers.reduce((a, b) => (counts.get(a)! >= counts.get(b)! ? a : b));
+      if (last === most) catchAll.set(key, last);
+    }
+  }
+
+  // 겹치는 조건(이중 타락 vs 희귀 등)은 order 가 작은 쪽이 먼저 걸리고, 같은 order 안에서는 티어 순서.
   for (const order of orders) {
     for (const tier of TIERS) {
       const setting = settings[tier.id];
@@ -267,20 +376,23 @@ export function generateTierFilter(
       const summary: string[] = [];
 
       for (const category of model.categories) {
-        const items = category.items.filter((item) => (item.order ?? 5) === order && tierOf(item) === tier.id);
+        const items = category.items.filter((item) => (item.order ?? 6) === order && tierOf(item) === tier.id);
         if (!items.length) continue;
         summary.push(`${category.label} ${items.length}`);
-        const names = items.filter((item) => !item.conditions).flatMap((item) => item.baseTypes ?? []);
-        if (names.length) {
-          blocks.push([
-            `${keyword} # [티어 ${tier.label}] ${category.label}`,
-            ...(category.guard ?? []).map((c) => `\t${c}`),
-            `\tBaseType == ${quoted(names)}`,
-          ]);
+        // 조건이 같은 아이템은 BaseType 을 모아 규칙 하나로 만든다.
+        const merged = new Map<string, { label: string; conditions: string[]; baseTypes: string[] }>();
+        for (const item of items) {
+          const conditions = item.conditions ?? category.guard ?? [];
+          const key = item.baseTypes ? conditions.join("\n") : `${item.id}\n${conditions.join("\n")}`;
+          const label = item.conditions ? (item.sub ? `${category.label} ${item.sub}` : item.label) : category.label;
+          const entry = merged.get(key) ?? { label, conditions, baseTypes: [] };
+          for (const name of item.baseTypes ?? []) if (!entry.baseTypes.includes(name)) entry.baseTypes.push(name);
+          merged.set(key, entry);
         }
-        for (const item of items.filter((i) => i.conditions)) {
-          const lines = [`${keyword} # [티어 ${tier.label}] ${item.label}`, ...item.conditions!.map((c) => `\t${c}`)];
-          if (item.baseTypes) lines.push(`\tBaseType == ${quoted(item.baseTypes)}`);
+        for (const entry of merged.values()) {
+          const lines = [`${keyword} # [티어 ${tier.label}] ${entry.label}`, ...entry.conditions.map((c) => `\t${c}`)];
+          const rest = catchAll.get(`${category.id}\n${entry.conditions.join("\n")}`) === tier.id;
+          if (entry.baseTypes.length && !rest) lines.push(`\tBaseType == ${quoted(entry.baseTypes)}`);
           blocks.push(lines);
         }
       }

@@ -1,15 +1,180 @@
 /**
- * 하나씩이 아니라 조건으로 묶어 티어에 넣는 항목(장비·장신구·특출난·고유·젬·주얼·플라스크·기타).
- * 종류(클래스) 목록과 아이콘은 poe2db 카탈로그(catalog.json)를 따른다.
- * 항목마다 필터 조건과, 기본 티어를 기준 필터로 계산할 예시 아이템(sample)을 둔다.
+ * 장비·장신구·주얼·플라스크·고유·젬·기타 항목.
+ * 장비류는 poe2db 카탈로그의 클래스 → 베이스(실제 아이템) 단위이고, 같은 베이스를
+ * 조건(희귀도·미확인 등급·특출난·이중 타락·아이템 레벨)별로 따로 티어에 넣는다.
  *
- * order: 필터 안에서 먼저 걸려야 하는 순서(작을수록 위). 항목끼리 조건이 겹칠 때만 의미가 있다.
- *   0 특정 베이스 예외 → 1 고급 조건 → 2 특출난 → 3 장비 등급 → 5 일반 → 9 나머지 잡기
+ * order: 필터 안에서 먼저 걸려야 하는 순서(작을수록 위). 조건이 겹칠 때만 의미가 있다.
+ *   1 이중 타락 → 2 특출난 → 3 5등급 → 4 4등급 → 5 아이템 레벨 82+ → 6 희귀도 → 9 나머지 잡기
  */
 import type { Sample } from "./evaluate";
 
 export type Tone = "normal" | "magic" | "rare" | "unique" | "gem" | "misc";
 
+/** 조건 하나: 같은 베이스를 이 조건으로 따로 티어에 넣는다. */
+export type Variant = {
+  id: string;
+  label: string;
+  conditions: string[];
+  order: number;
+  tone: Tone;
+  /** 기본 티어 계산용 예시 값 */
+  sample: Sample;
+};
+
+export type CatalogBase = { en: string; ko: string; icon?: string; level?: number };
+export type CatalogUnique = { en: string; ko: string; base: string; icon?: string; level?: number };
+export type GearClass = {
+  slug: string;
+  filterClass: string;
+  ko: string;
+  icon?: string;
+  bases: CatalogBase[];
+  uniques: CatalogUnique[];
+};
+
+const NMR = "Rarity Normal Magic Rare";
+const BIG = new Set(["Body Armours", "Bows", "Crossbows", "Quarterstaves", "Staves", "Talismans", "Two Hand Maces"]);
+
+const rarityVariants: Variant[] = [
+  { id: "normal", label: "일반", conditions: ["Rarity Normal"], order: 6, tone: "normal", sample: { Rarity: "Normal" } },
+  { id: "magic", label: "마법", conditions: ["Rarity Magic"], order: 6, tone: "magic", sample: { Rarity: "Magic" } },
+  { id: "rare", label: "희귀", conditions: ["Rarity Rare"], order: 6, tone: "rare", sample: { Rarity: "Rare" } },
+];
+
+const tierVariants: Variant[] = [
+  {
+    id: "t5",
+    label: "5등급",
+    conditions: ["UnidentifiedItemTier >= 5", NMR],
+    order: 3,
+    tone: "rare",
+    sample: { Rarity: "Rare", UnidentifiedItemTier: 5 },
+  },
+  {
+    id: "t4",
+    label: "4등급",
+    conditions: ["UnidentifiedItemTier 4", NMR],
+    order: 4,
+    tone: "rare",
+    sample: { Rarity: "Rare", UnidentifiedItemTier: 4 },
+  },
+];
+
+const twice: Variant = {
+  id: "twice",
+  label: "이중 타락",
+  conditions: ["TwiceCorrupted True", NMR],
+  order: 1,
+  tone: "rare",
+  sample: { Rarity: "Rare", Corrupted: true, TwiceCorrupted: true },
+};
+
+const ilvl82: Variant = {
+  id: "ilvl82",
+  label: "아이템 레벨 82+",
+  conditions: ["ItemLevel >= 82", "Rarity Normal Magic"],
+  order: 5,
+  tone: "normal",
+  sample: { Rarity: "Normal", ItemLevel: 82 },
+};
+
+/** 장비(무기·방어구) 조건. 소켓 초과 기준은 양손·갑옷 3개, 나머지 2개. */
+function gearVariants(filterClass: string): Variant[] {
+  const sockets = BIG.has(filterClass) ? 3 : 2;
+  return [
+    ...rarityVariants,
+    ...tierVariants,
+    {
+      id: "quality",
+      label: "품질 21+",
+      conditions: ["Corrupted False", "Quality >= 21", NMR],
+      order: 2,
+      tone: "rare",
+      sample: { Rarity: "Rare", Quality: 21 },
+    },
+    {
+      id: "sockets",
+      label: `소켓 ${sockets}개+`,
+      conditions: ["Corrupted False", `Sockets >= ${sockets}`, NMR],
+      order: 2,
+      tone: "rare",
+      sample: { Rarity: "Rare", Sockets: sockets },
+    },
+    twice,
+    ilvl82,
+  ];
+}
+
+const JEWELLERY_VARIANTS: Variant[] = [...rarityVariants, ...tierVariants, twice, ilvl82];
+
+const JEWEL_VARIANTS: Variant[] = [
+  {
+    id: "enchanted",
+    label: "타락 인챈트",
+    conditions: ["AnyEnchantment True", "Corrupted True", NMR],
+    order: 2,
+    tone: "rare",
+    sample: { Rarity: "Rare", Corrupted: true, AnyEnchantment: true },
+  },
+  { id: "rare", label: "희귀", conditions: ["Rarity Rare"], order: 6, tone: "rare", sample: { Rarity: "Rare" } },
+  {
+    id: "magic",
+    label: "일반·마법",
+    conditions: ["Rarity Normal Magic"],
+    order: 6,
+    tone: "magic",
+    sample: { Rarity: "Magic" },
+  },
+];
+
+const FLASK_VARIANTS: Variant[] = [
+  {
+    id: "quality",
+    label: "품질 18+",
+    conditions: ["Quality >= 18", "Rarity Normal Magic"],
+    order: 2,
+    tone: "magic",
+    sample: { Rarity: "Magic", Quality: 20, ItemLevel: 82 },
+  },
+  {
+    id: "magic",
+    label: "일반·마법",
+    conditions: ["Rarity Normal Magic"],
+    order: 6,
+    tone: "magic",
+    sample: { Rarity: "Magic" },
+  },
+];
+
+/** 장비류 탭: 어떤 클래스를 넣고 조건을 어떻게 나눌지 */
+export const EQUIPMENT_TABS: {
+  id: string;
+  label: string;
+  match: (g: GearClass) => boolean;
+  variants: (g: GearClass) => Variant[];
+}[] = [
+  {
+    id: "gear",
+    label: "장비",
+    match: (g) => !/Rings|Amulets|Belts|Jewels|Charms|Flasks|Gems|Tablet|Relics/.test(g.filterClass),
+    variants: (g) => gearVariants(g.filterClass),
+  },
+  {
+    id: "jewellery",
+    label: "장신구",
+    match: (g) => ["Rings", "Amulets", "Belts"].includes(g.filterClass),
+    variants: () => JEWELLERY_VARIANTS,
+  },
+  { id: "jewels", label: "주얼", match: (g) => g.filterClass === "Jewels", variants: () => JEWEL_VARIANTS },
+  {
+    id: "flasks",
+    label: "플라스크·호신부",
+    match: (g) => /Charms|Flasks/.test(g.filterClass),
+    variants: () => FLASK_VARIANTS,
+  },
+];
+
+/** 조건 없이 하나씩 넣는 항목(젬·기타) */
 export type ExtraItem = {
   id: string;
   label: string;
@@ -23,182 +188,15 @@ export type ExtraItem = {
 
 export type ExtraCategory = { id: string; label: string; items: ExtraItem[] };
 
-export type GearClass = { slug: string; filterClass: string; ko: string; icon?: string };
-
-const JEWELLERY = ["Rings", "Amulets", "Belts"];
-const NOT_GEAR = new Set([...JEWELLERY, "Jewels", "Charms", "Life Flasks", "Mana Flasks", "Skill Gems", "Support Gems", "Spirit Gems"]);
-const BIG = new Set(["Body Armours", "Bows", "Crossbows", "Quarterstaves", "Staves", "Talismans", "Two Hand Maces", "Two Hand Axes", "Two Hand Swords", "Traps"]);
-
-const RARITIES: [string, string, Tone][] = [
-  ["Normal", "일반", "normal"],
-  ["Magic", "마법", "magic"],
-  ["Rare", "희귀", "rare"],
-];
-
-const LOW_JEWELLERY = ["Azure Amulet", "Crimson Amulet", "Emerald Ring", "Iron Ring", "Lazuli Ring", "Unset Ring"];
-
-const classList = (list: GearClass[]) => `Class == ${list.map((g) => `"${g.filterClass}"`).join(" ")}`;
-
-export function buildExtraCategories(classes: GearClass[], icons: Record<string, string>): ExtraCategory[] {
-  const byClass = new Map(classes.map((g) => [g.filterClass, g]));
-  const iconOf = (cls: string) => byClass.get(cls)?.icon;
-  const gearClasses = classes.filter((g) => !NOT_GEAR.has(g.filterClass));
-  const bigGear = gearClasses.filter((g) => BIG.has(g.filterClass));
-  const smallGear = gearClasses.filter((g) => !BIG.has(g.filterClass));
-  const GEAR = classList(gearClasses);
-
-  const byRarity = (list: GearClass[], prefix: string): ExtraItem[] =>
-    list.flatMap((g) =>
-      RARITIES.map(([rarity, rko, tone]) => ({
-        id: `${prefix}:${g.filterClass}:${rarity}`,
-        label: `${rko} ${g.ko}`,
-        conditions: [`Rarity ${rarity}`, `Class == "${g.filterClass}"`],
-        order: 5,
-        tone,
-        icon: g.icon,
-        sample: { Class: g.filterClass, Rarity: rarity, BaseType: "", UnidentifiedItemTier: 1 },
-      })),
-    );
-
-  const exceptional: ExtraItem[] = [
-    {
-      id: "ex:lowjewel",
-      label: "저가 반지·목걸이 베이스",
-      conditions: ["Rarity Normal Magic Rare"],
-      baseTypes: LOW_JEWELLERY,
-      order: 0,
-      tone: "rare",
-      icon: iconOf("Rings"),
-      sample: { Class: "Rings", Rarity: "Rare", BaseType: "Iron Ring", UnidentifiedItemTier: 4 },
-    },
-    {
-      id: "ex:jewel45",
-      label: "반지·목걸이 4~5등급",
-      conditions: ["UnidentifiedItemTier >= 4", "Rarity Normal Magic Rare", 'Class == "Amulets" "Rings"'],
-      order: 1,
-      tone: "rare",
-      icon: iconOf("Amulets"),
-      sample: { Class: "Rings", Rarity: "Rare", BaseType: "Ruby Ring", UnidentifiedItemTier: 4 },
-    },
-    {
-      id: "ex:quality",
-      label: "특출난 품질 21+",
-      conditions: ["Corrupted False", "Quality >= 21", "Rarity Normal Magic Rare", GEAR],
-      order: 2,
-      tone: "rare",
-      icon: iconOf("Gloves"),
-      sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Quality: 21 },
-    },
-    {
-      id: "ex:socket3",
-      label: "특출난 소켓 3개+ (양손·갑옷)",
-      conditions: ["Corrupted False", "Sockets >= 3", "Rarity Normal Magic Rare", classList(bigGear)],
-      order: 2,
-      tone: "rare",
-      icon: iconOf("Body Armours"),
-      sample: { Class: "Body Armours", Rarity: "Rare", BaseType: "", Sockets: 3 },
-    },
-    {
-      id: "ex:socket2",
-      label: "특출난 소켓 2개+ (한손·방어구)",
-      conditions: ["Corrupted False", "Sockets >= 2", "Rarity Normal Magic Rare", classList(smallGear)],
-      order: 2,
-      tone: "rare",
-      icon: iconOf("Helmets"),
-      sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Sockets: 2 },
-    },
-    {
-      id: "ex:twice-rare",
-      label: "이중 타락 희귀",
-      conditions: ["TwiceCorrupted True", "Rarity Rare"],
-      order: 2,
-      tone: "rare",
-      icon: iconOf("Boots"),
-      sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", Corrupted: true, TwiceCorrupted: true },
-    },
-    {
-      id: "ex:twice-magic",
-      label: "이중 타락 일반·마법",
-      conditions: ["TwiceCorrupted True", "Rarity Normal Magic"],
-      order: 2,
-      tone: "magic",
-      icon: iconOf("Boots"),
-      sample: { Class: "Gloves", Rarity: "Magic", BaseType: "", Corrupted: true, TwiceCorrupted: true },
-    },
-    {
-      id: "ex:gear5",
-      label: "장비 5등급",
-      conditions: ["UnidentifiedItemTier >= 5", "Rarity Normal Magic Rare", GEAR],
-      order: 3,
-      tone: "rare",
-      icon: iconOf("Body Armours"),
-      sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", UnidentifiedItemTier: 5 },
-    },
-    {
-      id: "ex:gear4",
-      label: "장비 4등급",
-      conditions: ["UnidentifiedItemTier 4", "Rarity Normal Magic Rare", GEAR],
-      order: 3,
-      tone: "rare",
-      icon: iconOf("Body Armours"),
-      sample: { Class: "Gloves", Rarity: "Rare", BaseType: "", UnidentifiedItemTier: 4 },
-    },
-  ];
-
-  // 고유: 클래스마다 하나씩. 헤드헌터·마법사의 피(무거운·특수 허리띠)와 고유 서판은 먼저 걸리게 둔다.
-  const uniqueClasses = classes.filter((g) => !["Skill Gems", "Support Gems", "Spirit Gems"].includes(g.filterClass));
-  const uniques: ExtraItem[] = [
-    {
-      id: "unique:belt-top",
-      label: "고유 허리띠 (헤드헌터·마법사의 피)",
-      conditions: ["Rarity Unique", 'Class == "Belts"'],
-      baseTypes: ["Heavy Belt", "Utility Belt"],
-      order: 0,
-      tone: "unique",
-      icon: iconOf("Belts"),
-      sample: { Class: "Belts", Rarity: "Unique", BaseType: "Heavy Belt" },
-    },
-    {
-      id: "unique:tablet",
-      label: "고유 서판",
-      conditions: ["Rarity Unique", 'Class == "Tablet"'],
-      order: 0,
-      tone: "unique",
-      sample: { Class: "Tablet", Rarity: "Unique", BaseType: "Ritual Tablet" },
-    },
-    {
-      id: "unique:relic",
-      label: "고유 유물",
-      conditions: ["Rarity Unique", 'Class == "Relics"'],
-      order: 0,
-      tone: "unique",
-      sample: { Class: "Relics", Rarity: "Unique", BaseType: "Vase Relic" },
-    },
-    ...uniqueClasses.map((g) => ({
-      id: `unique:${g.filterClass}`,
-      label: `고유 ${g.ko}`,
-      conditions: ["Rarity Unique", `Class == "${g.filterClass}"`],
-      order: 5,
-      tone: "unique" as Tone,
-      icon: g.icon,
-      sample: { Class: g.filterClass, Rarity: "Unique", BaseType: "Unlisted Base" },
-    })),
-    {
-      id: "unique:other",
-      label: "그 외 고유",
-      conditions: ["Rarity Unique"],
-      order: 9,
-      tone: "unique",
-      sample: { Class: "Unknown", Rarity: "Unique", BaseType: "Unlisted Base" },
-    },
-  ];
+export function buildExtraCategories(gear: GearClass[], icons: Record<string, string>): ExtraCategory[] {
+  const iconOf = (cls: string) => gear.find((g) => g.filterClass === cls)?.icon;
 
   const uncut = (kind: string, ko: string, en: string): ExtraItem[] => [
     {
       id: `gem:${kind}:20`,
       label: `미가공 ${ko} 20레벨`,
       conditions: ["GemLevel >= 20", `BaseType "${en}"`],
-      order: 5,
+      order: 6,
       tone: "gem",
       icon: icons[`${en} (Level 20)`],
       sample: { BaseType: en, GemLevel: 20 },
@@ -207,7 +205,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       id: `gem:${kind}:19`,
       label: `미가공 ${ko} 19레벨`,
       conditions: ["GemLevel 19", `BaseType "${en}"`],
-      order: 5,
+      order: 6,
       tone: "gem",
       icon: icons[`${en} (Level 19)`],
       sample: { BaseType: en, GemLevel: 19 },
@@ -216,7 +214,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       id: `gem:${kind}:low`,
       label: `미가공 ${ko} 18레벨 이하`,
       conditions: ["GemLevel <= 18", `BaseType "${en}"`],
-      order: 5,
+      order: 6,
       tone: "gem",
       icon: icons[`${en} (Level 10)`],
       sample: { BaseType: en, GemLevel: 18 },
@@ -230,7 +228,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       id: "gem:support",
       label: "미가공 보조 젬",
       conditions: ['BaseType "Uncut Support Gem"'],
-      order: 5,
+      order: 6,
       tone: "gem",
       icon: icons["Uncut Support Gem (Level 5)"],
       sample: { BaseType: "Uncut Support Gem", GemLevel: 3 },
@@ -255,92 +253,12 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
     },
   ];
 
-  const jewelIcon = iconOf("Jewels");
-  const jewels: ExtraItem[] = [
-    {
-      id: "jewelitem:timelost",
-      label: "오래된 주얼",
-      conditions: ["Rarity Normal Magic Rare", 'Class == "Jewels"'],
-      baseTypes: ["Time-Lost Emerald", "Time-Lost Ruby", "Time-Lost Sapphire"],
-      order: 1,
-      tone: "rare",
-      icon: jewelIcon,
-      sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Time-Lost Ruby" },
-    },
-    {
-      id: "jewelitem:enchanted",
-      label: "타락 인챈트 주얼",
-      conditions: ["AnyEnchantment True", "Corrupted True", "Rarity Normal Magic Rare", 'Class == "Jewels"'],
-      order: 1,
-      tone: "rare",
-      icon: jewelIcon,
-      sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Ruby", Corrupted: true, AnyEnchantment: true },
-    },
-    {
-      id: "jewelitem:rare",
-      label: "희귀 주얼",
-      conditions: ["Rarity Rare", 'Class == "Jewels"'],
-      order: 5,
-      tone: "rare",
-      icon: jewelIcon,
-      sample: { Class: "Jewels", Rarity: "Rare", BaseType: "Ruby" },
-    },
-    {
-      id: "jewelitem:magic",
-      label: "일반·마법 주얼",
-      conditions: ["Rarity Normal Magic", 'Class == "Jewels"'],
-      order: 5,
-      tone: "magic",
-      icon: jewelIcon,
-      sample: { Class: "Jewels", Rarity: "Magic", BaseType: "Ruby" },
-    },
-  ];
-
-  const flasks: ExtraItem[] = [
-    {
-      id: "flask:charm-quality",
-      label: "고품질 호신부 (품질 18+)",
-      conditions: ["Quality >= 18", "Rarity Normal Magic", 'Class == "Charms"'],
-      order: 1,
-      tone: "magic",
-      icon: iconOf("Charms"),
-      sample: { Class: "Charms", Rarity: "Magic", BaseType: "Golden Charm", Quality: 20, ItemLevel: 82 },
-    },
-    {
-      id: "flask:charm",
-      label: "호신부",
-      conditions: ["Rarity Normal Magic", 'Class == "Charms"'],
-      order: 5,
-      tone: "magic",
-      icon: iconOf("Charms"),
-      sample: { Class: "Charms", Rarity: "Magic", BaseType: "Golden Charm" },
-    },
-    {
-      id: "flask:life",
-      label: "생명력 플라스크",
-      conditions: ["Rarity Normal Magic", 'Class == "Life Flasks"'],
-      order: 5,
-      tone: "magic",
-      icon: iconOf("Life Flasks"),
-      sample: { Class: "Life Flasks", Rarity: "Magic", BaseType: "Ultimate Life Flask" },
-    },
-    {
-      id: "flask:mana",
-      label: "마나 플라스크",
-      conditions: ["Rarity Normal Magic", 'Class == "Mana Flasks"'],
-      order: 5,
-      tone: "magic",
-      icon: iconOf("Mana Flasks"),
-      sample: { Class: "Mana Flasks", Rarity: "Magic", BaseType: "Ultimate Mana Flask" },
-    },
-  ];
-
   const misc: ExtraItem[] = [
     {
       id: "misc:quest",
       label: "퀘스트 아이템",
       conditions: ['Class == "Instance Local Items" "Quest Items"'],
-      order: 5,
+      order: 6,
       tone: "misc",
       sample: { Class: "Quest Items", BaseType: "" },
     },
@@ -348,7 +266,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       id: "misc:logbook",
       label: "탐험 일지",
       conditions: ['Class == "Expedition Logbook"'],
-      order: 5,
+      order: 6,
       tone: "misc",
       icon: icons["Expedition Logbook"],
       sample: { Class: "Expedition Logbook", BaseType: "Expedition Logbook" },
@@ -358,7 +276,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       label: "골드 5000+",
       conditions: ["StackSize >= 5000"],
       baseTypes: ["Gold"],
-      order: 5,
+      order: 6,
       tone: "misc",
       sample: { BaseType: "Gold", StackSize: 5000 },
     },
@@ -367,7 +285,7 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       label: "골드 2000~4999",
       conditions: ["StackSize >= 2000", "StackSize <= 4999"],
       baseTypes: ["Gold"],
-      order: 5,
+      order: 6,
       tone: "misc",
       sample: { BaseType: "Gold", StackSize: 2000 },
     },
@@ -376,20 +294,22 @@ export function buildExtraCategories(classes: GearClass[], icons: Record<string,
       label: "골드 2000 미만",
       conditions: ["StackSize < 2000"],
       baseTypes: ["Gold"],
-      order: 5,
+      order: 6,
       tone: "misc",
       sample: { BaseType: "Gold", StackSize: 300 },
+    },
+    {
+      id: "misc:unique-other",
+      label: "목록에 없는 고유",
+      conditions: ["Rarity Unique"],
+      order: 9,
+      tone: "unique",
+      sample: { Class: "Unknown", Rarity: "Unique", BaseType: "Unlisted Base" },
     },
   ];
 
   return [
-    { id: "exceptional", label: "특출난·고급 장비", items: exceptional },
-    { id: "gear", label: "장비", items: byRarity(gearClasses, "gear") },
-    { id: "jewellery", label: "장신구", items: byRarity(classes.filter((g) => JEWELLERY.includes(g.filterClass)), "jewel") },
-    { id: "uniques", label: "고유", items: uniques },
     { id: "gems", label: "젬", items: gems },
-    { id: "jewelitems", label: "주얼", items: jewels },
-    { id: "flasks", label: "플라스크·호신부", items: flasks },
     { id: "misc", label: "기타", items: misc },
   ];
 }

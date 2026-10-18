@@ -3202,6 +3202,56 @@ a.tablet-mod-price-col.hot {
   flex-wrap: wrap;
 }
 
+.tm-subbar {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.chip.small {
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.chip.small.variant.active {
+  color: var(--on-accent);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.tm-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tm-search {
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: 360px;
+  padding: 8px 12px;
+}
+
+.tm-bulk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tm-bulk-select {
+  min-width: 0;
+  padding: 6px 8px;
+}
+
 .tm-board {
   display: grid;
   overflow: hidden;
@@ -3325,6 +3375,24 @@ a.tablet-mod-price-col.hot {
   border: 1px solid var(--line);
   border-radius: 6px;
   cursor: grab;
+}
+
+.tm-item {
+  position: relative;
+}
+
+.tm-item.shared {
+  border-style: dashed;
+  border-color: #af6025;
+}
+
+.tm-item-level {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
 }
 
 .tm-item:hover {

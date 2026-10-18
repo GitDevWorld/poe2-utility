@@ -77,6 +77,9 @@ const GEAR_CLASSES = [
   ["Skill_Gems", "Skill Gems"],
   ["Support_Gems", "Support Gems"],
   ["Spirit_Gems", "Spirit Gems"],
+  // 고유 서판·고유 유물을 고유 탭에 넣으려고 가져온다 (베이스는 화폐류 탭에서 다룬다).
+  ["Tablet", "Tablet"],
+  ["Relics", "Relics"],
 ];
 
 const SKIP_SECTION = /Unique|Ref$|Mods|Passives|Recipes|Maps$|Legends|Content|Penalty|Types|Wager|Length|Towers/;
@@ -143,14 +146,56 @@ const disabled = new Set(
   [...usIndex.matchAll(/class="ItemClasses disabled[^"]*"[^>]*href="([A-Za-z_]+)"/g)].map((m) => m[1]),
 );
 
+const UNIQUE =
+  /class="UniqueItem"[^>]*href="(?:\/(?:us|kr)\/)?([^"]+)"><span class="uniqueName">([^<]+)<\/span>\s*<span class="uniqueTypeLine">([^<]+)<\/span>/;
+const LEVEL = /Requires:\s*<span[^>]*>Level (\d+)/;
+
+/** 장비 클래스 페이지: 베이스(요구 레벨 포함)와 고유(이름·베이스) */
+function gearEntries(html) {
+  const bases = [];
+  const uniques = [];
+  for (const s of sections(html)) {
+    if (SKIP_SECTION.test(s.id) && !/Unique$|Unique_Unique\d*$/.test(s.id)) continue;
+    for (const chunk of s.html.split('<div class="col">').slice(1)) {
+      const level = Number(chunk.match(LEVEL)?.[1] ?? 0);
+      const unique = chunk.match(UNIQUE);
+      if (unique) {
+        uniques.push({ slug: unique[1], name: decode(unique[2]), base: decode(unique[3]), level });
+        continue;
+      }
+      const item = [...chunk.matchAll(ITEM)][0];
+      if (item && !/\[|DNT|UNUSED/i.test(item[4])) bases.push({ slug: item[2], name: decode(item[4]), icon: item[3], level });
+    }
+  }
+  return { bases, uniques };
+}
+
 const gear = [];
 for (const [slug, filterClass] of GEAR_CLASSES) {
   if (disabled.has(slug)) continue;
-  const us = await page("us", slug);
-  const first = sections(us).find((s) => !/Unique/.test(s.id) && s.items.length)?.items[0];
-  gear.push({ slug, filterClass, ko: krClassName[slug] ?? filterClass, icon: first?.icon });
+  const [us, kr] = await Promise.all([page("us", slug), page("kr", slug, true)]);
+  if (/Gems$/.test(filterClass)) {
+    // 젬은 미가공 젬·이중 타락 등 조건으로 다루므로 대표 아이콘만 둔다.
+    const first = sections(us).find((s) => !/Unique/.test(s.id) && s.items.length)?.items[0];
+    gear.push({ slug, filterClass, ko: krClassName[slug] ?? filterClass, icon: first?.icon, bases: [], uniques: [] });
+    continue;
+  }
+  const en = gearEntries(us);
+  const ko = gearEntries(kr);
+  const koBase = new Map(ko.bases.map((b) => [b.slug, b.name]));
+  const koUnique = new Map(ko.uniques.map((u) => [u.slug, u.name]));
+  const seenBase = new Set();
+  const bases = en.bases
+    .filter((b) => !seenBase.has(b.name) && seenBase.add(b.name))
+    .map((b) => ({ en: b.name, ko: koBase.get(b.slug) ?? tradeKo[b.name]?.ko ?? b.name, icon: b.icon, level: b.level }));
+  const baseIcon = new Map(bases.map((b) => [b.en, b.icon]));
+  const seenUnique = new Set();
+  const uniques = en.uniques
+    .filter((u) => !seenUnique.has(u.name) && seenUnique.add(u.name))
+    .map((u) => ({ en: u.name, ko: koUnique.get(u.slug) ?? u.name, base: u.base, icon: baseIcon.get(u.base), level: u.level }));
+  gear.push({ slug, filterClass, ko: krClassName[slug] ?? filterClass, icon: bases[0]?.icon, bases, uniques });
 }
-console.log("gear", gear.map((g) => `${g.ko}${g.icon ? "" : "(아이콘 없음)"}`).join(" "));
+console.log("gear", gear.map((g) => `${g.ko}(${g.bases.length}/${g.uniques.length})`).join(" "));
 
 // 조건으로 묶는 항목(미가공 젬, 탐험 일지)의 아이콘은 경매장 이미지를 쓴다.
 const icons = {};

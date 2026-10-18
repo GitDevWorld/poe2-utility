@@ -6,6 +6,7 @@ import {
   generateTierFilter,
   SOUNDS,
   TIERS,
+  type TierCategory,
   type TierId,
   type TierItem,
   type TierModel,
@@ -19,8 +20,8 @@ const BASES: { id: BaseId; label: string; name: string; file: string }[] = [
   { id: "sskim", label: "씹양태 필터", name: "씹양태증증미김성수 렛츠고", file: "/filters/sskim.filter" },
 ];
 
-// 아이템 id 가 poe2db 기준으로 바뀌어 저장 키를 새로 쓴다.
-const STORAGE_KEY = "filtergen.tiers.v2";
+// 장비를 베이스 단위로 바꿔 아이템 id 가 달라졌다.
+const STORAGE_KEY = "filtergen.tiers.v3";
 const ALL = "all";
 
 type Saved = { baseId: BaseId; assign: Record<string, TierId>; settings: Partial<Record<TierId, TierSetting>> };
@@ -41,38 +42,33 @@ function defaultSettings(): Record<TierId, TierSetting> {
   >;
 }
 
-function ItemTile({
-  item,
-  selected,
-  onSelect,
-}: {
-  item: TierItem;
-  selected: boolean;
-  onSelect: () => void;
-}) {
-  const icon = item.icon;
+function ItemTile({ item, selected, onSelect }: { item: TierItem; selected: boolean; onSelect: () => void }) {
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData("text/plain", item.id);
     event.dataTransfer.effectAllowed = "move";
   };
+  const title = [item.label, item.baseTypes?.length === 1 ? item.baseTypes[0] : "", item.level ? `요구 레벨 ${item.level}` : "", item.note ?? ""]
+    .filter(Boolean)
+    .join("\n");
   return (
     <li>
       <button
         type="button"
         draggable
         onDragStart={onDragStart}
-        className={`tm-item${selected ? " selected" : ""}`}
-        title={item.baseTypes?.length === 1 ? `${item.label} (${item.baseTypes[0]})` : item.label}
+        className={`tm-item${selected ? " selected" : ""}${item.note ? " shared" : ""}`}
+        title={title}
         aria-pressed={selected}
         onClick={onSelect}
       >
-        {icon ? (
-          <img src={iconUrl(icon)} alt="" width={36} height={36} loading="lazy" draggable={false} />
+        {item.icon ? (
+          <img src={iconUrl(item.icon)} alt="" width={36} height={36} loading="lazy" draggable={false} />
         ) : (
           <span className={`tm-item-fallback tone-${item.tone ?? "misc"}`} aria-hidden>
             {(item.label.split(" (")[0].split(" ").pop() ?? item.label).slice(0, 3)}
           </span>
         )}
+        {item.level ? <span className="tm-item-level">Lv{item.level}</span> : null}
         <span className="tm-item-name">{item.label}</span>
       </button>
     </li>
@@ -87,8 +83,12 @@ export function FilterGenPage() {
   const [assign, setAssign] = useState<Record<string, TierId>>(saved?.assign ?? {});
   const [settings, setSettings] = useState<Record<TierId, TierSetting>>({ ...defaultSettings(), ...saved?.settings });
   const [categoryId, setCategoryId] = useState(ALL);
+  const [subId, setSubId] = useState<string | null>(null);
+  const [variantId, setVariantId] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState<TierId | null>(null);
+  const [bulkTier, setBulkTier] = useState<TierId>("hidden");
 
   const base = BASES.find((b) => b.id === baseId) ?? BASES[0];
 
@@ -116,29 +116,53 @@ export function FilterGenPage() {
     }
   }, [baseId, assign, settings]);
 
-  const model = useMemo<TierModel | null>(
-    () => (text ? buildTierModel(text) : null),
-    [text],
-  );
+  const model = useMemo<TierModel | null>(() => (text ? buildTierModel(text) : null), [text]);
+  const tierOf = (id: string): TierId => assign[id] ?? model?.defaultOf(id) ?? "hidden";
 
-  const tierOf = (id: string): TierId => assign[id] ?? model?.defaults[id] ?? "hidden";
-  const shown = model ? (categoryId === ALL ? model.categories : model.categories.filter((c) => c.id === categoryId)) : [];
-  const movedCount = model ? Object.keys(assign).filter((id) => assign[id] !== model.defaults[id]).length : 0;
+  const category: TierCategory | undefined =
+    categoryId === ALL ? undefined : model?.categories.find((c) => c.id === categoryId);
+  const sub = category?.subs ? (category.subs.find((s) => s.id === subId) ?? category.subs[0]) : undefined;
+  const variants = sub ? (category?.variants?.[sub.id] ?? []) : [];
+  const variant = variants.find((v) => v.id === variantId) ?? variants[0];
 
-  const counts = useMemo(() => {
-    const out = Object.fromEntries(TIERS.map((t) => [t.id, 0])) as Record<TierId, number>;
-    for (const c of model?.categories ?? []) for (const item of c.items) out[tierOf(item.id)]++;
-    return out;
-    // tierOf 는 assign·model 로만 정해진다.
-  }, [model, assign]);
+  /** 지금 화면에 보일 종류·아이템 (클래스·조건·검색어 반영) */
+  const shown = useMemo(() => {
+    if (!model) return [];
+    const q = query.trim().toLowerCase();
+    const cats = categoryId === ALL ? model.categories.filter((c) => !c.hideInAll) : category ? [category] : [];
+    return cats.map((c) => ({
+      category: c,
+      items: c.items.filter(
+        (item) =>
+          (!sub || c !== category || item.sub === sub.id) &&
+          (!variant || c !== category || item.variant === variant.id) &&
+          (!q || item.label.toLowerCase().includes(q) || item.baseTypes?.some((b) => b.toLowerCase().includes(q))),
+      ),
+    }));
+  }, [model, categoryId, category, sub, variant, query]);
 
-  const moveTo = (itemId: string, tier: TierId) => {
+  const visibleItems = shown.flatMap((g) => g.items);
+  const counts = Object.fromEntries(TIERS.map((t) => [t.id, 0])) as Record<TierId, number>;
+  for (const item of visibleItems) counts[tierOf(item.id)]++;
+  const movedCount = model ? Object.keys(assign).filter((id) => assign[id] !== model.defaultOf(id)).length : 0;
+
+  const moveMany = (ids: string[], tier: TierId) => {
     setAssign((prev) => {
       const next = { ...prev };
-      if (model && model.defaults[itemId] === tier) delete next[itemId];
-      else next[itemId] = tier;
+      for (const id of ids) {
+        if (model && model.defaultOf(id) === tier) delete next[id];
+        else next[id] = tier;
+      }
       return next;
     });
+    setSelected(null);
+  };
+  const moveTo = (itemId: string, tier: TierId) => moveMany([itemId], tier);
+
+  const pickCategory = (id: string) => {
+    setCategoryId(id);
+    setSubId(null);
+    setVariantId(null);
     setSelected(null);
   };
 
@@ -199,9 +223,10 @@ export function FilterGenPage() {
 
         <p className="fg-help">
           아이템을 끌어서 다른 티어에 놓거나, 아이템을 누른 다음 티어 이름을 누르면 옮겨집니다. 티어마다 소리와 표시 여부를
-          정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 처음 배치와 소리는 고른 기본값 필터를 따릅니다.
-          아이템 목록과 분류는 poe2db.tw 를 따르고, "전체" 탭에서 모든 종류를 한 번에 볼 수 있습니다. 어느 티어에도 해당하지 않는
-          아이템만 기본값 필터 규칙을 따릅니다. 내려받은 파일과{" "}
+          정하고, "숨김" 티어와 스위치를 끈 티어의 아이템은 바닥에 보이지 않습니다. 아이템 목록과 분류는 poe2db.tw 를 따르고,
+          처음 배치는 고른 기본값 필터로 정해집니다. 장비·장신구·주얼·플라스크는 클래스와 조건(희귀도·등급·특출난·이중 타락·아이템
+          레벨)을 골라 베이스마다 티어를 정합니다. 고유는 필터가 이름이 아니라 베이스로만 구분하므로, 같은 베이스를 쓰는 고유는 함께
+          움직입니다(점선 테두리). 내려받은 파일과{" "}
           <a href="/filters/poe2-filter-sounds.zip" download>
             사운드 mp3
           </a>
@@ -219,15 +244,12 @@ export function FilterGenPage() {
                 role="tab"
                 aria-selected={categoryId === ALL}
                 className={`chip ${categoryId === ALL ? "active" : ""}`}
-                onClick={() => {
-                  setCategoryId(ALL);
-                  setSelected(null);
-                }}
+                onClick={() => pickCategory(ALL)}
               >
                 전체
               </button>
               {model.categories.map((c) => {
-                const icon = c.items.map((i) => i.icon).find(Boolean);
+                const icon = c.subs?.[0]?.icon ?? c.items.map((i) => i.icon).find(Boolean);
                 return (
                   <button
                     key={c.id}
@@ -235,10 +257,7 @@ export function FilterGenPage() {
                     role="tab"
                     aria-selected={c.id === categoryId}
                     className={`chip ${c.id === categoryId ? "active" : ""}`}
-                    onClick={() => {
-                      setCategoryId(c.id);
-                      setSelected(null);
-                    }}
+                    onClick={() => pickCategory(c.id)}
                   >
                     {icon && <img src={iconUrl(icon)} alt="" width={20} height={20} />}
                     {c.label}
@@ -247,12 +266,84 @@ export function FilterGenPage() {
               })}
             </div>
 
+            {category?.subs && (
+              <div className="tm-subbar">
+                <div className="chip-row" role="group" aria-label="클래스">
+                  {category.subs.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      className={`chip small ${s.id === sub?.id ? "active" : ""}`}
+                      onClick={() => {
+                        setSubId(s.id);
+                        setSelected(null);
+                      }}
+                    >
+                      {s.icon && <img src={iconUrl(s.icon)} alt="" width={18} height={18} />}
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+                {variants.length > 0 && (
+                  <div className="chip-row" role="group" aria-label="조건">
+                    {variants.map((v) => (
+                      <button
+                        key={v.id}
+                        type="button"
+                        className={`chip small variant ${v.id === variant?.id ? "active" : ""}`}
+                        onClick={() => {
+                          setVariantId(v.id);
+                          setSelected(null);
+                        }}
+                      >
+                        {v.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="tm-tools">
+              <input
+                type="search"
+                className="tm-search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="아이템 검색 (한글·영문)"
+                aria-label="아이템 검색"
+              />
+              <div className="tm-bulk">
+                <span>보이는 {visibleItems.length}개 모두</span>
+                <select
+                  className="tm-bulk-select"
+                  aria-label="옮길 티어"
+                  value={bulkTier}
+                  onChange={(event) => setBulkTier(event.target.value as TierId)}
+                >
+                  {TIERS.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  className="btn"
+                  disabled={!visibleItems.length}
+                  onClick={() => moveMany(visibleItems.map((i) => i.id), bulkTier)}
+                >
+                  티어로 옮기기
+                </button>
+              </div>
+            </div>
+
             <div className="tm-board">
               {TIERS.map((tier) => {
                 const setting = settings[tier.id];
                 const visible = tier.id !== "hidden" && setting.show;
                 const groups = shown
-                  .map((c) => ({ category: c, items: c.items.filter((item) => tierOf(item.id) === tier.id) }))
+                  .map((g) => ({ category: g.category, items: g.items.filter((item) => tierOf(item.id) === tier.id) }))
                   .filter((g) => g.items.length);
                 return (
                   <div
@@ -333,6 +424,9 @@ export function FilterGenPage() {
                 );
               })}
             </div>
+            {categoryId === ALL && (
+              <p className="fg-help">장비·장신구·주얼·플라스크는 베이스가 많아 "전체"에서는 빼고, 각 탭에서 클래스·조건별로 보여 줍니다.</p>
+            )}
           </>
         )}
       </section>
