@@ -66,5 +66,6 @@ export const CONTENT_SETUPS: ContentSetup[] = [
       { ref: { slot: "suffix", id: 56 }, selected: true }, // 의식 헌정품이 징조일 확률 증가
       { ref: { slot: "suffix", id: 49 }, selected: true }, // 헌정품 무작위 변경 공물 점수 감소
     ],
+    mapSettings: ["뜻밖의 임무", "수수께끼의 선물", "부분적인 해독", "기나긴 나날"],
   },
 ];
