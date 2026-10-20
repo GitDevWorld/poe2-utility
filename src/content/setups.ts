@@ -60,9 +60,11 @@ export const CONTENT_SETUPS: ContentSetup[] = [
     id: "ritual",
     label: "의식",
     tabletTypeId: 5,
+    minUses: 10,
     options: [
       { ref: { slot: "prefix", id: 2 }, selected: true }, // 지도 내 무리 규모 증가
       { ref: { slot: "prefix", id: 100 }, selected: true }, // 지도의 몬스터 희귀도 증가
+      MONSTER_EFFECTIVENESS,
       { ref: { slot: "suffix", id: 56 }, selected: true }, // 의식 헌정품이 징조일 확률 증가
       { ref: { slot: "suffix", id: 49 }, selected: true }, // 헌정품 무작위 변경 공물 점수 감소
     ],
