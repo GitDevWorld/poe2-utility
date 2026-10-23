@@ -21,8 +21,9 @@
 #   컨텐츠 화폐 : 원본 등급 유지, 에센스만 전부 표시
 #   시련 열쇠   : 숨김 (Djinn Barya, Test of ... Barya, Inscribed Ultimatum)
 #   고유템      : 허리띠 고유 2종(Heavy/Utility Belt = 마법사의 피/헤드헌터)
-#                 + 고유 서판 전체(Class Tablet) + 고유 반지 전체 + 고유 보석(주얼) 전체만 표시, 나머지 전부 숨김
+#                 + 고유 서판 전체(Class Tablet) + 고유 보석(주얼) 전체만 표시, 나머지 전부 숨김 (고유 반지도 숨김)
 #                 + 모리오르 갑옷(Morior Invictus = Grand Regalia 베이스)
+#                 + 특출난 고유(이중 타락 / 품질 21+ / 소켓 2~3개 이상)는 표시 (lv6)
 #   주얼        : 희귀 주얼 숨김 (Time-Lost/타락 주얼은 표시)
 #   젬          : 원본 설정 (19~20레벨 미가공 젬 등)
 #   조각        : 복제된 영토 파편(Simulacrum Splinter) 1개짜리는 숨김
@@ -30,10 +31,10 @@
 # [가치별 소리]  lv1이 가장 신나는 소리
 #   lv1 : 거울, Hinekora's Lock, 헤드헌터/마법사의 피(Heavy·Utility Belt 고유), 1티어 고유템, 21/21 젬, 금고 열쇠
 #   lv2 : 분열의 오브, 빛의 징조, 보스 초대장, S급 혈통 젬
-#   lv3 : Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠
-#   lv4 : 디바인보다 살짝 위 S화폐(Perfect Jeweller's/Exalted/Chaos 등), 고대 심연 뼈, 2티어 고유템, A급 혈통 젬, 20레벨 미가공 젬, 탐험 일지
+#   lv3 : 고대 턱뼈(Ancient Jawbone), Architect's Orb, 상위 징조(Sanctification, Whittling, Annulment), 보스/희귀 성유물 열쇠
+#   lv4 : 디바인보다 살짝 위 S화폐(Perfect Jeweller's/Exalted/Chaos 등), 고대 심연 뼈(턱뼈 제외), 2티어 고유템, A급 혈통 젬, 20레벨 미가공 젬, 탐험 일지
 #   lv5 : 디바인 수준 - 디바인 오브 + 나머지 S티어 화폐/징조/컨텐츠 화폐
-#   lv6 : A티어 화폐/컨텐츠 화폐, T16 경로석, A급 파편, 조각 20개+ (장비 관련은 숨김이라 소리 없음)
+#   lv6 : A티어 화폐/컨텐츠 화폐, T16 경로석, A급 파편, 조각 20개+, 특출난 고유 (장비 관련은 숨김이라 소리 없음)
 #   lv7 : B/C티어 화폐, 연금술의 오브, 하위 에센스, 서판, T15 경로석, 19레벨 젬
 #         (고유 서판도 lv7 = 엑잘티드 오브와 같은 소리)
 #
@@ -419,7 +420,7 @@ Hide # jjm: all normal/magic/rare gear and accessories
 	DisableDropSound True
 
 #===============================================================================================================
-# [[JJM]] 고유템 - 허리띠 고유 2개만 표시
+# [[JJM]] 고유템 - 허리띠 고유 2개, 고유 서판·주얼, 특출난 고유만 표시
 #===============================================================================================================
 
 Show # jjm: unique belts only (Mageblood / Headhunter bases)
@@ -445,17 +446,6 @@ Show # jjm: unique tablets - all bases (Exalted Orb sound)
 	MinimapIcon 2 Blue Star
 CustomAlertSound "lv7.mp3" 300
 
-Show # jjm: unique rings
-	Rarity Unique
-	Class == "Rings"
-	SetFontSize 42
-	SetTextColor 188 96 37 255
-	SetBorderColor 188 96 37 255
-	SetBackgroundColor 53 13 13 255
-	PlayEffect Brown
-	MinimapIcon 1 Brown Star
-CustomAlertSound "t_ring.mp3" 300
-
 Show # jjm: unique jewels
 	Rarity Unique
 	Class == "Jewels"
@@ -477,6 +467,52 @@ Show # jjm: unique Grand Regalia (Morior Invictus base)
 	PlayEffect Red
 	MinimapIcon 0 Yellow Star
 CustomAlertSound "lv4.mp3" 300
+
+Show # jjm: exceptional uniques - twice corrupted
+	TwiceCorrupted True
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255
+	SetBorderColor 0 240 190 255
+	SetBackgroundColor 188 96 37 255
+	PlayEffect Purple
+	MinimapIcon 0 Purple Star
+CustomAlertSound "lv6.mp3" 300
+
+Show # jjm: exceptional uniques - quality 21+
+	Quality >= 21
+	Rarity Unique
+	SetFontSize 42
+	SetTextColor 0 0 0 255
+	SetBorderColor 0 240 190 255
+	SetBackgroundColor 188 96 37 255
+	PlayEffect Purple
+	MinimapIcon 0 Purple Star
+CustomAlertSound "lv6.mp3" 300
+
+Show # jjm: exceptional uniques - extra sockets (3+)
+	Sockets >= 3
+	Rarity Unique
+	Class == "Body Armours" "Bows" "Crossbows" "Quarterstaves" "Staves" "Talismans" "Two Hand Maces"
+	SetFontSize 42
+	SetTextColor 0 0 0 255
+	SetBorderColor 0 240 190 255
+	SetBackgroundColor 188 96 37 255
+	PlayEffect Purple
+	MinimapIcon 0 Purple Star
+CustomAlertSound "lv6.mp3" 300
+
+Show # jjm: exceptional uniques - extra sockets (2+)
+	Sockets >= 2
+	Rarity Unique
+	Class == "Boots" "Bucklers" "Foci" "Gloves" "Helmets" "One Hand Maces" "Sceptres" "Shields" "Spears" "Wands"
+	SetFontSize 42
+	SetTextColor 0 0 0 255
+	SetBorderColor 0 240 190 255
+	SetBackgroundColor 188 96 37 255
+	PlayEffect Purple
+	MinimapIcon 0 Purple Star
+CustomAlertSound "lv6.mp3" 300
 
 Hide # jjm: all other uniques
 	Rarity Unique
@@ -3540,7 +3576,7 @@ CustomAlertSound "lv2.mp3" 300
 
 Show # sskim: high S tier currency / omens (lv3)
 	Class == "Stackable Currency" "Omen"
-	BaseType == "Architect's Orb" "Omen of Dextral Annulment" "Omen of Sanctification" "Omen of Sinistral Annulment" "Omen of Whittling"
+	BaseType == "Ancient Jawbone" "Architect's Orb" "Omen of Dextral Annulment" "Omen of Sanctification" "Omen of Sinistral Annulment" "Omen of Whittling"
 	SetFontSize 45
 	SetTextColor 255 0 0 255
 	SetBorderColor 255 0 0 255
@@ -3551,7 +3587,7 @@ CustomAlertSound "lv3.mp3" 300
 
 Show # sskim: S tier currency slightly above Divine
 	Class == "Stackable Currency"
-	BaseType == "Albino Rhoa Feather" "Ancient Collarbone" "Ancient Jawbone" "Ancient Rib" "Core Destabiliser" "Kopec's Orb of Sacrifice" "Perfect Chaos Orb" "Perfect Exalted Orb" "Perfect Jeweller's Orb" "Preserved Cranium" "Vaal Cultivation Orb"
+	BaseType == "Albino Rhoa Feather" "Ancient Collarbone" "Ancient Rib" "Core Destabiliser" "Kopec's Orb of Sacrifice" "Perfect Chaos Orb" "Perfect Exalted Orb" "Perfect Jeweller's Orb" "Preserved Cranium" "Vaal Cultivation Orb"
 	SetFontSize 45
 	SetTextColor 255 0 0 255
 	SetBorderColor 255 0 0 255
